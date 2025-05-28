@@ -1,5 +1,5 @@
 {
-  "name": "astro",
+  "name": "starlight",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.6.1"
+    "astro": "^5.8.0",
+    "starlight-theme-flexoki": "^0.1.0"
   }
 }
