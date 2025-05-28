@@ -1,18 +1,21 @@
-# The Docker image that will be used to build your app
-image: node:22.14.0
+pages:
+  # The Docker image that will be used to build your app
+  image: node:lts
 
-before_script:
-  # Functions that should be executed before the build script is run
-  - npm ci
+  before_script:
+    - npm ci
 
-create-pages:
-  stage: build
   script:
     # Specify the steps involved to build your app here
     - npm run build
-  pages: true  # publishes the default public directory
 
-  # Trigger rules
-  rules:
-  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  artifacts:
+    paths:
+      # The folder that contains the built files to be published.
+      # This must be called "public".
+      - public
 
+  only:
+    # Trigger a new build and deploy only when there is a push to the
+    # branch(es) below
+    - master
