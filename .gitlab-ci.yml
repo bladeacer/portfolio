@@ -3,7 +3,6 @@ pages:
   image: node:lts
 
   before_script:
-    - rm -rf package-lock.json
     - npm i
 
   script:
