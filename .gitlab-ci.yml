@@ -3,7 +3,8 @@ pages:
   image: node:lts
 
   before_script:
-    - npm ci
+    - rm -rf package-lock.json
+    - npm i
 
   script:
     # Specify the steps involved to build your app here
