@@ -1,4 +1,9 @@
-<!-- ![Build Status](https://gitlab.com/pages/astro/badges/master/build.svg) -->
+[![pipeline status](https://gitlab.com/bladeacer/portfolio/badges/master/pipeline.svg)](https://gitlab.com/bladeacer/portfolio/-/commits/master)
+
+> If you are seeing this on GitHub, the real projects exists on GitLab [over here](https://gitlab.com/bladeacer/portfolio)
+
+## My Portfolio Site
+WIP
 
 <!-- --- -->
 
@@ -97,7 +102,3 @@
 <!-- [documentation]: http://link-to-main-documentation-page -->
 <!-- [userpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#user-or-group-pages -->
 <!-- [projpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#project-pages -->
-
-## My Portfolio Site
-WIP
-
