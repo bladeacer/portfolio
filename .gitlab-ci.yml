@@ -15,7 +15,10 @@ pages:
       # This must be called "public".
       - public
 
-  only:
-    # Trigger a new build and deploy only when there is a push to the
-    # branch(es) below
-    - master
+  rules:
+    # Trigger a new build and deploy only when there is a push to tags
+    - if: '$CI_COMMIT_TAG'
+      when: always # Or on_success if you want it to run only after previous stages succeed
+    # Optionally, you might want to also build on regular pushes (branches)
+    - if: '$CI_COMMIT_BRANCH'
+      when: never # Or a specific branch name if needed

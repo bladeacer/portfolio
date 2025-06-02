@@ -5,13 +5,13 @@ const { title, url, author, date, description, tags } = Astro.props
   <a href={url}>
     <div class="blog-card__content">
       <h2 class="blog-card__title">{title}</h2>
+      {author && (
+        <div class="blog-card__author">
+          <span>By {author}</span>
+        </div>
+      )}
       {description && <p class="blog-card__excerpt">{description}</p>}
       <div class="blog-card__meta">
-        {author && (
-          <div class="blog-card__author">
-            <span>By {author}</span>
-          </div>
-        )}
         {date && <span class="blog-card__date">{date}</span>}
       </div>
       {tags && tags.length > 0 && (

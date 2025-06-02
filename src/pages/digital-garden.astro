@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
-const pageTitle = "Blogs";
+const pageTitle = "Digital Garden";
 const allPosts = Object.values(await import.meta.glob('./posts/*.md', { eager: true }));
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Here are my blogs</p>
+  <p>Here is my digital garden.</p>
   {allPosts.length === 0 ? (
     <p>No posts available yet.</p>
   ) : (
