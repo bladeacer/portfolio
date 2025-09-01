@@ -1,5 +1,11 @@
 ---
-const { title, url, author, date, description, tags } = Astro.props
+const { title, url, author, pubDate, description, tags } = Astro.props;
+const dateOptions: object = {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+};
+const formattedPubDate = new Date(pubDate).toLocaleDateString("en-GB", dateOptions);
 ---
 <div class="blog-card">
   <a href={url}>
@@ -7,13 +13,10 @@ const { title, url, author, date, description, tags } = Astro.props
       <h2 class="blog-card__title">{title}</h2>
       {author && (
         <div class="blog-card__author">
-          <span>By {author}</span>
+          <span>By {author}<br>Created on {formattedPubDate}</span>
         </div>
       )}
       {description && <p class="blog-card__excerpt">{description}</p>}
-      <div class="blog-card__meta">
-        {date && <span class="blog-card__date">{date}</span>}
-      </div>
       {tags && tags.length > 0 && (
         <div class="blog-card__tags">
           {tags.map(tag => (

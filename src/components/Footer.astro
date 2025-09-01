@@ -1,5 +1,4 @@
 ---
-import Social from "./Social.astro";
 import Github from '@lucide/astro/icons/github';
 import Gitlab from '@lucide/astro/icons/gitlab';
 import Copyright from '@lucide/astro/icons/copyright';
@@ -13,7 +12,7 @@ import Scale from '@lucide/astro/icons/scale';
     margin: 0 auto;
     margin-top: 12rem;
     align-items: center;
-    jusitfy-content: center;
+    justify-content: center;
     width: 60%;
   }
   footer svg {
@@ -27,9 +26,13 @@ import Scale from '@lucide/astro/icons/scale';
 <footer>
 
   <Github size={36} />
-  <Social platform="github" username="bladeacer" />
+  <span>
+    <a href="https://github.com/bladeacer">GitHub</a>
+  </span>
   <Gitlab size={36} />
-  <Social platform="gitlab" username="bladeacer" />
+  <span>
+    <a href="https://gitlab.com/bladeacer">GitLab</a>
+  </span>
   <Scale size={36} />
   <span>
     <a href="https://gitlab.com/bladeacer/portfolio/-/blob/master/LICENSE">CC BY-SA 4.0</a>

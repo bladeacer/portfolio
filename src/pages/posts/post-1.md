@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'WIP'
-pubDate: 2022-07-01
-description: "WIP"
+title: "Flexcyon"
+pubDate: 09/01/2025
+description: "An Obsidian.md theme combining the colour schemes of Halcyon and Flexoki."
 author: "bladeacer"
-tags: ["astro", "blogging", "wip"]
+tags: ["obsidian.md", "theme", "css", "scss"]
 ---
 
-WIP
+WIP.

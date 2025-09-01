@@ -14,7 +14,7 @@ const allPosts = Object.values(await import.meta.glob('./posts/*.md', { eager: t
     <BlogPost url={post.url} 
     title={post.frontmatter.title} 
     author={post.frontmatter.author} 
-    date={post.frontmatter.date}
+    pubDate={post.frontmatter.pubDate}
     description={post.frontmatter.description} />)
   )}
 </BaseLayout>
