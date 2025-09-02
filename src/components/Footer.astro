@@ -1,25 +1,20 @@
 ---
-import Github from '@lucide/astro/icons/github';
-import Gitlab from '@lucide/astro/icons/gitlab';
 import Copyright from '@lucide/astro/icons/copyright';
 import Scale from '@lucide/astro/icons/scale';
 import Type from '@lucide/astro/icons/type';
+const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <Github size={36} />
+  <Copyright/>
   <span>
-    <a href="https://github.com/bladeacer" target="_blank">GitHub</a>
+    bladeacer {currentYear}
   </span>
-  <Gitlab size={36} />
-  <span>
-    <a href="https://gitlab.com/bladeacer" target="_blank">GitLab</a>
-  </span>
-  <Scale size={36} />
+  <Scale/>
   <span>
     <a href="https://gitlab.com/bladeacer/portfolio/-/blob/master/LICENSE" target="_blank">CC BY-SA 4.0</a>
   </span>
-  <Type size={36} />
+  <Type/>
   <span>
     <a href="https://departuremono.com/" target="_blank">DepatureMono</a>
   </span>

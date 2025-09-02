@@ -126,6 +126,10 @@ h1 {
   background-color: color-mix(in srgb, var(--flexcyon-cyan) 20%, transparent 80%);
 }
 
+.nav-links:not(.expanded) {
+  display: none;
+}
+
 .expanded {
   display: unset;
 }
@@ -144,6 +148,10 @@ h1 {
     padding: 15px 12.5px;
   }
 
+  .nav-links:not(.expanded) {
+    display: unset;
+  }
+
   .hamburger {
     display: none;
   }
@@ -154,7 +162,7 @@ h1 {
   background: none;
   position: absolute;
   top: 3vh;
-  left: 14vw;
+  left: 13.25vw;
 }
 
 .sun, .moon {
@@ -256,7 +264,7 @@ html.dark .sun {
   line-height: 1.2;
   border-radius: 0.75em;
   padding: 0.5em 0.75em;
-  font-size: 1.15em;
+  font-size: 1em;
   background-color: var(--flexcyon-base-02);
 }
 
@@ -290,15 +298,35 @@ stron-toc {
   }
 }
 
+.toc-content li ul li {
+  opacity: 0.85;
+  &:hover, :focus {
+    opacity: 1;
+  }
+  a {
+    color: var(--flexcyon-purple-lilac);
+  }
+}
+
+.toc-content li ul li ul li {
+  opacity: 0.75;
+  &:hover, :focus {
+    opacity: 1;
+  }
+  a {
+    color: var(--flexcyon-cyan);
+  }
+}
+
 blockquote {
   background-color: var(--flexcyon-base-03);
-  max-width: 45vw;
+  max-width: 47vw;
   margin-left: 0;
   padding: 1px 16px;
   border-radius: 16px;
 }
 
-div, p {
+div, p, em {
   max-width: 47.5vw;
   white-space: normal;
   overflow: visible;
@@ -341,23 +369,20 @@ h6 {
   line-height: 1.01;
 }
 
-footer {
+p.foot, footer {
   display: flex;
   gap: 0.75rem;
   margin-top: 2rem;
-  margin-bottom: 4rem;
   align-items: left;
   justify-content: left;
   width: 80%;
 }
-footer svg {
-  margin-left: 0.25rem;
-}
-footer span {
-  margin-top: 6px;
+
+p.foot {
+  margin-top: 0px;
 }
 
-p + hr {
+hr {
   color: var(--text-faint);
   opacity: 0.55;
   width: 47.5vw;
@@ -379,4 +404,22 @@ body {
   * {
     background-image: none;
   }
+}
+
+img {
+  max-width: 50vw;
+  border-radius: 1rem;
+}
+
+strong {
+  color: var(--flexcyon-red-salmon);
+}
+
+em {
+  color: var(--text-accent);
+}
+code {
+  font-size: 1rem;
+  font-family: "DepartureMono", monospace;
+  background-color: var(--flexcyon-base-03);
 }

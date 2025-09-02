@@ -1,6 +1,6 @@
-[![pipeline status](https://gitlab.com/bladeacer/portfolio/badges/0.0.1/pipeline.svg)](https://gitlab.com/bladeacer/portfolio/-/commits/master)
+[![pipeline status](https://gitlab.com/bladeacer/portfolio/badges/0.0.2/pipeline.svg)](https://gitlab.com/bladeacer/portfolio/-/commits/master)
 
-> If you are seeing this on GitHub, the real projects exists on GitLab [over here](https://gitlab.com/bladeacer/portfolio)
+> If you are seeing this on GitHub, the real project exists on GitLab [over here](https://gitlab.com/bladeacer/portfolio)
 
 ## My Portfolio Site
 WIP
