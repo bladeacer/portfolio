@@ -7,12 +7,21 @@ const dateOptions: object = {
   day: "numeric"
 };
 const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString("en-GB", dateOptions);
+import TableOfContents from 'astro-table-of-contents/component';
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <p>Created on: {formattedPubDate}</p>
+  <TableOfContents class="toc" />
+    <div>
+      <em>{frontmatter.description}</em>
+      <br>
+      Written by: {frontmatter.author}
+      <br>
+      Created on: {formattedPubDate}
+      <br>
+      Status: {frontmatter.status}
+    </div>
+    <br>
 
   <div class="tags">
     {
