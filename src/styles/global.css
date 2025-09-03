@@ -277,24 +277,44 @@ li {
   line-height: 1.65;
 }
 
-stron-toc {
+stron-toc.toc {
   position: fixed;
-  left: 65vw;
-  top: 12.5vh;
-  max-width: 25vw !important;
+  left: 66vw;
+  top: 11.5vh;
+  max-width: min(30vw, 22.5rem) !important;
   box-shadow: none !important;
+  white-space: normal;
+  text-overflow: clip;
+  background-color: color-mix(in hsl, var(--flexcyon-base-01), var(--flexcyon-base-02));
+  border-radius: 8px;
 }
 
 #toc-title {
+  padding-top: 0px;
   color: var(--text-accent) !important;
 }
 
+.toc-content {
+  margin-top: -10px;
+  max-height: 60vh;
+  overflow: scroll;
+}
+
 .toc-content ul li {
-  list-style-type: square;
-  list-style-position: outside;
+  border-left: var(--text-faint) 1px solid;
+}
+.toc-content ul li {
+  list-style-type: "\2500";
+  list-style-position: inside;
+  margin-left: -1.25px;
 
   &::marker {
     color: var(--text-faint) !important;
+  }
+  a {
+    padding-left: 8px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 }
 
@@ -318,6 +338,22 @@ stron-toc {
   }
 }
 
+.toc-content li ul li ul li ul li{
+  opacity: 0.95;
+  &:hover, :focus {
+    opacity: 1;
+  }
+  a {
+    color: var(--flexcyon-pink);
+  }
+}
+
+@media (width < 800px) {
+  stron-toc.toc {
+    display: none !important;
+  }
+}
+
 blockquote {
   background-color: var(--flexcyon-base-03);
   max-width: 47vw;
@@ -327,7 +363,7 @@ blockquote {
 }
 
 div, p, em {
-  max-width: 47.5vw;
+  max-width: min(47.5vw,50rem);
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
@@ -369,13 +405,17 @@ h6 {
   line-height: 1.01;
 }
 
+h2, h3, h4 {
+  padding-top: 1rem;
+}
+
 p.foot, footer {
   display: flex;
   gap: 0.75rem;
   margin-top: 2rem;
   align-items: left;
   justify-content: left;
-  width: 80%;
+  max-width: min(47.5vw,50rem);
 }
 
 p.foot {
@@ -385,7 +425,7 @@ p.foot {
 hr {
   color: var(--text-faint);
   opacity: 0.55;
-  width: 47.5vw;
+  width: min(47.5vw,50rem);
   margin-left: 0;
   margin-top: 24px;
   margin-bottom: 24px;
