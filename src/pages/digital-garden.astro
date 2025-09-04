@@ -6,7 +6,8 @@ const allPosts = Object.values(await import.meta.glob('./posts/*.md', { eager: t
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Here is my digital garden.</p>
+  <p>Here is my digital garden. I post about my projects and works from time to time.</p>
+  <p>This is also a space for me to share my thoughts and experiences.</p>
   {allPosts.length === 0 ? (
     <p>No posts available yet.</p>
   ) : (

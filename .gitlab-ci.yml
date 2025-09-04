@@ -1,24 +1,13 @@
+image: node:latest
+
 pages:
-  # The Docker image that will be used to build your app
-  image: node:lts
-
-  before_script:
-    - npm i
-
+  stage: deploy
   script:
-    # Specify the steps involved to build your app here
+    - npm install
     - npm run build
-
   artifacts:
     paths:
-      # The folder that contains the built files to be published.
-      # This must be called "public".
       - public
-
+    expire_in: 1 day
   rules:
-    # Trigger a new build and deploy only when there is a push to tags
-    - if: '$CI_COMMIT_TAG'
-      when: always # Or on_success if you want it to run only after previous stages succeed
-    # Optionally, you might want to also build on regular pushes (branches)
-    - if: '$CI_COMMIT_BRANCH'
-      when: never # Or a specific branch name if needed
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
