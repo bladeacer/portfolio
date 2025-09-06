@@ -68,6 +68,8 @@ body {
   font-family: "CascadiaCode", monospace;
 }
 
+
+.sort-dropdown, .astro-code span, blockquote,
 em, strong, div span, a, h1, h2, h3, h4, h5, h6 {
   font-family: "DepartureMono", monospace;
 }
@@ -269,6 +271,26 @@ html.dark .sun {
   gap: 4px;
 }
 
+.sort-dropdown {
+  color: var(--flexcyon-purple-lilac);
+  font-weight: 600;
+  background-color: var(--flexcyon-base-02);
+  border: none;
+  border-radius: 16px;
+  padding: 0.65em 1em;
+  font-size: 1.01803em;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
 .tag {
   margin: 0.25em;
   line-height: 1.2;
@@ -372,7 +394,8 @@ blockquote {
   border-radius: 16px;
 }
 
-div, p, em {
+pre.astro-code,
+div, p, em, li {
   max-width: min(47.5vw,50rem);
   white-space: normal;
   overflow: visible;
@@ -472,4 +495,13 @@ em {
 code {
   font-size: 1rem;
   background-color: var(--flexcyon-base-03);
+}
+
+.skill-icons img {
+  float: left;
+  scale: 0.8;
+}
+
+.skill-icons br {
+  margin-bottom: 6px;
 }

@@ -12,4 +12,9 @@ export default defineConfig({
             title: 'Table Of Contents',
         }),
     ],
+    markdown: {
+        shikiConfig: {
+          theme: 'kanagawa-wave',
+        },
+    },
 });

@@ -4,6 +4,7 @@ import Github from '@lucide/astro/icons/github';
 import Gitlab from '@lucide/astro/icons/gitlab';
 import Mail from '@lucide/astro/icons/mail';
 import CodeXML from '@lucide/astro/icons/code-xml';
+import { Image } from 'astro:assets';
 const pageTitle = "About Me";
 ---
 
@@ -13,7 +14,7 @@ const pageTitle = "About Me";
   </p>
   <ul>
     <li>
-      css, vim, linux enjoyer 🔨
+      css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux enjoyer 🔨
     </li>
     <li>
       currently a student 📖  
@@ -26,28 +27,99 @@ const pageTitle = "About Me";
   <h2>Current Works</h2>
   <ul>
     <li>
-      <a href="https://github.com/bladeacer/flexcyon">flexcyon</a>: A reasonably opinionated Obsidian.md theme
+      <a target="_blank" href="https://github.com/bladeacer/flexcyon">flexcyon</a><br> a reasonably opinionated Obsidian.md theme.<br><a target="_blank" href="/portfolio/posts/flexcyon">About my thought process while developing it</a>.
     </li>
+    <br>
     <li>
-      <a href="https://github.com/bladeacer/mnemosync">mnemosync</a>: A Golang CLI directory backup option
+      <a target="_blank" href="https://github.com/bladeacer/mnemosync">mnemosync</a><br>a Golang CLI tool that lets you add folders to backup manually to a target Git repository. 
     </li>
+    <br>
     <li>
-      <a href="https://github.com/bladeacer/tech-lingo">tech-lingo</a>: An Espanso package for tech terms
+      <a target="_blank" href="https://github.com/bladeacer/tech-lingo">tech-lingo</a><br> an Espanso package with tech terms sourced from tldr pages and Wikipedia.
     </li>
   </ul>
-  
-  <h2>My Socials</h2>
+  <h2>Tech Stack</h2>
+  <h3>Frontend</h3>
+  <p class="skill-icons">
+    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+      <Image alt="HTML Skill Icon" src="https://skillicons.dev/icons?i=html" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+      <Image alt="CSS Skill Icon" src="https://skillicons.dev/icons?i=css" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://sass-lang.com">
+      <Image alt="SASS Skill Icon" src="https://skillicons.dev/icons?i=sass" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://getbootstrap.com">
+      <Image alt="Bootstrap Skill Icon" src="https://skillicons.dev/icons?i=bootstrap" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://www.figma.com">
+      <Image alt="Figma Skill Icon" src="https://skillicons.dev/icons?i=figma" width="48" height="48"/>
+    </a>
+    <br><br>
+    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+      <Image alt="JavaScript Skill Icon" src="https://skillicons.dev/icons?i=js" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://react.dev">
+      <Image alt="React Skill Icon" src="https://skillicons.dev/icons?i=react" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://nodejs.org/en">
+      <Image alt="NodeJS Skill Icon" src="https://skillicons.dev/icons?i=nodejs" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://www.postman.com/">
+      <Image alt="Postman Skill Icon" src="https://skillicons.dev/icons?i=postman" width="48" height="48"/>
+    </a>
+  </p>
+  <br>
+  <h3>Languages</h3>
+  <p class="skill-icons">
+    <a target="_blank" href="https://www.python.org/">
+      <Image alt="Python Skill Icon" src="https://skillicons.dev/icons?i=python" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://kotlinlang.org/">
+      <Image alt="Kotlin Skill Icon" src="https://skillicons.dev/icons?i=kotlin" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
+      <Image alt="C# Skill Icon" src="https://skillicons.dev/icons?i=cs" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://www.gnu.org/software/bash/">
+      <Image alt="Bash Skill Icon" src="https://skillicons.dev/icons?i=bash" width="48" height="48"/>
+    </a>
+  </p>
+  <br>
+  <h3>Databases</h3>
+  <p class="skill-icons">
+    <a target="_blank" href="https://www.mysql.com/">
+      <Image alt="MySQL Skill Icon" src="https://skillicons.dev/icons?i=mysql" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://sqlite.org/">
+      <Image alt="SQLite Skill Icon" src="https://skillicons.dev/icons?i=sqlite" width="48" height="48"/>
+    </a>
+    <a target="_blank" href="https://sequelize.org/">
+      <Image alt="Sequelize Skill Icon" src="https://skillicons.dev/icons?i=sequelize" width="48" height="48"/>
+    </a>
+  </p>
+  <br>
+  <h3>Containerisation</h3>
+  <p class="skill-icons">
+    <a target="_blank" href="https://www.docker.com/">
+      <Image alt="Docker Skill Icon" src="https://skillicons.dev/icons?i=docker" width="48" height="48"/>
+    </a>
+  </p>
+  <br>
+  <br>
+  <h2>Find me on</h2>
   <p class="foot">
     <Mail/>
-    <a href="mailto:wg.nick.exe@gmail.com" target="_blank">wg.nick.exe@gmail.com</a>
+    <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">wg.nick.exe@gmail.com</a>
   </p>
   <p class="foot">
     <Github/>
-    <a href="https://github.com/bladeacer" target="_blank">bladeacer</a>
+    <a target="_blank" href="https://github.com/bladeacer" target="_blank">bladeacer</a>
   </p>
   <p class="foot">
     <Gitlab/>
-    <a href="https://gitlab.com/bladeacer" target="_blank">bladeacer</a>
+    <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">bladeacer</a>
   </p>
-  <hr>
 </BaseLayout>
+
