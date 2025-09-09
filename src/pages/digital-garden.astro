@@ -34,11 +34,11 @@ const sortedPosts = allPosts.sort((a, b) => {
           <div
             class="post-item"
             data-date={new Date(post.frontmatter.pubDate).valueOf()}
-            data-title={post.frontmatter.title}
+            data-title={post.frontmatter.title && post.frontmatter.title.length != 0 ? post.frontmatter.title : "No title"}
           >
             <BlogPost
               url={post.url}
-              title={post.frontmatter.title}
+              title={post.frontmatter.title && post.frontmatter.title.length != 0 ? post.frontmatter.title : "No title"}
               author={post.frontmatter.author}
               pubDate={post.frontmatter.pubDate}
               description={post.frontmatter.description}

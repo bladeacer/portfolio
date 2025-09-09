@@ -36,4 +36,12 @@ import TableOfContents from 'astro-table-of-contents/component';
   <br>
 
   <slot />
+  <div>
+    <script is:inline>
+      const links = document.getElementsByTagName("a");
+      console.log(links);
+      console.log(links[5].hash);
+      links[5].hash = "";
+    </script>
+  </div>
 </BaseLayout>

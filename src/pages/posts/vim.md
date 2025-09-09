@@ -2,10 +2,10 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: "Vim"
 pubDate: 09/06/2025
-status: "Draft"
+status: "Completed"
 description: "A text editor that works well for me."
 author: "bladeacer"
-tags: ["text-editor", "vim", "vim-motions"]
+tags: ["text-editor", "vim", "vim-motions", "unix"]
 ---
 
 ## Foreword
@@ -37,7 +37,8 @@ history of opened files.
 
 ## Why Vim?
 As intimidating as a command line text editor may sound, here are some of the
-pros that it has.
+pros that it has. Vim itself is a rather tried and tested piece of software,
+having been used in numerous production servers. It also starts almost instantly.
 
 ### Typing at the speed of thought
 When one is used to [Vim Motions](#vim-vs-vim-motions), they can precisely type out
@@ -119,6 +120,8 @@ Vim excels at one specific thing: being a text editor. Its command line based na
 and basically universal availability on UNIX devices means that various other command
 line applications have built integrations around it.
 
+> It also happens to be much more flexible and extensible than GUI text editors.
+
 The universal availability means that it (or its predecessor `vi`) would be
 available whenever you SSH into a remote server, on your UNIX (Linux and Mac) or
 even Windows.
@@ -140,6 +143,8 @@ Vim motions are the commands associated with a modal editor like Vim.
 You can find plenty an emulation of Vim Motions in popular text editors like
 VS Code, but there are differences between using Vim Motions in another text
 editor and using vim itself.[^4]
+
+However, they are made with the same underlying principles.
 
 ### Why this key bind for that motion?
 Vim itself followed along with the evolution of keyboards. It used to be
@@ -277,5 +282,5 @@ it too.
 
 [^1]: Short for Command Line Interface.
 [^2]: See [this Wikipedia article on the editor rivalry](https://en.wikipedia.org/wiki/Editor_war).
-[^3]: Mostly when certain keyboard shortcuts clash between the host text editor and Vim emulation.
-[^4]: Or registers.
+[^3]: Or registers.
+[^4]: Mostly when certain keyboard shortcuts clash between the host text editor and Vim emulation.

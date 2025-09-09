@@ -74,6 +74,15 @@ em, strong, div span, a, h1, h2, h3, h4, h5, h6 {
   font-family: "DepartureMono", monospace;
 }
 
+.astro-code {
+  border-radius: 4px;
+}
+
+.astro-code .line {
+  display: block;
+  padding: 4px 8px;
+}
+
 a {
   color: var(--flexcyon-blue);
 }
@@ -396,12 +405,18 @@ blockquote {
 
 pre.astro-code,
 div, p, em, li {
-  max-width: min(47.5vw,50rem);
+  max-width: 47.5vw;
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
   line-height: 1.35;
   font-size: 16px;
+}
+
+@media (width < 800px) {
+  pre.astro-code, div, p, em, li {
+    max-width: 70vw;
+  }
 }
 
 p {
@@ -449,7 +464,7 @@ p.foot, footer {
   margin-top: 2rem;
   align-items: left;
   justify-content: left;
-  max-width: min(47.5vw,50rem);
+  max-width: max(47.5vw,40em);
 }
 
 p.foot {
@@ -459,7 +474,7 @@ p.foot {
 hr {
   color: var(--text-faint);
   opacity: 0.55;
-  width: min(47.5vw,50rem);
+  width: max(47.5vw,40em);
   margin-left: 0;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -504,4 +519,10 @@ code {
 
 .skill-icons br {
   margin-bottom: 6px;
+}
+
+.posts-container {
+  width: 47.5vw;
+  height: 47.5vh;
+  overflow-y: scroll;
 }
