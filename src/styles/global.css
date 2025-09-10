@@ -209,6 +209,7 @@ html.dark .sun {
 }
 
 .blog-card {
+  max-width: 200%;
   background-color: var(--flexcyon-base-02);
   border-radius: 0.75rem;
   box-shadow: 0 2px 4px color-mix(in hsl, var(--text-faint) 15%, transparent 85%);
@@ -415,7 +416,7 @@ div, p, em, li {
 
 @media (width < 800px) {
   pre.astro-code, div, p, em, li {
-    max-width: 70vw;
+    max-width: 80vw;
   }
 }
 
@@ -464,7 +465,7 @@ p.foot, footer {
   margin-top: 2rem;
   align-items: left;
   justify-content: left;
-  max-width: max(47.5vw,40em);
+  max-width: 47.5vw;
 }
 
 p.foot {
@@ -474,11 +475,18 @@ p.foot {
 hr {
   color: var(--text-faint);
   opacity: 0.55;
-  width: max(47.5vw,40em);
+  max-width: 47.5vw;
   margin-left: 0;
   margin-top: 24px;
   margin-bottom: 24px;
 }
+
+@media (width < 800px) {
+  hr, p.foot, footer {
+    max-width: 80vw;
+  }
+}
+
 
 body {
   --flexcyon-bg-col: color-mix(in hsl, var(--flexcyon-base-01), var(--flexcyon-base-02));
@@ -525,4 +533,10 @@ code {
   width: 47.5vw;
   height: 47.5vh;
   overflow-y: scroll;
+}
+
+@media (width < 800px) {
+  .posts-container {
+    width: 80vw;
+  }
 }

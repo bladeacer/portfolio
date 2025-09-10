@@ -55,6 +55,10 @@ What sets Linux apart is that installation of software by users is typically not
 done by downloading and running some installer. Users tend to prefer that
 applications provide an option to be installed with a package manager.
 
+There are also some who prefer to make use of `curl` to invoke an installation script,
+or to clone and compile the source code. However, these are generally last resort options
+for the average Linux user.
+
 ### Package Managers
 Package managers (at least in the Linux context), are primarily command line utilities
 bundled as a core dependency of the distribution of Linux one is using. There
@@ -96,6 +100,17 @@ meaning (if you looked into the Arch Wiki or `pacman`'s manual page).
 Debian's `apt` syntax is much more specific on what it is doing, although it
 comes at the cost of unneeded verbosity for more experienced users.
 
+### Rolling release
+Pacman and the Linux distributions that use it generally make use of the rolling
+release model. This refers to the frequent release of small updates while working
+with only a single code branch. This differs from the more common workflow with
+semantic releases.[^3]
+
+Since users can choose to not updating their operating system on Linux, they can
+test out cutting edge features or wait and see if the update broke their set up.
+This also means that Arch Linux has one of the largest software package
+repositories, especially when factoring the Arch User Repository.
+
 ## Links
 Add EndeavourOS official website link, community forum link.
 Add FSF, GNU links.
@@ -116,3 +131,4 @@ I hope that this post gives you a quick glance as to how I daily drive Linux.
 [^2]: As for why Git's Windows version bundles said compatibility layer, it boils down to
 UNIX necessities like `grep` being missing from the vanilla Windows experience. They either had
 to add the compatibility layer, or lack feature parity and a consistent experience across operating systems.
+[^3]: Gordon Messmer has a great article about the developer workflow that goes into a typical semantic release.
