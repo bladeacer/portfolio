@@ -30,9 +30,48 @@ might be taken for granted in other operating systems.
 > non-profit organisation which supports the free software movement
 > with its preference that software be distributed under copyleft terms.
 
+## Why Linux?
+This begs the question - why Linux? Linux itself has some benefits and features
+that would be difficult to come by in other operating systems.
+
+### Lighter Binaries
+Unlike Windows' `.exe` and `.dll` executable file formats. Linux makes use of system
+binaries like `glibc` and `make` for compiling and handling executable calls. MacOS's
+`dmg` file format also has slightly more overhead.
+
+For example, `git` on Unix is less than a single megabyte. However, it is over
+200 MB on Windows. This includes the bundled binaries and compatibility layer,
+but the reliance on system binaries for compilation and executing certain instructions
+means some software would never be officially supported on Linux.
+
+Operating system updates might also break certain legacy software's reliance on
+a specific version of a core dependency like `glibc`.
+> TODO: Fact check this.
+
+Some Linux distributions which use another implementation of the C standard
+library that is not `glibc` tend to run into compatibility issues with certain software.
+
+For example, getting `onnx` or `langchain`'s Python packages to run on Alpine
+Linux is a tall order. Compilation from source for specific software does not
+work as well. This is due to the fundamental differences between `musl` and `glibc`.
+`musl` is extremely lightweight at the cost of software compatibility.
+
+### Customisable
+Linux is very customisable. You can customise the bootloader, login screen, how
+you tile and manage windows and panes. You can also manage and really customise how
+the desktop looks. This is so prevalent among Linux users that the term "ricing"
+was borrowed from car enthusiasts who liked to modify their vehicles.
+
+Customisation may be anti-productivity to most, however it can be somewhat enjoyable
+and actually spark joy.
+
+> What is the point of owning a device when you cannot fully customise it,
+> should you wish to?
+
 ## Linux Distributions
 There are **many** Linux distributions, each with their own unique offerings.
 
+### An experience you choose
 You have distributions which work out of the box, such as Ubuntu, Linux Mint and
 Fedora Linux. Then there distributions with a much higher learning curve; such
 as Arch Linux, NixOS and Gentoo. Out of the three, Arch Linux is comparatively easy
@@ -56,8 +95,8 @@ done by downloading and running some installer. Users tend to prefer that
 applications provide an option to be installed with a package manager.
 
 There are also some who prefer to make use of `curl` to invoke an installation script,
-or to clone and compile the source code. However, these are generally last resort options
-for the average Linux user.
+or to clone and compile the source code. However, these are generally last resort
+options for the average Linux user.
 
 ### Package Managers
 Package managers (at least in the Linux context), are primarily command line utilities
@@ -86,7 +125,7 @@ sudo apt update
 sudo apt install nodejs npm
 ```
 
-### Concise but meaningful
+### Concise and meaningful
 To the average user, `-Syu` seems like a random incantation of characters that
 just makes `pacman` do stuff. The truth is that each flag neatly translates its
 meaning (if you looked into the Arch Wiki or `pacman`'s manual page).
@@ -125,7 +164,7 @@ Credits Linus Torvalds, Free Software Foundation, GNU, EndeavourOS dev team and 
 ## Conclusion
 I hope that this post gives you a quick glance as to how I daily drive Linux.
 
-> Fun fact: I made part of this draft mid flight.
+> Fun fact: I made part of this draft mid flight (like the last post).
 
 [^1]: And other software, whether free, open source or proprietary.
 [^2]: As for why Git's Windows version bundles said compatibility layer, it boils down to
