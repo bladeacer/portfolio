@@ -503,8 +503,14 @@ body {
   }
 }
 
+@media (width < 1000px) {
+  img {
+    max-width: 80vw;
+  }
+}
+
 img {
-  max-width: 50vw;
+  max-width: 47.5vw;
   border-radius: 1rem;
 }
 
@@ -539,4 +545,32 @@ code {
   .posts-container {
     width: 80vw;
   }
+}
+
+.profile-2,
+.profile {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-top: -8px;
+}
+
+.profile-2 img,
+.profile img {
+  border-radius: 50%;
+  flex-direction: row;
+}
+
+.profile img {
+  margin-right: 5%;
+}
+
+.profile-2 div {
+  width: 45%;
+}
+
+.profile-2 div,
+.profile div {
+  margin-top: -8px;
+  padding-bottom: 16px;
 }

@@ -15,6 +15,16 @@ home PC market. It has the potential for mass appeal, especially with the
 advent of initiatives like SteamOS. Though Linux for now seems to be remaining
 on the niche side as far as home or work desktop goes.
 
+## Links
+- [EndeavourOS Website](https://endeavouros.com/)
+- [EndeavourOS Community Forum](https://forum.endeavouros.com/)
+- [Free Software Foundation](https://www.fsf.org/)
+- [GNU Software](https://www.gnu.org/software/software.en.html)
+- [Linux Kernel Archives](https://www.kernel.org/)
+
+## Screenshots
+Select screenshots from my own desktop.
+
 ### GNU Linux
 Linux itself, technically speak refers to the Linux kernel by Linus Torvalds.
 This is why there are "distributions" of Linux with the relevant package manager
@@ -46,7 +56,9 @@ means some software would never be officially supported on Linux.
 
 Operating system updates might also break certain legacy software's reliance on
 a specific version of a core dependency like `glibc`.
-> TODO: Fact check this.
+
+> [musl wiki](https://wiki.musl-libc.org/functional-differences-from-glibc.html)
+> goes into more specifics on the differences.
 
 Some Linux distributions which use another implementation of the C standard
 library that is not `glibc` tend to run into compatibility issues with certain software.
@@ -65,8 +77,8 @@ was borrowed from car enthusiasts who liked to modify their vehicles.
 Customisation may be anti-productivity to most, however it can be somewhat enjoyable
 and actually spark joy.
 
-> What is the point of owning a device when you cannot fully customise it,
-> should you wish to?
+> "What is the point of owning a device when you cannot fully customise it,
+> should you wish to?"
 
 ## Linux Distributions
 There are **many** Linux distributions, each with their own unique offerings.
@@ -146,20 +158,13 @@ with only a single code branch. This differs from the more common workflow with
 semantic releases.[^3]
 
 Since users can choose to not updating their operating system on Linux, they can
-test out cutting edge features or wait and see if the update broke their set up.
-This also means that Arch Linux has one of the largest software package
+test out cutting edge features or wait and see if the update might break their
+set up.  This also means that Arch Linux has one of the largest software package
 repositories, especially when factoring the Arch User Repository.
 
-## Links
-Add EndeavourOS official website link, community forum link.
-Add FSF, GNU links.
-Add Linus Torvalds and Linux kernel link.
-
-## Screenshots
-Select screenshots from my own desktop.
-
 ## Credits
-Credits Linus Torvalds, Free Software Foundation, GNU, EndeavourOS dev team and community.
+Credits to Linus Torvalds, Free Software Foundation, GNU Software devs,
+EndeavourOS dev team and the Linux community.
 
 ## Conclusion
 I hope that this post gives you a quick glance as to how I daily drive Linux.

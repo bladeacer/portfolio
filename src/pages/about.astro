@@ -3,31 +3,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Github from '@lucide/astro/icons/github';
 import Gitlab from '@lucide/astro/icons/gitlab';
 import Mail from '@lucide/astro/icons/mail';
+import User from '@lucide/astro/icons/user';
+import LinkedIn from '@lucide/astro/icons/linkedin';
 import CodeXML from '@lucide/astro/icons/code-xml';
 import { Image } from 'astro:assets';
 const pageTitle = "About Me";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>
-    Hi there, I write some code in my free time.
-  </p>
-  <ul>
-    <li>
-      css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux enjoyer 🔨
-    </li>
-    <li>
-      currently a student 📖  
-    </li>
-    <li>
-      software developer in the making 💻
-    </li>
-  </ul>
+  <div class="profile">
+    <Image alt="Profile Picture" src="/portfolio/profile.png" width="128" height="128"/>
+    <div>
+      <p>
+        Hi there, I write some code in my free time.
+      </p>
+      <ul>
+        <li>
+          css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux enjoyer 🔨
+        </li>
+        <li>
+          currently a student 📖  
+        </li>
+        <li>
+          software developer in the making 💻
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <h2>Current Works</h2>
   <ul>
     <li>
-      <a target="_blank" href="https://github.com/bladeacer/flexcyon">flexcyon</a><br> a reasonably opinionated Obsidian.md theme.<br><a target="_blank" href="/portfolio/posts/flexcyon">About my thought process while developing it</a>.
+      <a target="_blank" href="https://github.com/bladeacer/flexcyon">flexcyon</a><br> a reasonably opinionated Obsidian.md theme.<br><br>About <a target="_blank" href="/portfolio/posts/flexcyon">my thought process</a> while developing it.
     </li>
     <br>
     <li>
@@ -39,87 +46,108 @@ const pageTitle = "About Me";
     </li>
   </ul>
   <h2>Tech Stack</h2>
-  <h3>Frontend</h3>
-  <p class="skill-icons">
-    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-      <Image alt="HTML Skill Icon" src="https://skillicons.dev/icons?i=html" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-      <Image alt="CSS Skill Icon" src="https://skillicons.dev/icons?i=css" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://sass-lang.com">
-      <Image alt="SASS Skill Icon" src="https://skillicons.dev/icons?i=sass" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://getbootstrap.com">
-      <Image alt="Bootstrap Skill Icon" src="https://skillicons.dev/icons?i=bootstrap" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://www.figma.com">
-      <Image alt="Figma Skill Icon" src="https://skillicons.dev/icons?i=figma" width="48" height="48"/>
-    </a>
-    <br><br>
-    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-      <Image alt="JavaScript Skill Icon" src="https://skillicons.dev/icons?i=js" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://react.dev">
-      <Image alt="React Skill Icon" src="https://skillicons.dev/icons?i=react" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://nodejs.org/en">
-      <Image alt="NodeJS Skill Icon" src="https://skillicons.dev/icons?i=nodejs" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://www.postman.com/">
-      <Image alt="Postman Skill Icon" src="https://skillicons.dev/icons?i=postman" width="48" height="48"/>
-    </a>
-  </p>
-  <br>
-  <h3>Languages</h3>
-  <p class="skill-icons">
-    <a target="_blank" href="https://www.python.org/">
-      <Image alt="Python Skill Icon" src="https://skillicons.dev/icons?i=python" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://kotlinlang.org/">
-      <Image alt="Kotlin Skill Icon" src="https://skillicons.dev/icons?i=kotlin" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
-      <Image alt="C# Skill Icon" src="https://skillicons.dev/icons?i=cs" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://www.gnu.org/software/bash/">
-      <Image alt="Bash Skill Icon" src="https://skillicons.dev/icons?i=bash" width="48" height="48"/>
-    </a>
-  </p>
-  <br>
-  <h3>Databases</h3>
-  <p class="skill-icons">
-    <a target="_blank" href="https://www.mysql.com/">
-      <Image alt="MySQL Skill Icon" src="https://skillicons.dev/icons?i=mysql" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://sqlite.org/">
-      <Image alt="SQLite Skill Icon" src="https://skillicons.dev/icons?i=sqlite" width="48" height="48"/>
-    </a>
-    <a target="_blank" href="https://sequelize.org/">
-      <Image alt="Sequelize Skill Icon" src="https://skillicons.dev/icons?i=sequelize" width="48" height="48"/>
-    </a>
-  </p>
-  <br>
-  <h3>Containerisation</h3>
-  <p class="skill-icons">
-    <a target="_blank" href="https://www.docker.com/">
-      <Image alt="Docker Skill Icon" src="https://skillicons.dev/icons?i=docker" width="48" height="48"/>
-    </a>
-  </p>
-  <br>
-  <br>
+  <div class="profile-2">
+    <div>
+      <h3>Frontend</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+          <Image alt="HTML Skill Icon" src="https://skillicons.dev/icons?i=html" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+          <Image alt="CSS Skill Icon" src="https://skillicons.dev/icons?i=css" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sass-lang.com">
+          <Image alt="SASS Skill Icon" src="https://skillicons.dev/icons?i=sass" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://getbootstrap.com">
+          <Image alt="Bootstrap Skill Icon" src="https://skillicons.dev/icons?i=bootstrap" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.figma.com">
+          <Image alt="Figma Skill Icon" src="https://skillicons.dev/icons?i=figma" width="48" height="48"/>
+        </a>
+        <br><br>
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+          <Image alt="JavaScript Skill Icon" src="https://skillicons.dev/icons?i=js" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://react.dev">
+          <Image alt="React Skill Icon" src="https://skillicons.dev/icons?i=react" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://nodejs.org/en">
+          <Image alt="NodeJS Skill Icon" src="https://skillicons.dev/icons?i=nodejs" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.postman.com/">
+          <Image alt="Postman Skill Icon" src="https://skillicons.dev/icons?i=postman" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+    <div>
+      <h3>Languages</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.python.org/">
+          <Image alt="Python Skill Icon" src="https://skillicons.dev/icons?i=python" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://kotlinlang.org/">
+          <Image alt="Kotlin Skill Icon" src="https://skillicons.dev/icons?i=kotlin" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
+          <Image alt="C# Skill Icon" src="https://skillicons.dev/icons?i=cs" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.gnu.org/software/bash/">
+          <Image alt="Bash Skill Icon" src="https://skillicons.dev/icons?i=bash" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class="profile-2">
+    <div>
+      <h3>Databases</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.mysql.com/">
+          <Image alt="MySQL Skill Icon" src="https://skillicons.dev/icons?i=mysql" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sqlite.org/">
+          <Image alt="SQLite Skill Icon" src="https://skillicons.dev/icons?i=sqlite" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sequelize.org/">
+          <Image alt="Sequelize Skill Icon" src="https://skillicons.dev/icons?i=sequelize" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+    <div>
+      <h3>Containerisation</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.docker.com/">
+          <Image alt="Docker Skill Icon" src="https://skillicons.dev/icons?i=docker" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+  </div>
   <h2>Find me on</h2>
-  <p class="foot">
-    <Mail/>
-    <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">wg.nick.exe@gmail.com</a>
-  </p>
-  <p class="foot">
-    <Github/>
-    <a target="_blank" href="https://github.com/bladeacer" target="_blank">bladeacer</a>
-  </p>
-  <p class="foot">
-    <Gitlab/>
-    <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">bladeacer</a>
-  </p>
+  <div class="profile">
+    <p class="foot">
+      <Mail/>
+      <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">wg.nick.exe@gmail.com</a>
+    </p>
+  </div>
+  <div class="profile">
+    <p class="foot">
+      <Github/>
+      <a target="_blank" href="https://github.com/bladeacer" target="_blank">bladeacer</a>
+    </p>
+    <p class="foot">
+      <Gitlab/>
+      <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">bladeacer</a>
+    </p>
+  </div>
+  <div class="profile">
+    <p class="foot">
+      <User/>
+      <a target="_blank" href="https://gravatar.com/objectoriginal8f1e7ecf6f" target="_blank">bladeacer</a>
+    </p>
+    <p class="foot">
+      <LinkedIn/>
+      <a target="_blank" href="https://www.linkedin.com/in/nicholas-wen-a525832b2/" target="_blank">Nicholas Wen</a>
+    </p>
+  </div>
 </BaseLayout>
 
