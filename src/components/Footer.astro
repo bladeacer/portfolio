@@ -1,21 +1,21 @@
 ---
 import Copyright from '@lucide/astro/icons/copyright';
 import Scale from '@lucide/astro/icons/scale';
-import Type from '@lucide/astro/icons/type';
+import Heart from '@lucide/astro/icons/heart';
 const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <Copyright/>
-  <span>
+  <a href="https://github.com/bladeacer" target="_blank">
+    <Copyright/>
     bladeacer {currentYear}
-  </span>
-  <Scale/>
-  <span>
-    <a href="https://gitlab.com/bladeacer/portfolio/-/blob/master/LICENSE" target="_blank">CC BY-SA 4.0</a>
-  </span>
-  <Type/>
-  <span>
-    <a href="/portfolio/credits" target="_blank">Credits</a>
-  </span>
+  </a>
+  <a href="https://gitlab.com/bladeacer/portfolio/-/blob/master/LICENSE" target="_blank">
+    <Scale/>
+    CC BY-SA 4.0
+  </a>
+  <a href="/portfolio/credits" target="_blank">
+    <Heart/>
+    Credits
+  </a>
 </footer>

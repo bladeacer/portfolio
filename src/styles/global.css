@@ -212,7 +212,6 @@ html.dark .sun {
   max-width: 200%;
   background-color: var(--flexcyon-base-02);
   border-radius: 0.75rem;
-  box-shadow: 0 2px 4px color-mix(in hsl, var(--text-faint) 15%, transparent 85%);
   overflow: hidden;
   padding: 0rem 1.5rem;
   margin: 1.5rem 0rem;
@@ -268,9 +267,8 @@ html.dark .sun {
   margin-bottom: 0.25rem;
 }
 
-/* Optional: Hover effect */
 .blog-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px color-mix(in hsl, var(--text-faint) 15%, transparent 85%);
   transform: scale(1.01);
   transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
 }
@@ -398,7 +396,7 @@ stron-toc.toc {
 
 blockquote {
   background-color: var(--flexcyon-base-03);
-  max-width: 47vw;
+  max-width: 45vw;
   margin-left: 0;
   padding: 1px 16px;
   border-radius: 16px;
@@ -406,7 +404,7 @@ blockquote {
 
 pre.astro-code,
 div, p, em, li {
-  max-width: 47.5vw;
+  max-width: 45vw;
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
@@ -416,7 +414,7 @@ div, p, em, li {
 
 @media (width < 1000px) {
   blockquote, pre.astro-code, div, p, em, li {
-    max-width: 80vw;
+    max-width: 85vw;
   }
 }
 
@@ -465,7 +463,23 @@ p.foot, footer {
   margin-top: 2rem;
   align-items: left;
   justify-content: left;
-  max-width: 47.5vw;
+  max-width: 45vw;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--text-faint);
+  padding-right: 16px;
+}
+
+footer svg {
+  transform: translateY(6px);
+}
+
+@media (width < 900px) {
+  footer {
+    flex-direction: column;
+  }
 }
 
 p.foot {
@@ -475,7 +489,7 @@ p.foot {
 hr {
   color: var(--text-faint);
   opacity: 0.55;
-  max-width: 47.5vw;
+  max-width: 45vw;
   margin-left: 0;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -483,7 +497,7 @@ hr {
 
 @media (width < 1000px) {
   hr, p.foot, footer {
-    max-width: 80vw;
+    max-width: 85vw;
   }
 }
 
@@ -505,12 +519,12 @@ body {
 
 @media (width < 1000px) {
   img {
-    max-width: 80vw;
+    max-width: 85vw;
   }
 }
 
 img {
-  max-width: 47.5vw;
+  max-width: 45vw;
   border-radius: 1rem;
 }
 
@@ -536,14 +550,15 @@ code {
 }
 
 .posts-container {
-  width: 47.5vw;
-  height: 47.5vh;
-  overflow-y: scroll;
+  width: 35vw;
 }
 
 @media (width < 1000px) {
   .posts-container {
     width: 80vw;
+  }
+  .post-item {
+    width: 70vw;
   }
 }
 
@@ -555,6 +570,7 @@ code {
   margin-top: -8px;
 }
 
+
 .profile-2 img,
 .profile img {
   border-radius: 50%;
@@ -562,15 +578,33 @@ code {
 }
 
 .profile img {
-  margin-right: 5%;
+  margin-right: 2.5%;
 }
 
-.profile-2 div {
-  width: 45%;
+.profile-2 div,
+.profile .foot {
+  width: max(35%, 270px);
 }
 
 .profile-2 div,
 .profile div {
   margin-top: -8px;
   padding-bottom: 16px;
+}
+
+@media (width < 900px) {
+  .profile {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .profile img {
+    margin-right: unset;
+  }
+  .profile div {
+    margin-top: unset;
+    padding-bottom: unset;
+  }
+  .profile .foot {
+    width: unset;
+  }
 }
