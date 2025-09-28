@@ -252,27 +252,13 @@ html.dark .sun {
   object-fit: cover;
 }
 
-.blog-card__tags {
-  margin-top: 0.75rem;
-}
-
-.blog-card__tag {
-  display: inline-block;
-  background-color: var(--flexcyon-red-salmon);
-  color: var(--text-normal);
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  margin-right: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
 .blog-card:hover {
   box-shadow: 0 1px 2px color-mix(in hsl, var(--text-faint) 15%, transparent 85%);
   transform: scale(1.01);
   transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
 }
 
+.blog-card__tags,
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -299,6 +285,7 @@ select::-ms-expand {
   display: none;
 }
 
+.blog-card__tag,
 .tag {
   margin: 0.25em;
   line-height: 1.2;
@@ -306,6 +293,21 @@ select::-ms-expand {
   padding: 0.5em 0.75em;
   font-size: 1em;
   background-color: var(--flexcyon-base-02);
+  color: color-mix(in srgb, var(--flexcyon-blue) 85%, transparent 15%);
+}
+
+.blog-card__tag {
+  background-color: color-mix(in srgb, var(--flexcyon-base-03) 35%, transparent 80%);
+  margin-left: 0;
+  margin-bottom: 12px;
+}
+.blog-card__tags {
+  padding-top: 12px;
+  margin-left: -4px;
+}
+.blog-card__tags a {
+  margin-top: 12px;
+  margin-bottom: 6px;
 }
 
 .tag a {
@@ -607,4 +609,34 @@ code {
   .profile .foot {
     width: unset;
   }
+}
+
+/* CSS for the Active Line Highlight with Smooth Fade */
+
+.active-line-highlight {
+    /* 1. Define the final highlighted state */
+    background-color: color-mix(in srgb, var(--flexcyon-cyan) 20%, transparent 80%);
+    opacity: 1; /* Fully visible */
+    border-radius: 4px;
+    padding: 4px 8px; 
+    
+    /* 2. Apply the transition property */
+    /* Transition background-color and opacity over 0.5s for a smooth effect */
+    transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* 3. Define the initial/default state (if necessary, often implied) */
+/* This ensures elements start hidden before the class is applied */
+p, h1, h2, h3, h4, li, blockquote, div {
+    /* Ensure the non-highlighted elements also have the transition properties 
+       if they are the elements being targeted, though usually applying it 
+       to the class is enough for fade-out */
+    transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+thead {
+  text-align: center;
+}
+td {
+  padding: 6px;
 }

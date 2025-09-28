@@ -16,14 +16,18 @@ const formattedPubDate = new Date(pubDate).toLocaleDateString("en-GB", dateOptio
           <span>By {author}<br>Created on {formattedPubDate}<br> </span>
         </div>
       )}
-      {description && <p class="blog-card__excerpt">{description}</p>}
       {tags && tags.length > 0 && (
         <div class="blog-card__tags">
           {tags.map(tag => (
-            <span class="blog-card__tag">#{tag}</span>
+          <a href={`/portfolio/tags/${tag}`}>
+            <span class="blog-card__tag">{tag}</span>
+          </a>
           ))}
         </div>
       )}
+      <a href={url}>
+      {description && <p class="blog-card__excerpt">{description}</p>}
+      </a>
     </div>
   </a>
 </div>
