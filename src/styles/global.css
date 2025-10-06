@@ -404,8 +404,9 @@ blockquote {
   border-radius: 16px;
 }
 
+h1, h2, h3, h4, h5, h6,
 pre.astro-code,
-div, p, em, li {
+div, p, em, ul {
   max-width: 45vw;
   white-space: normal;
   overflow: visible;
@@ -415,7 +416,7 @@ div, p, em, li {
 }
 
 @media (width < 1000px) {
-  blockquote, pre.astro-code, div, p, em, li {
+  blockquote, pre.astro-code, div, p, em, ul {
     max-width: 85vw;
   }
 }
@@ -552,7 +553,7 @@ code {
 }
 
 .posts-container {
-  width: 35vw;
+  width: 45vw;
 }
 
 @media (width < 1000px) {
@@ -611,26 +612,20 @@ code {
   }
 }
 
-/* CSS for the Active Line Highlight with Smooth Fade */
-
 .active-line-highlight {
-    /* 1. Define the final highlighted state */
     background-color: color-mix(in srgb, var(--flexcyon-cyan) 20%, transparent 80%);
-    opacity: 1; /* Fully visible */
+    opacity: 1;
     border-radius: 4px;
     padding: 4px 8px; 
     
-    /* 2. Apply the transition property */
-    /* Transition background-color and opacity over 0.5s for a smooth effect */
     transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-/* 3. Define the initial/default state (if necessary, often implied) */
-/* This ensures elements start hidden before the class is applied */
+.active-line-highlight img {
+  padding-right: 16px;
+}
+
 p, h1, h2, h3, h4, li, blockquote, div {
-    /* Ensure the non-highlighted elements also have the transition properties 
-       if they are the elements being targeted, though usually applying it 
-       to the class is enough for fade-out */
     transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 

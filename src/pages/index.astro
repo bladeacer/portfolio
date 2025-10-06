@@ -1,73 +1,153 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Greeting from '../components/Greeting';
-const pageTitle = "bladeacer's Portfolio";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Github from '@lucide/astro/icons/github';
+import Gitlab from '@lucide/astro/icons/gitlab';
+import Mail from '@lucide/astro/icons/mail';
+import User from '@lucide/astro/icons/user';
+import LinkedIn from '@lucide/astro/icons/linkedin';
+import CodeXML from '@lucide/astro/icons/code-xml';
+import { Image } from 'astro:assets';
+const pageTitle = "About Me";
 ---
+
 <BaseLayout pageTitle={pageTitle}>
-  <h3>About this Site</h3>
-  <p> 
-    This site will contain my portfolio, projects and blog posts about my <em>experiences with software</em>.
-    Viewing experience for this site is <strong>more optimised on desktop</strong>, tablets and larger devices.
-  </p>
-  <p>
-    This is site is a work in progress (WIP). 
-    I do write drafts on here from this time, which may be in various states of completion.
-  </p>
+  <div class="profile">
+    <Image alt="Profile Picture" src="/portfolio/profile.png" width="128" height="128"/>
+    <div>
+      <p>
+        Hi there, I write some code in my free time.
+      </p>
+      <ul>
+        <li>
+          css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux enjoyer 🔨
+        </li>
+        <li>
+          currently a student 📖  
+        </li>
+        <li>
+          software developer in the making 💻
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <h3>License</h3>
-  <p>
-    This site's content is licensed under the <strong>CC BY-SA 4.0 license</strong>.  There is a link to the license text you can click at the footer.
-  </p>
-  <p>
-    This site's source code is licensed under the <strong>MIT license</strong>.
-  </p>
-  The source code is available on
-  <a href="https://gitlab.com/bladeacer/portfolio" target="_blank">GitLab</a> and as a mirror on
-  <a href="https://github.com/bladeacer/portfolio" target="_blank">GitHub</a>.
-  </p>
-  
-  <h3>Shortcuts</h3>
-  <table>
-      <thead>
-          <tr>
-              <th>Trigger</th>
-              <th>Action</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td>j</td>
-              <td>Scroll up</td>
-          </tr>
-          <tr>
-              <td>k</td>
-              <td>Scroll down</td>
-          </tr>
-          <tr>
-              <td>gg</td>
-              <td>Scroll to the top</td>
-          </tr>
-          <tr>
-              <td>G</td>
-              <td>Scroll to the bottom</td>
-          </tr>
-          <tr>
-              <td>&#123;</td>
-              <td>Scroll up to previous section</td>
-          </tr>
-          <tr>
-              <td>&#125;</td>
-              <td>Scroll down to next section</td>
-          </tr>
-      </tbody>
-  </table>
-  <p>This feature is experimental.</p>
-
-  <h3>Disclaimer</h3>
-  <blockquote>
-    <p>
-      All content on this site is based on <em>my personal opinions</em> and experiences. 
-      You are free to share and feedback to me about the specific posts, but kindly do so according to the license below.
+  <h2>Current Works</h2>
+  <ul>
+    <li>
+      <a target="_blank" href="https://github.com/bladeacer/flexcyon">flexcyon</a><br> a reasonably opinionated Obsidian.md theme.<br>About <a target="_blank" href="/portfolio/posts/flexcyon">my thought process</a> while developing it.
+    </li>
+    <br>
+    <li>
+      <a target="_blank" href="https://github.com/bladeacer/mnemosync">mnemosync</a><br>a Golang CLI tool that lets you add folders to backup manually to a target Git repository. 
+    </li>
+    <br>
+    <li>
+      <a target="_blank" href="https://github.com/bladeacer/tech-lingo">tech-lingo</a><br> an Espanso package with tech terms sourced from<br> tldr pages and Wikipedia.
+    </li>
+  </ul>
+  <h2>Tech Stack</h2>
+  <div class="profile-2">
+    <div>
+      <h3>Frontend</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+          <Image alt="HTML Skill Icon" src="https://skillicons.dev/icons?i=html" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+          <Image alt="CSS Skill Icon" src="https://skillicons.dev/icons?i=css" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sass-lang.com">
+          <Image alt="SASS Skill Icon" src="https://skillicons.dev/icons?i=sass" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://getbootstrap.com">
+          <Image alt="Bootstrap Skill Icon" src="https://skillicons.dev/icons?i=bootstrap" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.figma.com">
+          <Image alt="Figma Skill Icon" src="https://skillicons.dev/icons?i=figma" width="48" height="48"/>
+        </a>
+        <br><br>
+        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+          <Image alt="JavaScript Skill Icon" src="https://skillicons.dev/icons?i=js" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://react.dev">
+          <Image alt="React Skill Icon" src="https://skillicons.dev/icons?i=react" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://nodejs.org/en">
+          <Image alt="NodeJS Skill Icon" src="https://skillicons.dev/icons?i=nodejs" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.postman.com/">
+          <Image alt="Postman Skill Icon" src="https://skillicons.dev/icons?i=postman" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+    <div>
+      <h3>Languages</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.python.org/">
+          <Image alt="Python Skill Icon" src="https://skillicons.dev/icons?i=python" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://kotlinlang.org/">
+          <Image alt="Kotlin Skill Icon" src="https://skillicons.dev/icons?i=kotlin" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
+          <Image alt="C# Skill Icon" src="https://skillicons.dev/icons?i=cs" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://www.gnu.org/software/bash/">
+          <Image alt="Bash Skill Icon" src="https://skillicons.dev/icons?i=bash" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class="profile-2">
+    <div>
+      <h3>Databases</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.mysql.com/">
+          <Image alt="MySQL Skill Icon" src="https://skillicons.dev/icons?i=mysql" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sqlite.org/">
+          <Image alt="SQLite Skill Icon" src="https://skillicons.dev/icons?i=sqlite" width="48" height="48"/>
+        </a>
+        <a target="_blank" href="https://sequelize.org/">
+          <Image alt="Sequelize Skill Icon" src="https://skillicons.dev/icons?i=sequelize" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+    <div>
+      <h3>Containerisation</h3>
+      <p class="skill-icons">
+        <a target="_blank" href="https://www.docker.com/">
+          <Image alt="Docker Skill Icon" src="https://skillicons.dev/icons?i=docker" width="48" height="48"/>
+        </a>
+      </p>
+    </div>
+  </div>
+  <h2>Find me on</h2>
+  <div class="profile">
+    <p class="foot">
+      <Mail/>
+      <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">wg.nick.exe@gmail.com</a>
     </p>
-  </blockquote>
+  </div>
+  <div class="profile">
+    <p class="foot">
+      <LinkedIn/>
+      <a target="_blank" href="https://www.linkedin.com/in/nicholas-wen-a525832b2/" target="_blank">Nicholas Wen</a>
+    </p>
+    <p class="foot">
+      <Github/>
+      <a target="_blank" href="https://github.com/bladeacer" target="_blank">bladeacer</a>
+    </p>
+  </div>
+  <div class="profile">
+    <p class="foot">
+      <User/>
+      <a target="_blank" href="https://gravatar.com/objectoriginal8f1e7ecf6f" target="_blank">bladeacer</a>
+    </p>
+    <p class="foot">
+      <Gitlab/>
+      <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">bladeacer</a>
+    </p>
+  </div>
 </BaseLayout>
+

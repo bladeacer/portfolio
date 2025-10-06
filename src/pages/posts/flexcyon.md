@@ -183,7 +183,7 @@ These are some of the many niche uses the theme covers.
 
 ### Yours to Customise
 
-I made the theme itself with customisation in mind. There is about over **240
+I made the theme itself with customisation in mind. There is about over **328
 Style Settings options** when I last checked. Source:
 `rg --count-matches 'default:'` on my theme's root directory.
 

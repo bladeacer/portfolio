@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: "EndeavourOS"
 pubDate: 09/08/2025
-status: "Draft"
+status: "Completed"
 description: "A DIY Linux experience."
 author: "bladeacer"
 tags: ["linux", "gnu", "os", "pacman", "unix"]
@@ -23,9 +23,54 @@ on the niche side as far as home or work desktop goes.
 - [Linux Kernel Archives](https://www.kernel.org/)
 
 ## Screenshots
-Select screenshots from my own desktop.
+![Endeavour Desktop](/portfolio/endeavour.png)
 
-### GNU Linux
+Here is a screenshot of my desktop (on a monitor).
+
+### Featured software
+- [Cinnamon Desktop Environment](https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment))
+  - **Sane defaults**, a familiar interface to users coming from Windows
+*Decently customisable*.
+
+- [X.Org Server (X11)](https://en.wikipedia.org/wiki/X.Org_Server)
+  - Broader **software compatibility**, especially with `fcitx5 + rime` (Chinese
+keyboard input) and Espanso (text expander)
+
+- [fastfetch](https://github.com/fastfetch-cli/fastfetch)
+  - `neofetch` but actively maintained which can be **easily customised**.
+  - Credits to this [Lain inspired](https://codeberg.org/LainOS/LainOS-ricer-arch)
+configuration for the `fastfetch` config
+
+- [cmatrix](https://github.com/abishekvashok/cmatrix)
+  - *aesthetic* screensaver, there is also
+[pipes.sh](https://github.com/pipeseroni/pipes.sh) for animated pipes instead
+
+- [bottom](https://github.com/ClementTsang/bottom)
+  - Cross platform terminal user interface system monitor
+
+- [tmux](https://github.com/tmux/tmux)
+  - A terminal multiplexer for managing multiple terminal sessions. `wezterm` is
+a good alternative especially on Windows.
+
+- [vim](https://github.com/vim/vim)
+  - A text editor [that works well for me](./vim). Has a bit of a learning curve.
+
+- [alacritty](https://alacritty.org/)
+  - A cross platform terminal emulator which is extensible with good performance.
+
+The above list is `non-exhaustive`, it is more of a list of software which has
+greatly improved my experience on Linux. Most of the software chosen was **cross
+platform**, as I started working on configuration before making the switch from
+*Windows to Linux*.
+
+### My configuration files
+My configuration files (or *dotfiles*) are a constant work in progress. You can
+find them over at [this repository](https://github.com/bladeacer/my_dotfiles).
+
+This repository includes configuration files for the software mentioned above
+like `vim`, `tmux` and `fastfetch`.
+
+## GNU Linux
 Linux itself, technically speak refers to the Linux kernel by Linus Torvalds.
 This is why there are "distributions" of Linux with the relevant package manager
 and/or software bundled together.
@@ -160,7 +205,14 @@ semantic releases.[^3]
 Since users can choose to not updating their operating system on Linux, they can
 test out cutting edge features or wait and see if the update might break their
 set up.  This also means that Arch Linux has one of the largest software package
-repositories, especially when factoring the Arch User Repository.
+repositories, especially when factoring the Arch User Repository (AUR).
+
+> A tradeoff of a large online repository of software is that one as the user
+> needs to check the software they are installing.
+>
+> **pacman** is also much involved as a package manager. Mirrors, cryptographic keys
+> need to update ever so often. The AUR also sometimes has a bit of downtime, though
+> otherwise the user experience is a good one.
 
 ## Credits
 Credits to Linus Torvalds, Free Software Foundation, GNU Software devs,
