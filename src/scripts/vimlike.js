@@ -77,19 +77,15 @@ function highlightActiveLine() {
     }
 }
 
-
-// --- Core Custom Scroll Animation (FIXED Acceleration Logic) ---
 function animateScroll(timestamp) {
-    if (!scrollStartTimestamp) {
-        scrollStartTimestamp = timestamp;
-    }
-    
-    const elapsedTime = timestamp - scrollStartTimestamp;
-    
-    // Calculate acceleration factor. 
-    let accelerationFactor = 0;
+    if (!scrollStartTimestamp) {
+        scrollStartTimestamp = timestamp;
+    }
     
-    // Only apply acceleration if chaining jumps (numericPrefix > 1) OR if the key is being held down
+    const elapsedTime = timestamp - scrollStartTimestamp;
+    
+    let accelerationFactor = 0;
+    
     if (numericPrefix > 1 || keyHoldStartTime > 0) {
         const totalKeyHoldTime = timestamp - keyHoldStartTime; 
         const maxHoldTimeForAccel = 1500;
@@ -99,39 +95,43 @@ function animateScroll(timestamp) {
             accelerationFactor = ACCELERATION_MAX_FACTOR * t;
         }
     }
-    
-    // Adjust duration based on acceleration
-    const actualDuration = BASE_SCROLL_DURATION / (1 + accelerationFactor);
-    
-    const progress = Math.min(1, elapsedTime / actualDuration);
-    const easedProgress = easeOutCubic(progress);
+    
+    // Adjust duration based on acceleration (Keep this block the same)
+    const actualDuration = BASE_SCROLL_DURATION / (1 + accelerationFactor);
+    
+    const progress = Math.min(1, elapsedTime / actualDuration);
+    const easedProgress = easeOutCubic(progress);
 
-    // Calculate new scroll position
-    const newPosition = startPosition + distanceToScroll * easedProgress;
-    window.scrollTo(0, newPosition);
-    
-    // Update highlight during the scroll
-    highlightActiveLine(); 
+    // Calculate new scroll position (Keep this block the same)
+    const newPosition = startPosition + distanceToScroll * easedProgress;
+    window.scrollTo(0, newPosition);
+    
+    // Update highlight during the scroll (Keep this block the same)
+    highlightActiveLine(); 
 
-    if (progress < 1) {
-        animationFrame = requestAnimationFrame(animateScroll);
-    } else {
-        // Animation finished, reset animation state for the next jump
-        scrollStartTimestamp = 0;
-        lastScrollTime = timestamp;
-        
-        // If there's a numeric prefix, perform the next jump
-        if (numericPrefix > 1) {
-            numericPrefix--;
-            // Recalculate and start the next jump immediately
-            const direction = distanceToScroll > 0 ? 1 : -1;
-            // Pass the 'command' argument to preserve heading logic during chained jumps
-            jumpToElement(direction, lastCommand); 
-        } else {
-            // If all jumps are done, only THEN reset the keyHoldStartTime
-            keyHoldStartTime = 0;
-        }
-    }
+    if (progress < 1) {
+        animationFrame = requestAnimationFrame(animateScroll);
+    } else {
+        // Animation finished, reset animation state for the next jump
+        scrollStartTimestamp = 0;
+        lastScrollTime = timestamp;
+        
+        // If there's a numeric prefix remaining (2 or more), perform the next jump
+        if (numericPrefix > 1) {
+            numericPrefix--; // Decrement the count
+            // Recalculate and start the next jump immediately
+            const direction = distanceToScroll > 0 ? 1 : -1;
+            // Pass the 'command' argument to preserve heading logic during chained jumps
+            jumpToElement(direction, lastCommand); 
+        } else {
+            // If all jumps are done (numericPrefix is 1 or less):
+            // 1. Reset the numericPrefix state
+            numericPrefix = 1; 
+            
+            // 2. Reset the keyHoldStartTime
+            keyHoldStartTime = 0;
+        }
+    }
 }
 
 // --- Utility: Find Next/Previous Heading Index ---
@@ -307,15 +307,7 @@ Mousetrap.bind('}', () => handleKeydown(1, 'heading')); // Find next heading (sc
 Mousetrap.bind('g g', () => handleKeydown(0, 'top'));
 Mousetrap.bind('G', () => handleKeydown(0, 'bottom'));
 
-// H/L Bindings (Horizontal scroll)
-Mousetrap.bind('h', (event) => { 
-    event.preventDefault(); 
-    window.scrollBy({ left: -250, behavior: 'smooth' });
-    highlightActiveLine(); 
-}, 'keydown');
-
 Mousetrap.bind('l', (event) => { 
     event.preventDefault(); 
-    window.scrollBy({ left: 250, behavior: 'smooth' }); 
-    highlightActiveLine();
+    highlightActiveLine(); 
 }, 'keydown');

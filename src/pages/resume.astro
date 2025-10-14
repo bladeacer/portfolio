@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Resume";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <iframe 
+    src="/portfolio/resume.pdf" 
+    width="100%" 
+    height="600px" 
+    title="bladeacer's Resume"
+  >
+    <p>Your browser does not support embedded PDF frames. You can <a href="/portfolio/resume">download the PDF</a> instead.</p>
+  </iframe>
+</BaseLayout>

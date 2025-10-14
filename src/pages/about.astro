@@ -27,7 +27,9 @@ const pageTitle = "bladeacer's Portfolio";
     <a href="https://github.com/bladeacer/portfolio" target="_blank">GitHub</a>.
   </p>
   
-  <h3>Shortcuts</h3>
+  <h3 id="shortcuts">Shortcuts</h3>
+  <p>This site has its own set of keyboard shortcuts you can use which are heavily inspired by Vim and Vimium.</p>
+  <h4>Scrolling</h4>
   <table>
       <thead>
           <tr>
@@ -38,11 +40,19 @@ const pageTitle = "bladeacer's Portfolio";
       <tbody>
           <tr>
               <td>j</td>
-              <td>Scroll up</td>
+              <td>Scroll up*</td>
           </tr>
           <tr>
               <td>k</td>
-              <td>Scroll down</td>
+              <td>Scroll down*</td>
+          </tr>
+          <tr>
+              <td>&#123;</td>
+              <td>Scroll up to previous section*</td>
+          </tr>
+          <tr>
+              <td>&#125;</td>
+              <td>Scroll down to next section*</td>
           </tr>
           <tr>
               <td>gg</td>
@@ -52,17 +62,78 @@ const pageTitle = "bladeacer's Portfolio";
               <td>G</td>
               <td>Scroll to the bottom</td>
           </tr>
+      </tbody>
+  </table>
+  <p>Note: scrolling only works on selections which <strong>do not exceed</strong> the vertical centre of the top and bottom of this site.</p>
+  <p>For the motions with `*`, scrolling <em>x</em> numbers of times is supported. E.g. 5j scrolls down 5 times.</p>
+  
+  <h4>Navigation</h4>
+  <table>
+      <thead>
           <tr>
-              <td>&#123;</td>
-              <td>Scroll up to previous section</td>
+              <th>Trigger</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>h</td>
+              <td>Navigate to home page</td>
           </tr>
           <tr>
-              <td>&#125;</td>
-              <td>Scroll down to next section</td>
+              <td>a</td>
+              <td>Navigate to about page</td>
+          </tr>
+          <tr>
+              <td>d</td>
+              <td>Navigate to digital garden</td>
+          </tr>
+          <tr>
+              <td>c</td>
+              <td>Navigate to credits page</td>
+          </tr>
+          <tr>
+              <td>#</td>
+              <td>Navigate to tags page</td>
+          </tr>
+          <tr>
+              <td>?</td>
+              <td>Navigate to this shortcuts table</td>
+          </tr>
+          <tr>
+              <td>r</td>
+              <td>Navigate to resume</td>
+          </tr>
+          <tr>
+              <td>&lt;</td>
+              <td>Navigate backward one entry in the browser's history stack</td>
+          </tr>
+          <tr>
+              <td>&gt;</td>
+              <td>Navigate forward one entry in the browser's history stack</td>
           </tr>
       </tbody>
   </table>
-  <p>This feature is experimental. The page itself also does not dynamically add bottom padding to allow keybind scrolling to the very last DOM element.</p>
+
+  <h4>Others</h4>
+  <table>
+      <thead>
+          <tr>
+              <th>Trigger</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>l</td>
+              <td>Highlight active line</td>
+          </tr>
+          <tr>
+              <td>t</td>
+              <td>Toggle theme</td>
+          </tr>
+      </tbody>
+  </table>
 
   <h3>Disclaimer</h3>
   <blockquote>
@@ -72,3 +143,24 @@ const pageTitle = "bladeacer's Portfolio";
     </p>
   </blockquote>
 </BaseLayout>
+
+<script>
+  window.onload = function() {
+    const hash = window.location.hash; 
+
+    if (hash === '#shortcuts') {
+      setTimeout(() => {
+        const targetElement = document.getElementById('shortcuts');
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' 
+          });
+        }
+        
+        window.history.replaceState(null, null, window.location.pathname);
+      }, 100);
+    }
+  };
+</script>

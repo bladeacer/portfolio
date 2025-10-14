@@ -533,6 +533,7 @@ img {
 
 strong {
   color: var(--flexcyon-red-salmon);
+  font-weight: 900;
 }
 
 em {
@@ -595,6 +596,24 @@ code {
   padding-bottom: 16px;
 }
 
+p.cta {
+    background-color: color-mix(in hsl, var(--text-accent) 55%, transparent 55%);
+    padding: 5.5px 11px;
+    border-radius: 12px;
+    margin-left: 24px;
+    margin-bottom: 4px;
+    svg {
+      color: var(--text-normal);
+    }
+    a {
+      color: var(--text-normal);
+      font-weight: 900;
+      text-decoration: none;
+      text-shadow: 2px 4px 2px 4px;
+      font-size: 1.15rem;
+    }
+}
+
 @media (width < 900px) {
   .profile {
     flex-direction: column;
@@ -629,9 +648,14 @@ p, h1, h2, h3, h4, li, blockquote, div {
     transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-thead {
+th {
   text-align: center;
+  padding: 6px 10px;
 }
 td {
-  padding: 6px;
+  padding: 6px 8px;
+}
+table {
+  background-color: var(--flexcyon-base-02);
+  border-radius: 8px;
 }
