@@ -1,11 +1,54 @@
-Mousetrap.bind('t', () => {
+Mousetrap.bind('0', () => {
     window.toggleTheme();
     return false; 
 });
 
 Mousetrap.bind('?', () => {
-    window.location.href = "/portfolio/about#shortcuts";
-    return false; 
+    const url = "/portfolio/about#shortcuts";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
+});
+
+Mousetrap.bind('e m', () => {
+    const url = "mailto:wg.nick.exe@gmail.com";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
+});
+
+Mousetrap.bind('g h', () => {
+    const url = "https://github.com/bladeacer";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
+});
+
+Mousetrap.bind('g l', () => {
+    const url = "https://gitlab.com/bladeacer";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
+});
+
+Mousetrap.bind('g r', () => {
+    const url = "https://gravatar.com/objectoriginal8f1e7ecf6f";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
+});
+
+Mousetrap.bind('l i', () => {
+    const url = "https://www.linkedin.com/in/nicholas-wen-a525832b2/";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
 });
 
 Mousetrap.bind('h', () => {
@@ -28,14 +71,17 @@ Mousetrap.bind('c', () => {
     return false; 
 });
 
-Mousetrap.bind('#', () => {
+Mousetrap.bind('t', () => {
     window.location.href = "/portfolio/tags";
     return false; 
 });
 
 Mousetrap.bind('r', () => {
-    window.location.href = "/portfolio/resume";
-    return false; 
+    const url = "/portfolio/resume";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false;
 });
 
 Mousetrap.bind('<', () => {

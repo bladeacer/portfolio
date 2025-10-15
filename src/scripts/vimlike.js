@@ -142,7 +142,7 @@ function findNextHeadingIndex(currentIndex, direction, candidates) {
         const tagName = candidates[nextIndex].tagName.toLowerCase();
         
         // Check if the element is an H1, H2, or H3
-        if (tagName.match(/^h[1-3]$/)) {
+        if (tagName.match(/^h[1-4]$/)) {
             return nextIndex; 
         }
         nextIndex += direction;
@@ -253,7 +253,6 @@ function jumpToElement(direction, command = null) {
 function handleNumberKey(event) {
     const number = parseInt(event.key, 10);
     if (!isNaN(number)) {
-        event.preventDefault();
         // Clear the old timeout
         clearTimeout(numericPrefixTimeout);
         // Build the prefix
@@ -275,7 +274,6 @@ function handleKeydown(direction, command = null) {
     if (document.activeElement.tagName.toLowerCase() === 'input' || document.activeElement.tagName.toLowerCase() === 'textarea') {
         return;
     }
-    event.preventDefault();
     clearTimeout(numericPrefixTimeout); // Stop number capture
 
     // Only initialize keyHoldStartTime if it hasn't been set (i.e., if it's the first keydown)
@@ -307,7 +305,6 @@ Mousetrap.bind('}', () => handleKeydown(1, 'heading')); // Find next heading (sc
 Mousetrap.bind('g g', () => handleKeydown(0, 'top'));
 Mousetrap.bind('G', () => handleKeydown(0, 'bottom'));
 
-Mousetrap.bind('l', (event) => { 
-    event.preventDefault(); 
+Mousetrap.bind('l', () => { 
     highlightActiveLine(); 
 }, 'keydown');
