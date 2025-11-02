@@ -80,6 +80,7 @@ em, strong, div span, a, h1, h2, h3, h4, h5, h6 {
 
 .astro-code .line {
   display: block;
+  white-space: pre;
   padding: 4px 8px;
 }
 

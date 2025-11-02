@@ -8,12 +8,13 @@ author: "bladeacer"
 tags: ["python", "pdf", "pdf-text-extraction", "programming", "scripting"]
 ---
 
-## Foreword
+WIP.
+<!-- ## Foreword -->
 
-## Screenshots
+<!-- ## Screenshots -->
 
-## Links
+<!-- ## Links -->
 
-## Credits
+<!-- ## Credits -->
 
-## Conclusion
+<!-- ## Conclusion -->

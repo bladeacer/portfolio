@@ -14,7 +14,7 @@ export default defineConfig({
     ],
     markdown: {
         shikiConfig: {
-          theme: 'kanagawa-wave',
+          theme: 'night-owl',
         },
     },
 });
