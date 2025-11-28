@@ -52,11 +52,10 @@ understand what the code is trying to do.
 * We pass the value of `' '` to the `end` parameter. This is to tell Python to
 a single space after each printed number.[^4]
 
-<!-- ## Screenshots -->
+## Credits
 
-<!-- ## Links -->
-
-<!-- ## Credits -->
+* [W3Schools' Python tutorial](https://www.w3schools.com/python/)
+* [Python Software Foundation](https://www.python.org/)
 
 <!-- ## Conclusion -->
 

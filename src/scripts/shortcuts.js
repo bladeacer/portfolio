@@ -93,3 +93,8 @@ Mousetrap.bind('>', () => {
     history.forward();
     return false;
 });
+
+Mousetrap.bind('f', () => {
+    window.location.href = "/portfolio/rss.xml";
+    return false; 
+});

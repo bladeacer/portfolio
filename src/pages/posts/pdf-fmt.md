@@ -8,13 +8,16 @@ author: "bladeacer"
 tags: ["python", "pdf", "pdf-text-extraction", "programming", "scripting"]
 ---
 
-WIP.
-<!-- ## Foreword -->
+## Foreword
+
+pdf-fmt is a PDF text extraction utility. It supports features like regex based
+filtering and document format conversion (via LibreOffice or pandoc).
 
 <!-- ## Screenshots -->
 
-<!-- ## Links -->
+## Credits
 
-<!-- ## Credits -->
+- [LibreOffice](https://www.libreoffice.org/)
+- [Pandoc](https://www.libreoffice.org/)
 
 <!-- ## Conclusion -->
