@@ -1,5 +1,5 @@
 // --- Configuration ---
-const CANDIDATE_SELECTOR = 'body > p, body > h1, body > h2, body > h3, body > h4, body > ul > li, body > blockquote, body > li, body > pre, body > .profile-2, body > table'; 
+const CANDIDATE_SELECTOR = 'body p, body h1, body h2, body h3, body h4, body ul > li, body blockquote, body li, body pre, body .profile-2, body table'; 
 // RETAIN: Used for checking element type within jumpToElement
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;

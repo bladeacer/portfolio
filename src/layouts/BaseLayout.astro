@@ -26,10 +26,12 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header />
-    <h1>{pageTitle}</h1>
-    <slot />
-    <Footer />
+    <div class="content-wrapper">
+      <Header />
+      <h1>{pageTitle}</h1>
+      <slot />
+      <Footer />
+    </div>
     <noscript>
       This site uses JavaScript functionality. Please ensure that JavaScript is enabled to continue.
       <br>

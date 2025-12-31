@@ -35,6 +35,14 @@ Mousetrap.bind('g l', () => {
     return false;
 });
 
+Mousetrap.bind('b', () => {
+    const url = "https://codeberg.org/bladeacer";
+    const target = '_blank';
+    const features = 'noopener,noreferrer'; 
+    window.open(url, target, features);
+    return false; 
+});
+
 Mousetrap.bind('g r', () => {
     const url = "https://gravatar.com/objectoriginal8f1e7ecf6f";
     const target = '_blank';

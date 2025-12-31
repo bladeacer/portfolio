@@ -190,6 +190,17 @@ nav {
   background: none;
 }
 
+@media screen and (min-width: 636px) {
+  #themeToggle {
+    padding-top: 12px;
+  }
+}
+
+#themeToggle p {
+  color: var(--text-faint);
+  font-size: 13.25px;
+}
+
 .sun, .moon {
   stroke-width: 0;
 }
@@ -689,7 +700,7 @@ p.cta2 {
   padding-right: 16px;
 }
 
-p, h1, h2, h3, h4, li, blockquote, div {
+p, h1, h2, h3, h4, li, blockquote, div:not(.content-wrapper) {
     transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -703,4 +714,25 @@ td {
 table {
   background-color: var(--flexcyon-base-02);
   border-radius: 8px;
+}
+
+body {
+  --anim-slide-amt: 56.6311px;
+  --anim-duration: 300ms;
+  --anim-easing: ease-in-out;
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0.55;
+    transform: translateX(calc(var(--anim-slide-amt)) * -1);
+  }
+  100% {
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+.content-wrapper {
+  animation: slide-in-left var(--anim-duration) var(--anim-easing);
 }

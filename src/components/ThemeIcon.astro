@@ -6,37 +6,54 @@ import Moon from '@lucide/astro/icons/moon';
 <button id="themeToggle">
   <Sparkles class="sun" size="36"/>
   <Moon class="moon" size="36"/>
+  <p>
+    Toggle
+  </p>
 </button>
 
 <script is:inline>
   const htmlElement = document.documentElement;
 
+  const applyTheme = (theme) => {
+    if (theme === "dark") {
+      htmlElement.classList.add("dark");
+    } else {
+      htmlElement.classList.remove("dark");
+    }
+  };
+
   window.toggleTheme = function() {
-    htmlElement.classList.toggle("dark");
-    const isDark = htmlElement.classList.contains("dark");
+    const isDark = htmlElement.classList.toggle("dark");
     localStorage.setItem("theme", isDark ? "dark" : "light");
   };
 
-  const initialTheme = (() => {
-    const localStorageTheme = localStorage?.getItem("theme") ?? "";
-    if (["dark", "light"].includes(localStorageTheme)) {
-      return localStorageTheme;
+  const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
     }
+
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return "dark";
     }
+
     return "light";
-  })();
+  };
 
-  if (initialTheme === "light") {
-    htmlElement.classList.remove("dark");
-  } else {
-    htmlElement.classList.add("dark");
-  }
+  const initialTheme = getInitialTheme();
+  applyTheme(initialTheme);
 
-  window.localStorage.setItem("theme", initialTheme);
+  // Listen for System/OS changes
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) {
+      const newSystemTheme = e.matches ? "dark" : "light";
+      applyTheme(newSystemTheme);
+    }
+  });
 
-  document
-    .getElementById("themeToggle")
-    ?.addEventListener("click", window.toggleTheme);
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .getElementById("themeToggle")
+      ?.addEventListener("click", window.toggleTheme);
+  });
 </script>
