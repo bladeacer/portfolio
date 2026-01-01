@@ -1,11 +1,11 @@
 // --- Configuration ---
-const CANDIDATE_SELECTOR = 'body p, body h1, body h2, body h3, body h4, body ul > li, body blockquote, body li, body pre, body .profile-2, body table'; 
+const CANDIDATE_SELECTOR = 'body > div > p, body > div > h1, body > div > h2, body > div > h3, body > div > h4, body > div > ul > li, body > div > blockquote, body > div > blockquote > ul > li, body > div > li, body > div > pre, body > div > table, body > div .post-item > .blog-card, body > div > .cards > .card-item > a > img, body > div > .cards > .card-item > p, body > div > .profile li, body > div > .profile > .profile-desc > a > p'; 
 // RETAIN: Used for checking element type within jumpToElement
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;
 const HIGHLIGHT_CLASS = 'active-line-highlight';
-const ACCELERATION_MAX_FACTOR = 0.25; // 25% additional speed at max acceleration
-const BASE_SCROLL_DURATION = 350; // Base duration in ms for a single jump (before acceleration)
+const ACCELERATION_MAX_FACTOR = 0.15;
+const BASE_SCROLL_DURATION = 350;
 
 // --- State Variables ---
 let lastHighlightedElement = null;
@@ -21,6 +21,7 @@ let distanceToScroll = 0;
 // NEW State for Numerical Prefixes
 let numericPrefix = 1; // Default to 1
 let numericPrefixTimeout = null; 
+let lastModifiedLink = null;
 
 // --- Utility Functions ---
 
@@ -293,6 +294,71 @@ function handleKeydown(direction, command = null) {
     }
 }
 
+function navigateToNearestLink() {
+    if (!lastHighlightedElement) {
+        lastHighlightedElement = document.querySelector(`.${HIGHLIGHT_CLASS}`);
+        if (!lastHighlightedElement) return;
+    }
+
+    let targetLink = null;
+    let navigationUrl = null;
+
+    // 1. GLOBAL ANCHOR CHECK
+    // First, check if the highlight itself is a link, OR is inside a link, OR contains a link
+    targetLink = lastHighlightedElement.closest('a') || lastHighlightedElement.querySelector('a');
+
+    // 2. IMAGE FALLBACK (Only if no anchor was found above or inside)
+    if (!targetLink) {
+        const isImg = lastHighlightedElement.tagName.toLowerCase() === 'img';
+        const imgInside = isImg ? lastHighlightedElement : lastHighlightedElement.querySelector('img');
+
+        if (imgInside) {
+            // Check if the image found is wrapped in a link (redundancy check)
+            const imgParentAnchor = imgInside.closest('a');
+            if (imgParentAnchor) {
+                targetLink = imgParentAnchor;
+            } else if (imgInside.src) {
+                navigationUrl = imgInside.src;
+            }
+        }
+    }
+
+    // 3. EXECUTION
+    if (targetLink) {
+        // LRU Style Management
+        if (lastModifiedLink && lastModifiedLink !== targetLink) {
+            lastModifiedLink.style.outline = '';
+            lastModifiedLink.style.boxShadow = '';
+        }
+
+        targetLink.style.outline = '2px solid var(--flexcyon-orange)';
+        lastModifiedLink = targetLink;
+
+        // Force target="_blank"
+        const originalTarget = targetLink.getAttribute('target');
+        targetLink.setAttribute('target', '_blank');
+        targetLink.click();
+        
+        // Restore target state
+        setTimeout(() => {
+            if (originalTarget) {
+                targetLink.setAttribute('target', originalTarget);
+            } else {
+                targetLink.removeAttribute('target');
+            }
+        }, 0);
+        
+        const href = targetLink.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            setTimeout(highlightActiveLine, 100);
+        }
+
+    } else if (navigationUrl) {
+        // Direct image navigation if no anchor exists anywhere in the hierarchy
+        window.open(navigationUrl, '_blank');
+    }
+}
+
 // J/K Bindings
 Mousetrap.bind('j', () => handleKeydown(1), 'keydown');
 Mousetrap.bind('k', () => handleKeydown(-1), 'keydown');
@@ -308,3 +374,11 @@ Mousetrap.bind('G', () => handleKeydown(0, 'bottom'));
 Mousetrap.bind('l', () => { 
     highlightActiveLine(); 
 }, 'keydown');
+
+Mousetrap.bind('enter', (e) => {
+    // Prevent default behavior (like form submission) if we're navigating
+    if (lastHighlightedElement) {
+        e.preventDefault();
+        navigateToNearestLink();
+    }
+});

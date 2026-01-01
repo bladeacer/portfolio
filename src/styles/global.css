@@ -199,6 +199,8 @@ nav {
 #themeToggle p {
   color: var(--text-faint);
   font-size: 13.25px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 .sun, .moon {
@@ -660,6 +662,14 @@ code {
   }
 }
 
+a:has(.cta, .cta2) {
+    color: var(--text-normal);
+    font-weight: 900;
+    text-decoration: none;
+    text-shadow: 2px 4px 2px 4px;
+    font-size: 1.15rem;
+}
+
 p.cta2,
 p.cta {
     background-color: color-mix(in oklch, var(--text-accent) 55%, transparent 55%);
@@ -667,13 +677,6 @@ p.cta {
     border-radius: 12px;
     svg {
       color: var(--text-normal);
-    }
-    a {
-      color: var(--text-normal);
-      font-weight: 900;
-      text-decoration: none;
-      text-shadow: 2px 4px 2px 4px;
-      font-size: 1.15rem;
     }
 }
 p.cta2,
@@ -688,20 +691,16 @@ p.cta2 {
 }
 
 .active-line-highlight {
-    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%);
+    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%) !important;
     opacity: 1;
     border-radius: 4px;
     padding: 4px 8px; 
     
-    transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: background-color 0.55s ease-in, opacity 0.5s ease-in-out;
 }
 
 .active-line-highlight img {
   padding-right: 16px;
-}
-
-p, h1, h2, h3, h4, li, blockquote, div:not(.content-wrapper) {
-    transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 th {
