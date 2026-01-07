@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Github from '@lucide/astro/icons/github';
 import Gitlab from '@lucide/astro/icons/gitlab';
+import Rss from '@lucide/astro/icons/rss';
 import Mountain from '@lucide/astro/icons/mountain';
 import Mail from '@lucide/astro/icons/mail';
 import User from '@lucide/astro/icons/user';
@@ -31,6 +32,9 @@ const pageTitle = "About Me";
           software developer in the making
         </li>
       </ul>
+      <p>
+        UTC+8 / EN / zh-CN
+      </p>
       <br>
       <a href="/portfolio/resume" target="_blank">
         <p class="foot cta">
@@ -42,6 +46,12 @@ const pageTitle = "About Me";
         <p class="foot cta2">
           <Keyboard/>
             Shortcuts
+        </p>
+      </a>
+      <a href="/portfolio/rss.xml" target="_blank">
+        <p class="foot cta3">
+          <Rss/>
+            RSS Feed
         </p>
       </a>
     </div>

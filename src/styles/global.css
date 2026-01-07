@@ -662,7 +662,7 @@ code {
   }
 }
 
-a:has(.cta, .cta2) {
+a:has([class*="cta"]) {
     color: var(--text-normal);
     font-weight: 900;
     text-decoration: none;
@@ -670,32 +670,30 @@ a:has(.cta, .cta2) {
     font-size: 1.15rem;
 }
 
-p.cta2,
-p.cta {
-    background-color: color-mix(in oklch, var(--text-accent) 55%, transparent 55%);
-    padding: 5.5px 11px;
+p[class*="cta"] {
+    background-color: color-mix(in oklch, var(--text-accent) 55%, transparent);
+    padding: 6px 12px;
+    margin-bottom: 4px;
+    max-inline-size: 60%;
     border-radius: 12px;
     svg {
       color: var(--text-normal);
     }
 }
-p.cta2,
-p.cta {
-    margin-bottom: 12px;
-    max-inline-size: 60%;
-}
 
 p.cta2 {
-    background-color: color-mix(in oklch, var(--flexcyon-red-salmon) 55%, transparent 55%);
-    margin-bottom: 4px;
+    background-color: color-mix(in oklch, var(--flexcyon-red-salmon) 55%, transparent);
+}
+
+p.cta3 {
+    background-color: color-mix(in oklch, var(--flexcyon-orange) 55%, transparent);
 }
 
 .active-line-highlight {
-    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%) !important;
+    background-color: color-mix(in oklch, var(--flexcyon-yellow) 12.5%, transparent) !important;
     opacity: 1;
     border-radius: 4px;
     padding: 4px 8px; 
-    
     transition: background-color 0.55s ease-in, opacity 0.5s ease-in-out;
 }
 
