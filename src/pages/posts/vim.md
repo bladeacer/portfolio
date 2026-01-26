@@ -90,7 +90,20 @@ touch type when needed.
 > If you are using an alternate keyboard layout like Dvorak or that of another language.
 >
 > Be prepared to either remap half your keys or be able to switch keyboard
-> layouts quickly when performing vim motions.
+> layouts quickly when performing vim motions /lh.able
+>
+> Errata 1: That being said, if you are learning a new keyboard layout the
+> relearning of muscle memory is part of the process.
+>
+> Much like learning Vim itself, it is a  difficult but necessary process.
+> It's akin to "learning the rules" (keyboard layout/motions) before breaking
+> them (remapping).
+>
+> Errata 2: Not that this is very much possible, but the muscle memory and
+> context switching required would be difficult for most.
+>
+> If you are able to use a non-conventional keyboard layout and it suits you,
+> that is great :D
 
 ### Customisation
 Speaking of remapping keybinds, vim has its own VimScript for customising the
@@ -176,6 +189,8 @@ By default, you still can use the arrow keys and mouse on modern versions of vim
 However, overtly relying on the "non-Vim" way of navigating text sort of defeats
 the purpose of using vim in the first place.
 
+> This site has some vim motions, you can view the shortcuts page by invoking `?`
+
 ## Using the different modes
 Here is an example of using the different modes together.
 
@@ -210,17 +225,23 @@ to return to the original line of text they were editing.
 They can press `Esc` if they are not already in normal mode and
 type: `:%s/registrs/registers/gc`.
 
-    7.1 `:%s` is the string search and replace command.
+    7,1 `:` enters command mode.
 
-    7.2 `registrs` is the target string to replace. In this case, it is our typo.
+    7.2 `%` selects our entire buffer, which we will mention on a section below.
 
-    7.3 `registers` is the target string we will replace our typo string with.
+    7.3 `s` is the string search and replace command.
 
-    7.4 `gc` is telling vim to perform this search and replace globally
+    7.4 `registrs` is the target string to replace. In this case, it is our typo.
+
+    7.5 `registers` is the target string we will replace our typo string with.
+
+    7.6 `gc` is telling vim to perform this search and replace globally
     (within the whole file), and `c` is to ask the user for confirmation on each
     replacement occurrence. This means you can *selectively search and replace*.
 
-    7.5 It supports regular expressions too :D
+    7.7 It supports regular expressions too :D
+
+> Command mode has a lot of other cool stuff you can do with it which is not covered.
 
 ### Undoing changes
 8. The user then accidentally deletes too many a line. They can undo this edit by
@@ -251,7 +272,10 @@ Vim also has tabs and sessions, although they are separate concepts.
 Some motions have inverses.
 
 The `p` motion by default pastes text below the current line the user's cursor
-is at. To do the opposite, the user can use `P` instead.
+is at. To do the opposite, the user can use `P` instead. This is true for Visual
+Line mode.
+
+When using `p` in-line, it pastes after the cursor. `P` does the opposite.
 
 As for `Y`, it acts as a shorthand for `yy`, which means yanking the current line.
 
@@ -266,12 +290,15 @@ down 19 lines).
 
 - Another might remember text content on line 20 and just search the file for it.
 
+- Another might navigate with `}` and `{` (jumping between blocks of code)
+
 For example, I can search for the string "acquired" in this blog post within Vim
 with `/acquired`.
 
 ## Credits
 - [Bram Moolenaar, creator of Vim](https://www.moolenaar.net/)
 - Various tech YouTubers and online articles from which I discovered Vim
+- u/BodyOrgan1 on the Vim subreddit for some corrections
 
 ## Conclusion
 I hope that I have not bored you to death with the specifics of Vim.
