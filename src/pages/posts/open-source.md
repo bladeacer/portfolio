@@ -3,36 +3,38 @@ layout: ../../layouts/MarkdownPostLayout.astro
 title: "Open Source"
 pubDate: 10/10/2025
 status: "Draft"
-description: "Something is hard to agree on."
+description: "More nuanced than code made freely available"
 author: "bladeacer"
 tags: ["open-source", "programming"]
 ---
 
-## Foreword
+TIP
 
-## Why open source?
+<!-- ## Foreword -->
 
-### Why open source: End user
+<!-- ## Why open source? -->
 
-### Why open source: Developers
+<!-- ### Why open source: End user -->
 
-## Open Source is free, for the end user
+<!-- ### Why open source: Developers -->
 
-### On Maintainers
+<!-- ## Open Source is free, for the end user -->
 
-### On Contributors
+<!-- ### On Maintainers -->
 
-## On Gatekeeping
-How easy should it be for an end user to contribute code?
+<!-- ### On Contributors -->
 
-## On Nitpicking
-Some nitpick on others' tech stack, choices and reasons for not implementing
-some feature.
+<!-- ## On Gatekeeping -->
+<!-- How easy should it be for an end user to contribute code? -->
 
-## Licensing woes
+<!-- ## On Nitpicking -->
+<!-- Some nitpick on others' tech stack, choices and reasons for not implementing -->
+<!-- some feature. -->
 
-## AI Usage in Open Source
+<!-- ## Licensing woes -->
 
-## Credits
+<!-- ## AI Usage in Open Source -->
 
-## Conclusion
+<!-- ## Credits -->
+
+<!-- ## Conclusion -->
