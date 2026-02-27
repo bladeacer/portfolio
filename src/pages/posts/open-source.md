@@ -3,12 +3,14 @@ layout: ../../layouts/MarkdownPostLayout.astro
 title: "Open Source"
 pubDate: 10/10/2025
 status: "Draft"
-description: "More nuanced than code made freely available"
+description: "A bit more nuanced than code made freely available"
 author: "bladeacer"
 tags: ["open-source", "programming"]
 ---
 
-TIP
+WIP.
+
+<!-- Themes: Community, AI Usage, user expectations etc. -->
 
 <!-- ## Foreword -->
 
