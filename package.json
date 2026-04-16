@@ -12,6 +12,7 @@
     "@astrojs/rss": "4.0.18",
     "@lucide/astro": "^1.8.0",
     "astro": "^5.18.1",
-    "astro-table-of-contents": "^1.0.16"
+    "astro-table-of-contents": "^1.0.16",
+    "simple-icons-astro": "^16.1.0"
   }
 }

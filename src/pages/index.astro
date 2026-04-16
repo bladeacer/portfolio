@@ -1,12 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Github from '@lucide/astro/icons/github';
-import Gitlab from '@lucide/astro/icons/gitlab';
-import Rss from '@lucide/astro/icons/rss';
-import Mountain from '@lucide/astro/icons/mountain';
-import Mail from '@lucide/astro/icons/mail';
+import { Github, Gitlab, Rss, Codeberg, Gmail } from 'simple-icons-astro'
 import User from '@lucide/astro/icons/user';
-import LinkedIn from '@lucide/astro/icons/linkedin';
+import Network from '@lucide/astro/icons/network';
 import CodeXML from '@lucide/astro/icons/code-xml';
 import Download from '@lucide/astro/icons/download';
 import Keyboard from '@lucide/astro/icons/keyboard';
@@ -166,11 +162,11 @@ const pageTitle = "About Me";
   <p>Feel free to connect or reach out to me via these channels.</p>
   <div class="profile-3">
     <p class="foot">
-      <Mail/>
+      <Gmail/>
       <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">Email</a>
     </p>
     <p class="foot">
-      <LinkedIn/>
+      <Network/>
       <a target="_blank" href="https://www.linkedin.com/in/nicholas-wen-a525832b2/" target="_blank">LinkedIn</a>
     </p>
     <p class="foot">
@@ -186,7 +182,7 @@ const pageTitle = "About Me";
       <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">GitLab</a>
     </p>
     <p class="foot">
-      <Mountain/>
+      <Codeberg/>
       <a target="_blank" href="https://codeberg.org/bladeacer" target="_blank">Codeberg</a>
     </p>
   </div>

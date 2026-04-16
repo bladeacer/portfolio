@@ -20,6 +20,9 @@ importers:
       astro-table-of-contents:
         specifier: ^1.0.16
         version: 1.0.16(astro@5.18.1(rollup@4.60.1)(typescript@5.9.3))
+      simple-icons-astro:
+        specifier: ^16.1.0
+        version: 16.1.0(astro@5.18.1(rollup@4.60.1)(typescript@5.9.3))
 
 packages:
 
@@ -1418,6 +1421,11 @@ packages:
 
   shiki@3.23.0:
     resolution: {integrity: sha512-55Dj73uq9ZXL5zyeRPzHQsK7Nbyt6Y10k5s7OjuFZGMhpp4r/rsLBH0o/0fstIzX1Lep9VxefWljK/SKCzygIA==}
+
+  simple-icons-astro@16.1.0:
+    resolution: {integrity: sha512-BzkYMmN1J8S2iAzMpNo1NtjNfdleWY7ZY39onZ1EWE7yCfjiOXfEo5zSIhX84OuNFeB/VlmWiEeQy6lc/jHrfQ==}
+    peerDependencies:
+      astro: '>=2.7.1'
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -3298,6 +3306,10 @@ snapshots:
       '@shikijs/types': 3.23.0
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.4
+
+  simple-icons-astro@16.1.0(astro@5.18.1(rollup@4.60.1)(typescript@5.9.3)):
+    dependencies:
+      astro: 5.18.1(rollup@4.60.1)(typescript@5.9.3)
 
   sisteransi@1.0.5: {}
 
