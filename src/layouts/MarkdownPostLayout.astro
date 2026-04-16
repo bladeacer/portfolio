@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Menu from '@lucide/astro/icons/menu';
+import X from '@lucide/astro/icons/x';
 const { frontmatter } = Astro.props;
 const dateOptions: object = {
   year: "numeric",
@@ -11,18 +13,28 @@ import TableOfContents from 'astro-table-of-contents/component';
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <TableOfContents class="toc" />
-    <div>
-      <em>{frontmatter.description}</em>
-      <br>
-      <br>
-      <span>Written by:</span> {frontmatter.author}
-      <br>
-      <span>Created on:</span> {formattedPubDate}
-      <br>
-      <span>Status:</span> {frontmatter.status}
-    </div>
+  <button id="toc-toggle" class="toc-mobile-button" aria-label="Toggle Table of Contents">
+    <Menu class="menu-icon" />
+    <X class="close-icon" />
+  </button>
+
+  <div id="toc-overlay" class="toc-overlay"></div>
+
+  <div id="toc-wrapper">
+    <TableOfContents class="toc" />
+  </div>
+
+  <div>
+    <em>{frontmatter.description}</em>
     <br>
+    <br>
+    <span>Written by:</span> {frontmatter.author}
+    <br>
+    <span>Created on:</span> {formattedPubDate}
+    <br>
+    <span>Status:</span> {frontmatter.status}
+  </div>
+  <br>
 
   <div class="tags">
     {
@@ -36,12 +48,31 @@ import TableOfContents from 'astro-table-of-contents/component';
   <br>
 
   <slot />
-  <div>
-    <script is:inline>
-      const links = document.getElementsByTagName("a");
-      console.log(links);
-      console.log(links[5].hash);
-      links[5].hash = "";
-    </script>
-  </div>
+
+  <script is:inline>
+    const links = document.getElementsByTagName("a");
+    console.log(links);
+    console.log(links[5].hash);
+    links[5].hash = "";
+  </script>
+
+  <script>
+  const btn = document.getElementById('toc-toggle');
+  const wrapper = document.getElementById('toc-wrapper');
+  const overlay = document.getElementById('toc-overlay');
+  const links = document.querySelectorAll('#toc-wrapper a');
+
+  const toggleTOC = () => {
+    wrapper?.classList.toggle('is-active');
+    overlay?.classList.toggle('is-active');
+    btn?.classList.toggle('is-active');
+    document.body.classList.toggle('no-scroll');
+  };
+
+btn?.addEventListener('click', toggleTOC);
+overlay?.addEventListener('click', toggleTOC);
+
+// Close when a link is clicked
+links.forEach(link => link.addEventListener('click', toggleTOC));
+</script>
 </BaseLayout>

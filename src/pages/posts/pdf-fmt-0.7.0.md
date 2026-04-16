@@ -1,12 +1,14 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: "pdf-fmt"
-pubDate: 10/24/2025
-status: "Completed"
+title: "pdf-fmt 0.7.0"
+pubDate: 04/16/2026
+status: "Draft"
 description: "A small Python script to extract and format text content from PDF files, with filter rules and other niceties."
 author: "bladeacer"
-tags: ["python", "pdf", "pdf-text-extraction", "programming", "scripting"]
+tags: ["python", "pdf", "pdf-text-extraction", "pdf-table-extraction", "pdf-image-extraction", "programming", "scripting", "nuitka"]
 ---
+
+<!-- Why is the date format MM/DD/YYYY -->
 
 ## Foreword
 
@@ -15,14 +17,16 @@ filtering and document format conversion (via LibreOffice or pandoc).
 
 ### Project Status
 
-The project is currently under active development. However, there is an MVP[^1]
-executable and script installer. The script installer at the main branch might
-not work at the moment, as I am in the process of rewriting the parser.
+I have rewrote the parser (yay!) :D.
+
+Here are some of the main takeaways got from the process.
 
 I plan to continue working on it, although development might be slow as I am in
 the process of rewriting the parser to `pdfplumber` instead of `pdfminer.six`.
 Technicalities are discussed below, and I will update this post once the rewrite
 is complete.
+
+Note: More details in the [old post](./pdf-fmt-0.6.0) about the earlier version.
 
 ## Links
 
@@ -31,21 +35,26 @@ is complete.
 
 ## Screenshots
 
-![pdf-fmt on a sample PDF](/portfolio/pdf-fmt-preview.png)
+<!-- ![pdf-fmt on a sample PDF](/portfolio/pdf-fmt-preview.png) -->
+TODO: New screenshot
 
 ## Retrospect
 
-The project was quite fun to work on, with various challenges and technical
-decisions that had to be considered along the way.
+The rewrite did take quite a while, although it was necessary for long term
+maintainability of the project.
 
-### Why this is not an OCR
+### On not being an OCR
 
-There are plenty of Optical Character Recognition (OCR) tools out there.
+As mentioned in the earlier blog post, there are plenty of Optical Character
+Recognition (OCR) tools out there. Do note that text, table and image extraction
+from PDF documents is different from OCR tooling.
+
 However, they might not always be the best use for primarily text based documents.
 
 For example, a use case of mine involves extracting text from lecture slides.
-I am generally more interested in the text content, which makes up a large part
-of the lecture slides.
+I am generally more interested in the text, image and table content.
+
+These makes up a large portion of the lecture slides, notes or even research papers.
 
 If I were mostly interested in the non-text content e.g. equations and diagrams
 would be much better solved with an OCR. Not just any OCR, but picking one that targets
@@ -53,15 +62,24 @@ my own use case. For example, some OCRs are much better at figuring out table co
 than others are at diagrams and mathematical equations written in LaTeX or some
 other typesetting software.
 
+Table content extraction is currently experimental, and works well enough thanks
+to `pdfplumber`'s sane APIs.
+
 OCRs are also inherently much larger in binary size, and the large plethora of
 existing tools means that my project would need a lot more polish to even be considered.
+For example, the current Linux binary is around 37.7 MB in size while packing a decent
+amount of features.
 
-It also somewhat contravenes the [Unix](/portfolio/posts/unix) software philosophy.
-Bundling every feature without knowing whether users would want to use them is
-not good. The added maintenance overhead and increased friction with not using
-existing well established tools is quite the antithesis to a command line
-application. There might be disagreements with what the philosophy entails,
-but it is very much borne out of practicality.
+As emphasised earlier, `pdf-fmt` and OCRs serve entirely different niches. Here
+is a table for more detailed comparison.
+
+Unironically, a binary written in Python (which is not exactly known for performance)
+conforms somewhat to the [Unix](/portfolio/posts/unix) software philosophy.
+
+| Criteria | `pdf-fmt` | OCRs |
+|---|---|---|
+| Installation size | 37.7 MB Linux/ | Heavily varies, usually over 100 MB especially for those requiring using LLMs. |
+
 
 ### Why Python?
 

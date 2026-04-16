@@ -341,12 +341,75 @@ stron-toc.toc {
   position: fixed;
   left: 66vw;
   top: 11.5vh;
-  max-width: min(30vw, 22.5rem) !important;
-  box-shadow: none !important;
-  white-space: normal;
-  text-overflow: clip;
+  max-width: min(35vw, 25rem) !important;
   background-color: var(--flexcyon-base-01-02-mix);
   border-radius: 8px;
+  z-index: 100;
+}
+
+.toc-mobile-button {
+  display: none;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1001;
+  background: var(--flexcyon-cyan);
+  color: var(--flexcyon-base-01);
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.toc-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+@media (width < 1000px) {
+  .toc-mobile-button { display: block; }
+  
+  .toc-mobile-button .close-icon { display: none; }
+  .toc-mobile-button.is-active .close-icon { display: block; }
+  .toc-mobile-button.is-active .menu-icon { display: none; }
+
+  .toc-overlay.is-active { display: block; }
+
+  #toc-wrapper {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100vh;
+    width: 80vw;
+    max-width: 500px;
+    background: var(--flexcyon-base-01-02-mix);
+    z-index: 1000;
+    transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  #toc-wrapper.is-active {
+    right: 0;
+  }
+
+  stron-toc.toc {
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+  }
+  
+  .no-scroll {
+    overflow: hidden;
+  }
 }
 
 #toc-title {
@@ -355,11 +418,9 @@ stron-toc.toc {
 }
 
 .toc-content {
-  margin-top: -10px;
-  max-height: 60vh;
-  overflow: scroll;
+  max-height: 70vh;
+  overflow: auto;
 }
-
 
 .toc-content::-webkit-scrollbar {
   display: none;
@@ -410,12 +471,6 @@ stron-toc.toc {
   }
   a {
     color: var(--flexcyon-pink);
-  }
-}
-
-@media (width < 1000px) {
-  stron-toc.toc {
-    display: none !important;
   }
 }
 

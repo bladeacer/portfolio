@@ -9,9 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.15",
+    "@astrojs/rss": "4.0.18",
     "@lucide/astro": "^0.511.0",
-    "astro": "^5.16.15",
+    "astro": "^6.1.7",
     "astro-table-of-contents": "^1.0.14"
   }
 }
