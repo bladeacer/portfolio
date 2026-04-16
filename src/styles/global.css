@@ -366,8 +366,7 @@ stron-toc.toc {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
   z-index: 999;
 }
 

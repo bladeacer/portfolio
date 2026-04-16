@@ -14,6 +14,8 @@ WIP.
 
 <!-- ## Foreword -->
 
+<!-- I have been contemplating writing the post for the past few months. -->
+
 <!-- ## Why open source? -->
 
 <!-- ### Why open source: End user -->
@@ -29,7 +31,7 @@ WIP.
 <!-- ## On Gatekeeping -->
 <!-- How easy should it be for an end user to contribute code? -->
 
-<!-- ## On Nitpicking -->
+<!-- ## Tech Stack and Design Decision -->
 <!-- Some nitpick on others' tech stack, choices and reasons for not implementing -->
 <!-- some feature. -->
 

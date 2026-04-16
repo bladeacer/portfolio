@@ -164,43 +164,7 @@ two were chosen as both are useful software in their own right and already have
 the existing robust capabilities for format conversion in built.[^2]
 
 Image extraction is now working with support for SVG and common raster image formats
-covered by the Pillow library.
-> SVG support is currently somewhat bootleg, being a base64 encoded PNG within
-> the SVG XML. That being said, it seems to work well enough.
-
-Currently, the binary has been tested to work with `.svg`, `.webp`, `.png`
-and `.jpeg` formats.
-
-Table extraction is experimental but results have been promising thus far.
-
-### Compiling Python
-
-Python is not usually compiled to an executable. Some of the
-reasons I wanted to implement binaries include:
-
-- Distributable
-- Relatively painless setup
-- One-file
-- No external dependencies
-  - other than optionally calling binaries like LibreOffice/Pandoc
-
-Cython, PyInstaller and Nuitka were considered for this purpose. Nuitka was chosen
-as it compiled fully to binary, not just bytecode or an intermediate format.
-It was also much easier to set up Continuous Integration for with the use of GitHub
-Actions to automatically build the binaries on a tagged release.
-
-The final executable size may be larger, but the compiler is able to avoid
-requiring platform specific dependencies and "just work" out of the box. Further
-testing would be required, albeit initial testing[^4] suggests that it should work
-on Windows 11, Arch and Fedora based systems (both are Linux distributions).
-
-I am not sure why the Linux binary is larger than the Windows one, though that
-might have to do with C standard library differences (`musl`, `glibc`).
-
-For local development, installation of Nuitka dependencies like `ccache` and
-`patchelf` would be necessary.
-
-> Nuitka also does not work with `pyenv` on MacOS
+covered
 
 ### Parsing the PDF content
 
@@ -249,7 +213,6 @@ Here are the releases and Actions runs, if you are interested.
 The Lichess developer has a [great blog post on this](https://lichess.org/@/thibault/blog/we-dont-want-all-the-features/q3nOzv4n).
 Dependencies and libraries added without consideration on maintenance or utility
 will only add up technical debt and bloat in the long run.
-> Which was why the rewrite happened :D
 
 `pdfminer.six` was quite nice, although having to delve into lower level
 parts of the library to configure code for image extraction was
@@ -296,28 +259,27 @@ with pdfplumber.open(pdf_path) as pdf:
 ```
 
 One is more low level and involved, while the other provides a nice abstraction
-over the details. In addition, future changes generally break lower level APIs
-much more than higher level ones. That being said, the "right level" of abstraction
-is a nuanced topic.
-> Python is not really "low level" as well.
+over the details.
 
-#### Adding uv install
+### Compiling Python
 
-Aside from binaries from GitHub Releases, installation was previously with a cURL script that cloned the repository. This
-is a bit too involved other than for those using the script directly or
-compiling from source.
+Python is not usually compiled to an executable. Some of the
+reasons I wanted to implement binaries include:
 
-> The README has more details on compiling from source or using the script installer.
+- Distributable
+- Relatively painless setup
+- One-file
+- Potential future integrations with package managers
 
-Thus during the rewrite, the project structure was updated to support
-installation with `uv`.
+Cython, PyInstaller and Nuitka were considered for this purpose. Nuitka was chosen
+as it compiled fully to binary, not just bytecode or an intermediate format.
+It was also much easier to set up Continuous Integration for with the use of GitHub
+Actions to automatically build the binaries on a tagged release.
 
-This means the user can just run:
-
-```python
-uv tool install git+https://github.com/bladeacer/pdf-fmt
-pdf-fmt
-```
+The final executable size may be larger, but the compiler is able to avoid
+requiring platform specific dependencies and "just work" out of the box. Further
+testing would be required, albeit initial testing[^4] suggests that it should work
+on Windows 11, Arch and Fedora based systems (both are Linux distributions).
 
 ## Credits
 
@@ -334,7 +296,6 @@ Without them, this would not be possible.
 - [pdfminer.six](https://github.com/pdfminer/pdfminer.six)
 - [PyMuPDF](https://github.com/pymupdf/PyMuPDF)
 - [BentoPDF](https://github.com/alam00000/bentopdf)
-- [uv](https://github.com/astral-sh/uv)
 - My friends Floodlight and Potato for testing the project
 
 ## Conclusion
@@ -349,5 +310,6 @@ of your niche would come in as a community to see the project through with you.
 
 [^1]: Machine Learning
 [^2]: [Wikipedia on Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
+[^2]: Pandoc is like `ffmpeg`, but for documents instead of media and audio formats. LibreOffice has its own CLI for converting between Word documents and other related file formats.
 [^4]: Shout out to my friends Floodlight and Potato for testing the project
 [^5]: Stuff like `vim` or UNIX utilities that would probably outlive both you and I.
