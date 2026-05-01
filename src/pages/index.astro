@@ -1,6 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Github, Gitlab, Rss, Codeberg, Gmail } from 'simple-icons-astro'
+import { 
+  Github, Gitlab, Rss, Codeberg, Gmail,
+  Html5, Css, Sass, Bootstrap, Figma, Javascript, 
+  React, Nodedotjs, Postman, Python, Kotlin, Dotnet,
+  Gnubash, Mysql, Sqlite, Sequelize, Docker 
+} from 'simple-icons-astro';
 import User from '@lucide/astro/icons/user';
 import Network from '@lucide/astro/icons/network';
 import CodeXML from '@lucide/astro/icons/code-xml';
@@ -71,7 +76,7 @@ const pageTitle = "About Me";
       </a>
       <p>
         <a target="_blank" href="https://github.com/bladeacer/pdf-fmt">pdf-fmt</a> is a PDF text extractor, processor and formatter.
-        Supports regex based exclusions and other niceties.
+        About <a target="_blank" href="/portfolio/posts/pdf-fmt">my thought process</a> while developing it.
       </p>
     </div>
     <div class="card-item">
@@ -85,79 +90,75 @@ const pageTitle = "About Me";
   </div>
 
   <h2>Tech Stack</h2>
+
   <div class="profile-2">
     <div>
       <h3>Frontend</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-          <Image alt="HTML Skill Icon" src="https://skillicons.dev/icons?i=html" width="48" height="48"/>
+          <Html5/>
         </a>
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-          <Image alt="CSS Skill Icon" src="https://skillicons.dev/icons?i=css" width="48" height="48"/>
+          <Css/>
         </a>
         <a target="_blank" href="https://sass-lang.com">
-          <Image alt="SASS Skill Icon" src="https://skillicons.dev/icons?i=sass" width="48" height="48"/>
+          <Sass/>
         </a>
         <a target="_blank" href="https://getbootstrap.com">
-          <Image alt="Bootstrap Skill Icon" src="https://skillicons.dev/icons?i=bootstrap" width="48" height="48"/>
+          <Bootstrap/>
         </a>
         <a target="_blank" href="https://www.figma.com">
-          <Image alt="Figma Skill Icon" src="https://skillicons.dev/icons?i=figma" width="48" height="48"/>
+          <Figma/>
         </a>
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-          <Image alt="JavaScript Skill Icon" src="https://skillicons.dev/icons?i=js" width="48" height="48"/>
+          <Javascript/>
         </a>
         <a target="_blank" href="https://react.dev">
-          <Image alt="React Skill Icon" src="https://skillicons.dev/icons?i=react" width="48" height="48"/>
+          <React/>
         </a>
         <a target="_blank" href="https://nodejs.org/en">
-          <Image alt="NodeJS Skill Icon" src="https://skillicons.dev/icons?i=nodejs" width="48" height="48"/>
+          <Nodedotjs/>
         </a>
         <a target="_blank" href="https://www.postman.com/">
-          <Image alt="Postman Skill Icon" src="https://skillicons.dev/icons?i=postman" width="48" height="48"/>
+          <Postman/>
         </a>
       </p>
     </div>
+
     <div>
       <h3>Languages</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://www.python.org/">
-          <Image alt="Python Skill Icon" src="https://skillicons.dev/icons?i=python" width="48" height="48"/>
+          <Python/>
         </a>
         <a target="_blank" href="https://kotlinlang.org/">
-          <Image alt="Kotlin Skill Icon" src="https://skillicons.dev/icons?i=kotlin" width="48" height="48"/>
+          <Kotlin/>
         </a>
         <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
-          <Image alt="C# Skill Icon" src="https://skillicons.dev/icons?i=cs" width="48" height="48"/>
+          <Dotnet/>
         </a>
         <a target="_blank" href="https://www.gnu.org/software/bash/">
-          <Image alt="Bash Skill Icon" src="https://skillicons.dev/icons?i=bash" width="48" height="48"/>
+          <Gnubash/>
         </a>
       </p>
     </div>
+
     <div>
       <h3>Databases</h3>
-      <p class="skill-icons">
+        <p class="skill-icons">
         <a target="_blank" href="https://www.mysql.com/">
-          <Image alt="MySQL Skill Icon" src="https://skillicons.dev/icons?i=mysql" width="48" height="48"/>
+          <Mysql/>
         </a>
         <a target="_blank" href="https://sqlite.org/">
-          <Image alt="SQLite Skill Icon" src="https://skillicons.dev/icons?i=sqlite" width="48" height="48"/>
+          <Sqlite/>
         </a>
         <a target="_blank" href="https://sequelize.org/">
-          <Image alt="Sequelize Skill Icon" src="https://skillicons.dev/icons?i=sequelize" width="48" height="48"/>
-        </a>
-      </p>
-    </div>
-    <div>
-      <h3>Containerisation</h3>
-      <p class="skill-icons">
-        <a target="_blank" href="https://www.docker.com/">
-          <Image alt="Docker Skill Icon" src="https://skillicons.dev/icons?i=docker" width="48" height="48"/>
+          <Sequelize/>
         </a>
       </p>
     </div>
   </div>
+
   <h2>Find me on</h2>
   <p>Feel free to connect or reach out to me via these channels.</p>
   <div class="profile-3">

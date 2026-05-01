@@ -337,9 +337,9 @@ li {
   line-height: 1.65;
 }
 
-stron-toc.toc {
+.stron-toc.toc {
   position: fixed;
-  left: 66vw;
+  left: 60vw;
   top: 11.5vh;
   max-width: min(35vw, 25rem) !important;
   background-color: var(--flexcyon-base-01-02-mix);
@@ -398,12 +398,12 @@ stron-toc.toc {
   }
 
   stron-toc.toc {
-    display: block !important;
-    position: relative !important;
-    left: 0 !important;
-    top: 0 !important;
-    max-width: 100% !important;
-    box-shadow: none !important;
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    max-width: 100%;
+    box-shadow: none;
   }
   
   .no-scroll {
@@ -412,13 +412,24 @@ stron-toc.toc {
 }
 
 #toc-title {
+  padding-inline: 32px;
   padding-top: 0px;
   color: var(--text-accent) !important;
+  display: block;
+  width: 100%;
 }
 
 .toc-content {
   max-height: 70vh;
   overflow: auto;
+  display: block;
+  width: 100%;
+}
+
+.toc-link.toc-current {
+  color: var(--flexcyon-blue) !important;
+  font-weight: bold;
+  opacity: 1 !important;
 }
 
 .toc-content::-webkit-scrollbar {
@@ -643,6 +654,10 @@ code {
 
 .skill-icons {
   margin-inline-start: -6px;
+}
+
+.skill-icons a {
+  text-decoration: none;
 }
 
 .skill-icons img {

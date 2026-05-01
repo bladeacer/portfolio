@@ -1,0 +1,166 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  levels?: number;
+}
+
+const { headings = [], levels = 4 } = Astro.props;
+
+// Filter headings
+const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth <= levels);
+
+// 1. IMPORTANT: If no headings, return nothing (prevents empty TOC box/button)
+if (filteredHeadings.length === 0) return null;
+
+function buildTree(list: Heading[]) {
+  const root = [];
+  const stack = [];
+  for (const heading of list) {
+    const node = { ...heading, children: [] };
+    while (stack.length > 0 && stack[stack.length - 1].depth >= node.depth) {
+      stack.pop();
+    }
+    if (stack.length === 0) {
+      root.push(node);
+    } else {
+      stack[stack.length - 1].children.push(node);
+    }
+    stack.push(node);
+  }
+  return root;
+}
+
+const nestedHeadings = buildTree(filteredHeadings);
+
+import Menu from '@lucide/astro/icons/menu';
+import X from '@lucide/astro/icons/x'; 
+---
+
+<button id="toc-mobile-toggle" class="toc-mobile-button" aria-label="Toggle Table of Contents">
+  <Menu class="menu-icon" />
+  <X class="close-icon" /> 
+</button>
+
+<div id="toc-overlay" class="toc-overlay"></div>
+
+<div id="toc-wrapper">
+  <nav class="stron-toc toc">
+    <h4 id="toc-title">Table of Contents</h4>
+    <div class="toc-content">
+      <ul>
+        {nestedHeadings.map((h2) => (
+          <li>
+            <a href={`#${h2.slug}`} class="toc-link">{h2.text}</a>
+            {h2.children.length > 0 && (
+              <ul>
+                {h2.children.map((h3) => (
+                  <li>
+                    <a href={`#${h3.slug}`} class="toc-link">{h3.text}</a>
+                    {h3.children.length > 0 && (
+                      <ul>
+                        {h3.children.map((h4) => (
+                          <li>
+                            <a href={`#${h4.slug}`} class="toc-link">{h4.text}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<style>
+  /* 1. Fix the "Beside" Title Issue */
+  .stron-toc.toc {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* 2. Fix the "Always Displayed" Mobile Issue */
+  @media (width < 1000px) {
+    /* We only want the TOC to be visible when the wrapper is active.
+       Your external CSS hides #toc-wrapper by moving it to right: -100%.
+    */
+    #toc-wrapper {
+      display: block !important; /* Ensure the container exists to animate */
+    }
+
+    /* If the wrapper IS NOT active, we ensure the inner TOC 
+       doesn't accidentally force its way into view.
+    */
+    #toc-wrapper:not(.is-active) {
+       visibility: hidden;
+    }
+    
+    #toc-wrapper.is-active {
+       visibility: visible;
+    }
+  }
+</style>
+
+<script>
+  function setupTOC() {
+    // Matches the IDs in the component HTML
+    const btn = document.getElementById('toc-mobile-toggle');
+    const wrapper = document.getElementById('toc-wrapper');
+    const overlay = document.getElementById('toc-overlay');
+    const links = document.querySelectorAll('.toc-link');
+    const content = document.querySelector('.markdown-content');
+
+    const toggle = () => {
+      // Toggle 'is-active' on all three elements to trigger the CSS rules
+      wrapper?.classList.toggle('is-active');
+      overlay?.classList.toggle('is-active');
+      btn?.classList.toggle('is-active');
+      
+      // Prevent background scrolling when menu is open
+      document.body.classList.toggle('no-scroll');
+    };
+
+    // Open/Close listeners
+    btn?.addEventListener('click', toggle);
+    overlay?.addEventListener('click', toggle);
+    
+    // Close mobile menu when a heading link is clicked
+    links.forEach(l => l.addEventListener('click', () => {
+      if (wrapper?.classList.contains('is-active')) {
+        toggle();
+      }
+    }));
+
+    // Intersection Observer for highlighting current section
+    if (content) {
+      const headers = content.querySelectorAll('h2, h3, h4');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('toc-current'));
+            const target = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+            target?.classList.add('toc-current');
+          }
+        });
+      }, { rootMargin: '0px 0px -70% 0px' });
+      
+      headers.forEach(h => observer.observe(h));
+    }
+  }
+
+  // Initialize on load
+  setupTOC();
+  
+  // Re-initialize if you are using Astro View Transitions
+  document.addEventListener('astro:after-swap', setupTOC);
+</script>
