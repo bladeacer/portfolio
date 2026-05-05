@@ -573,6 +573,11 @@ footer svg {
   transform: translateY(6px);
 }
 
+svg {
+  width: 24px;
+  height: 24px;
+}
+
 @media (width < 900px) {
   footer {
     flex-direction: column;
@@ -602,7 +607,6 @@ hr {
     max-width: 85vw;
   }
 }
-
 
 /* TODO: Make this toggleable */
 body {

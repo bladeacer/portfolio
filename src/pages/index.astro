@@ -1,12 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { 
-  Github, Gitlab, Rss, Codeberg, Gmail,
-  Html5, Css, Sass, Bootstrap, Figma, Javascript, 
-  React, Nodedotjs, Postman, Python, Kotlin, Dotnet,
-  Gnubash, Mysql, Sqlite, Sequelize, Docker, Matrix,
-  Discord
-} from 'simple-icons-astro';
+import { Icon } from 'astro-icon/components'
 import User from '@lucide/astro/icons/user';
 import Network from '@lucide/astro/icons/network';
 import CodeXML from '@lucide/astro/icons/code-xml';
@@ -52,7 +46,7 @@ const pageTitle = "About Me";
       </a>
       <a href="/portfolio/rss.xml" target="_blank">
         <p class="foot cta3">
-          <Rss/>
+          <Icon name="simple-icons:rss"/>
             RSS Feed
         </p>
       </a>
@@ -81,6 +75,14 @@ const pageTitle = "About Me";
       </p>
     </div>
     <div class="card-item">
+      <a target="_blank" href="https://codeberg.org/bladeacer/yams">
+        <img src="/portfolio/yams-preview.webp"/>
+      </a>
+      <p>
+        <a target="_blank" href="https://codeberg.org/bladeacer/yams">yams</a>, short for Yet Another Media Screensaver, is a CLI tool written with ncurses and C.  It lets you view media status and perform basic controls via <kbd>playerctl</kbd>.
+      </p>
+    </div>
+    <div class="card-item">
       <a target="_blank" href="https://github.com/bladeacer/mnemosync">
         <img src="/portfolio/mmsync-preview.png"/>
       </a>
@@ -97,31 +99,31 @@ const pageTitle = "About Me";
       <h3>Frontend</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-          <Html5/>
+          <Icon name="simple-icons:html5"/>
         </a>
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-          <Css/>
+          <Icon name="simple-icons:css"/>
         </a>
         <a target="_blank" href="https://sass-lang.com">
-          <Sass/>
+          <Icon name="simple-icons:sass"/>
         </a>
         <a target="_blank" href="https://getbootstrap.com">
-          <Bootstrap/>
+          <Icon name="simple-icons:bootstrap"/>
         </a>
         <a target="_blank" href="https://www.figma.com">
-          <Figma/>
+          <Icon name="simple-icons:figma"/>
         </a>
         <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-          <Javascript/>
+          <Icon name="simple-icons:javascript"/>
         </a>
         <a target="_blank" href="https://react.dev">
-          <React/>
+          <Icon name="simple-icons:react"/>
         </a>
         <a target="_blank" href="https://nodejs.org/en">
-          <Nodedotjs/>
+          <Icon name="simple-icons:nodedotjs"/>
         </a>
         <a target="_blank" href="https://www.postman.com/">
-          <Postman/>
+          <Icon name="simple-icons:postman"/>
         </a>
       </p>
     </div>
@@ -130,16 +132,16 @@ const pageTitle = "About Me";
       <h3>Languages</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://www.python.org/">
-          <Python/>
+          <Icon name="simple-icons:python"/>
         </a>
         <a target="_blank" href="https://kotlinlang.org/">
-          <Kotlin/>
+          <Icon name="simple-icons:kotlin"/>
         </a>
         <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
-          <Dotnet/>
+          <Icon name="simple-icons:dotnet"/>
         </a>
         <a target="_blank" href="https://www.gnu.org/software/bash/">
-          <Gnubash/>
+          <Icon name="simple-icons:gnubash"/>
         </a>
       </p>
     </div>
@@ -148,13 +150,13 @@ const pageTitle = "About Me";
       <h3>Databases</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://www.mysql.com/">
-          <Mysql/>
+          <Icon name="simple-icons:mysql"/>
         </a>
         <a target="_blank" href="https://sqlite.org/">
-          <Sqlite/>
+          <Icon name="simple-icons:sqlite"/>
         </a>
         <a target="_blank" href="https://sequelize.org/">
-          <Sequelize/>
+          <Icon name="simple-icons:sequelize"/>
         </a>
       </p>
     </div>
@@ -164,7 +166,7 @@ const pageTitle = "About Me";
   <p>Feel free to connect or reach out to me via these channels.</p>
   <div class="profile-3">
     <p class="foot">
-      <Gmail/>
+      <Icon name="simple-icons:gmail"/>
       <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">Email</a>
     </p>
     <p class="foot">
@@ -178,25 +180,25 @@ const pageTitle = "About Me";
   </div>
   <div class="profile-3">
     <p class="foot">
-      <Matrix/>
+      <Icon name="simple-icons:matrix"/>
       <a target="_blank" href="https://matrix.to/#/@bladeacer:matrix.org" target="_blank">Matrix</a>
     </p>
     <p class="foot">
-      <Discord/>
+      <Icon name="simple-icons:discord"/>
       <a target="_blank" href="https://discord.com/users/695109107861946409" target="_blank">Discord</a>
     </p>
   </div>
   <div class="profile-3">
     <p class="foot">
-      <Github/>
+      <Icon name="simple-icons:github"/>
       <a target="_blank" href="https://github.com/bladeacer" target="_blank">GitHub</a>
     </p>
     <p class="foot">
-      <Gitlab/>
+      <Icon name="simple-icons:gitlab"/>
       <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">GitLab</a>
     </p>
     <p class="foot">
-      <Codeberg/>
+      <Icon name="simple-icons:codeberg"/>
       <a target="_blank" href="https://codeberg.org/bladeacer" target="_blank">Codeberg</a>
     </p>
   </div>
