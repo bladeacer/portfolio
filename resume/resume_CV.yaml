@@ -1,0 +1,311 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Nicholas Wen
+  headline: 
+  location: Singapore
+  email: wg.nick.exe@gmail.com
+  photo:
+  # phone: +65 8502 9888
+  website: https://bladeacer.gitlab.io/portfolio/
+  social_networks:
+    - network: WhatsApp
+      username: "+6585029888"
+    - network: LinkedIn
+      username: nicholas-wen-a525832b2
+  custom_connections:
+  sections:
+    Summary:
+      - I am an aspiring software developer, who is deeply interested in software and how it work under the hood. My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
+
+    education:
+      - institution: Nanyang Polytechnic
+        area: Information Technology
+        degree: Diploma
+        # date:
+        start_date: 2023-04
+        end_date: 2026-04
+        location: Singapore
+        # summary:
+        # highlights:
+        #   - 'Thesis: Efficient Neural Architecture Search for Resource-Constrained Deployment'
+        #   - 'Advisor: Prof. Sanjeev Arora'
+        #   - NSF Graduate Research Fellowship, Siebel Scholar (Class of 2022)
+
+    skills:
+      - label: Languages
+        details: Python, Go, Rust, Kotlin, C#, HTML, CSS, SASS, React, TypeScript
+      - label: ML Frameworks
+        details: PyTorch, TensorFlow, ONNX
+      - label: Infrastructure
+        details: Docker, Docker Compose
+      - label: Scripting
+        details: Bash, PowerShell
+
+    experience:
+      - company: Fujitsu
+        position: EUC Systems Intern
+        date:
+        start_date: 2025-03
+        end_date: 2025-05
+        location: Singapore
+        summary: 3 Month Internship.
+        highlights:
+          - Assisted end users with *troubleshooting software issues*, wrote Python scripts to **automate email notifications**.
+          - Imaging, setting up and wiping data for **80+ Windows 11 laptops**. Tagged and accounted for over **120+ assets**.
+
+    Relevant Coursework:
+      - name: '[Automo](https://github.com/bladeacer/automo-web-app)'
+        # date:
+        start_date: 2026-01
+        end_date: 2026-02
+        location: Nanyang Polytechnic
+        # summary: Open-source library for high-performance LLM inference kernels
+        highlights:
+          - "**SARIMA time-series dashboard** with Docker Compose in *decoupled services architecture*."
+          - KeyDB for **in-memory caching**, Goatcounter for *observability* and Gemini **generated Executive Summary**.
+      - name: '[NYP-FYP CNC Chatbot](https://github.com/chweekueh1/nyp-fyp-project)'
+        # date:
+        start_date: 2025-06
+        end_date: 2025-08
+        location: Nanyang Polytechnic
+        # summary: Open-source library for high-performance LLM inference kernels
+        highlights:
+          - Reduced startup time from 30 seconds to **under 10 seconds.**
+          - Added **quality of life features** such as search, rate limits, audio preprocessing, **containerisation with Docker.**
+
+    projects:
+      - name: '[yams](https://codeberg.org/bladeacer/yams)'
+        date:
+        start_date: 2026-04
+        end_date: present
+        location:
+        summary: A media screensaver Terminal User Interface (TUI) written with C, ncurses and playerctl (MPRIS).
+        highlights:
+          - Event driven UI updates with parallel FFmpeg workers and **200ms debounce**.
+          - "**36 kB** binary, **<3% CPU, ~5 MB RAM** usage, ~1.4 CPU IPC, ~25% Retiring rate."
+
+      - name: '[**pdf-fmt**](https://github.com/bladeacer/pdf-fmt)'
+        date:
+        start_date: 2025-10
+        end_date: present
+        location:
+        summary: A lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
+
+        highlights:
+          - Comprehensive configuration suite with **regex exclusions, output formatting and image deduplication**.
+
+    # publications:
+    #   - title: 'Sparse Mixture-of-Experts at Scale: Efficient Routing for Trillion-Parameter Models'
+    #     authors:
+    #       - '*John Doe*'
+    #       - Sarah Williams
+    #       - David Park
+    #     summary:
+    #     doi: 10.1234/neurips.2023.1234
+    #     url:
+    #     journal: NeurIPS 2023
+    #     date: 2023-07
+  
+    Awards and Honors:
+      - bullet: "[**MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)**](https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards) (2021)"
+
+    # selected_honors:
+    #   - bullet: Forbes 30 Under 30 in Enterprise Technology (2024)
+    
+    Certifications:
+      - bullet: "[**Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition**](https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/) (2025)"
+      - bullet: "[**Google Data Analytics**](https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51) (2025)"
+      - bullet: "[**Google IT Automation with Python**](https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ) (2024)"
+
+     
+    # patents:
+    #   - number: Adaptive Quantization for Neural Network Inference on Edge Devices (US Patent 11,234,567)
+    #   - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US Patent 11,345,678)
+    #   - number: Hardware-Aware Neural Architecture Search Method (US Patent 11,456,789)
+    # invited_talks:
+    #   - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI Symposium (2024)
+    #   - reversed_number: Building AI Infrastructure for the Next Decade — TechCrunch Disrupt (2024)
+    #   - reversed_number: 'From Research to Production: Lessons in ML Systems — NeurIPS Workshop (2023)'
+    #   - reversed_number: "Efficient Deep Learning: A Practitioner's Perspective — Google Tech Talk (2022)"
+
+design:
+  theme: sb2nov
+  
+  page:
+    size: a4
+    top_margin: 0.25in
+    bottom_margin: 0.25in
+    left_margin: 0.25in
+    right_margin: 0.25in
+    show_footer: false
+    show_top_note: true
+  colors:
+    body: rgb(0, 0, 0)
+    name: rgb(0, 0, 0)
+    headline: rgb(0, 0, 0)
+    connections: rgb(0, 0, 0)
+    section_titles: rgb(0, 0, 0)
+    links: rgb(0, 0, 0)
+    footer: rgb(0, 0, 0)
+    top_note: rgb(0, 0, 0)
+  typography:
+    line_spacing: 0.35em
+    alignment: justified
+    date_and_location_column_alignment: right
+    font_family:
+      body: Arial
+      name: Arial
+      headline: Arial
+      connections: Arial
+      section_titles: Arial
+    font_size:
+      body: 9pt
+      name: 1em
+      headline: 9pt
+      connections: 9pt
+      section_titles: 0.95em
+  #   small_caps:
+  #     name: false
+  #     headline: false
+  #     connections: false
+  #     section_titles: false
+  #   bold:
+  #     name: false
+  #     headline: false
+  #     connections: false
+  #     section_titles: false
+  # links:
+  #   underline: false
+  #   show_external_link_icon: false
+  header:
+  #   alignment: left
+  #   photo_width: 3.5cm
+  #   photo_position: left
+  #   photo_space_left: 0.4cm
+  #   photo_space_right: 0.4cm
+  #   space_below_name: 0.7cm
+  #   space_below_headline: 0.7cm
+  #   space_below_connections: 0.7cm
+    connections:
+      phone_number_format: international
+      hyperlink: true
+      show_icons: true
+      display_urls_instead_of_usernames: false
+      separator: ''
+      space_between_connections: 0.5cm
+  section_titles:
+    type: with_full_line
+    line_thickness: 0.5pt
+    space_above: 0.4cm
+    space_below: 0.2cm
+  # sections:
+  #   allow_page_break: true
+  #   space_between_regular_entries: 1.2em
+  #   space_between_text_based_entries: 0.3em
+  #   show_time_spans_in: []
+  entries:
+    date_and_location_width: 4.15cm
+    side_space: 0cm
+  #   space_between_columns: 0.1cm
+  #   allow_page_break: false
+  #   short_second_row: false
+  #   degree_width: 1cm
+  #   summary:
+  #     space_above: 0.12cm
+  #     space_left: 0cm
+    highlights:
+      bullet: "-"
+      nested_bullet: "-"
+  #     space_left: 0cm
+  #     space_above: 0.12cm
+  #     space_between_items: 0.12cm
+  #     space_between_bullet_and_text: 0.5em
+  # templates:
+  #   footer: '*NAME -- PAGE_NUMBER/TOTAL_PAGES*'
+  #   top_note: '*LAST_UPDATED CURRENT_DATE*'
+  #   single_date: MONTH_ABBREVIATION YEAR
+  #   date_range: START_DATE – END_DATE
+  #   time_span: HOW_MANY_YEARS YEARS HOW_MANY_MONTHS MONTHS
+  #   one_line_entry:
+  #     main_column: '**LABEL:** DETAILS'
+  #   education_entry:
+  #     main_column: |-
+  #       **INSTITUTION**, DEGREE_WITH_AREA -- LOCATION
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     degree_column:
+  #     date_and_location_column: DATE
+  #   normal_entry:
+  #     main_column: |-
+  #       **NAME** -- **LOCATION**
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     date_and_location_column: DATE
+  #   experience_entry:
+  #     main_column: |-
+  #       **POSITION**, COMPANY -- LOCATION
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     date_and_location_column: DATE
+  #   publication_entry:
+  #     main_column: |-
+  #       **TITLE**
+  #       SUMMARY
+  #       AUTHORS
+  #       URL (JOURNAL)
+  #     date_and_location_column: DATE
+locale:
+  language: english
+  # last_updated: Last updated in
+  # month: month
+  # months: months
+  # year: year
+  # years: years
+  present: Present
+  # phrases:
+  #   degree_with_area: DEGREE AREA
+  # month_abbreviations:
+  #   - Jan
+  #   - Feb
+  #   - Mar
+  #   - Apr
+  #   - May
+  #   - June
+  #   - July
+  #   - Aug
+  #   - Sept
+  #   - Oct
+  #   - Nov
+  #   - Dec
+  # month_names:
+  #   - January
+  #   - February
+  #   - March
+  #   - April
+  #   - May
+  #   - June
+  #   - July
+  #   - August
+  #   - September
+  #   - October
+  #   - November
+  #   - December
+
+settings:
+  current_date: today
+  render_command:
+    output_folder: rendercv_output
+    # design:
+    # locale:
+    typst_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.typ
+    pdf_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.pdf
+    markdown_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.md
+    html_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.html
+    png_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.png
+    dont_generate_markdown: false
+    dont_generate_html: true
+    dont_generate_typst: false
+    dont_generate_pdf: false
+    dont_generate_png: true
+  bold_keywords: []
+  pdf_title: NAME - CV
