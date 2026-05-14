@@ -5,7 +5,6 @@ cv:
   location: Singapore
   email: wg.nick.exe@gmail.com
   photo:
-  # phone: +65 8502 9888
   website: https://bladeacer.gitlab.io/portfolio/
   social_networks:
     - network: WhatsApp
@@ -15,84 +14,81 @@ cv:
   custom_connections:
   sections:
     Summary:
-      - I am an aspiring software developer, who is deeply interested in software and how it work under the hood. My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
+      - I am an aspiring software developer, who is deeply interested in software and how it work under the hood. 
+      - My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
 
     education:
       - institution: Nanyang Polytechnic
         area: Information Technology
         degree: Diploma
-        # date:
         start_date: 2023-04
         end_date: 2026-04
         location: Singapore
-        # summary:
-        # highlights:
-        #   - 'Thesis: Efficient Neural Architecture Search for Resource-Constrained Deployment'
-        #   - 'Advisor: Prof. Sanjeev Arora'
-        #   - NSF Graduate Research Fellowship, Siebel Scholar (Class of 2022)
+      - institution: Holy Innocents' High School
+        area: GCE 'O' Levels
+        start_date: 2018-01
+        end_date: 2022-12
+        location: Singapore
 
     skills:
       - label: Languages
-        details: Python, Go, Rust, Kotlin, C#, HTML, CSS, SASS, React, TypeScript
-      - label: ML Frameworks
-        details: PyTorch, TensorFlow, ONNX
+        details: Python, Go, Rust, Kotlin, C, C#, JavaScript, TypeScript, Node, React
+      - label: Machine Learning
+        details: PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
       - label: Infrastructure
-        details: Docker, Docker Compose
-      - label: Scripting
-        details: Bash, PowerShell
+        details: Docker, Docker Compose, MySQL, MS SQL, SQLite, Redis, KeyDB
+      - label: Others
+        details: Git, Bash, PowerShell, HTML, CSS, SASS, Tailwind, Bootstrap
 
     experience:
       - company: Fujitsu
         position: EUC Systems Intern
-        date:
         start_date: 2025-03
         end_date: 2025-05
         location: Singapore
-        summary: 3 Month Internship.
         highlights:
           - Assisted end users with *troubleshooting software issues*, wrote Python scripts to **automate email notifications**.
           - Imaging, setting up and wiping data for **80+ Windows 11 laptops**. Tagged and accounted for over **120+ assets**.
 
     Relevant Coursework:
       - name: '[Automo](https://github.com/bladeacer/automo-web-app)'
-        # date:
         start_date: 2026-01
         end_date: 2026-02
         location: Nanyang Polytechnic
-        # summary: Open-source library for high-performance LLM inference kernels
+        summary: "**SARIMA time-series dashboard** with Docker Compose in *decoupled services architecture*."
         highlights:
-          - "**SARIMA time-series dashboard** with Docker Compose in *decoupled services architecture*."
           - KeyDB for **in-memory caching**, Goatcounter for *observability* and Gemini **generated Executive Summary**.
       - name: '[NYP-FYP CNC Chatbot](https://github.com/chweekueh1/nyp-fyp-project)'
-        # date:
         start_date: 2025-06
         end_date: 2025-08
         location: Nanyang Polytechnic
-        # summary: Open-source library for high-performance LLM inference kernels
         highlights:
           - Reduced startup time from 30 seconds to **under 10 seconds.**
           - Added **quality of life features** such as search, rate limits, audio preprocessing, **containerisation with Docker.**
 
     projects:
       - name: '[yams](https://codeberg.org/bladeacer/yams)'
-        date:
         start_date: 2026-04
         end_date: present
-        location:
-        summary: A media screensaver Terminal User Interface (TUI) written with C, ncurses and playerctl (MPRIS).
+        summary: Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
         highlights:
-          - Event driven UI updates with parallel FFmpeg workers and **200ms debounce**.
-          - "**36 kB** binary, **<3% CPU, ~5 MB RAM** usage, ~1.4 CPU IPC, ~25% Retiring rate."
+          - Event driven UI updates based on *playerctl (MPRIS) state*, **200ms debounce** and parallel FFmpeg workers.
+          - "**36 kB** binary, **<3% CPU, ~5 MB RAM** usage."
 
-      - name: '[**pdf-fmt**](https://github.com/bladeacer/pdf-fmt)'
-        date:
+      - name: '[pdf-fmt](https://github.com/bladeacer/pdf-fmt)'
         start_date: 2025-10
         end_date: present
-        location:
-        summary: A lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
-
+        summary: Lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
         highlights:
           - Comprehensive configuration suite with **regex exclusions, output formatting and image deduplication**.
+
+      - name: '[flexcyon](https://github.com/bladeacer/flexcyon)'
+        start_date: 2024-09
+        end_date: present
+        location:
+        summary: Obsidian.md theme with terminal inspired aesthetics, over **3000 downloads** and **300+ customisation options.**
+        highlights:
+          - "Use of *SCSS for codebase modularity*, with SemVer and linting. [**Documentation**](https://flexcyon.github.io/docs-en/) in both *English and Chinese.*"
 
     # publications:
     #   - title: 'Sparse Mixture-of-Experts at Scale: Efficient Routing for Trillion-Parameter Models'
@@ -105,18 +101,42 @@ cv:
     #     url:
     #     journal: NeurIPS 2023
     #     date: 2023-07
+    
+    Co-corriculars:
+      - name: NDP 2024 Motivators
+        start_date: 2024-05
+        end_date: 2024-08
+        summary: Participated in Singapore's National Day Parade.
+      - name: Hwa Chong Mindsports Championships
+        date: 2024-04
+        summary: Participated in the international chess competition representing my Polytechnic.
+      - name: Project Mid-Autumn Festival
+        start_date: 2023-07
+        end_date: 2023-09
+        summary: Involved as **Student Organiser**, planning logistics and activities during the event at the elderly home.
+      - name: HIHS Chinese Weiqi Club
+        start_date: 2021-02
+        end_date: 2022-02
+        summary: Involved as **Executive Committee** Member, with roles in Publicity, Mentorship and organising the inaugural Weiqi Immersion Fortnight.
   
     Awards and Honors:
-      - bullet: "[**MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)**](https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards) (2021)"
+      - name: "[**MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)**](https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards)"
+        date: 2021
+        summary: "Ministry of Education (MOE)"
 
     # selected_honors:
     #   - bullet: Forbes 30 Under 30 in Enterprise Technology (2024)
     
     Certifications:
-      - bullet: "[**Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition**](https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/) (2025)"
-      - bullet: "[**Google Data Analytics**](https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51) (2025)"
-      - bullet: "[**Google IT Automation with Python**](https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ) (2024)"
-
+      - name: "[**Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition**](https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/)"
+        date: 2025
+        summary: Digital Defence Alliance Singapore (DDAS)
+      - name: "[**Google Data Analytics**](https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51)"
+        date: 2025
+        summary: Coursera
+      - name: "[**Google IT Automation with Python**](https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ)"
+        date: 2024
+        summary: Coursera
      
     # patents:
     #   - number: Adaptive Quantization for Neural Network Inference on Edge Devices (US Patent 11,234,567)
@@ -153,14 +173,14 @@ design:
     alignment: justified
     date_and_location_column_alignment: right
     font_family:
-      body: Arial
-      name: Arial
-      headline: Arial
-      connections: Arial
-      section_titles: Arial
+      body: "Arial"
+      name: "Arial"
+      headline: "Arial"
+      connections: "Arial"
+      section_titles: "Arial"
     font_size:
       body: 9pt
-      name: 1em
+      name: 1.25em
       headline: 9pt
       connections: 9pt
       section_titles: 0.95em
@@ -197,7 +217,7 @@ design:
     type: with_full_line
     line_thickness: 0.5pt
     space_above: 0.4cm
-    space_below: 0.2cm
+    space_below: 0.1cm
   # sections:
   #   allow_page_break: true
   #   space_between_regular_entries: 1.2em
@@ -263,7 +283,7 @@ locale:
   # years: years
   present: Present
   # phrases:
-  #   degree_with_area: DEGREE AREA
+  #   degree_with_area: DEGREE IN AREA
   # month_abbreviations:
   #   - Jan
   #   - Feb

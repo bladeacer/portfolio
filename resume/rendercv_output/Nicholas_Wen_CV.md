@@ -8,7 +8,9 @@
 
 
 # Summary
-I am an aspiring software developer, who is deeply interested in software and how it work under the hood. My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
+I am an aspiring software developer, who is deeply interested in software and how it work under the hood.
+
+My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
 
 # Education
 ## **Nanyang Polytechnic**
@@ -21,14 +23,24 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
 
 
+## **Holy Innocents' High School**
+*Singapore*
+
+
+*Jan 2018 – Dec 2022*
+
+ *in* *GCE 'O' Levels*
+
+
+
 # Skills
-**Languages:** Python, Go, Rust, Kotlin, C#, HTML, CSS, SASS, React, TypeScript
+**Languages:** Python, Go, Rust, Kotlin, C, C#, JavaScript, TypeScript, Node, React
 
-**ML Frameworks:** PyTorch, TensorFlow, ONNX
+**Machine Learning:** PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
 
-**Infrastructure:** Docker, Docker Compose
+**Infrastructure:** Docker, Docker Compose, MySQL, MS SQL, SQLite, Redis, KeyDB
 
-**Scripting:** Bash, PowerShell
+**Others:** Git, Bash, PowerShell, HTML, CSS, SASS, Tailwind, Bootstrap
 
 # Experience
 ## **EUC Systems Intern**
@@ -38,8 +50,6 @@ I am an aspiring software developer, who is deeply interested in software and ho
 *Mar 2025 – May 2025*
 
 *Fujitsu*
-
-3 Month Internship.
 
 - Assisted end users with *troubleshooting software issues*, wrote Python scripts to **automate email notifications**.
 
@@ -54,7 +64,7 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
 *Jan 2026 – Feb 2026*
 
-- **SARIMA time-series dashboard** with Docker Compose in *decoupled services architecture*.
+**SARIMA time-series dashboard** with Docker Compose in *decoupled services architecture*.
 
 - KeyDB for **in-memory caching**, Goatcounter for *observability* and Gemini **generated Executive Summary**.
 
@@ -77,30 +87,97 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
 *Apr 2026 – Present*
 
-A media screensaver Terminal User Interface (TUI) written with C, ncurses and playerctl (MPRIS).
+Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
 
-- Event driven UI updates with parallel FFmpeg workers and **200ms debounce**.
+- Event driven UI updates based on *playerctl (MPRIS) state*, **200ms debounce** and parallel FFmpeg workers.
 
-- **36 kB** binary, **<3% CPU, ~5 MB RAM** usage, ~1.4 CPU IPC, ~25% Retiring rate.
+- **36 kB** binary, **<3% CPU, ~5 MB RAM** usage.
 
 
 
-## **[**pdf-fmt**](https://github.com/bladeacer/pdf-fmt)**
+## **[pdf-fmt](https://github.com/bladeacer/pdf-fmt)**
 
 *Oct 2025 – Present*
 
-A lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
+Lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
 
 - Comprehensive configuration suite with **regex exclusions, output formatting and image deduplication**.
 
 
 
+## **[flexcyon](https://github.com/bladeacer/flexcyon)**
+
+*Sept 2024 – Present*
+
+Obsidian.md theme with terminal inspired aesthetics, over **3000 downloads** and **300+ customisation options.**
+
+- Use of *SCSS for codebase modularity*, with SemVer and linting. [**Documentation**](https://flexcyon.github.io/docs-en/) in both *English and Chinese.*
+
+
+
+# Co-corriculars
+## **NDP 2024 Motivators**
+
+*May 2024 – Aug 2024*
+
+Participated in Singapore's National Day Parade.
+
+
+
+## **Hwa Chong Mindsports Championships**
+
+*Apr 2024*
+
+Participated in the international chess competition representing my Polytechnic.
+
+
+
+## **Project Mid-Autumn Festival**
+
+*July 2023 – Sept 2023*
+
+Involved as **Student Organiser**, planning logistics and activities during the event at the elderly home.
+
+
+
+## **HIHS Chinese Weiqi Club**
+
+*Feb 2021 – Feb 2022*
+
+Involved as **Executive Committee** Member, with roles in Publicity, Mentorship and organising the inaugural Weiqi Immersion Fortnight.
+
+
+
 # Awards and Honors
-- [**MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)**](https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards) (2021)
+## **[**MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)**](https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards)**
+
+*2021*
+
+Ministry of Education (MOE)
+
+
 
 # Certifications
-- [**Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition**](https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/) (2025)
+## **[**Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition**](https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/)**
 
-- [**Google Data Analytics**](https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51) (2025)
+*2025*
 
-- [**Google IT Automation with Python**](https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ) (2024)
+Digital Defence Alliance Singapore (DDAS)
+
+
+
+## **[**Google Data Analytics**](https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51)**
+
+*2025*
+
+Coursera
+
+
+
+## **[**Google IT Automation with Python**](https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ)**
+
+*2024*
+
+Coursera
+
+

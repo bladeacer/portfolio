@@ -33,7 +33,7 @@
   typography-font-family-connections: "Arial",
   typography-font-family-section-titles: "Arial",
   typography-font-size-body: 9pt,
-  typography-font-size-name: 1em,
+  typography-font-size-name: 1.25em,
   typography-font-size-headline: 9pt,
   typography-font-size-connections: 9pt,
   typography-font-size-section-titles: 0.95em,
@@ -60,7 +60,7 @@
   section-titles-type: "with_full_line",
   section-titles-line-thickness: 0.5pt,
   section-titles-space-above: 0.4cm,
-  section-titles-space-below: 0.2cm,
+  section-titles-space-below: 0.1cm,
   sections-allow-page-break: true,
   sections-space-between-text-based-entries: 0.3em,
   sections-space-between-regular-entries: 1.2em,
@@ -99,7 +99,9 @@
 
 == Summary
 
-I am an aspiring software developer, who is deeply interested in software and how it work under the hood. My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
+I am an aspiring software developer, who is deeply interested in software and how it work under the hood.
+
+My interests include web, mobile development, systems design, artificial intelligence as well as operating systems and compilers.
 
 == Education
 
@@ -120,15 +122,32 @@ I am an aspiring software developer, who is deeply interested in software and ho
   ],
 )
 
+#education-entry(
+  [
+    #strong[Holy Innocents' High School]
+
+    #emph[in] #emph[GCE 'O' Levels]
+
+  ],
+  [
+    #emph[Singapore]
+
+    #emph[Jan 2018 – Dec 2022]
+
+  ],
+  main-column-second-row: [
+  ],
+)
+
 == Skills
 
-#strong[Languages:] Python, Go, Rust, Kotlin, C\#, HTML, CSS, SASS, React, TypeScript
+#strong[Languages:] Python, Go, Rust, Kotlin, C, C\#, JavaScript, TypeScript, Node, React
 
-#strong[ML Frameworks:] PyTorch, TensorFlow, ONNX
+#strong[Machine Learning:] PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
 
-#strong[Infrastructure:] Docker, Docker Compose
+#strong[Infrastructure:] Docker, Docker Compose, MySQL, MS SQL, SQLite, Redis, KeyDB
 
-#strong[Scripting:] Bash, PowerShell
+#strong[Others:] Git, Bash, PowerShell, HTML, CSS, SASS, Tailwind, Bootstrap
 
 == Experience
 
@@ -146,8 +165,6 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
   ],
   main-column-second-row: [
-    #summary[3 Month Internship.]
-
     - Assisted end users with #emph[troubleshooting software issues], wrote Python scripts to #strong[automate email notifications].
 
     - Imaging, setting up and wiping data for #strong[80+ Windows 11 laptops]. Tagged and accounted for over #strong[120+ assets].
@@ -161,7 +178,7 @@ I am an aspiring software developer, who is deeply interested in software and ho
   [
     #strong[#link("https://github.com/bladeacer/automo-web-app")[Automo]]
 
-    - #strong[SARIMA time-series dashboard] with Docker Compose in #emph[decoupled services architecture].
+    #summary[#strong[SARIMA time-series dashboard] with Docker Compose in #emph[decoupled services architecture].]
 
   ],
   [
@@ -207,18 +224,18 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
   ],
   main-column-second-row: [
-    #summary[A media screensaver Terminal User Interface (TUI) written with C, ncurses and playerctl (MPRIS).]
+    #summary[Media Screensaver Terminal User Interface (TUI) written with C and ncurses.]
 
-    - Event driven UI updates with parallel FFmpeg workers and #strong[200ms debounce].
+    - Event driven UI updates based on #emph[playerctl (MPRIS) state], #strong[200ms debounce] and parallel FFmpeg workers.
 
-    - #strong[36 kB] binary, #strong[\<3\% CPU, \~5 MB RAM] usage, \~1.4 CPU IPC, \~25\% Retiring rate.
+    - #strong[36 kB] binary, #strong[\<3\% CPU, \~5 MB RAM] usage.
 
   ],
 )
 
 #regular-entry(
   [
-    #strong[#link("https://github.com/bladeacer/pdf-fmt")[#strong[pdf-fmt]]]
+    #strong[#link("https://github.com/bladeacer/pdf-fmt")[pdf-fmt]]
 
   ],
   [
@@ -226,21 +243,152 @@ I am an aspiring software developer, who is deeply interested in software and ho
 
   ],
   main-column-second-row: [
-    #summary[A lightweight, self-contained utility that extracts #strong[images, structured Markdown tables and text] from PDF documents.]
+    #summary[Lightweight, self-contained utility that extracts #strong[images, structured Markdown tables and text] from PDF documents.]
 
     - Comprehensive configuration suite with #strong[regex exclusions, output formatting and image deduplication].
 
   ],
 )
 
+#regular-entry(
+  [
+    #strong[#link("https://github.com/bladeacer/flexcyon")[flexcyon]]
+
+  ],
+  [
+    #emph[Sept 2024 – Present]
+
+  ],
+  main-column-second-row: [
+    #summary[Obsidian.md theme with terminal inspired aesthetics, over #strong[3000 downloads] and #strong[300+ customisation options.]]
+
+    - Use of #emph[SCSS for codebase modularity], with SemVer and linting. #link("https://flexcyon.github.io/docs-en/")[#strong[Documentation]] in both #emph[English and Chinese.]
+
+  ],
+)
+
+== Co-corriculars
+
+#regular-entry(
+  [
+    #strong[NDP 2024 Motivators]
+
+  ],
+  [
+    #emph[May 2024 – Aug 2024]
+
+  ],
+  main-column-second-row: [
+    #summary[Participated in Singapore's National Day Parade.]
+
+  ],
+)
+
+#regular-entry(
+  [
+    #strong[Hwa Chong Mindsports Championships]
+
+  ],
+  [
+    #emph[Apr 2024]
+
+  ],
+  main-column-second-row: [
+    #summary[Participated in the international chess competition representing my Polytechnic.]
+
+  ],
+)
+
+#regular-entry(
+  [
+    #strong[Project Mid-Autumn Festival]
+
+  ],
+  [
+    #emph[July 2023 – Sept 2023]
+
+  ],
+  main-column-second-row: [
+    #summary[Involved as #strong[Student Organiser], planning logistics and activities during the event at the elderly home.]
+
+  ],
+)
+
+#regular-entry(
+  [
+    #strong[HIHS Chinese Weiqi Club]
+
+  ],
+  [
+    #emph[Feb 2021 – Feb 2022]
+
+  ],
+  main-column-second-row: [
+    #summary[Involved as #strong[Executive Committee] Member, with roles in Publicity, Mentorship and organising the inaugural Weiqi Immersion Fortnight.]
+
+  ],
+)
+
 == Awards and Honors
 
-- #link("https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards")[#strong[MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)]] (2021)
+#regular-entry(
+  [
+    #strong[#link("https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards")[#strong[MOE Edusave Award for Achievement, Good Leadership and Service (EAGLES)]]]
+
+  ],
+  [
+    #emph[2021]
+
+  ],
+  main-column-second-row: [
+    #summary[Ministry of Education (MOE)]
+
+  ],
+)
 
 == Certifications
 
-- #link("https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/")[#strong[Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition]] (2025)
+#regular-entry(
+  [
+    #strong[#link("https://www.linkedin.com/in/nicholas-wen-a525832b2/details/certifications/")[#strong[Certificate of Participation for Beyond Borders with DDAS | Hong Kong Edition]]]
 
-- #link("https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51")[#strong[Google Data Analytics]] (2025)
+  ],
+  [
+    #emph[2025]
 
-- #link("https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ")[#strong[Google IT Automation with Python]] (2024)
+  ],
+  main-column-second-row: [
+    #summary[Digital Defence Alliance Singapore (DDAS)]
+
+  ],
+)
+
+#regular-entry(
+  [
+    #strong[#link("https://www.coursera.org/account/accomplishments/specialization/P4LZ66LC9V51")[#strong[Google Data Analytics]]]
+
+  ],
+  [
+    #emph[2025]
+
+  ],
+  main-column-second-row: [
+    #summary[Coursera]
+
+  ],
+)
+
+#regular-entry(
+  [
+    #strong[#link("https://www.coursera.org/account/accomplishments/professional-cert/M6JUHS3803KJ")[#strong[Google IT Automation with Python]]]
+
+  ],
+  [
+    #emph[2024]
+
+  ],
+  main-column-second-row: [
+    #summary[Coursera]
+
+  ],
+)
