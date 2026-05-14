@@ -22,8 +22,8 @@ For other platforms `uv install` should work.
 
 ## Posts
 
-- [pdf-fmt 0.7.0](./pdf-fmt-0.7.0.md)
-- [pdf-fmt 0.6.0](./pdf-fmt-0.6.0.md)
+- [pdf-fmt 0.7.0](./pdf-fmt-0.7.0)
+- [pdf-fmt 0.6.0](./pdf-fmt-0.6.0)
 
 ## Links
 

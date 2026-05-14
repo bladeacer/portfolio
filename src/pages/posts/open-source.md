@@ -8,6 +8,7 @@ author: "bladeacer"
 tags: ["open-source", "programming"]
 ---
 
+
 WIP.
 
 <!-- Themes: Community, AI Usage, user expectations etc. -->
@@ -15,6 +16,8 @@ WIP.
 <!-- ## Foreword -->
 
 <!-- I have been contemplating writing the post for the past few months. -->
+<!-- I hope the information here can be useful to you, especially if you are -->
+<!-- contemplating on whether to contribute to open source yourself. -->
 
 <!-- ## Why open source? -->
 

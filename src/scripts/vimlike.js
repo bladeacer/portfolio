@@ -1,13 +1,11 @@
-// --- Configuration ---
 const CANDIDATE_SELECTOR = 'body > div > p, body > div > h1, body > div > h2, body > div > h3, body > div > h4, body > div > ul > li, body > div > blockquote, body > div > blockquote > ul > li, body > div > li, body > div > pre, body > div > table, body > div .post-item > .blog-card, body > div > .cards > .card-item > a > img, body > div > .cards > .card-item > p, body > div > .profile li, body > div > .profile > .profile-desc > a > p'; 
-// RETAIN: Used for checking element type within jumpToElement
+
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;
 const HIGHLIGHT_CLASS = 'active-line-highlight';
 const ACCELERATION_MAX_FACTOR = 0.15;
 const BASE_SCROLL_DURATION = 350;
 
-// --- State Variables ---
 let lastHighlightedElement = null;
 let highlightTimeout = null;
 let animationFrame = null;
@@ -18,12 +16,9 @@ let scrollStartTimestamp = 0;
 let startPosition = 0;
 let distanceToScroll = 0;
 
-// NEW State for Numerical Prefixes
-let numericPrefix = 1; // Default to 1
+let numericPrefix = 1;
 let numericPrefixTimeout = null; 
 let lastModifiedLink = null;
-
-// --- Utility Functions ---
 
 function removeHighlight() {
     if (lastHighlightedElement) {
