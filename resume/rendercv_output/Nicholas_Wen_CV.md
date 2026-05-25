@@ -89,9 +89,11 @@ My interests include web, mobile development, systems design, artificial intelli
 
 Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
 
-- Event driven UI updates based on *playerctl (MPRIS) state*, **200ms debounce** and parallel FFmpeg workers.
+- Event-driven architecture via **D-Bus/MPRIS** with parallel FFmpeg workers and a **200ms debounce** for flicker-free UI transitions.
 
-- **36 kB** binary, **<3% CPU, ~5 MB RAM** usage.
+- Engineered a **resilient asset pipeline** with localized image caching and exponential backoff retry logic for robust remote metadata handling.
+
+- Statically-linked **~1.5 MB binary** featuring a **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**).
 
 
 

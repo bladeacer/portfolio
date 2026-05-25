@@ -81,7 +81,7 @@
   date: datetime(
     year: 2026,
     month: 5,
-    day: 14,
+    day: 25,
   ),
 )
 
@@ -226,9 +226,11 @@ My interests include web, mobile development, systems design, artificial intelli
   main-column-second-row: [
     #summary[Media Screensaver Terminal User Interface (TUI) written with C and ncurses.]
 
-    - Event driven UI updates based on #emph[playerctl (MPRIS) state], #strong[200ms debounce] and parallel FFmpeg workers.
+    - Event-driven architecture via #strong[D-Bus\/MPRIS] with parallel FFmpeg workers and a #strong[200ms debounce] for flicker-free UI transitions.
 
-    - #strong[36 kB] binary, #strong[\<3\% CPU, \~5 MB RAM] usage.
+    - Engineered a #strong[resilient asset pipeline] with localized image caching and exponential backoff retry logic for robust remote metadata handling.
+
+    - Statically-linked #strong[\~1.5 MB binary] featuring a #strong[zero-leak memory profile] (Valgrind-verified) and negligible idle CPU overhead (#strong[\<2\%]).
 
   ],
 )
