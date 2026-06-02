@@ -34,7 +34,7 @@ My interests include web, mobile development, systems design, artificial intelli
 
 
 # Skills
-**Languages:** Python, Go, Rust, Kotlin, C, C#, JavaScript, TypeScript, Node, React
+**Languages:** Python, Go, Rust, C, Ada/SPARK, C, Kotlin, C#, JavaScript (TypeScript, Node, React)
 
 **Machine Learning:** PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
 
@@ -89,11 +89,11 @@ My interests include web, mobile development, systems design, artificial intelli
 
 Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
 
-- Event-driven architecture via **D-Bus/MPRIS** with parallel FFmpeg workers and a **200ms debounce** for flicker-free UI transitions.
+- Event-driven architecture via **D-Bus/MPRIS** with FFmpeg/Chafa API handling and a **200ms debounce** for snappy user experience.
 
-- Engineered a **resilient asset pipeline** with localized image caching and exponential backoff retry logic for robust remote metadata handling.
+- Engineered resilient asset pipeline with **local image caching** and exponential backoff retry for robust remote asset handling.
 
-- Statically-linked **~1.5 MB binary** featuring a **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**).
+- Statically-linked **~1.5 MB binary** with **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**).
 
 
 

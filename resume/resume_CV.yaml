@@ -32,7 +32,7 @@ cv:
 
     skills:
       - label: Languages
-        details: Python, Go, Rust, Kotlin, C, C#, JavaScript, TypeScript, Node, React
+        details: Python, Go, Rust, C, Ada/SPARK, C, Kotlin, C#, JavaScript (TypeScript, Node, React)
       - label: Machine Learning
         details: PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
       - label: Infrastructure
@@ -72,9 +72,9 @@ cv:
         end_date: present
         summary: Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
         highlights:
-          - "Event-driven architecture via **D-Bus/MPRIS** with parallel FFmpeg workers and a **200ms debounce** for flicker-free UI transitions."
-          - "Engineered a **resilient asset pipeline** with localized image caching and exponential backoff retry logic for robust remote metadata handling."
-          - "Statically-linked **~1.5 MB binary** featuring a **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**)."
+          - "Event-driven architecture via **D-Bus/MPRIS** with FFmpeg/Chafa API handling and a **200ms debounce** for snappy user experience."
+          - "Engineered resilient asset pipeline with **local image caching** and exponential backoff retry for robust remote asset handling."
+          - "Statically-linked **~1.5 MB binary** with **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**)."
 
       - name: '[pdf-fmt](https://github.com/bladeacer/pdf-fmt)'
         start_date: 2025-10

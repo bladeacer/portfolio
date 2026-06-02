@@ -6,7 +6,7 @@
   name: "Nicholas Wen",
   title: "Nicholas Wen - CV",
   footer: context { [#emph[Nicholas Wen -- #str(here().page())\/#str(counter(page).final().first())]] },
-  top-note: [ #emph[Last updated in May 2026] ],
+  top-note: [ #emph[Last updated in June 2026] ],
   locale-catalog-language: "en",
   text-direction: ltr,
   page-size: "a4",
@@ -80,8 +80,8 @@
   entries-highlights-space-between-bullet-and-text: 0.5em,
   date: datetime(
     year: 2026,
-    month: 5,
-    day: 25,
+    month: 6,
+    day: 2,
   ),
 )
 
@@ -141,7 +141,7 @@ My interests include web, mobile development, systems design, artificial intelli
 
 == Skills
 
-#strong[Languages:] Python, Go, Rust, Kotlin, C, C\#, JavaScript, TypeScript, Node, React
+#strong[Languages:] Python, Go, Rust, C, Ada\/SPARK, C, Kotlin, C\#, JavaScript (TypeScript, Node, React)
 
 #strong[Machine Learning:] PyTorch, TensorFlow, LangChain, HuggingFace, ONNX
 
@@ -226,11 +226,11 @@ My interests include web, mobile development, systems design, artificial intelli
   main-column-second-row: [
     #summary[Media Screensaver Terminal User Interface (TUI) written with C and ncurses.]
 
-    - Event-driven architecture via #strong[D-Bus\/MPRIS] with parallel FFmpeg workers and a #strong[200ms debounce] for flicker-free UI transitions.
+    - Event-driven architecture via #strong[D-Bus\/MPRIS] with FFmpeg\/Chafa API handling and a #strong[200ms debounce] for snappy user experience.
 
-    - Engineered a #strong[resilient asset pipeline] with localized image caching and exponential backoff retry logic for robust remote metadata handling.
+    - Engineered resilient asset pipeline with #strong[local image caching] and exponential backoff retry for robust remote asset handling.
 
-    - Statically-linked #strong[\~1.5 MB binary] featuring a #strong[zero-leak memory profile] (Valgrind-verified) and negligible idle CPU overhead (#strong[\<2\%]).
+    - Statically-linked #strong[\~1.5 MB binary] with #strong[zero-leak memory profile] (Valgrind-verified) and negligible idle CPU overhead (#strong[\<2\%]).
 
   ],
 )
