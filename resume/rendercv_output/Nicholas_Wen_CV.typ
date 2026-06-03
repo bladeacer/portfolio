@@ -81,7 +81,7 @@
   date: datetime(
     year: 2026,
     month: 6,
-    day: 2,
+    day: 3,
   ),
 )
 
@@ -165,7 +165,7 @@ My interests include web, mobile development, systems design, artificial intelli
 
   ],
   main-column-second-row: [
-    - Assisted end users with #emph[troubleshooting software issues], wrote Python scripts to #strong[automate email notifications].
+    #summary[Assisted end users with #emph[troubleshooting software issues], wrote Python scripts to #strong[automate email notifications].]
 
     - Imaging, setting up and wiping data for #strong[80+ Windows 11 laptops]. Tagged and accounted for over #strong[120+ assets].
 
@@ -197,7 +197,7 @@ My interests include web, mobile development, systems design, artificial intelli
   [
     #strong[#link("https://github.com/chweekueh1/nyp-fyp-project")[NYP-FYP CNC Chatbot]]
 
-    - Reduced startup time from 30 seconds to #strong[under 10 seconds.]
+    #summary[Refactored and decoupled an inherited chatbot platform into an #strong[optimised, containerised] runtime architecture.]
 
   ],
   [
@@ -207,12 +207,33 @@ My interests include web, mobile development, systems design, artificial intelli
 
   ],
   main-column-second-row: [
-    - Added #strong[quality of life features] such as search, rate limits, audio preprocessing, #strong[containerisation with Docker.]
+    - Implemented limiting and mitigated resource exhaustion, #strong[reducing initialisation latency by over 20 seconds].
 
   ],
 )
 
 == Projects
+
+#regular-entry(
+  [
+    #strong[#link("https://codeberg.org/bladeacer/Ada_CRDT")[Ada\_CRDT]]
+
+  ],
+  [
+    #emph[June 2026 – Present]
+
+  ],
+  main-column-second-row: [
+    #summary[First #link("https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type")[Conflict-Free Replicated Data Types (CRDT)] library for Ada\/SPARK, achieving strong eventual consistency across decentralized nodes.]
+
+    - CRDT primitives like #strong[PN-Counters], #strong[LWW-Sets], and #strong[RGA sequences] with interchangeable backends (#strong[Yjs], #strong[Fugue], #strong[Naive]).
+
+    - #strong[Zero-heap bounded types], compressed #strong[#link("https://en.wikipedia.org/wiki/LEB128")[LEB128] binary wire protocol] with #link("https://en.wikipedia.org/wiki/Logical_clock")[#strong[Hybrid Logical Clocks (HLC)]] to minimise bandwidth during partition healing.
+
+    - Real-time #strong[Conway's Game of Life TUI demo], supported by extensive test suite and #strong[docs-as-code pipeline].
+
+  ],
+)
 
 #regular-entry(
   [
@@ -231,23 +252,6 @@ My interests include web, mobile development, systems design, artificial intelli
     - Engineered resilient asset pipeline with #strong[local image caching] and exponential backoff retry for robust remote asset handling.
 
     - Statically-linked #strong[\~1.5 MB binary] with #strong[zero-leak memory profile] (Valgrind-verified) and negligible idle CPU overhead (#strong[\<2\%]).
-
-  ],
-)
-
-#regular-entry(
-  [
-    #strong[#link("https://github.com/bladeacer/pdf-fmt")[pdf-fmt]]
-
-  ],
-  [
-    #emph[Oct 2025 – Present]
-
-  ],
-  main-column-second-row: [
-    #summary[Lightweight, self-contained utility that extracts #strong[images, structured Markdown tables and text] from PDF documents.]
-
-    - Comprehensive configuration suite with #strong[regex exclusions, output formatting and image deduplication].
 
   ],
 )
@@ -282,21 +286,6 @@ My interests include web, mobile development, systems design, artificial intelli
   ],
   main-column-second-row: [
     #summary[Participated in Singapore's National Day Parade.]
-
-  ],
-)
-
-#regular-entry(
-  [
-    #strong[Hwa Chong Mindsports Championships]
-
-  ],
-  [
-    #emph[Apr 2024]
-
-  ],
-  main-column-second-row: [
-    #summary[Participated in the international chess competition representing my Polytechnic.]
 
   ],
 )

@@ -51,7 +51,7 @@ My interests include web, mobile development, systems design, artificial intelli
 
 *Fujitsu*
 
-- Assisted end users with *troubleshooting software issues*, wrote Python scripts to **automate email notifications**.
+Assisted end users with *troubleshooting software issues*, wrote Python scripts to **automate email notifications**.
 
 - Imaging, setting up and wiping data for **80+ Windows 11 laptops**. Tagged and accounted for over **120+ assets**.
 
@@ -76,13 +76,27 @@ My interests include web, mobile development, systems design, artificial intelli
 
 *June 2025 – Aug 2025*
 
-- Reduced startup time from 30 seconds to **under 10 seconds.**
+Refactored and decoupled an inherited chatbot platform into an **optimised, containerised** runtime architecture.
 
-- Added **quality of life features** such as search, rate limits, audio preprocessing, **containerisation with Docker.**
+- Implemented limiting and mitigated resource exhaustion, **reducing initialisation latency by over 20 seconds**.
 
 
 
 # Projects
+## **[Ada_CRDT](https://codeberg.org/bladeacer/Ada_CRDT)**
+
+*June 2026 – Present*
+
+First [Conflict-Free Replicated Data Types (CRDT)](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type) library for Ada/SPARK, achieving strong eventual consistency across decentralized nodes.
+
+- CRDT primitives like **PN-Counters**, **LWW-Sets**, and **RGA sequences** with interchangeable backends (**Yjs**, **Fugue**, **Naive**).
+
+- **Zero-heap bounded types**, compressed **[LEB128](https://en.wikipedia.org/wiki/LEB128) binary wire protocol** with [**Hybrid Logical Clocks (HLC)**](https://en.wikipedia.org/wiki/Logical_clock) to minimise bandwidth during partition healing.
+
+- Real-time **Conway's Game of Life TUI demo**, supported by extensive test suite and **docs-as-code pipeline**.
+
+
+
 ## **[yams](https://codeberg.org/bladeacer/yams)**
 
 *Apr 2026 – Present*
@@ -94,16 +108,6 @@ Media Screensaver Terminal User Interface (TUI) written with C and ncurses.
 - Engineered resilient asset pipeline with **local image caching** and exponential backoff retry for robust remote asset handling.
 
 - Statically-linked **~1.5 MB binary** with **zero-leak memory profile** (Valgrind-verified) and negligible idle CPU overhead (**<2%**).
-
-
-
-## **[pdf-fmt](https://github.com/bladeacer/pdf-fmt)**
-
-*Oct 2025 – Present*
-
-Lightweight, self-contained utility that extracts **images, structured Markdown tables and text** from PDF documents.
-
-- Comprehensive configuration suite with **regex exclusions, output formatting and image deduplication**.
 
 
 
@@ -123,14 +127,6 @@ Obsidian.md theme with terminal inspired aesthetics, over **3000 downloads** and
 *May 2024 – Aug 2024*
 
 Participated in Singapore's National Day Parade.
-
-
-
-## **Hwa Chong Mindsports Championships**
-
-*Apr 2024*
-
-Participated in the international chess competition representing my Polytechnic.
 
 
 
