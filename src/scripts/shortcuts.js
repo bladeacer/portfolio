@@ -137,6 +137,9 @@ Mousetrap.bind('r', function(e) {
     return false;
 });
 
+// Guard: prevent ctrl+r from firing the bare r handler
+Mousetrap.bind('ctrl+r', function() { return false; });
+
 Mousetrap.bind('<', () => {
     history.back();
     showStatus('<', 'History back');
@@ -169,13 +172,13 @@ Mousetrap.bind('esc', function() {
         var cmdOverlay = document.getElementById("command-mode-overlay");
         if (cmdOverlay && cmdOverlay.classList.contains("is-active")) {
             window.closeCommandMode();
-            showStatus('Esc', 'Cancelled');
+            showStatus('Esc', 'Closed command palette');
             return false;
         }
     }
     if (window.closeSearch) {
         var searchOverlay = document.getElementById("search-overlay");
-        if (searchOverlay && searchOverlay.style.display === "flex") {
+        if (searchOverlay && searchOverlay.style.display === "grid") {
             window.closeSearch();
             showStatus('Esc', 'Closed search');
             return false;

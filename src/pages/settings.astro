@@ -92,14 +92,21 @@ const colors = [
         </div>
       </div>
 
-      <h3>Accent Color</h3>
+      <h3>Accent Colors</h3>
       <div class="setting-group">
         <label class="setting-row">
-          <span class="setting-label">Color scheme</span>
-          <select id="setting-color" class="setting-select">
+          <span class="setting-label">Dark mode</span>
+          <select id="setting-color-dark" class="setting-select">
             {colors.map(c => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="setting-color-picker" class="setting-color-picker" value="#3085dd" style="display:none" />
+          <input type="color" id="setting-color-dark-picker" class="setting-color-picker" value="#a5bc84" style="display:none" />
+        </label>
+        <label class="setting-row">
+          <span class="setting-label">Light mode</span>
+          <select id="setting-color-light" class="setting-select">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="setting-color-light-picker" class="setting-color-picker" value="#4b65b4" style="display:none" />
         </label>
       </div>
 
@@ -331,7 +338,8 @@ const colors = [
       sizeSans: 16,
       sizeFallback: 16,
       sizeMono: 16,
-      accentColor: "",
+      accentLight: "",
+      accentDark: "",
       h1Size: 1.81803,
       h2Size: 1.61803,
       h3Size: 1.41803,
@@ -386,7 +394,8 @@ const colors = [
       setColor(root, "--h2-color", s.h2Color);
       setColor(root, "--h3-color", s.h3Color);
       setColor(root, "--h4-color", s.h4Color);
-      setColor(root, "--user-accent", s.accentColor);
+      setColor(root, "--user-accent-light", s.accentLight);
+      setColor(root, "--user-accent-dark", s.accentDark);
     }
 
     function setColor(root, prop, val) {
@@ -412,7 +421,8 @@ const colors = [
       syncColorSelect("s-h2Color", "s-h2ColorPicker", s.h2Color);
       syncColorSelect("s-h3Color", "s-h3ColorPicker", s.h3Color);
       syncColorSelect("s-h4Color", "s-h4ColorPicker", s.h4Color);
-      syncColorSelect("setting-color", "setting-color-picker", s.accentColor);
+      syncColorSelect("setting-color-light", "setting-color-light-picker", s.accentLight);
+      syncColorSelect("setting-color-dark", "setting-color-dark-picker", s.accentDark);
     }
 
     function syncField(id, val) { var el = $(id); if (el) el.value = val; }
@@ -449,7 +459,8 @@ const colors = [
         h2Color: readColor("s-h2Color"),
         h3Color: readColor("s-h3Color"),
         h4Color: readColor("s-h4Color"),
-        accentColor: readColor("setting-color"),
+        accentLight: readColor("setting-color-light"),
+        accentDark: readColor("setting-color-dark"),
       };
     }
 
@@ -525,7 +536,8 @@ const colors = [
       bindColor("s-h2Color", "s-h2ColorPicker");
       bindColor("s-h3Color", "s-h3ColorPicker");
       bindColor("s-h4Color", "s-h4ColorPicker");
-      bindColor("setting-color", "setting-color-picker");
+      bindColor("setting-color-dark", "setting-color-dark-picker");
+      bindColor("setting-color-light", "setting-color-light-picker");
 
       $("settings-reset")?.addEventListener("click", doReset);
     }

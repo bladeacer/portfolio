@@ -60,11 +60,11 @@ import FlexSearch from 'flexsearch';
     results.forEach(function(r, i) {
       var li = document.createElement('li');
       li.className = 'search-result-item' + (i === 0 ? ' search-selected' : '');
-      var displayTitle = r.title;
-      // Highlight matched part in title
-      if (q && displayTitle.toLowerCase().indexOf(q) > -1) {
-        var idx = displayTitle.toLowerCase().indexOf(q);
-        displayTitle = displayTitle.substring(0, idx) + '<mark class="search-highlight">' + displayTitle.substring(idx, idx + q.length) + '</mark>' + displayTitle.substring(idx + q.length);
+      var displayLabel = r.breadcrumb ? r.breadcrumb + ' > ' + r.title : r.title;
+      var displayLower = displayLabel.toLowerCase();
+      if (q && displayLower.indexOf(q) > -1) {
+        var idx = displayLower.indexOf(q);
+        displayLabel = displayLabel.substring(0, idx) + '<mark class="search-highlight">' + displayLabel.substring(idx, idx + q.length) + '</mark>' + displayLabel.substring(idx + q.length);
       }
       var snippetHtml = '';
       if (q && r.snippet) {
@@ -74,7 +74,7 @@ import FlexSearch from 'flexsearch';
           snippetHtml = r.snippet.substring(0, sIdx) + '<mark class="search-highlight">' + r.snippet.substring(sIdx, sIdx + q.length) + '</mark>' + r.snippet.substring(sIdx + q.length);
         }
       }
-      li.innerHTML = '<a href="' + r.url + '">' + displayTitle + '</a>' + (snippetHtml ? '<div class="search-snippet">' + snippetHtml + '</div>' : '');
+      li.innerHTML = '<a href="' + r.url + '">' + displayLabel + '</a>' + (snippetHtml ? '<div class="search-snippet">' + snippetHtml + '</div>' : '');
       li.dataset.url = r.url;
       li.addEventListener('click', function() { navigate(r.url); });
       li.addEventListener('mouseenter', function() {
@@ -122,7 +122,8 @@ import FlexSearch from 'flexsearch';
             var p = pages[id];
             if (p && !seenUrls[p.url]) {
               seenUrls[p.url] = true;
-              results.push({ title: p.title, url: p.url, snippet: extractSnippet(p.content || '', q) });
+              var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
+              results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q) });
             }
           });
         }
@@ -135,7 +136,8 @@ import FlexSearch from 'flexsearch';
       if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
           (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
         seenUrls[p.url] = true;
-        results.push({ title: p.title, url: p.url, snippet: extractSnippet(p.content || '', q) });
+        var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
+        results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q) });
       }
     });
     render(results.slice(0, 10));
@@ -197,6 +199,14 @@ import FlexSearch from 'flexsearch';
 
   // Bind ctrl+/ to open search
   Mousetrap.bind('ctrl+/', function() {
+    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    window.openSearch();
+    return false;
+  });
+
+  // Bind ctrl+f to open search
+  Mousetrap.bind('ctrl+f', function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     window.openSearch();

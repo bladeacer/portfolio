@@ -29,6 +29,7 @@
     if (s.h2Color) root.style.setProperty("--h2-color", s.h2Color);
     if (s.h3Color) root.style.setProperty("--h3-color", s.h3Color);
     if (s.h4Color) root.style.setProperty("--h4-color", s.h4Color);
-    if (s.accentColor) root.style.setProperty("--user-accent", s.accentColor);
+    if (s.accentLight) root.style.setProperty("--user-accent-light", s.accentLight);
+    if (s.accentDark) root.style.setProperty("--user-accent-dark", s.accentDark);
   } catch(e) {}
 })();

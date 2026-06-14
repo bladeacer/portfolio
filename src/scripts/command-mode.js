@@ -36,7 +36,7 @@
     filtered.forEach(function(s, i) {
       var li = document.createElement("li");
       li.className = "cm-item" + (i === 0 ? " cm-selected" : "");
-      li.innerHTML = '<span class="cm-chord">' + s.chord + '</span><span class="cm-desc">' + s.desc + '</span>';
+      li.innerHTML = '<span class="cm-chord">' + s.chord + ':</span><span class="cm-desc">' + s.desc + '</span>';
       li.dataset.index = i;
       li.addEventListener("click", function() { execute(i); });
       li.addEventListener("mouseenter", function() {
@@ -69,7 +69,7 @@
     if (e.key === "Escape") {
       e.preventDefault();
       close();
-      if (window.showStatus) window.showStatus('Esc', 'Cancelled');
+      if (window.showStatus) window.showStatus('Esc', 'Closed command palette');
     } else if (e.key === "Enter") {
       e.preventDefault();
       execute(selectedIdx >= 0 ? selectedIdx : 0);
@@ -109,6 +109,14 @@
 
   // Bind : to open command mode
   Mousetrap.bind(':', function() {
+    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    window.openCommandMode();
+    return false;
+  });
+
+  // Bind ctrl+p to open command mode
+  Mousetrap.bind('ctrl+p', function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     window.openCommandMode();

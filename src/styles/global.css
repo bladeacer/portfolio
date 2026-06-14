@@ -43,7 +43,7 @@ body.theme-light {
   --flexcyon-blue: #3085dd;
   --flexcyon-pink: #d451a0;
 
-  --text-accent: var(--user-accent, #4b65b4);
+  --text-accent: var(--user-accent-light, #4b65b4);
   --bg-color: var(--flexcyon-base-01);
 }
 
@@ -69,7 +69,7 @@ body.theme-dark {
   --flexcyon-blue: #7ab8fe;
   --flexcyon-pink: #ff91cb;
 
-  --text-accent: var(--user-accent, #a5bc84);
+  --text-accent: var(--user-accent-dark, #a5bc84);
   --bg-color: var(--flexcyon-base-02);
 }
 
