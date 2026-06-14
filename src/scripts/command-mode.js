@@ -64,6 +64,8 @@
   input.addEventListener("input", render);
 
   input.addEventListener("keydown", function(e) {
+    // Stop propagation so Mousetrap doesn't also fire
+    e.stopPropagation();
     if (e.key === "Escape") {
       e.preventDefault();
       close();
@@ -89,11 +91,6 @@
       selectedIdx = prev;
     }
   });
-
-  // Stop propagation to prevent other shortcuts from firing while in command mode
-  input.addEventListener("keydown", function(e) {
-    e.stopPropagation();
-  }, true);
 
   overlay.addEventListener("click", function(e) {
     if (e.target === overlay) close();

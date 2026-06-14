@@ -219,6 +219,22 @@ nav {
   margin-bottom: 1em;
 }
 
+#search-icon-btn {
+  border: 0;
+  background: none;
+  color: var(--flexcyon-cyan);
+}
+#search-icon-btn svg {
+  stroke-width: 0;
+  fill: var(--flexcyon-cyan);
+}
+#search-icon-btn p {
+  color: var(--flexcyon-cyan);
+  font-size: 13.25px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
 .sun, .moon {
   stroke-width: 0;
 }

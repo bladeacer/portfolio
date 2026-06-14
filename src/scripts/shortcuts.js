@@ -23,9 +23,10 @@ Mousetrap.bind('9', function() {
     if (btn && btn.offsetParent !== null) {
         btn.click();
     } else {
-        // On desktop, use inline style (avoids !important conflict with component CSS)
+        // On desktop, toggle via inline style; remove stale .toc-hidden class
         var toc = document.querySelector('.stron-toc.toc');
         if (toc) {
+            toc.classList.remove('toc-hidden');
             toc.style.display = toc.style.display === 'none' ? '' : 'none';
         }
     }

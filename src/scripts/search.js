@@ -90,9 +90,10 @@ import FlexSearch from 'flexsearch';
       render([]);
       return;
     }
-    var raw = index.search(q, { limit: 10 });
     var results = [];
     var seenUrls = {};
+    // FlexSearch index search
+    var raw = index.search(q, { limit: 20 });
     if (raw && raw.length) {
       raw.forEach(function(fieldRes) {
         if (fieldRes.result) {
@@ -106,25 +107,24 @@ import FlexSearch from 'flexsearch';
         }
       });
     }
-    // Fallback: simple string match
-    if (results.length === 0) {
-      var lower = q.toLowerCase();
-      pages.forEach(function(p) {
-        if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
-            (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
-          if (!seenUrls[p.url]) {
-            seenUrls[p.url] = true;
-            results.push({ title: p.title, url: p.url });
-          }
-        }
-      });
-    }
+    // Always run fallback for substring matching (catches partial-word matches)
+    var lower = q.toLowerCase();
+    pages.forEach(function(p) {
+      if (seenUrls[p.url]) return;
+      if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
+          (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
+        seenUrls[p.url] = true;
+        results.push({ title: p.title, url: p.url });
+      }
+    });
     render(results.slice(0, 10));
   }
 
   input.addEventListener('input', doSearch);
 
   input.addEventListener('keydown', function(e) {
+    // Stop propagation so Mousetrap doesn't also fire
+    e.stopPropagation();
     if (e.key === 'Escape') {
       e.preventDefault();
       close();
@@ -155,11 +155,6 @@ import FlexSearch from 'flexsearch';
       selectedIdx = prev;
     }
   });
-
-  // Stop propagation to prevent vimlike/shortcuts from firing while typing
-  input.addEventListener('keydown', function(e) {
-    e.stopPropagation();
-  }, true);
 
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) close();
