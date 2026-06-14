@@ -36,7 +36,22 @@
     filtered.forEach(function(s, i) {
       var li = document.createElement("li");
       li.className = "cm-item" + (i === 0 ? " cm-selected" : "");
-      li.innerHTML = '<span class="cm-chord">' + s.chord + ':</span><span class="cm-desc">' + s.desc + '</span>';
+      var chordText = s.chord + ':';
+      var descText = s.desc;
+      var q = input.value.toLowerCase().trim();
+      if (q) {
+        var cl = chordText.toLowerCase();
+        var ci = cl.indexOf(q);
+        if (ci > -1) {
+          chordText = chordText.substring(0, ci) + '<mark class="search-highlight">' + chordText.substring(ci, ci + q.length) + '</mark>' + chordText.substring(ci + q.length);
+        }
+        var dl = descText.toLowerCase();
+        var di = dl.indexOf(q);
+        if (di > -1) {
+          descText = descText.substring(0, di) + '<mark class="search-highlight">' + descText.substring(di, di + q.length) + '</mark>' + descText.substring(di + q.length);
+        }
+      }
+      li.innerHTML = '<span class="cm-chord">' + chordText + '</span><span class="cm-desc">' + descText + '</span>';
       li.dataset.index = i;
       li.addEventListener("click", function() { execute(i); });
       li.addEventListener("mouseenter", function() {

@@ -131,14 +131,11 @@ Mousetrap.bind('r', function(e) {
     if (e.ctrlKey || e.metaKey) return;
     const url = "/portfolio/resume";
     const target = '_blank';
-    const features = 'noopener,noreferrer'; 
+    const features = 'noopener,noreferrer';
     window.open(url, target, features);
     showStatus('r', 'Opened resume');
     return false;
 });
-
-// Guard: prevent ctrl+r from firing the bare r handler
-Mousetrap.bind('ctrl+r', function() { return false; });
 
 Mousetrap.bind('<', () => {
     history.back();
@@ -162,7 +159,7 @@ Mousetrap.bind('esc', function() {
     // Close popup if open (command mode and search handle their own Esc)
     if (window.toggleShortcutsPopup) {
         var popupOverlay = document.getElementById("shortcuts-popup-overlay");
-        if (popupOverlay && popupOverlay.style.display === "grid") {
+        if (popupOverlay && popupOverlay.style.display === "block") {
             popupOverlay.style.display = "none";
             showStatus('Esc', 'Closed popup');
             return false;
@@ -178,7 +175,7 @@ Mousetrap.bind('esc', function() {
     }
     if (window.closeSearch) {
         var searchOverlay = document.getElementById("search-overlay");
-        if (searchOverlay && searchOverlay.style.display === "grid") {
+        if (searchOverlay && searchOverlay.style.display === "block") {
             window.closeSearch();
             showStatus('Esc', 'Closed search');
             return false;

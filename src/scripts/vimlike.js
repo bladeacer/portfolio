@@ -270,21 +270,32 @@ for (let i = 0; i <= 7; i++) {
 function handleKeydown(direction, command = null) {
     clearTimeout(numericPrefixTimeout); // Stop number capture
 
-    // Only initialize keyHoldStartTime if it hasn't been set (i.e., if it's the first keydown)
-    if (keyHoldStartTime === 0) {
-        keyHoldStartTime = performance.now();
-    }
-    
-    const count = numericPrefix;
-    numericPrefix = 1; // Reset prefix immediately
+    // Only initialize keyHoldStartTime if it hasn't been set (i.e., if it's the first keydown)
+    if (keyHoldStartTime === 0) {
+        keyHoldStartTime = performance.now();
+    }
+    
+    const count = numericPrefix;
+    numericPrefix = 1; // Reset prefix immediately
 
-    // Perform the first jump
-    jumpToElement(direction, command);
-    
-    // Set the remaining count for the animation loop to handle
-    if (count > 1) {
-        numericPrefix = count;
-    }
+    // For multi-jump: multiply distance instead of sequential animations
+    if (count > 1 && command !== 'heading') {
+        numericPrefix = 1;
+        jumpToElement(direction, command);
+        distanceToScroll *= count;
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        scrollStartTimestamp = 0;
+        animationFrame = requestAnimationFrame(animateScroll);
+        return;
+    }
+
+    // Perform the first jump
+    jumpToElement(direction, command);
+    
+    // Set the remaining count for the animation loop to handle
+    if (count > 1) {
+        numericPrefix = count;
+    }
 }
 
 function navigateToNearestLink() {

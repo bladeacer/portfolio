@@ -62,22 +62,25 @@ const { pageTitle } = Astro.props;
         align-items: center;
         justify-content: center;
       }
-      /* Search overlay (centered like popup) */
+      /* Search overlay - exact popup pattern */
       .search-overlay {
         position: fixed;
         inset: 0;
         z-index: 99999;
         display: none;
-        place-items: center;
         background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
       }
       .search-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         background: var(--flexcyon-base-02);
         border: 1px solid var(--flexcyon-base-04);
         border-radius: 12px;
         width: 90vw;
         max-width: 800px;
-        max-height: 70vh;
+        max-height: 80vh;
         display: flex;
         flex-direction: column;
         box-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -112,6 +115,9 @@ const { pageTitle } = Astro.props;
       }
       .search-result-item:hover, .search-selected {
         background-color: var(--flexcyon-base-03);
+        outline: 1px solid var(--flexcyon-cyan);
+        outline-offset: -1px;
+        border-radius: 4px;
       }
       .search-result-item a {
         color: var(--flexcyon-blue);
@@ -144,25 +150,28 @@ const { pageTitle } = Astro.props;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      /* Command mode overlay (centered like shortcuts popup) */
+      /* Command mode overlay - exact popup pattern */
       .command-mode-overlay {
         position: fixed;
         inset: 0;
         z-index: 99999;
         display: none;
-        place-items: center;
         background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
       }
       .command-mode-overlay.is-active {
-        display: grid;
+        display: block;
       }
       .command-mode-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         background: var(--flexcyon-base-02);
         border: 1px solid var(--flexcyon-base-04);
         border-radius: 12px;
         width: 90vw;
         max-width: 800px;
-        max-height: 70vh;
+        max-height: 80vh;
         display: flex;
         flex-direction: column;
         box-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -204,6 +213,9 @@ const { pageTitle } = Astro.props;
       }
       .cm-item:hover, .cm-selected {
         background-color: var(--flexcyon-base-03);
+        outline: 1px solid var(--flexcyon-cyan);
+        outline-offset: -1px;
+        border-radius: 4px;
       }
       .cm-chord {
         font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;

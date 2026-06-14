@@ -185,7 +185,7 @@ import FlexSearch from 'flexsearch';
 
   window.openSearch = function() {
     loadIndex(function() {
-      overlay.style.display = 'grid';
+      overlay.style.display = 'block';
       input.value = '';
       list.innerHTML = '';
       if (noResults) noResults.style.display = 'none';

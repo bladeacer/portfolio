@@ -72,7 +72,6 @@
       inset: 0;
       z-index: 9999;
       display: none;
-      place-items: center;
       background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
     }
 
@@ -189,7 +188,7 @@
     if (!overlay) return;
 
     function close() { overlay.style.display = "none"; }
-    function open() { overlay.style.display = "grid"; }
+    function open() { overlay.style.display = "block"; }
 
     window.toggleShortcutsPopup = function() {
       if (overlay.style.display === "none" || !overlay.style.display) {
@@ -207,7 +206,7 @@
       });
 
       document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape" && overlay.style.display === "grid") close();
+        if (e.key === "Escape" && overlay.style.display === "block") close();
       });
     });
   })();
