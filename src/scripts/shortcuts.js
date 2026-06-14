@@ -17,15 +17,17 @@ Mousetrap.bind('?', () => {
     return false;
 });
 
-Mousetrap.bind('9', () => {
+Mousetrap.bind('9', function() {
     var btn = document.getElementById("toc-mobile-toggle");
     // On mobile (<1000px) the button is visible; click it to toggle the drawer
     if (btn && btn.offsetParent !== null) {
         btn.click();
     } else {
-        // On desktop, toggle the TOC visibility class
+        // On desktop, use inline style (avoids !important conflict with component CSS)
         var toc = document.querySelector('.stron-toc.toc');
-        if (toc) toc.classList.toggle('toc-hidden');
+        if (toc) {
+            toc.style.display = toc.style.display === 'none' ? '' : 'none';
+        }
     }
     showStatus('9', 'Toggled table of contents');
     return false;
@@ -121,7 +123,8 @@ Mousetrap.bind('8', () => {
     return false; 
 });
 
-Mousetrap.bind('r', () => {
+Mousetrap.bind('r', function(e) {
+    if (e.ctrlKey || e.metaKey) return;
     const url = "/portfolio/resume";
     const target = '_blank';
     const features = 'noopener,noreferrer'; 
@@ -160,7 +163,7 @@ Mousetrap.bind('esc', function() {
     }
     if (window.closeCommandMode) {
         var cmdOverlay = document.getElementById("command-mode-overlay");
-        if (cmdOverlay && cmdOverlay.style.display === "flex") {
+        if (cmdOverlay && cmdOverlay.classList.contains("is-active")) {
             window.closeCommandMode();
             showStatus('Esc', 'Cancelled');
             return false;

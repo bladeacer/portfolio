@@ -1,6 +1,6 @@
 var Mousetrap = window.Mousetrap;
-// Use descendant selectors to match content at any nesting depth
-const CANDIDATE_SELECTOR = '.content-wrapper p, .content-wrapper h1, .content-wrapper h2, .content-wrapper h3, .content-wrapper h4, .content-wrapper ul li, .content-wrapper ol li, .content-wrapper blockquote, .content-wrapper li, .content-wrapper pre, .content-wrapper table, .content-wrapper figcaption, .content-wrapper .blog-card, .content-wrapper .cards .card-item, .content-wrapper .profile li'; 
+// Scoped selectors: only direct-list-item children + specific class-based targets
+const CANDIDATE_SELECTOR = '.content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper figcaption, .content-wrapper .blog-card, .content-wrapper .cards .card-item, .content-wrapper .profile li, .content-wrapper .profile > .profile-desc > a > p'; 
 
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;

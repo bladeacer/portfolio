@@ -100,7 +100,6 @@
   });
 
   window.openCommandMode = function() {
-    overlay.style.display = "flex";
     overlay.classList.add("is-active");
     input.value = "";
     render();

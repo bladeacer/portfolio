@@ -56,10 +56,17 @@ import FlexSearch from 'flexsearch';
       selectedIdx = -1;
       return;
     }
+    var q = input.value.trim().toLowerCase();
     results.forEach(function(r, i) {
       var li = document.createElement('li');
       li.className = 'search-result-item' + (i === 0 ? ' search-selected' : '');
-      li.innerHTML = '<a href="' + r.url + '">' + r.title + '</a>';
+      var displayTitle = r.title;
+      // Highlight matched part in title
+      if (q && displayTitle.toLowerCase().indexOf(q) > -1) {
+        var idx = displayTitle.toLowerCase().indexOf(q);
+        displayTitle = displayTitle.substring(0, idx) + '<mark class="search-highlight">' + displayTitle.substring(idx, idx + q.length) + '</mark>' + displayTitle.substring(idx + q.length);
+      }
+      li.innerHTML = '<a href="' + r.url + '">' + displayTitle + '</a>';
       li.dataset.url = r.url;
       li.addEventListener('click', function() { navigate(r.url); });
       li.addEventListener('mouseenter', function() {
@@ -165,7 +172,7 @@ import FlexSearch from 'flexsearch';
       list.innerHTML = '';
       if (noResults) noResults.style.display = 'none';
       selectedIdx = -1;
-      if (window.setMode) window.setMode('/');
+      if (window.setMode) window.setMode('CMD');
       setTimeout(function() { input.focus(); }, 50);
     });
   };
