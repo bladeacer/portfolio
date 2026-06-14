@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
+import flexcyonDark from './src/themes/flexcyon-dark.json' with { type: 'json' };
 
 export default defineConfig({
     outDir: 'public',
@@ -12,7 +13,7 @@ export default defineConfig({
     ],
     markdown: {
         shikiConfig: {
-          theme: 'night-owl',
+          theme: flexcyonDark,
         },
     },
 });

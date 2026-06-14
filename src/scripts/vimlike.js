@@ -1,3 +1,4 @@
+var Mousetrap = window.Mousetrap;
 const CANDIDATE_SELECTOR = 'body > div > p, body > div > h1, body > div > h2, body > div > h3, body > div > h4, body > div > ul > li, body > div > blockquote, body > div > blockquote > ul > li, body > div > li, body > div > pre, body > div > table, body > div .post-item > .blog-card, body > div > .cards > .card-item > a > img, body > div > .cards > .card-item > p, body > div > .profile li, body > div > .profile > .profile-desc > a > p'; 
 
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 

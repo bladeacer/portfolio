@@ -1,8 +1,4 @@
----
-const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : "";
----
-
-<div id="shortcuts-popup-overlay" class="popup-overlay">
+<div id="shortcuts-popup-overlay" class="popup-overlay" style="display:none">
   <div id="shortcuts-popup" class="popup-content" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts">
     <div class="popup-header">
       <h2 id="popup-title">Keyboard Shortcuts</h2>
@@ -33,7 +29,7 @@ const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : ""
           <tr><td>a</td><td>About page</td></tr>
           <tr><td>d</td><td>Digital garden</td></tr>
           <tr><td>c</td><td>Credits page</td></tr>
-          <tr><td>t</td><td>Tags page</td></tr>
+          <tr><td>8</td><td>Tags page</td></tr>
           <tr><td>s</td><td>Settings page</td></tr>
           <tr><td>r</td><td>Resume</td></tr>
           <tr><td>f</td><td>RSS feed</td></tr>
@@ -53,11 +49,12 @@ const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : ""
         </thead>
         <tbody>
           <tr><td>l</td><td>Highlight active line</td></tr>
-          <tr><td>0</td><td>Toggle theme</td></tr>
+          <tr><td>t</td><td>Toggle theme</td></tr>
+          <tr><td>9</td><td>Toggle table of contents</td></tr>
         </tbody>
       </table>
       <p class="popup-footer-link">
-        <a href="{pageBase}/about#shortcuts">View full shortcuts reference &rarr;</a>
+        <a href="/portfolio/about#shortcuts">View full shortcuts reference &rarr;</a>
       </p>
     </div>
   </div>
@@ -68,11 +65,9 @@ const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : ""
     position: fixed;
     inset: 0;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: color-mix(in oklch, var(--flexcyon-bg-col) 70%, transparent 30%);
-    backdrop-filter: blur(3px);
+    display: grid;
+    place-items: center;
+    background-color: var(--flexcyon-base-02);
   }
 
   .popup-content {
@@ -85,7 +80,12 @@ const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : ""
     display: flex;
     flex-direction: column;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    margin: auto;
+    position: relative;
+  }
+
+  .popup-content,
+  .popup-content div {
+    max-width: none;
   }
 
   .popup-header {
@@ -180,13 +180,8 @@ const pageBase = Astro.url.pathname.startsWith("/portfolio") ? "/portfolio" : ""
     var overlay = document.getElementById("shortcuts-popup-overlay");
     if (!overlay) return;
 
-    function close() {
-      overlay.style.display = "none";
-    }
-
-    function open() {
-      overlay.style.display = "flex";
-    }
+    function close() { overlay.style.display = "none"; }
+    function open() { overlay.style.display = "flex"; }
 
     window.toggleShortcutsPopup = function() {
       if (overlay.style.display === "none" || !overlay.style.display) {

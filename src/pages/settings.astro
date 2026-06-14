@@ -3,79 +3,141 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Settings";
 const fonts = ["CascadiaCode", "Maple Mono Medium", "DepartureMono"];
+const colors = [
+  { value: "", label: "Default" },
+  { value: "#3b9ba1", label: "Cyan" },
+  { value: "#599100", label: "Lime Green" },
+  { value: "#a37e11", label: "Orange" },
+  { value: "#9b8211", label: "Yellow" },
+  { value: "#6f49ae", label: "Purple Lilac" },
+  { value: "#c03a47", label: "Red Salmon" },
+  { value: "#3085dd", label: "Blue" },
+  { value: "#d451a0", label: "Pink" },
+  { value: "custom", label: "Custom..." },
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <p>Customise how this site looks. All changes are saved locally and applied immediately.</p>
 
-  <h3>Fonts</h3>
-  <div class="setting-group">
-    <label class="setting-row">
-      <span class="setting-label">Sans font</span>
-      <select id="setting-font-sans" class="setting-select">
-        {fonts.map(f => <option value={f}>{f}</option>)}
-      </select>
-      <input type="number" id="setting-size-sans" class="setting-size" min="10" max="32" value="16" />
-      <span class="setting-unit">px</span>
-    </label>
+  <div class="settings-layout">
+    <div class="settings-column">
+      <h3>Fonts</h3>
+      <div class="setting-group">
+        <label class="setting-row">
+          <span class="setting-label">Sans font</span>
+          <select id="setting-font-sans" class="setting-select">
+            {fonts.map(f => <option value={f}>{f}</option>)}
+          </select>
+          <input type="number" id="setting-size-sans" class="setting-size" min="10" max="32" value="16" />
+          <span class="setting-unit">px</span>
+        </label>
 
-    <label class="setting-row">
-      <span class="setting-label">Fallback font</span>
-      <select id="setting-font-fallback" class="setting-select">
-        {fonts.map(f => <option value={f}>{f}</option>)}
-      </select>
-      <input type="number" id="setting-size-fallback" class="setting-size" min="10" max="32" value="16" />
-      <span class="setting-unit">px</span>
-    </label>
+        <label class="setting-row">
+          <span class="setting-label">Fallback font</span>
+          <select id="setting-font-fallback" class="setting-select">
+            {fonts.map(f => <option value={f}>{f}</option>)}
+          </select>
+          <input type="number" id="setting-size-fallback" class="setting-size" min="10" max="32" value="16" />
+          <span class="setting-unit">px</span>
+        </label>
 
-    <label class="setting-row">
-      <span class="setting-label">Monospace font</span>
-      <select id="setting-font-mono" class="setting-select">
-        {fonts.map(f => <option value={f}>{f}</option>)}
-      </select>
-      <input type="number" id="setting-size-mono" class="setting-size" min="10" max="32" value="16" />
-      <span class="setting-unit">px</span>
-    </label>
-  </div>
+        <label class="setting-row">
+          <span class="setting-label">Monospace font</span>
+          <select id="setting-font-mono" class="setting-select">
+            {fonts.map(f => <option value={f}>{f}</option>)}
+          </select>
+          <input type="number" id="setting-size-mono" class="setting-size" min="10" max="32" value="16" />
+          <span class="setting-unit">px</span>
+        </label>
+      </div>
 
-  <h3>Accent Color</h3>
-  <div class="setting-group">
-    <label class="setting-row">
-      <span class="setting-label">Color scheme</span>
-      <select id="setting-color" class="setting-select">
-        <option value="">Default</option>
-        <option value="#3b9ba1">Cyan</option>
-        <option value="#599100">Lime Green</option>
-        <option value="#a37e11">Orange</option>
-        <option value="#9b8211">Yellow</option>
-        <option value="#6f49ae">Purple Lilac</option>
-        <option value="#c03a47">Red Salmon</option>
-        <option value="#3085dd">Blue</option>
-        <option value="#d451a0">Pink</option>
-        <option value="custom">Custom...</option>
-      </select>
-      <input type="color" id="setting-color-picker" class="setting-color-picker" value="#3085dd" style="display:none" />
-    </label>
-  </div>
+      <h3>Headings</h3>
+      <div class="setting-group">
+        <div class="setting-row heading-row">
+          <span class="setting-label">H1</span>
+          <input type="number" id="s-h1Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <span class="setting-unit">em</span>
+          <select id="s-h1Color" class="setting-select heading-color">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="s-h1ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+        </div>
+        <div class="setting-row heading-row">
+          <span class="setting-label">H2</span>
+          <input type="number" id="s-h2Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <span class="setting-unit">em</span>
+          <select id="s-h2Color" class="setting-select heading-color">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="s-h2ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+        </div>
+        <div class="setting-row heading-row">
+          <span class="setting-label">H3</span>
+          <input type="number" id="s-h3Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <span class="setting-unit">em</span>
+          <select id="s-h3Color" class="setting-select heading-color">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="s-h3ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+        </div>
+        <div class="setting-row heading-row">
+          <span class="setting-label">H4</span>
+          <input type="number" id="s-h4Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <span class="setting-unit">em</span>
+          <select id="s-h4Color" class="setting-select heading-color">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="s-h4ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+        </div>
+      </div>
 
-  <h3>Preview</h3>
-  <div class="preview-box" id="preview-box">
-    <h4 id="preview-heading">Sample Heading</h4>
-    <p id="preview-paragraph">
-      This is a sample paragraph to demonstrate how your selected
-      <strong id="preview-strong">fonts and colours</strong> will look.
-      The <a href="#" id="preview-link">links</a> use the accent colour.
-    </p>
-    <pre id="preview-code"><code>const greeting = "hello world";
+      <h3>Accent Color</h3>
+      <div class="setting-group">
+        <label class="setting-row">
+          <span class="setting-label">Color scheme</span>
+          <select id="setting-color" class="setting-select">
+            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+          </select>
+          <input type="color" id="setting-color-picker" class="setting-color-picker" value="#3085dd" style="display:none" />
+        </label>
+      </div>
+
+      <div class="setting-actions">
+        <button id="settings-reset" class="setting-btn">Reset defaults</button>
+      </div>
+    </div>
+
+    <div class="preview-column">
+      <h3>Preview</h3>
+      <div class="preview-box" id="preview-box">
+        <h4 id="preview-h4">Sample Heading &mdash; &#x6807;&#x9898;</h4>
+        <p id="preview-p">
+          This paragraph shows how your selected <strong id="preview-strong">fonts</strong> and
+          <a href="#" id="preview-link">colours</a> will render.
+          &#x8fd9;&#x662f;&#x4e00;&#x4e2a;&#x793a;&#x4f8b;&#x6bb5;&#x843d;&#xff0c;&#x5305;&#x542b;&#x4e2d;&#x6587;&#x6587;&#x672c;&#x3002;
+        </p>
+        <pre id="preview-code"><code>const greeting = "hello world";
 console.log(greeting);</code></pre>
-  </div>
-
-  <div class="setting-actions">
-    <button id="settings-reset" class="setting-btn">Reset defaults</button>
+      </div>
+    </div>
   </div>
 </BaseLayout>
 
 <style is:global>
+  .settings-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (width < 900px) {
+    .settings-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .setting-group {
     margin-bottom: 1.25rem;
   }
@@ -90,8 +152,13 @@ console.log(greeting);</code></pre>
 
   .setting-label {
     min-width: 130px;
-    color: var(--text-faint);
-    font-size: 0.85rem;
+    color: var(--text-normal);
+    font-size: 0.95rem;
+  }
+
+  .heading-row .setting-label {
+    min-width: 30px;
+    font-weight: 600;
   }
 
   .setting-select {
@@ -108,7 +175,7 @@ console.log(greeting);</code></pre>
   .setting-size {
     font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
     font-size: 0.85rem;
-    width: 55px;
+    width: 70px;
     padding: 5px 8px;
     border-radius: 4px;
     border: 1px solid var(--flexcyon-base-04);
@@ -119,6 +186,14 @@ console.log(greeting);</code></pre>
   .setting-unit {
     font-size: 0.8rem;
     color: var(--text-faint);
+  }
+
+  .heading-size {
+    width: 75px;
+  }
+
+  .heading-color {
+    min-width: 130px;
   }
 
   .setting-color-picker {
@@ -196,6 +271,14 @@ console.log(greeting);</code></pre>
       sizeFallback: 16,
       sizeMono: 16,
       accentColor: "",
+      h1Size: 1.81803,
+      h2Size: 1.61803,
+      h3Size: 1.41803,
+      h4Size: 1.21803,
+      h1Color: "",
+      h2Color: "",
+      h3Color: "",
+      h4Color: "",
     };
 
     var SANS_CHAINS = {
@@ -227,54 +310,96 @@ console.log(greeting);</code></pre>
     function apply(s) {
       var root = document.documentElement;
 
-      var sansChain = SANS_CHAINS[s.fontSans] || SANS_CHAINS[DEFAULTS.fontSans];
-      var fallbackChain = SANS_CHAINS[s.fontFallback] || SANS_CHAINS[DEFAULTS.fontFallback];
-      var monoChain = MONO_CHAINS[s.fontMono] || MONO_CHAINS[DEFAULTS.fontMono];
-
-      root.style.setProperty("--font-sans", sansChain);
-      root.style.setProperty("--font-fallback", fallbackChain);
-      root.style.setProperty("--font-mono", monoChain);
+      root.style.setProperty("--font-sans", SANS_CHAINS[s.fontSans] || SANS_CHAINS[DEFAULTS.fontSans]);
+      root.style.setProperty("--font-fallback", SANS_CHAINS[s.fontFallback] || SANS_CHAINS[DEFAULTS.fontFallback]);
+      root.style.setProperty("--font-mono", MONO_CHAINS[s.fontMono] || MONO_CHAINS[DEFAULTS.fontMono]);
       root.style.setProperty("--font-size-sans", s.sizeSans + "px");
       root.style.setProperty("--font-size-fallback", s.sizeFallback + "px");
       root.style.setProperty("--font-size-mono", s.sizeMono + "px");
 
-      if (s.accentColor && s.accentColor !== "custom") {
-        root.style.setProperty("--user-accent", s.accentColor);
-      } else if (!s.accentColor || s.accentColor === "custom") {
-        root.style.removeProperty("--user-accent");
+      root.style.setProperty("--h1-size", s.h1Size + "em");
+      root.style.setProperty("--h2-size", s.h2Size + "em");
+      root.style.setProperty("--h3-size", s.h3Size + "em");
+      root.style.setProperty("--h4-size", s.h4Size + "em");
+      setColor(root, "--h1-color", s.h1Color);
+      setColor(root, "--h2-color", s.h2Color);
+      setColor(root, "--h3-color", s.h3Color);
+      setColor(root, "--h4-color", s.h4Color);
+      setColor(root, "--user-accent", s.accentColor);
+    }
+
+    function setColor(root, prop, val) {
+      if (val && val !== "custom") {
+        root.style.setProperty(prop, val);
+      } else {
+        root.style.removeProperty(prop);
       }
     }
 
     function syncForm(s) {
-      $("setting-font-sans").value = s.fontSans;
-      $("setting-font-fallback").value = s.fontFallback;
-      $("setting-font-mono").value = s.fontMono;
-      $("setting-size-sans").value = s.sizeSans;
-      $("setting-size-fallback").value = s.sizeFallback;
-      $("setting-size-mono").value = s.sizeMono;
+      syncField("setting-font-sans", s.fontSans);
+      syncField("setting-font-fallback", s.fontFallback);
+      syncField("setting-font-mono", s.fontMono);
+      syncField("setting-size-sans", s.sizeSans);
+      syncField("setting-size-fallback", s.sizeFallback);
+      syncField("setting-size-mono", s.sizeMono);
+      syncField("s-h1Size", s.h1Size);
+      syncField("s-h2Size", s.h2Size);
+      syncField("s-h3Size", s.h3Size);
+      syncField("s-h4Size", s.h4Size);
+      syncColorSelect("s-h1Color", "s-h1ColorPicker", s.h1Color);
+      syncColorSelect("s-h2Color", "s-h2ColorPicker", s.h2Color);
+      syncColorSelect("s-h3Color", "s-h3ColorPicker", s.h3Color);
+      syncColorSelect("s-h4Color", "s-h4ColorPicker", s.h4Color);
+      syncColorSelect("setting-color", "setting-color-picker", s.accentColor);
+    }
 
-      if (s.accentColor && s.accentColor !== "custom") {
-        $("setting-color").value = s.accentColor;
-        $("setting-color-picker").style.display = "none";
-      } else if (s.accentColor === "custom") {
-        $("setting-color").value = "custom";
-        $("setting-color-picker").style.display = "inline-block";
+    function syncField(id, val) { var el = $(id); if (el) el.value = val; }
+
+    function syncColorSelect(selId, pickerId, val) {
+      var sel = $(selId);
+      var picker = $(pickerId);
+      if (!sel || !picker) return;
+      if (val && val !== "custom") {
+        sel.value = val;
+        picker.style.display = "none";
+      } else if (val === "custom") {
+        sel.value = "custom";
+        picker.style.display = "inline-block";
       } else {
-        $("setting-color").value = "";
-        $("setting-color-picker").style.display = "none";
+        sel.value = "";
+        picker.style.display = "none";
       }
     }
 
     function readForm() {
       return {
-        fontSans: $("setting-font-sans").value,
-        fontFallback: $("setting-font-fallback").value,
-        fontMono: $("setting-font-mono").value,
-        sizeSans: parseInt($("setting-size-sans").value, 10) || 16,
-        sizeFallback: parseInt($("setting-size-fallback").value, 10) || 16,
-        sizeMono: parseInt($("setting-size-mono").value, 10) || 16,
-        accentColor: $("setting-color").value === "custom" ? "custom" : $("setting-color").value,
+        fontSans: getVal("setting-font-sans"),
+        fontFallback: getVal("setting-font-fallback"),
+        fontMono: getVal("setting-font-mono"),
+        sizeSans: parseFloat(getVal("setting-size-sans")) || 16,
+        sizeFallback: parseFloat(getVal("setting-size-fallback")) || 16,
+        sizeMono: parseFloat(getVal("setting-size-mono")) || 16,
+        h1Size: parseFloat(getVal("s-h1Size")) || 1.81803,
+        h2Size: parseFloat(getVal("s-h2Size")) || 1.61803,
+        h3Size: parseFloat(getVal("s-h3Size")) || 1.41803,
+        h4Size: parseFloat(getVal("s-h4Size")) || 1.21803,
+        h1Color: readColor("s-h1Color"),
+        h2Color: readColor("s-h2Color"),
+        h3Color: readColor("s-h3Color"),
+        h4Color: readColor("s-h4Color"),
+        accentColor: readColor("setting-color"),
       };
+    }
+
+    function getVal(id) { var el = $(id); return el ? el.value : ""; }
+
+    function readColor(id) {
+      var el = $(id);
+      if (!el) return "";
+      var v = el.value;
+      if (v === "custom") return "custom";
+      return v;
     }
 
     function doReset() {
@@ -284,33 +409,49 @@ console.log(greeting);</code></pre>
       save(s);
     }
 
+    function bindColor(selId, pickerId) {
+      var sel = $(selId);
+      var picker = $(pickerId);
+      if (!sel || !picker) return;
+      sel.addEventListener("change", function() {
+        if (sel.value === "custom") {
+          picker.style.display = "inline-block";
+        } else {
+          picker.style.display = "none";
+          var s = readForm();
+          apply(s);
+          save(s);
+        }
+      });
+      picker.addEventListener("input", function() {
+        sel.value = "custom";
+        var s = readForm();
+        if (selId.indexOf("h1") > -1) s.h1Color = this.value;
+        else if (selId.indexOf("h2") > -1) s.h2Color = this.value;
+        else if (selId.indexOf("h3") > -1) s.h3Color = this.value;
+        else if (selId.indexOf("h4") > -1) s.h4Color = this.value;
+        else s.accentColor = this.value;
+        apply(s);
+        save(s);
+      });
+    }
+
     function main() {
       var s = load();
       syncForm(s);
       apply(s);
 
-      var formIds = ["setting-font-sans", "setting-font-fallback", "setting-font-mono",
-                     "setting-size-sans", "setting-size-fallback", "setting-size-mono",
-                     "setting-color"];
+      var autoSaveIds = ["setting-font-sans", "setting-font-fallback", "setting-font-mono",
+                         "setting-size-sans", "setting-size-fallback", "setting-size-mono",
+                         "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size"];
 
-      formIds.forEach(function(id) {
+      autoSaveIds.forEach(function(id) {
         var el = $(id);
         if (!el) return;
         el.addEventListener("change", function() {
-          if (id === "setting-color") {
-            if (el.value === "custom") {
-              $("setting-color-picker").style.display = "inline-block";
-            } else {
-              $("setting-color-picker").style.display = "none";
-              var s = readForm();
-              apply(s);
-              save(s);
-            }
-          } else {
-            var s = readForm();
-            apply(s);
-            save(s);
-          }
+          var s = readForm();
+          apply(s);
+          save(s);
         });
         el.addEventListener("input", function() {
           var s = readForm();
@@ -319,13 +460,11 @@ console.log(greeting);</code></pre>
         });
       });
 
-      $("setting-color-picker")?.addEventListener("input", function() {
-        $("setting-color").value = "custom";
-        var s = readForm();
-        s.accentColor = this.value;
-        apply(s);
-        save(s);
-      });
+      bindColor("s-h1Color", "s-h1ColorPicker");
+      bindColor("s-h2Color", "s-h2ColorPicker");
+      bindColor("s-h3Color", "s-h3ColorPicker");
+      bindColor("s-h4Color", "s-h4ColorPicker");
+      bindColor("setting-color", "setting-color-picker");
 
       $("settings-reset")?.addEventListener("click", doReset);
     }

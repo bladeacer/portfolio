@@ -1,4 +1,5 @@
-Mousetrap.bind('0', () => {
+var Mousetrap = window.Mousetrap;
+Mousetrap.bind('t', () => {
     window.toggleTheme();
     return false; 
 });
@@ -9,6 +10,14 @@ Mousetrap.bind('?', () => {
     }
     return false;
 });
+
+Mousetrap.bind('9', () => {
+    var btn = document.getElementById("toc-mobile-toggle");
+    if (btn) btn.click();
+    var toc = document.querySelector('.stron-toc.toc');
+    if (toc) toc.classList.toggle('toc-hidden');
+    return false;
+}, 'keydown');
 
 Mousetrap.bind('s', () => {
     window.location.href = "/portfolio/settings";
@@ -83,7 +92,7 @@ Mousetrap.bind('c', () => {
     return false; 
 });
 
-Mousetrap.bind('t', () => {
+Mousetrap.bind('8', () => {
     window.location.href = "/portfolio/tags";
     return false; 
 });

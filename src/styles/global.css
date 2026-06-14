@@ -14,6 +14,15 @@
 }
 
 html {
+  --font-sans: "CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-fallback: "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: "DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-sans: 16px;
+  --font-size-mono: 16px;
+  --font-size-fallback: 16px;
+}
+
+body.theme-light {
   --flexcyon-base-01: #f1f0ec;
   --flexcyon-base-02: #effaf2;
   --flexcyon-base-03: #e8f2eb;
@@ -25,40 +34,6 @@ html {
   --flexcyon-base-01-02-mix: color-mix(in oklch, var(--flexcyon-base-01) 40%, var(--flexcyon-base-02) 60%);
   --flexcyon-bg-col: color-mix(in oklch, var(--flexcyon-base-01), var(--flexcyon-base-02));
 
-  --font-sans: "CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-fallback: "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: "DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-size-sans: 16px;
-  --font-size-mono: 16px;
-  --font-size-fallback: 16px;
-}
-
-html.dark {
-  --flexcyon-base-01: #14161c;
-  --flexcyon-base-02: #191d28;
-  --flexcyon-base-03: #24262c;
-  --flexcyon-base-04: #4d566b;
-  --flexcyon-base-05: #6f7685;
-
-  --flexcyon-base-grey-dark: #898c93;
-  --flexcyon-base-grey-light: #d3d5d3;
-}
-
-html.dark {
-  --flexcyon-cyan: #3cb9c2;
-  --flexcyon-lime-green: #a1c05c;
-  --flexcyon-orange: #ddad49;
-  --flexcyon-yellow: #c29e42;
-  --flexcyon-purple-lilac: #d89ff5;
-  --flexcyon-red-salmon: #ff9880;
-  --flexcyon-blue: #7ab8fe;
-  --flexcyon-pink: #ff91cb;
-
-  --text-accent: var(--user-accent, #a5bc84);
-  --bg-color: var(--flexcyon-base-02);
-}
-
-html {
   --flexcyon-cyan: #3b9ba1;
   --flexcyon-lime-green: #599100;
   --flexcyon-orange: #a37e11;
@@ -70,6 +45,32 @@ html {
 
   --text-accent: var(--user-accent, #4b65b4);
   --bg-color: var(--flexcyon-base-01);
+}
+
+body.theme-dark {
+  --flexcyon-base-01: #14161c;
+  --flexcyon-base-02: #191d28;
+  --flexcyon-base-03: #24262c;
+  --flexcyon-base-04: #4d566b;
+  --flexcyon-base-05: #6f7685;
+
+  --flexcyon-base-grey-dark: #898c93;
+  --flexcyon-base-grey-light: #d3d5d3;
+
+  --flexcyon-base-01-02-mix: color-mix(in oklch, var(--flexcyon-base-01) 40%, var(--flexcyon-base-02) 60%);
+  --flexcyon-bg-col: color-mix(in oklch, var(--flexcyon-base-01), var(--flexcyon-base-02));
+
+  --flexcyon-cyan: #3cb9c2;
+  --flexcyon-lime-green: #a1c05c;
+  --flexcyon-orange: #ddad49;
+  --flexcyon-yellow: #c29e42;
+  --flexcyon-purple-lilac: #d89ff5;
+  --flexcyon-red-salmon: #ff9880;
+  --flexcyon-blue: #7ab8fe;
+  --flexcyon-pink: #ff91cb;
+
+  --text-accent: var(--user-accent, #a5bc84);
+  --bg-color: var(--flexcyon-base-02);
 }
 
 body {
@@ -162,7 +163,7 @@ nav {
   text-align: center;
   padding: 10px 0;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: var(--flexcyon-blue);
 }
@@ -228,15 +229,15 @@ nav {
   display: unset;
 }
 
-html .moon {
+body.theme-light .moon {
   display: none;
 }
 
-html.dark .sun {
+body.theme-dark .sun {
   display: none;
 }
 
-.dark .moon {
+body.theme-dark .moon {
   fill: var(--text-accent);
   display: unset;
 }
@@ -360,6 +361,10 @@ li {
   background-color: var(--flexcyon-base-01-02-mix);
   border-radius: 8px;
   z-index: 100;
+}
+
+.stron-toc.toc.toc-hidden {
+  display: none !important;
 }
 
 .toc-mobile-button {
@@ -528,30 +533,29 @@ p {
   margin-bottom: 1.25em;
 }
 
-/*TODO: Make coloured headings toggleable */
 h1 {
-  font-size: 1.81803em;
+  font-size: var(--h1-size, 1.81803em);
   font-weight: 700;
   line-height: 1.61;
-  color: var(--flexcyon-blue);
+  color: var(--h1-color, var(--flexcyon-blue));
 }
 h2 {
-  font-size: 1.61803em;
+  font-size: var(--h2-size, 1.61803em);
   font-weight: 675;
   line-height: 1.41;
-  color: var(--flexcyon-purple-lilac);
+  color: var(--h2-color, var(--flexcyon-purple-lilac));
 }
 h3 {
-  font-size: 1.41803em;
+  font-size: var(--h3-size, 1.41803em);
   font-weight: 650;
   line-height: 1.31;
-  color: var(--flexcyon-cyan);
+  color: var(--h3-color, var(--flexcyon-cyan));
 }
 h4 {
-  font-size: 1.21803em;
+  font-size: var(--h4-size, 1.21803em);
   font-weight: 625;
   line-height: 1.21;
-  color: var(--flexcyon-pink);
+  color: var(--h4-color, var(--flexcyon-pink));
 }
 h5 {
   font-size: 1.11803em;
@@ -695,7 +699,7 @@ code {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
-  max-width: 80vw;
+  max-width: 100%;
 }
 
 .profile-2 {
