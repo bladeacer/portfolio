@@ -504,6 +504,14 @@ li {
   }
 }
 
+body.theme-dark .astro-code,
+body.theme-dark .astro-code span {
+  color: var(--shiki-dark) !important;
+}
+body.theme-dark .astro-code {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
 blockquote {
   background-color: var(--flexcyon-base-03);
   max-width: 45vw;

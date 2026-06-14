@@ -261,17 +261,13 @@ function handleNumberKey(event) {
         }, 800);
     }
 }
-// Bind number keys for prefix capture
-for (let i = 0; i <= 9; i++) {
+// Bind number keys for prefix capture (8 and 9 excluded - used for tags and TOC)
+for (let i = 0; i <= 7; i++) {
     Mousetrap.bind(String(i), handleNumberKey, 'keydown');
 }
 
 function handleKeydown(direction, command = null) {
-    // Prevent execution in input/textarea fields
-    if (document.activeElement.tagName.toLowerCase() === 'input' || document.activeElement.tagName.toLowerCase() === 'textarea') {
-        return;
-    }
-    clearTimeout(numericPrefixTimeout); // Stop number capture
+    clearTimeout(numericPrefixTimeout); // Stop number capture
 
     // Only initialize keyHoldStartTime if it hasn't been set (i.e., if it's the first keydown)
     if (keyHoldStartTime === 0) {
@@ -355,26 +351,55 @@ function navigateToNearestLink() {
     }
 }
 
+function showStatus(chord, desc) {
+  if (window.showStatus) window.showStatus(chord, desc);
+}
+
 // J/K Bindings
-Mousetrap.bind('j', () => handleKeydown(1), 'keydown');
-Mousetrap.bind('k', () => handleKeydown(-1), 'keydown');
+Mousetrap.bind('j', () => {
+  handleKeydown(1);
+  var c = numericPrefix > 1 ? numericPrefix + 'j' : 'j';
+  showStatus(c, 'Scrolled down');
+}, 'keydown');
+Mousetrap.bind('k', () => {
+  handleKeydown(-1);
+  var c = numericPrefix > 1 ? numericPrefix + 'k' : 'k';
+  showStatus(c, 'Scrolled up');
+}, 'keydown');
 
 // Heading Jumps
-Mousetrap.bind('{', () => handleKeydown(-1, 'heading')); // Find previous heading (scroll up)
-Mousetrap.bind('}', () => handleKeydown(1, 'heading')); // Find next heading (scroll down)
+Mousetrap.bind('{', () => {
+  handleKeydown(-1, 'heading');
+  showStatus('{', 'Previous heading');
+});
+Mousetrap.bind('}', () => {
+  handleKeydown(1, 'heading');
+  showStatus('}', 'Next heading');
+});
 
 // GG/G Bindings (Full top/bottom scroll)
-Mousetrap.bind('g g', () => handleKeydown(0, 'top'));
-Mousetrap.bind('G', () => handleKeydown(0, 'bottom'));
+Mousetrap.bind('g g', () => {
+  handleKeydown(0, 'top');
+  showStatus('gg', 'Top of page');
+});
+Mousetrap.bind('G', () => {
+  handleKeydown(0, 'bottom');
+  showStatus('G', 'Bottom of page');
+});
 
 Mousetrap.bind('l', () => { 
-    highlightActiveLine(); 
+    highlightActiveLine();
+    showStatus('l', 'Highlighted active line');
 }, 'keydown');
 
 Mousetrap.bind('enter', (e) => {
+    // Don't intercept Enter when focused on form fields
+    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     // Prevent default behavior (like form submission) if we're navigating
     if (lastHighlightedElement) {
         e.preventDefault();
         navigateToNearestLink();
+        showStatus('Enter', 'Opened link');
     }
 });

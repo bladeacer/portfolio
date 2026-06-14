@@ -117,8 +117,25 @@ const colors = [
           <a href="#" id="preview-link">colours</a> will render.
           &#x8fd9;&#x662f;&#x4e00;&#x4e2a;&#x793a;&#x4f8b;&#x6bb5;&#x843d;&#xff0c;&#x5305;&#x542b;&#x4e2d;&#x6587;&#x6587;&#x672c;&#x3002;
         </p>
-        <pre id="preview-code"><code>const greeting = "hello world";
-console.log(greeting);</code></pre>
+        <pre id="preview-code"><code><span class="kw">import</span> <span class="nx">fs</span> <span class="kw">from</span> <span class="s">"node:fs"</span>;
+<span class="kw">const</span> <span class="nx">greeting</span> <span class="o">=</span> <span class="s">"hello world"</span>;
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span></code></pre>
+
+        <h5>Blockquote</h5>
+        <blockquote id="preview-blockquote">
+          This is a blockquote. It should render with the correct fonts and colours based on your settings.
+        </blockquote>
+
+        <h5>Table</h5>
+        <table id="preview-table">
+          <thead>
+            <tr><th>Key</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>j</code></td><td>Scroll down</td></tr>
+            <tr><td><code>k</code></td><td>Scroll up</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -231,6 +248,44 @@ console.log(greeting);</code></pre>
     max-width: 100%;
   }
 
+  .preview-box h5 {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 0.9rem;
+    color: var(--flexcyon-purple-lilac);
+    padding: 0;
+  }
+
+  .preview-box blockquote {
+    margin: 0 0 0.75rem;
+    padding: 0.5rem 1rem;
+    border-left: 4px solid var(--flexcyon-blue);
+    background-color: var(--flexcyon-base-01);
+    border-radius: 4px;
+    font-style: italic;
+  }
+
+  .preview-box table {
+    width: 100%;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    border-collapse: collapse;
+  }
+
+  .preview-box th,
+  .preview-box td {
+    padding: 4px 10px;
+    text-align: left;
+    border: 1px solid var(--flexcyon-base-04);
+  }
+
+  .preview-box th {
+    font-weight: 600;
+    color: var(--text-faint);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
   .preview-box code {
     font-size: inherit;
     background-color: var(--flexcyon-base-03);
@@ -238,6 +293,12 @@ console.log(greeting);</code></pre>
     border-radius: 4px;
     display: block;
   }
+
+  .preview-box .kw { color: var(--flexcyon-purple-lilac); }
+  .preview-box .nx { color: var(--flexcyon-cyan); }
+  .preview-box .s { color: var(--flexcyon-green); }
+  .preview-box .o { color: var(--flexcyon-orange); }
+  .preview-box .p { color: var(--text-normal); }
 
   .setting-actions {
     margin-top: 0.5rem;

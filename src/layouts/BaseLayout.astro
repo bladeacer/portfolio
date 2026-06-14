@@ -24,6 +24,23 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <style>
+      .key-status {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 99999;
+        background: var(--flexcyon-base-02);
+        border: 1px solid var(--flexcyon-base-04);
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        color: var(--text-normal);
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        max-width: 300px;
+        line-height: 1.4;
+      }
+    </style>
   </head>
   <body>
     <div class="content-wrapper">
@@ -33,6 +50,9 @@ const { pageTitle } = Astro.props;
       <Footer />
     </div>
     <Popup />
+    <div id="key-status" class="key-status" style="display:none">
+      <span id="key-status-chord"></span><span id="key-status-desc"></span>
+    </div>
     <noscript>
       This site uses JavaScript functionality. Please ensure that JavaScript is enabled to continue.
       <br>
@@ -41,6 +61,8 @@ const { pageTitle } = Astro.props;
     <script>
       import "../scripts/menu.js";
       import "../scripts/mousetrap.min.js";
+      import "../scripts/settings-init.js";
+      import "../scripts/status-indicator.js";
       import "../scripts/vimlike.js";
       import "../scripts/shortcuts.js";
     </script>
