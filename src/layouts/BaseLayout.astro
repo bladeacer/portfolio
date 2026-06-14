@@ -40,6 +40,99 @@ const { pageTitle } = Astro.props;
         max-width: 300px;
         line-height: 1.4;
       }
+      .search-icon-btn {
+        background: none;
+        border: none;
+        color: var(--flexcyon-cyan);
+        cursor: pointer;
+        padding: 4px 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+      }
+      .search-icon-btn:hover {
+        color: var(--flexcyon-blue);
+      }
+      .search-overlay, .command-mode-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: none;
+        place-items: start center;
+        padding-top: 15vh;
+        background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
+      }
+      .search-box, .command-mode-box {
+        background: var(--flexcyon-base-02);
+        border: 1px solid var(--flexcyon-base-04);
+        border-radius: 12px;
+        width: 90vw;
+        max-width: 600px;
+        max-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      }
+      .search-input, .command-mode-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: var(--text-normal);
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        outline: none;
+        border-bottom: 1px solid var(--flexcyon-base-04);
+        box-sizing: border-box;
+      }
+      .search-results, .command-mode-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        flex: 1;
+      }
+      .search-result-item, .cm-item {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-normal);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .search-result-item:hover, .search-selected, .cm-item:hover, .cm-selected {
+        background-color: var(--flexcyon-base-03);
+      }
+      .search-result-item a {
+        color: var(--flexcyon-blue);
+        text-decoration: none;
+        width: 100%;
+        display: block;
+      }
+      .cm-chord {
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        color: var(--flexcyon-cyan);
+        min-width: 60px;
+      }
+      .cm-desc {
+        color: var(--text-normal);
+        margin-left: 1rem;
+      }
+      .cm-empty {
+        padding: 1rem;
+        text-align: center;
+        color: var(--text-faint);
+        font-style: italic;
+      }
+      .search-no-results {
+        display: none;
+        padding: 1rem;
+        text-align: center;
+        color: var(--text-faint);
+        font-style: italic;
+      }
     </style>
   </head>
   <body>
@@ -53,6 +146,24 @@ const { pageTitle } = Astro.props;
     <div id="key-status" class="key-status" style="display:none">
       <span id="key-status-chord"></span><span id="key-status-desc"></span>
     </div>
+
+    <!-- Search overlay -->
+    <div id="search-overlay" class="search-overlay">
+      <div class="search-box">
+        <input id="search-input" class="search-input" type="text" placeholder="Search pages..." autocomplete="off" spellcheck="false" />
+        <div id="search-no-results" class="search-no-results">No results found.</div>
+        <ul id="search-results" class="search-results"></ul>
+      </div>
+    </div>
+
+    <!-- Command mode overlay -->
+    <div id="command-mode-overlay" class="command-mode-overlay">
+      <div class="command-mode-box">
+        <input id="command-mode-input" class="command-mode-input" type="text" placeholder="Type a shortcut chord or description..." autocomplete="off" spellcheck="false" />
+        <ul id="command-mode-list" class="command-mode-list"></ul>
+      </div>
+    </div>
+
     <noscript>
       This site uses JavaScript functionality. Please ensure that JavaScript is enabled to continue.
       <br>
@@ -63,8 +174,11 @@ const { pageTitle } = Astro.props;
       import "../scripts/mousetrap.min.js";
       import "../scripts/settings-init.js";
       import "../scripts/status-indicator.js";
+      import "../scripts/shortcuts-data.js";
       import "../scripts/vimlike.js";
       import "../scripts/shortcuts.js";
+      import "../scripts/command-mode.js";
+      import "../scripts/search.js";
     </script>
   </body>
 </html>

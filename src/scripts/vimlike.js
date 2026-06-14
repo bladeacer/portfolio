@@ -1,5 +1,6 @@
 var Mousetrap = window.Mousetrap;
-const CANDIDATE_SELECTOR = 'body > div > p, body > div > h1, body > div > h2, body > div > h3, body > div > h4, body > div > ul > li, body > div > blockquote, body > div > blockquote > ul > li, body > div > li, body > div > pre, body > div > table, body > div .post-item > .blog-card, body > div > .cards > .card-item > a > img, body > div > .cards > .card-item > p, body > div > .profile li, body > div > .profile > .profile-desc > a > p'; 
+// Use descendant selectors to match content at any nesting depth
+const CANDIDATE_SELECTOR = '.content-wrapper p, .content-wrapper h1, .content-wrapper h2, .content-wrapper h3, .content-wrapper h4, .content-wrapper ul li, .content-wrapper ol li, .content-wrapper blockquote, .content-wrapper li, .content-wrapper pre, .content-wrapper table, .content-wrapper figcaption, .content-wrapper .blog-card, .content-wrapper .cards .card-item, .content-wrapper .profile li'; 
 
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;

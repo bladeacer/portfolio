@@ -13,6 +13,7 @@
     "@iconify-json/simple-icons": "^1.2.80",
     "@lucide/astro": "1.14.0",
     "astro": "6.4.2",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "flexsearch": "^0.8.212"
   }
 }

@@ -1,6 +1,6 @@
 var Mousetrap = window.Mousetrap;
-function showStatus(chord, desc) {
-  if (window.showStatus) window.showStatus(chord, desc);
+function showStatus(chord, desc, persistNav) {
+  if (window.showStatus) window.showStatus(chord, desc, persistNav);
 }
 
 Mousetrap.bind('t', () => {
@@ -33,7 +33,7 @@ Mousetrap.bind('9', () => {
 
 Mousetrap.bind('s', () => {
     window.location.href = "/portfolio/settings";
-    showStatus('s', 'Opened settings');
+    showStatus('s', 'Opened settings', true);
     return false;
 });
 
@@ -93,31 +93,31 @@ Mousetrap.bind('l i', () => {
 
 Mousetrap.bind('h', () => {
     window.location.href = "/portfolio";
-    showStatus('h', 'Navigated home');
+    showStatus('h', 'Navigated home', true);
     return false; 
 });
 
 Mousetrap.bind('a', () => {
     window.location.href = "/portfolio/about";
-    showStatus('a', 'Navigated to about');
+    showStatus('a', 'Navigated to about', true);
     return false; 
 });
 
 Mousetrap.bind('d', () => {
     window.location.href = "/portfolio/digital-garden";
-    showStatus('d', 'Navigated to digital garden');
+    showStatus('d', 'Navigated to digital garden', true);
     return false; 
 });
 
 Mousetrap.bind('c', () => {
     window.location.href = "/portfolio/credits";
-    showStatus('c', 'Navigated to credits');
+    showStatus('c', 'Navigated to credits', true);
     return false; 
 });
 
 Mousetrap.bind('8', () => {
     window.location.href = "/portfolio/tags";
-    showStatus('8', 'Navigated to tags');
+    showStatus('8', 'Navigated to tags', true);
     return false; 
 });
 
@@ -146,4 +146,26 @@ Mousetrap.bind('f', () => {
     window.location.href = "/portfolio/rss.xml";
     showStatus('f', 'Opened RSS feed');
     return false; 
+});
+
+Mousetrap.bind('esc', function() {
+    // If popup is open, close it
+    if (window.toggleShortcutsPopup) {
+        var overlay = document.getElementById("shortcuts-popup-overlay");
+        if (overlay && overlay.style.display === "grid") {
+            overlay.style.display = "none";
+            showStatus('Esc', 'Closed popup');
+            return false;
+        }
+    }
+    // If command mode is open, close it
+    if (window.closeCommandMode) {
+        // handled in command-mode.js
+    }
+    // If search is open, close it
+    if (window.closeSearch) {
+        // handled in search.js
+    }
+    showStatus('Esc', 'Cancelled');
+    return false;
 });
