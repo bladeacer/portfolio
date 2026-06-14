@@ -26,7 +26,7 @@ window.__shortcutsRegistry = [
   { chord: '>', desc: 'History forward', category: 'Navigation' },
   { chord: 't', desc: 'Toggle theme', category: 'Toggles' },
   { chord: '9', desc: 'Toggle table of contents', category: 'Toggles' },
-  { chord: '/', desc: 'Search site', category: 'Toggles' },
+  { chord: 'ctrl+/', desc: 'Search site', category: 'Toggles' },
   { chord: ':', desc: 'Command mode', category: 'Toggles' },
   { chord: '?', desc: 'Show shortcuts popup', category: 'Toggles' },
   { chord: 'Esc', desc: 'Close popup / Cancel', category: 'Toggles' },

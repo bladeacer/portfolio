@@ -1,15 +1,15 @@
 (function() {
   var el = document.getElementById("key-status");
-  if (!el) return;
   var chordEl = document.getElementById("key-status-chord");
   var descEl = document.getElementById("key-status-desc");
+  var modeEl = document.getElementById("mode-indicator");
 
-  // Restore status from sessionStorage if we navigated here
+  // Restore status from sessionStorage
   try {
     var saved = sessionStorage.getItem("portfolio-last-status");
     if (saved) {
       var parsed = JSON.parse(saved);
-      if (parsed.chord) {
+      if (parsed.chord && el && chordEl && descEl) {
         chordEl.textContent = parsed.chord;
         descEl.textContent = parsed.desc ? " " + parsed.desc : "";
         el.style.display = "block";
@@ -31,11 +31,19 @@
     el._hideTimeout = setTimeout(function() {
       el.style.display = "none";
     }, 5000);
-    // If this navigation will reload the page, persist status
     if (persistNav) {
       try {
         sessionStorage.setItem("portfolio-last-status", JSON.stringify({chord: chord, desc: desc}));
       } catch(e) {}
     }
   };
+
+  // Mode indicator
+  window.setMode = function(mode) {
+    if (!modeEl) return;
+    modeEl.textContent = mode;
+  };
+
+  // Ensure default is NOR
+  if (modeEl) modeEl.textContent = 'NOR';
 })();

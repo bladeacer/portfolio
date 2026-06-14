@@ -149,22 +149,30 @@ Mousetrap.bind('f', () => {
 });
 
 Mousetrap.bind('esc', function() {
-    // If popup is open, close it
+    // Close popup if open (command mode and search handle their own Esc)
     if (window.toggleShortcutsPopup) {
-        var overlay = document.getElementById("shortcuts-popup-overlay");
-        if (overlay && overlay.style.display === "grid") {
-            overlay.style.display = "none";
+        var popupOverlay = document.getElementById("shortcuts-popup-overlay");
+        if (popupOverlay && popupOverlay.style.display === "grid") {
+            popupOverlay.style.display = "none";
             showStatus('Esc', 'Closed popup');
             return false;
         }
     }
-    // If command mode is open, close it
     if (window.closeCommandMode) {
-        // handled in command-mode.js
+        var cmdOverlay = document.getElementById("command-mode-overlay");
+        if (cmdOverlay && cmdOverlay.style.display === "flex") {
+            window.closeCommandMode();
+            showStatus('Esc', 'Cancelled');
+            return false;
+        }
     }
-    // If search is open, close it
     if (window.closeSearch) {
-        // handled in search.js
+        var searchOverlay = document.getElementById("search-overlay");
+        if (searchOverlay && searchOverlay.style.display === "flex") {
+            window.closeSearch();
+            showStatus('Esc', 'Closed search');
+            return false;
+        }
     }
     showStatus('Esc', 'Cancelled');
     return false;

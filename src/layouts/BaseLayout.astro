@@ -25,11 +25,17 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <style>
-      .key-status {
+      /* Status + Mode indicators side by side */
+      .status-bar {
         position: fixed;
         bottom: 1rem;
         right: 1rem;
         z-index: 99999;
+        display: flex;
+        gap: 0.5rem;
+        align-items: stretch;
+      }
+      .key-status {
         background: var(--flexcyon-base-02);
         border: 1px solid var(--flexcyon-base-04);
         border-radius: 8px;
@@ -40,6 +46,23 @@ const { pageTitle } = Astro.props;
         max-width: 300px;
         line-height: 1.4;
       }
+      .mode-indicator {
+        background: var(--flexcyon-base-02);
+        border: 1px solid var(--flexcyon-base-04);
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        line-height: 1.4;
+        color: var(--flexcyon-cyan);
+        font-weight: bold;
+        min-width: 3em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Search icon */
       .search-icon-btn {
         background: none;
         border: none;
@@ -54,7 +77,8 @@ const { pageTitle } = Astro.props;
       .search-icon-btn:hover {
         color: var(--flexcyon-blue);
       }
-      .search-overlay, .command-mode-overlay {
+      /* Search overlay (centered) */
+      .search-overlay {
         position: fixed;
         inset: 0;
         z-index: 99999;
@@ -63,7 +87,7 @@ const { pageTitle } = Astro.props;
         padding-top: 15vh;
         background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
       }
-      .search-box, .command-mode-box {
+      .search-box {
         background: var(--flexcyon-base-02);
         border: 1px solid var(--flexcyon-base-04);
         border-radius: 12px;
@@ -74,7 +98,7 @@ const { pageTitle } = Astro.props;
         flex-direction: column;
         box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       }
-      .search-input, .command-mode-input {
+      .search-input {
         width: 100%;
         border: none;
         background: transparent;
@@ -86,23 +110,23 @@ const { pageTitle } = Astro.props;
         border-bottom: 1px solid var(--flexcyon-base-04);
         box-sizing: border-box;
       }
-      .search-results, .command-mode-list {
+      .search-input:focus {
+        border-bottom-color: var(--flexcyon-blue);
+      }
+      .search-results {
         list-style: none;
         margin: 0;
         padding: 0;
         overflow-y: auto;
         flex: 1;
       }
-      .search-result-item, .cm-item {
+      .search-result-item {
         padding: 0.5rem 1rem;
         cursor: pointer;
         font-size: 0.9rem;
         color: var(--text-normal);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
       }
-      .search-result-item:hover, .search-selected, .cm-item:hover, .cm-selected {
+      .search-result-item:hover, .search-selected {
         background-color: var(--flexcyon-base-03);
       }
       .search-result-item a {
@@ -111,20 +135,8 @@ const { pageTitle } = Astro.props;
         width: 100%;
         display: block;
       }
-      .cm-chord {
-        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
-        color: var(--flexcyon-cyan);
-        min-width: 60px;
-      }
-      .cm-desc {
-        color: var(--text-normal);
-        margin-left: 1rem;
-      }
-      .cm-empty {
-        padding: 1rem;
-        text-align: center;
-        color: var(--text-faint);
-        font-style: italic;
+      .search-result-item:first-child {
+        border-top: none;
       }
       .search-no-results {
         display: none;
@@ -132,6 +144,87 @@ const { pageTitle } = Astro.props;
         text-align: center;
         color: var(--text-faint);
         font-style: italic;
+      }
+      /* Command mode overlay (bottom-left) */
+      .command-mode-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: none;
+        place-items: end start;
+        padding: 0 0 4rem 1rem;
+        background: transparent;
+        pointer-events: none;
+      }
+      .command-mode-overlay.is-active {
+        pointer-events: auto;
+      }
+      .command-mode-box {
+        background: var(--flexcyon-base-02);
+        border: 1px solid var(--flexcyon-base-04);
+        border-radius: 8px;
+        width: 90vw;
+        max-width: 500px;
+        max-height: 50vh;
+        display: flex;
+        flex-direction: column-reverse;
+        box-shadow: 0 -4px 24px rgba(0,0,0,0.35);
+        pointer-events: auto;
+      }
+      .command-mode-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: var(--text-normal);
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        font-size: 0.95rem;
+        padding: 0.6rem 0.75rem;
+        outline: none;
+        border-top: 1px solid var(--flexcyon-base-04);
+        box-sizing: border-box;
+      }
+      .command-mode-input:focus {
+        border-top-color: var(--flexcyon-blue);
+      }
+      .command-mode-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        max-height: 35vh;
+      }
+      .cm-item {
+        padding: 0.4rem 0.75rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: var(--text-normal);
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--flexcyon-base-03);
+      }
+      .cm-item:last-child {
+        border-bottom: none;
+      }
+      .cm-item:hover, .cm-selected {
+        background-color: var(--flexcyon-base-03);
+      }
+      .cm-chord {
+        font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+        color: var(--flexcyon-cyan);
+        min-width: 5em;
+        font-size: 0.85rem;
+      }
+      .cm-desc {
+        color: var(--text-normal);
+        margin-left: 0.75rem;
+        font-size: 0.85rem;
+      }
+      .cm-empty {
+        padding: 0.75rem;
+        text-align: center;
+        color: var(--text-faint);
+        font-style: italic;
+        font-size: 0.85rem;
       }
     </style>
   </head>
@@ -143,8 +236,12 @@ const { pageTitle } = Astro.props;
       <Footer />
     </div>
     <Popup />
-    <div id="key-status" class="key-status" style="display:none">
-      <span id="key-status-chord"></span><span id="key-status-desc"></span>
+
+    <div class="status-bar">
+      <div id="key-status" class="key-status" style="display:none">
+        <span id="key-status-chord"></span><span id="key-status-desc"></span>
+      </div>
+      <div id="mode-indicator" class="mode-indicator">NOR</div>
     </div>
 
     <!-- Search overlay -->
@@ -156,11 +253,11 @@ const { pageTitle } = Astro.props;
       </div>
     </div>
 
-    <!-- Command mode overlay -->
+    <!-- Command mode overlay (bottom-left) -->
     <div id="command-mode-overlay" class="command-mode-overlay">
       <div class="command-mode-box">
-        <input id="command-mode-input" class="command-mode-input" type="text" placeholder="Type a shortcut chord or description..." autocomplete="off" spellcheck="false" />
         <ul id="command-mode-list" class="command-mode-list"></ul>
+        <input id="command-mode-input" class="command-mode-input" type="text" placeholder=":" autocomplete="off" spellcheck="false" />
       </div>
     </div>
 

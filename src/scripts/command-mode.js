@@ -11,9 +11,11 @@
 
   function close() {
     overlay.style.display = "none";
+    overlay.classList.remove("is-active");
     input.value = "";
     list.innerHTML = "";
     selectedIdx = -1;
+    if (window.setMode) window.setMode('NOR');
   }
 
   function render() {
@@ -51,10 +53,9 @@
     if (idx < 0 || idx >= filtered.length) return;
     var s = filtered[idx];
     close();
-    // Simulate the chord via Mousetrap trigger
     if (Mousetrap && s.chord !== ':') {
-      var handled = Mousetrap.trigger(s.chord);
-      if (!handled && window.showStatus) {
+      Mousetrap.trigger(s.chord);
+      if (window.showStatus) {
         window.showStatus(s.chord, s.desc);
       }
     }
@@ -89,7 +90,7 @@
     }
   });
 
-  // Prevent other shortcuts from firing while in command mode
+  // Stop propagation to prevent other shortcuts from firing while in command mode
   input.addEventListener("keydown", function(e) {
     e.stopPropagation();
   }, true);
@@ -100,14 +101,16 @@
 
   window.openCommandMode = function() {
     overlay.style.display = "flex";
+    overlay.classList.add("is-active");
     input.value = "";
     render();
     input.focus();
+    if (window.setMode) window.setMode('CMD');
   };
 
   window.closeCommandMode = close;
 
-  // Bind : to open command mode (but not when focused in an input)
+  // Bind : to open command mode
   Mousetrap.bind(':', function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;

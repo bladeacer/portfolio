@@ -11,6 +11,7 @@ import FlexSearch from 'flexsearch';
   var index = null;
   var pages = [];
   var selectedIdx = -1;
+  var loaded = false;
 
   function close() {
     overlay.style.display = "none";
@@ -18,60 +19,52 @@ import FlexSearch from 'flexsearch';
     list.innerHTML = "";
     if (noResults) noResults.style.display = "none";
     selectedIdx = -1;
+    if (window.setMode) window.setMode('NOR');
   }
 
-  function buildIndex() {
-    // Collect page data from links in navigation and content
-    var docId = 0;
-    var docs = [];
-    var navLinks = document.querySelectorAll('.nav-links a, .content-wrapper a[href^="/portfolio/"]');
-    var seen = {};
-    navLinks.forEach(function(a) {
-      var href = a.getAttribute("href");
-      if (!href || href.indexOf("/portfolio/") !== 0) return;
-      if (seen[href]) return;
-      seen[href] = true;
-      var text = a.textContent.replace(/\[.*?\]/g, "").trim();
-      docs.push({ id: docId++, title: text || "Page", url: href, content: text });
-    });
-
-    // Index current page content
-    var contentEl = document.querySelector(".content-wrapper");
-    if (contentEl) {
-      var text = contentEl.textContent || "";
-      text = text.replace(/\s+/g, " ").trim().substring(0, 5000);
-      var title = document.title || "";
-      docs.push({ id: docId++, title: title, url: window.location.pathname, content: text });
-    }
-
-    pages = docs;
-    index = new FlexSearch.Document({
-      document: {
-        id: "id",
-        index: ["title", "content"],
-        store: ["title", "url"]
-      }
-    });
-    docs.forEach(function(d) { index.add(d); });
+  function loadIndex(callback) {
+    if (loaded) { if (callback) callback(); return; }
+    fetch('/portfolio/search-index.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        pages = data || [];
+        index = new FlexSearch.Document({
+          document: {
+            id: 'id',
+            index: ['title', 'content'],
+            store: ['title', 'url']
+          }
+        });
+        pages.forEach(function(p, i) {
+          index.add({ id: i, title: p.title, content: p.content, url: p.url });
+        });
+        loaded = true;
+        if (callback) callback();
+      })
+      .catch(function() {
+        // Fallback: use basic local data
+        pages = [{ title: 'Home', url: '/portfolio/', content: '' }];
+        if (callback) callback();
+      });
   }
 
   function render(results) {
-    list.innerHTML = "";
-    if (noResults) noResults.style.display = "none";
+    list.innerHTML = '';
+    if (noResults) noResults.style.display = 'none';
     if (!results || results.length === 0) {
-      if (noResults) noResults.style.display = "block";
+      if (noResults) noResults.style.display = 'block';
       selectedIdx = -1;
       return;
     }
     results.forEach(function(r, i) {
-      var li = document.createElement("li");
-      li.className = "search-result-item" + (i === 0 ? " search-selected" : "");
-      li.innerHTML = '<a href="' + r.url + '">' + r.title + "</a>";
+      var li = document.createElement('li');
+      li.className = 'search-result-item' + (i === 0 ? ' search-selected' : '');
+      li.innerHTML = '<a href="' + r.url + '">' + r.title + '</a>';
       li.dataset.url = r.url;
-      li.addEventListener("click", function() { navigate(r.url); });
-      li.addEventListener("mouseenter", function() {
-        document.querySelectorAll(".search-selected").forEach(function(el) { el.classList.remove("search-selected"); });
-        li.classList.add("search-selected");
+      li.addEventListener('click', function() { navigate(r.url); });
+      li.addEventListener('mouseenter', function() {
+        document.querySelectorAll('.search-selected').forEach(function(el) { el.classList.remove('search-selected'); });
+        li.classList.add('search-selected');
         selectedIdx = i;
       });
       list.appendChild(li);
@@ -93,7 +86,6 @@ import FlexSearch from 'flexsearch';
     var raw = index.search(q, { limit: 10 });
     var results = [];
     var seenUrls = {};
-    // Flatten results from multi-field search
     if (raw && raw.length) {
       raw.forEach(function(fieldRes) {
         if (fieldRes.result) {
@@ -107,76 +99,81 @@ import FlexSearch from 'flexsearch';
         }
       });
     }
-    // Also search by direct string matching as fallback
+    // Fallback: simple string match
     if (results.length === 0) {
       var lower = q.toLowerCase();
       pages.forEach(function(p) {
-        if (p.title.toLowerCase().indexOf(lower) > -1 && !seenUrls[p.url]) {
-          seenUrls[p.url] = true;
-          results.push({ title: p.title, url: p.url });
+        if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
+            (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
+          if (!seenUrls[p.url]) {
+            seenUrls[p.url] = true;
+            results.push({ title: p.title, url: p.url });
+          }
         }
       });
     }
     render(results.slice(0, 10));
   }
 
-  input.addEventListener("input", doSearch);
+  input.addEventListener('input', doSearch);
 
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
       e.preventDefault();
       close();
-      if (window.showStatus) window.showStatus('Esc', 'Cancelled');
-    } else if (e.key === "Enter") {
+      if (window.showStatus) window.showStatus('Esc', 'Closed search');
+    } else if (e.key === 'Enter') {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      var items = list.querySelectorAll('.search-result-item');
       if (selectedIdx >= 0 && items[selectedIdx]) {
         navigate(items[selectedIdx].dataset.url);
       } else if (items[0]) {
         navigate(items[0].dataset.url);
       }
-    } else if (e.key === "ArrowDown") {
+    } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      var items = list.querySelectorAll('.search-result-item');
       if (items.length === 0) return;
       var next = (selectedIdx + 1) % items.length;
-      document.querySelectorAll(".search-selected").forEach(function(el) { el.classList.remove("search-selected"); });
-      if (items[next]) items[next].classList.add("search-selected");
+      document.querySelectorAll('.search-selected').forEach(function(el) { el.classList.remove('search-selected'); });
+      if (items[next]) items[next].classList.add('search-selected');
       selectedIdx = next;
-    } else if (e.key === "ArrowUp") {
+    } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      var items = list.querySelectorAll('.search-result-item');
       if (items.length === 0) return;
       var prev = (selectedIdx - 1 + items.length) % items.length;
-      document.querySelectorAll(".search-selected").forEach(function(el) { el.classList.remove("search-selected"); });
-      if (items[prev]) items[prev].classList.add("search-selected");
+      document.querySelectorAll('.search-selected').forEach(function(el) { el.classList.remove('search-selected'); });
+      if (items[prev]) items[prev].classList.add('search-selected');
       selectedIdx = prev;
     }
   });
 
-  // Stop propagation to prevent vimlike/shortcuts from firing
-  input.addEventListener("keydown", function(e) {
+  // Stop propagation to prevent vimlike/shortcuts from firing while typing
+  input.addEventListener('keydown', function(e) {
     e.stopPropagation();
   }, true);
 
-  overlay.addEventListener("click", function(e) {
+  overlay.addEventListener('click', function(e) {
     if (e.target === overlay) close();
   });
 
   window.openSearch = function() {
-    if (!index) buildIndex();
-    overlay.style.display = "flex";
-    input.value = "";
-    list.innerHTML = "";
-    if (noResults) noResults.style.display = "none";
-    selectedIdx = -1;
-    setTimeout(function() { input.focus(); }, 50);
+    loadIndex(function() {
+      overlay.style.display = 'flex';
+      input.value = '';
+      list.innerHTML = '';
+      if (noResults) noResults.style.display = 'none';
+      selectedIdx = -1;
+      if (window.setMode) window.setMode('/');
+      setTimeout(function() { input.focus(); }, 50);
+    });
   };
 
   window.closeSearch = close;
 
-  // Bind / to open search
-  Mousetrap.bind('/', function() {
+  // Bind ctrl+/ to open search
+  Mousetrap.bind('ctrl+/', function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     window.openSearch();
@@ -184,7 +181,7 @@ import FlexSearch from 'flexsearch';
   });
 
   // Search icon button click handler
-  document.getElementById("search-icon-btn")?.addEventListener("click", function(e) {
+  document.getElementById('search-icon-btn')?.addEventListener('click', function(e) {
     e.preventDefault();
     window.openSearch();
   });
