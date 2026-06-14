@@ -4,10 +4,14 @@ Mousetrap.bind('0', () => {
 });
 
 Mousetrap.bind('?', () => {
-    const url = "/portfolio/about#shortcuts";
-    const target = '_blank';
-    const features = 'noopener,noreferrer'; 
-    window.open(url, target, features);
+    if (window.toggleShortcutsPopup) {
+        window.toggleShortcutsPopup();
+    }
+    return false;
+});
+
+Mousetrap.bind('s', () => {
+    window.location.href = "/portfolio/settings";
     return false;
 });
 

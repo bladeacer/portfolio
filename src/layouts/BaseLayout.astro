@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Popup from "../components/Popup.astro";
 import "../styles/global.css";
 const { pageTitle } = Astro.props;
 ---
@@ -31,6 +32,7 @@ const { pageTitle } = Astro.props;
       <slot />
       <Footer />
     </div>
+    <Popup />
     <noscript>
       This site uses JavaScript functionality. Please ensure that JavaScript is enabled to continue.
       <br>
