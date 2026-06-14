@@ -223,10 +223,11 @@ nav {
   border: 0;
   background: none;
   color: var(--flexcyon-cyan);
+  padding-top: 12px;
 }
 #search-icon-btn svg {
-  stroke-width: 0;
-  fill: var(--flexcyon-cyan);
+  display: block;
+  margin: 0 auto;
 }
 #search-icon-btn p {
   color: var(--flexcyon-cyan);

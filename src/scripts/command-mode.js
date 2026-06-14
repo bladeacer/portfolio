@@ -10,8 +10,8 @@
   var selectedIdx = -1;
 
   function close() {
-    overlay.style.display = "none";
     overlay.classList.remove("is-active");
+    overlay.style.display = "";
     input.value = "";
     list.innerHTML = "";
     selectedIdx = -1;
@@ -98,6 +98,7 @@
 
   window.openCommandMode = function() {
     overlay.classList.add("is-active");
+    overlay.style.display = "";
     input.value = "";
     render();
     input.focus();

@@ -14,7 +14,7 @@ import FlexSearch from 'flexsearch';
   var loaded = false;
 
   function close() {
-    overlay.style.display = "none";
+    overlay.style.display = "";
     input.value = "";
     list.innerHTML = "";
     if (noResults) noResults.style.display = "none";
@@ -66,7 +66,15 @@ import FlexSearch from 'flexsearch';
         var idx = displayTitle.toLowerCase().indexOf(q);
         displayTitle = displayTitle.substring(0, idx) + '<mark class="search-highlight">' + displayTitle.substring(idx, idx + q.length) + '</mark>' + displayTitle.substring(idx + q.length);
       }
-      li.innerHTML = '<a href="' + r.url + '">' + displayTitle + '</a>';
+      var snippetHtml = '';
+      if (q && r.snippet) {
+        var sLower = r.snippet.toLowerCase();
+        var sIdx = sLower.indexOf(q);
+        if (sIdx > -1) {
+          snippetHtml = r.snippet.substring(0, sIdx) + '<mark class="search-highlight">' + r.snippet.substring(sIdx, sIdx + q.length) + '</mark>' + r.snippet.substring(sIdx + q.length);
+        }
+      }
+      li.innerHTML = '<a href="' + r.url + '">' + displayTitle + '</a>' + (snippetHtml ? '<div class="search-snippet">' + snippetHtml + '</div>' : '');
       li.dataset.url = r.url;
       li.addEventListener('click', function() { navigate(r.url); });
       li.addEventListener('mouseenter', function() {
@@ -82,6 +90,19 @@ import FlexSearch from 'flexsearch';
   function navigate(url) {
     close();
     window.location.href = url;
+  }
+
+  function extractSnippet(content, query, maxLen) {
+    maxLen = maxLen || 120;
+    var lower = content.toLowerCase();
+    var idx = lower.indexOf(query.toLowerCase());
+    if (idx === -1) return '';
+    var start = Math.max(0, idx - Math.floor((maxLen - query.length) / 2));
+    var end = Math.min(content.length, start + maxLen);
+    var snippet = content.substring(start, end);
+    if (start > 0) snippet = '...' + snippet;
+    if (end < content.length) snippet = snippet + '...';
+    return snippet;
   }
 
   function doSearch() {
@@ -101,7 +122,7 @@ import FlexSearch from 'flexsearch';
             var p = pages[id];
             if (p && !seenUrls[p.url]) {
               seenUrls[p.url] = true;
-              results.push({ title: p.title, url: p.url });
+              results.push({ title: p.title, url: p.url, snippet: extractSnippet(p.content || '', q) });
             }
           });
         }
@@ -114,7 +135,7 @@ import FlexSearch from 'flexsearch';
       if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
           (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
         seenUrls[p.url] = true;
-        results.push({ title: p.title, url: p.url });
+        results.push({ title: p.title, url: p.url, snippet: extractSnippet(p.content || '', q) });
       }
     });
     render(results.slice(0, 10));
@@ -162,7 +183,7 @@ import FlexSearch from 'flexsearch';
 
   window.openSearch = function() {
     loadIndex(function() {
-      overlay.style.display = 'flex';
+      overlay.style.display = 'grid';
       input.value = '';
       list.innerHTML = '';
       if (noResults) noResults.style.display = 'none';

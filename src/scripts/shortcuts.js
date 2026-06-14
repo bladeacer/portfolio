@@ -19,15 +19,18 @@ Mousetrap.bind('?', () => {
 
 Mousetrap.bind('9', function() {
     var btn = document.getElementById("toc-mobile-toggle");
-    // On mobile (<1000px) the button is visible; click it to toggle the drawer
+    // On mobile (<1000px) the button is visible; click it to trigger the drawer
     if (btn && btn.offsetParent !== null) {
         btn.click();
     } else {
-        // On desktop, toggle via inline style; remove stale .toc-hidden class
-        var toc = document.querySelector('.stron-toc.toc');
-        if (toc) {
-            toc.classList.remove('toc-hidden');
-            toc.style.display = toc.style.display === 'none' ? '' : 'none';
+        // On desktop, toggle display on the wrapper (avoids component CSS conflicts)
+        var wrapper = document.getElementById("toc-wrapper");
+        if (wrapper) {
+            if (wrapper.style.display === 'none') {
+                wrapper.style.removeProperty('display');
+            } else {
+                wrapper.style.display = 'none';
+            }
         }
     }
     showStatus('9', 'Toggled table of contents');
