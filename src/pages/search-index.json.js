@@ -22,7 +22,7 @@ export async function GET() {
   // Get all markdown posts
   var postModules = import.meta.glob('./posts/**/*.md', { query: '?raw', import: 'default' });
   var staticPages = [
-    { title: 'Home', url: '/portfolio/', content: 'Home page - About Me. Personal portfolio and blog. Tech stack, current projects, and contact information. CSS, Vim, Linux enthusiast. Software developer.' },
+    { title: 'Home', url: '/portfolio/', content: 'Home page - About bladeacer. Personal portfolio and blog. Tech stack, current projects, and contact information. CSS, Vim, Linux enthusiast. Software developer.' },
     { title: 'About', url: '/portfolio/about/', content: 'About bladeacer. Keyboard shortcuts reference, site features, and usage guide. Scrolling, navigation, toggles, and other keyboard shortcuts.' },
     { title: 'Credits', url: '/portfolio/credits/', content: 'Credits and acknowledgements for tools, fonts, icons, and libraries used to build this site. Open source licenses and attributions.' },
     { title: 'Settings', url: '/portfolio/settings/', content: 'Site settings and customisation. Configure fonts, font sizes, heading sizes and colours, accent colours for dark and light mode. All changes are saved locally.' },
