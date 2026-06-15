@@ -42,6 +42,18 @@ const colors = [
       </div>
 
       <div class="setting-group">
+        <label class="setting-row">
+          <span class="setting-label">Yank count unit</span>
+          <select id="setting-yank-unit" class="setting-select">
+            <option value="characters">Characters</option>
+            <option value="words">Words</option>
+            <option value="sentences">Sentences</option>
+            <option value="paragraphs">Paragraphs</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="setting-group">
         <button id="settings-reset" class="setting-btn">Reset defaults (keeps theme)</button>
       </div>
 
@@ -370,6 +382,7 @@ const colors = [
       h4Color: "",
       themePreference: "",
       showGrid: true,
+      yankUnit: "characters",
     };
 
     var SANS_CHAINS = {
@@ -461,6 +474,7 @@ const colors = [
       syncField("s-h3Size", s.h3Size);
       syncField("s-h4Size", s.h4Size);
       syncField("setting-theme", s.themePreference || "");
+      syncField("setting-yank-unit", s.yankUnit || "characters");
       var gridEl = document.getElementById("setting-show-grid");
       if (gridEl) gridEl.checked = s.showGrid !== false;
       syncColorSelect("s-h1Color", "s-h1ColorPicker", s.h1Color);
@@ -509,6 +523,7 @@ const colors = [
         accentDark: readColor("setting-color-dark"),
         themePreference: getVal("setting-theme"),
         showGrid: document.getElementById("setting-show-grid")?.checked ?? true,
+        yankUnit: getVal("setting-yank-unit"),
       };
     }
 
@@ -567,7 +582,7 @@ const colors = [
       var autoSaveIds = ["setting-font-sans", "setting-font-fallback", "setting-font-mono",
                          "setting-size-sans", "setting-size-fallback", "setting-size-mono",
                          "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size",
-                         "setting-theme", "setting-show-grid"];
+                         "setting-theme", "setting-show-grid", "setting-yank-unit"];
 
       autoSaveIds.forEach(function(id) {
         var el = $(id);

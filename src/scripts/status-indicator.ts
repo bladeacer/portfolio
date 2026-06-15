@@ -20,7 +20,7 @@
       }
       sessionStorage.removeItem("portfolio-last-status");
     }
-  } catch(e) {}
+  } catch {}
 
   window.showStatus = function(chord, desc, persistNav) {
     if (!el || !chordEl || !descEl) return;
@@ -34,7 +34,7 @@
     if (persistNav) {
       try {
         sessionStorage.setItem("portfolio-last-status", JSON.stringify({chord: chord, desc: desc}));
-      } catch(e) {}
+      } catch {}
     }
   };
 

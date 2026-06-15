@@ -1,3 +1,7 @@
-document.querySelector('.hamburger').addEventListener('click', () => {
-  document.querySelector('.nav-links').classList.toggle('expanded');
-});
+var hamburger = document.querySelector('.hamburger');
+var navLinks = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('expanded');
+  });
+}

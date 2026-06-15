@@ -6,7 +6,35 @@ body {
   will-change: scroll-position;
   font-family: var(--font-sans);
   font-size: var(--font-size-sans);
+  margin: 0 auto;
+  inline-size: 100%;
+  max-inline-size: 75vw;
+  line-height: 1.25;
+  padding: 1em 0;
+  background-image:
+    repeating-linear-gradient(0deg, var(--flexcyon-bg-col),
+    var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px),
+    repeating-linear-gradient(90deg, var(--flexcyon-bg-col),
+    var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px)
+  ;
+}
 
+@media (width < 1000px) {
+  body {
+    max-inline-size: 80vw;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+a {
+  color: var(--flexcyon-blue);
 }
 
 .sort-dropdown, .astro-code span, blockquote,
@@ -22,37 +50,6 @@ em, strong, div span, a, h1, h2, h3, h4, h5, h6, code {
   display: block;
   white-space: pre;
   padding: 4px 8px;
-}
-
-a {
-  color: var(--flexcyon-blue);
-}
-
-html {
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0 auto;
-  inline-size: 100%;
-  max-inline-size: 75vw;
-  line-height: 1.25;
-  padding: 1em 0;
-}
-
-@media (width < 1000px) {
-  body {
-    max-inline-size: 80vw;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1 {
-  padding: 1rem 0;
-  font-size: 1.85rem;
 }
 
 li {
@@ -101,24 +98,28 @@ h1 {
   font-weight: 700;
   line-height: 1.61;
   color: var(--h1-color, var(--flexcyon-blue));
+  padding: 1rem 0;
 }
 h2 {
   font-size: var(--h2-size, 1.61803em);
   font-weight: 675;
   line-height: 1.41;
   color: var(--h2-color, var(--flexcyon-purple-lilac));
+  padding-top: 1rem;
 }
 h3 {
   font-size: var(--h3-size, 1.41803em);
   font-weight: 650;
   line-height: 1.31;
   color: var(--h3-color, var(--flexcyon-cyan));
+  padding-top: 1rem;
 }
 h4 {
   font-size: var(--h4-size, 1.21803em);
   font-weight: 625;
   line-height: 1.21;
   color: var(--h4-color, var(--flexcyon-pink));
+  padding-top: 1rem;
 }
 h5 {
   font-size: 1.11803em;
@@ -133,10 +134,6 @@ h6 {
   color: var(--flexcyon-yellow);
 }
 
-h2, h3, h4 {
-  padding-top: 1rem;
-}
-
 hr {
   color: var(--text-faint);
   opacity: 0.55;
@@ -149,18 +146,6 @@ hr {
 @media (width < 1000px) {
   hr, p.foot, footer {
     max-width: 85vw;
-  }
-}
-
-/* TODO: Make this toggleable */
-body {
-  & {
-    background-image:
-      repeating-linear-gradient(0deg, var(--flexcyon-bg-col),
-      var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px),
-      repeating-linear-gradient(calc(90deg + 0deg), var(--flexcyon-bg-col),
-      var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px)
-    ;
   }
 }
 

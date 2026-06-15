@@ -1,3 +1,36 @@
+/* Shared overlay backdrop (search, command-mode, popup) */
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: none;
+  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
+}
+
+.overlay-backdrop.is-active {
+  display: block;
+}
+
+/* Shared overlay content box */
+.overlay-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--flexcyon-base-02);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 800px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
 /* Status + Mode indicators side by side */
 .status-bar {
   position: fixed;
@@ -38,37 +71,13 @@
   justify-content: center;
 }
 
-/* Search overlay - exact popup pattern */
+/* Search overlay */
 .search-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
   z-index: 99999;
-  display: none;
-  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
-}
-
-.search-overlay.is-active {
-  display: block;
 }
 
 .search-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--flexcyon-base-02);
-  border: 1px solid var(--flexcyon-base-04);
-  border-radius: 12px;
-  width: 90vw;
-  max-width: 800px;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  pointer-events: auto;
 }
 
 .search-input {
@@ -151,35 +160,10 @@
 
 /* Command mode overlay - exact popup pattern */
 .command-mode-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
   z-index: 99999;
-  display: none;
-  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
-}
-
-.command-mode-overlay.is-active {
-  display: block;
 }
 
 .command-mode-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--flexcyon-base-02);
-  border: 1px solid var(--flexcyon-base-04);
-  border-radius: 12px;
-  width: 90vw;
-  max-width: 800px;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   pointer-events: auto;
 }
 

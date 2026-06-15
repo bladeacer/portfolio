@@ -10,7 +10,7 @@ const formattedPubDate = new Date(pubDate).toLocaleDateString("en-GB", dateOptio
 <div class="blog-card">
   <a href={url}>
     <div class="blog-card__content">
-      <h2 class="blog-card__title">{title}</h2>
+      <h3 class="blog-card__title">{title}</h3>
       {author && formattedPubDate && (
         <div class="blog-card__author">
           <span>By {author}<br>Created on {formattedPubDate}<br> </span>

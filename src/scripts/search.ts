@@ -1,7 +1,6 @@
 import FlexSearch from 'flexsearch';
 
 (function() {
-  var Mousetrap = window.Mousetrap;
   var overlay = document.getElementById("search-overlay");
   var input = document.getElementById("search-input");
   var list = document.getElementById("search-results");
@@ -148,7 +147,7 @@ import FlexSearch from 'flexsearch';
           }
         });
       }
-    } catch(e) {} // FlexSearch error non-fatal; fallback below still runs
+    } catch {} // FlexSearch error non-fatal; fallback below still runs
     // Always run fallback for substring matching (catches partial-word matches)
     pages.forEach(function(p) {
       if (seenUrls[p.url]) return;

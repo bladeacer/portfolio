@@ -11,17 +11,9 @@
         "Maple Mono Medium": '"Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
         DepartureMono: '"DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
       };
-      var MONO = {
-        CascadiaCode: '"CascadiaCode", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-        "Maple Mono Medium": '"Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-        DepartureMono: '"DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-      };
       var sansChain = SANS[s.fontSans] || SANS["CascadiaCode"];
-      var fallbackChain = SANS[s.fontFallback] || SANS["CascadiaCode"];
-      var monoChain = MONO[s.fontMono] || MONO["DepartureMono"];
       var sz = (s.sizeSans || 16) + "px";
       var szm = (s.sizeMono || 16) + "px";
-      var szf = (s.sizeFallback || 16) + "px";
 
       var css = "";
       css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
@@ -53,7 +45,7 @@
       } else {
         localStorage.removeItem("theme");
       }
-    } catch(e) {}
+    } catch {}
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', apply);

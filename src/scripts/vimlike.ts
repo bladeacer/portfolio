@@ -2,7 +2,6 @@ var Mousetrap = window.Mousetrap;
 // Scoped selectors: only direct-list-item children + specific class-based targets
 const CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card'; 
 
-const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;
 const HIGHLIGHT_CLASS = 'active-line-highlight';
 const ACCELERATION_MAX_FACTOR = 0.15;
@@ -11,8 +10,6 @@ const BASE_SCROLL_DURATION = 350;
 let lastHighlightedElement = null;
 let highlightTimeout = null;
 let animationFrame = null;
-let lastScrollTime = 0;
-let keyHoldTime = 0;
 let keyHoldStartTime = 0;
 let scrollStartTimestamp = 0;
 let startPosition = 0;
@@ -136,10 +133,7 @@ function findNextHeadingIndex(currentIndex, direction, candidates) {
     return (direction === 1) ? candidates.length - 1 : 0;
 }
 
-
-// --- Global Variable to Store the Last Command ---
-let lastCommand = null;
-
+ 
 // --- Main Jump Function (FIXED G/gg and J/K/{} scroll calculation) ---
 function jumpToElement(direction, command = null) {
     // 1. Get ALL scrollable candidates
@@ -221,10 +215,8 @@ function jumpToElement(direction, command = null) {
     // If the distance is too small (e.g., at the boundary and trying to scroll further)
     if (Math.abs(distanceToScroll) < 1) return;
 
-    // Store the command for multi-jumps (10j, etc.)
-    lastCommand = command;
 
-    // 4. Start the custom smooth scroll animation
+     // 4. Start the custom smooth scroll animation
     if (animationFrame) cancelAnimationFrame(animationFrame);
     scrollStartTimestamp = 0; // Reset timestamp for the new animation
     animationFrame = requestAnimationFrame(animateScroll);
@@ -338,10 +330,39 @@ function showStatus(chord, desc) {
 var yPending = false;
 var yPendingTimer = null;
 
+function getYankUnit() {
+  try {
+    var raw = localStorage.getItem('portfolio-settings');
+    if (raw) {
+      var s = JSON.parse(raw);
+      return s.yankUnit || 'characters';
+    }
+  } catch {}
+  return 'characters';
+}
+
+function formatYankCount(text) {
+  var unit = getYankUnit();
+  var count;
+  switch (unit) {
+    case 'words':
+      count = text.split(/\s+/).filter(Boolean).length;
+      break;
+    case 'sentences':
+      count = text.split(/[.!?]+/).filter(Boolean).length;
+      break;
+    case 'paragraphs':
+      count = text.split(/\n\s*\n/).filter(Boolean).length;
+      break;
+    default:
+      count = text.length;
+  }
+  return count + ' ' + unit;
+}
+
 function yankToClipboard(text, label) {
-  var len = text.length;
   navigator.clipboard.writeText(text).then(function() {
-    showStatus(label || 'yank', 'Copied ' + len + ' chars');
+    showStatus(label || 'yank', 'Copied ' + formatYankCount(text));
   }).catch(function() {
     showStatus(label || 'yank', 'Clipboard write failed');
   });

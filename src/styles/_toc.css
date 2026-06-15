@@ -79,7 +79,7 @@
 #toc-title {
   padding-inline: 32px;
   padding-top: 0px;
-  color: var(--text-accent) !important;
+  color: var(--text-accent);
   display: block;
   width: 100%;
 }
@@ -92,9 +92,9 @@
 }
 
 .toc-link.toc-current {
-  color: var(--flexcyon-blue) !important;
+  color: var(--flexcyon-blue);
   font-weight: bold;
-  opacity: 1 !important;
+  opacity: 1;
 }
 
 .toc-content::-webkit-scrollbar {
