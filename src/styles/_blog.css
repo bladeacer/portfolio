@@ -1,45 +1,45 @@
 .blog-card {
   max-width: 200%;
+  padding: 0 1.5rem;
+  margin: 1.5rem 0;
+  overflow: hidden;
   background-color: var(--flexcyon-base-01-02-mix);
   border-radius: 0.75rem;
-  overflow: hidden;
-  padding: 0rem 1.5rem;
-  margin: 1.5rem 0rem;
 }
 
 .blog-card a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 .blog-card__title {
   margin-top: 4px;
+  margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--flexcyon-cyan);
-  margin-bottom: 0.75rem;
 }
 
 .blog-card__excerpt {
-  color: var(--text-normal);
-  font-size: 0.9rem;
   margin-top: 1.25rem;
+  font-size: 0.9rem;
   line-height: 1.5;
+  color: var(--text-normal);
 }
 
 .blog-card__author {
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
+  font-size: 0.9rem;
   color: var(--text-faint);
 }
 
 .blog-card__author-image {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
   margin-right: 0.5rem;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .blog-card:hover {
@@ -56,18 +56,16 @@
 }
 
 .sort-dropdown {
-  color: var(--flexcyon-purple-lilac);
+  padding: 0.65em 1em;
+  font-size: 1.01803em;
   font-weight: 600;
+  color: var(--flexcyon-purple-lilac);
   background-color: var(--flexcyon-base-02);
   border: none;
   border-radius: 16px;
-  padding: 0.65em 1em;
-  font-size: 1.01803em;
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
@@ -77,30 +75,32 @@ select::-ms-expand {
 
 .blog-card__tag,
 .tag {
-  margin: 0.25em;
-  line-height: 1.2;
-  border-radius: 0.75em;
   padding: 0.5em 0.75em;
+  margin: 0.25em;
   font-size: 1em;
+  line-height: 1.2;
   background-color: var(--flexcyon-base-01-02-mix);
+  border-radius: 0.75em;
 }
 
 .blog-card__tag {
-  background-color: color-mix(in oklch, var(--flexcyon-base-03) 35%, transparent 80%);
-  margin-left: 0;
   margin-bottom: 12px;
+  margin-left: 0;
+  background-color: color-mix(in oklch, var(--flexcyon-base-03) 35%, transparent 80%);
 }
+
 .blog-card__tags {
   padding-top: 12px;
   margin-left: -4px;
 }
+
 .blog-card__tags a {
   margin-top: 12px;
   margin-bottom: 6px;
 }
 
 .tag a {
-  text-decoration: none;
-  text-transform: none;
   color: var(--text-faint);
+  text-transform: none;
+  text-decoration: none;
 }

@@ -1,15 +1,15 @@
 p.foot, footer {
   display: flex;
   gap: 0.75rem;
-  padding-top: 1rem;
   justify-content: left;
   max-width: 60vw;
+  padding-top: 1rem;
 }
 
 footer a {
-  text-decoration: none;
-  color: var(--text-faint);
   padding-right: 16px;
+  color: var(--text-faint);
+  text-decoration: none;
 }
 
 footer svg {
@@ -28,12 +28,12 @@ svg {
 }
 
 p.foot {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 p.foot a {
-  text-decoration: none;
   color: var(--text-normal);
+  text-decoration: none;
 }
 
 .posts-container {
@@ -44,6 +44,7 @@ p.foot a {
   .posts-container {
     width: 80vw;
   }
+
   .post-item {
     width: 70vw;
   }
@@ -93,16 +94,17 @@ p.foot a {
   max-inline-size: 300px;
   max-block-size: 220px;
   padding: 6px;
+
   &:hover {
-    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%);
     cursor: pointer;
+    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%);
   }
 }
 
 .card-item p {
-  margin-inline-start: 4px;
   max-inline-size: 300px;
   max-block-size: 220px;
+  margin-inline-start: 4px;
 }
 
 .profile-2 img,
@@ -119,10 +121,12 @@ p.foot a {
   .profile img {
     margin-right: unset;
   }
+
   .profile div {
-    margin-top: unset;
     padding-bottom: unset;
+    margin-top: unset;
   }
+
   .profile .foot {
     width: unset;
   }

@@ -1,0 +1,5 @@
+.body-scroll-locked {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}

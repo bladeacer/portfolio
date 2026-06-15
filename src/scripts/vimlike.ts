@@ -116,110 +116,92 @@ function animateScroll(timestamp) {
 }
 
 // --- Utility: Find Next/Previous Heading Index ---
-function findNextHeadingIndex(currentIndex, direction, candidates) {
-    let nextIndex = currentIndex + direction;
+function findNextHeadingIndex(currentIndex, direction, candidates, count) {
+  count = count || 1;
+  var found = 0;
+  var idx = currentIndex + direction;
 
-    while (nextIndex >= 0 && nextIndex < candidates.length) {
-        const tagName = candidates[nextIndex].tagName.toLowerCase();
-        
-        // Check if the element is an H1, H2, or H3
-        if (tagName.match(/^h[1-4]$/)) {
-            return nextIndex; 
-        }
-        nextIndex += direction;
-    }
-    
-    // If no heading is found in that direction, return the boundary index
-    return (direction === 1) ? candidates.length - 1 : 0;
+  while (idx >= 0 && idx < candidates.length) {
+    if (candidates[idx].tagName.toLowerCase().match(/^h[1-4]$/)) {
+      found++;
+      if (found >= count) return idx;
+    }
+    idx += direction;
+  }
+
+  return (direction === 1) ? candidates.length - 1 : 0;
 }
 
  
 // --- Main Jump Function (FIXED G/gg and J/K/{} scroll calculation) ---
-function jumpToElement(direction, command = null) {
-    // 1. Get ALL scrollable candidates
-    const candidates = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
-        .filter(el => el.getBoundingClientRect().height > 0);
+function jumpToElement(direction, command, count) {
+  count = count || 1;
+  var candidates = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
+    .filter(function(el) { return el.getBoundingClientRect().height > 0; });
 
-    if (candidates.length === 0) return;
+  if (candidates.length === 0) return;
 
-    let targetElement;
-    let currentIndex = -1;
-    let bestDistance = Infinity;
-    const viewportCenterY = window.innerHeight / 2;
-    
-    // Max scroll calculation for G command
-    const maxScrollY = Math.max(
-        document.body.scrollHeight, 
-        document.documentElement.scrollHeight, 
-        document.body.offsetHeight, 
-        document.documentElement.offsetHeight, 
-        document.body.clientHeight, 
-        document.documentElement.clientHeight
-    ) - window.innerHeight; 
+  var targetElement;
+  var currentIndex = -1;
+  var bestDistance = Infinity;
+  var viewportCenterY = window.innerHeight / 2;
 
-    // Find the element currently closest to the center
-    candidates.forEach((el, index) => {
-        const rect = el.getBoundingClientRect();
-        const elementCenterY = rect.top + rect.height / 2;
-        const distance = Math.abs(elementCenterY - viewportCenterY);
-        if (distance < bestDistance) {
-            bestDistance = distance;
-            currentIndex = index;
-        }
-    });
-    
-    // 2. Determine the target index and calculate the target scroll position
-    let nextIndex = currentIndex;
-    let targetScrollTop; // This will hold the absolute pixel value to scroll to
+  var maxScrollY = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight
+  ) - window.innerHeight;
 
-    if (command === 'top') {
-        nextIndex = 0;
-        targetScrollTop = 0; // Absolute top of the page
-    } else if (command === 'bottom') {
-        nextIndex = candidates.length - 1;
-        targetScrollTop = maxScrollY; // Absolute bottom of the page
-    } else if (command === 'heading') {
-        nextIndex = findNextHeadingIndex(currentIndex, direction, candidates);
-        targetElement = candidates[nextIndex];
-
-        // Calculate scroll-to-center for the heading
-        const targetRect = targetElement.getBoundingClientRect();
-        targetScrollTop = window.scrollY + targetRect.top + (targetRect.height / 2) - viewportCenterY;
-        
-    } else { // J/K Logic
-        nextIndex = currentIndex + direction;
-        
-        // Boundary check
-        if (nextIndex < 0) nextIndex = 0;
-        if (nextIndex >= candidates.length) nextIndex = candidates.length - 1;
-        
-        targetElement = candidates[nextIndex];
-
-        // Calculate scroll-to-center for J/K
-        const targetRect = targetElement.getBoundingClientRect();
-        targetScrollTop = window.scrollY + targetRect.top + (targetRect.height / 2) - viewportCenterY;
-    }
-
-    // Ensure targetElement is set for gg/G commands
-    if (!targetElement && nextIndex !== -1) {
-        targetElement = candidates[nextIndex];
+  candidates.forEach(function(el, index) {
+    var rect = el.getBoundingClientRect();
+    var elementCenterY = rect.top + rect.height / 2;
+    var distance = Math.abs(elementCenterY - viewportCenterY);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      currentIndex = index;
     }
-    
-    // Stop if already at the boundary or if the new index is the same as the current one
-    if (!targetElement || nextIndex === currentIndex) return;
+  });
 
-    // 3. Set the scroll distance based on the calculated targetScrollTop
-    startPosition = window.scrollY;
-    distanceToScroll = targetScrollTop - startPosition;
+  var nextIndex = currentIndex;
+  var targetScrollTop;
 
-    // If the distance is too small (e.g., at the boundary and trying to scroll further)
-    if (Math.abs(distanceToScroll) < 1) return;
+  if (command === 'top') {
+    nextIndex = 0;
+    targetScrollTop = 0;
+  } else if (command === 'bottom') {
+    nextIndex = candidates.length - 1;
+    targetScrollTop = maxScrollY;
+  } else if (command === 'heading') {
+    nextIndex = findNextHeadingIndex(currentIndex, direction, candidates, count);
+    targetElement = candidates[nextIndex];
+    var targetRect = targetElement.getBoundingClientRect();
+    targetScrollTop = window.scrollY + targetRect.top + (targetRect.height / 2) - viewportCenterY;
+  } else {
+    nextIndex = currentIndex + direction * count;
+    if (nextIndex < 0) nextIndex = 0;
+    if (nextIndex >= candidates.length) nextIndex = candidates.length - 1;
+    targetElement = candidates[nextIndex];
+    var targetRect = targetElement.getBoundingClientRect();
+    targetScrollTop = window.scrollY + targetRect.top + (targetRect.height / 2) - viewportCenterY;
+  }
 
+  if (!targetElement && nextIndex !== -1) {
+    targetElement = candidates[nextIndex];
+  }
 
-     // 4. Start the custom smooth scroll animation
-    if (animationFrame) cancelAnimationFrame(animationFrame);
-    scrollStartTimestamp = 0; // Reset timestamp for the new animation
-    animationFrame = requestAnimationFrame(animateScroll);
+  if (!targetElement || nextIndex === currentIndex) return;
+
+  startPosition = window.scrollY;
+  distanceToScroll = targetScrollTop - startPosition;
+
+  if (Math.abs(distanceToScroll) < 1) return;
+
+  if (animationFrame) cancelAnimationFrame(animationFrame);
+  scrollStartTimestamp = 0;
+  animationFrame = requestAnimationFrame(animateScroll);
 }
 
 
@@ -251,8 +233,7 @@ function handleKeydown(direction, command = null) {
     const count = numericPrefix;
     numericPrefix = 1;
 
-    // Use count as multiplier on direction (deterministic: advance N elements at once)
-    jumpToElement(direction * count, command);
+    jumpToElement(direction, command, count);
     return count;
 }
 
@@ -481,22 +462,22 @@ Mousetrap.bind('k', () => {
 
 // Heading Jumps
 Mousetrap.bind('{', () => {
-  handleKeydown(-1, 'heading');
-  showStatus('{', 'Previous heading');
+  var c = handleKeydown(-1, 'heading');
+  showStatus(c > 1 ? c + '{' : '{', 'Previous heading');
 });
 Mousetrap.bind('}', () => {
-  handleKeydown(1, 'heading');
-  showStatus('}', 'Next heading');
+  var c = handleKeydown(1, 'heading');
+  showStatus(c > 1 ? c + '}' : '}', 'Next heading');
 });
 
 // GG/G Bindings (Full top/bottom scroll)
 Mousetrap.bind('g g', () => {
-  handleKeydown(0, 'top');
-  showStatus('gg', 'Top of page');
+  var c = handleKeydown(0, 'top');
+  showStatus(c > 1 ? c + 'gg' : 'gg', 'Top of page');
 });
 Mousetrap.bind('G', () => {
-  handleKeydown(0, 'bottom');
-  showStatus('G', 'Bottom of page');
+  var c = handleKeydown(0, 'bottom');
+  showStatus(c > 1 ? c + 'G' : 'G', 'Bottom of page');
 });
 
 Mousetrap.bind('l', () => { 

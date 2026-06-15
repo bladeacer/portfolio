@@ -1,10 +1,12 @@
 th {
-  text-align: center;
   padding: 6px 10px;
+  text-align: center;
 }
+
 td {
   padding: 6px 8px;
 }
+
 table {
   background-color: var(--flexcyon-base-02);
   border-radius: 8px;

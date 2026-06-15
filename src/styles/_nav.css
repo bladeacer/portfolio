@@ -20,20 +20,20 @@ nav {
 }
 
 .nav-links {
-  max-width: 65%;
   top: 5rem;
   left: 48px;
+  max-width: 65%;
   margin: 0;
 }
 
 .nav-links a {
   display: block;
-  text-align: center;
   padding: 10px 0;
-  text-decoration: none;
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--flexcyon-blue);
+  text-align: center;
+  text-decoration: none;
 }
 
 .nav-links a:hover,
@@ -70,8 +70,8 @@ nav {
 }
 
 #themeToggle {
-  border: 0;
   background: none;
+  border: 0;
 }
 
 @media screen and (min-width: 636px) {
@@ -81,27 +81,29 @@ nav {
 }
 
 #themeToggle p {
-  color: var(--text-faint);
-  font-size: 13.25px;
   margin-top: 0.5em;
   margin-bottom: 1em;
+  font-size: 13.25px;
+  color: var(--text-faint);
 }
 
 #search-icon-btn {
-  border: 0;
-  background: none;
-  color: var(--flexcyon-cyan);
   padding-top: 12px;
+  color: var(--flexcyon-cyan);
+  background: none;
+  border: 0;
 }
+
 #search-icon-btn svg {
   display: block;
   margin: 0 auto;
 }
+
 #search-icon-btn p {
-  color: var(--flexcyon-cyan);
-  font-size: 13.25px;
   margin-top: 0.5em;
   margin-bottom: 1em;
+  font-size: 13.25px;
+  color: var(--flexcyon-cyan);
 }
 
 .sun, .moon {
@@ -109,9 +111,9 @@ nav {
 }
 
 .sun {
+  display: unset;
   fill: var(--text-accent);
   stroke: none;
-  display: unset;
 }
 
 body.theme-light .moon {
@@ -123,6 +125,6 @@ body.theme-dark .sun {
 }
 
 body.theme-dark .moon {
-  fill: var(--text-accent);
   display: unset;
+  fill: var(--text-accent);
 }

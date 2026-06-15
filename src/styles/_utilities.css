@@ -1,16 +1,17 @@
 a:has([class*="cta"]) {
-    color: var(--text-normal);
+    font-size: 1.15rem;
     font-weight: 900;
+    color: var(--text-normal);
     text-decoration: none;
     text-shadow: 2px 4px 2px 4px;
-    font-size: 1.15rem;
 }
 
 p[class*="cta"] {
+    max-inline-size: 60%;
     padding: 6px 12px;
     margin-bottom: 4px;
-    max-inline-size: 60%;
     border-radius: 12px;
+
     svg {
       color: var(--text-normal);
     }
@@ -29,10 +30,10 @@ p.cta3 {
 }
 
 .active-line-highlight {
+    padding: 4px 8px;
     background-color: color-mix(in oklch, var(--flexcyon-yellow) 12.5%, transparent) !important;
-    opacity: 1;
     border-radius: 4px;
-    padding: 4px 8px; 
+    opacity: 1; 
     transition: background-color 0.55s ease-in, opacity 0.5s ease-in-out;
 }
 
@@ -51,6 +52,7 @@ body {
     opacity: 0.55;
     transform: translateX(calc(var(--anim-slide-amt)) * -1);
   }
+
   100% {
     opacity: 1; 
     transform: translateX(0);

@@ -1,7 +1,7 @@
 html {
   --font-sans: "CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --font-fallback: "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: "DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: "DepartureMono", "Maple Mono Medium", ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace;
   --font-size-sans: 16px;
   --font-size-mono: 16px;
   --font-size-fallback: 16px;

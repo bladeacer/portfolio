@@ -1,11 +1,11 @@
 .stron-toc.toc {
   position: fixed;
-  left: 60vw;
   top: 11.5vh;
+  left: 60vw;
+  z-index: 100;
   max-width: min(35vw, 25rem);
   background-color: var(--flexcyon-base-01-02-mix);
   border-radius: 8px;
-  z-index: 100;
 }
 
 .stron-toc.toc.toc-hidden {
@@ -13,25 +13,25 @@
 }
 
 .toc-mobile-button {
-  display: none;
   position: fixed;
   top: 2rem;
   right: 2rem;
   z-index: 1001;
-  background: none;
-  color: var(--flexcyon-orange);
-  border: 0;
+  display: none;
   padding: 12px;
-  cursor: pointer;
   line-height: 0;
+  color: var(--flexcyon-orange);
+  cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .toc-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
   z-index: 999;
+  display: none;
+  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
 }
 
 @media (width < 1000px) {
@@ -45,16 +45,16 @@
 
   #toc-wrapper {
     position: fixed;
-    right: -100%;
     top: 0;
-    height: 100vh;
+    right: -100%;
+    z-index: 1000;
     width: 90vw;
     max-width: 600px;
-    background: var(--flexcyon-base-01-02-mix);
-    z-index: 1000;
-    transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
+    height: 100vh;
     padding: 2rem;
     overflow-y: auto;
+    background: var(--flexcyon-base-01-02-mix);
+    transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
   }
 
   #toc-wrapper.is-active {
@@ -62,10 +62,10 @@
   }
 
   stron-toc.toc {
-    display: block;
     position: relative;
-    left: 0;
     top: 0;
+    left: 0;
+    display: block;
     width: 100%;
     max-width: 100%;
     box-shadow: none;
@@ -77,23 +77,23 @@
 }
 
 #toc-title {
-  padding-inline: 32px;
-  padding-top: 0px;
-  color: var(--text-accent);
   display: block;
   width: 100%;
+  padding-inline: 32px;
+  padding-top: 0;
+  color: var(--text-accent);
 }
 
 .toc-content {
-  max-height: 70vh;
-  overflow: auto;
   display: block;
   width: 100%;
+  max-height: 70vh;
+  overflow: auto;
 }
 
 .toc-link.toc-current {
-  color: var(--flexcyon-blue);
   font-weight: bold;
+  color: var(--flexcyon-blue);
   opacity: 1;
 }
 
@@ -104,34 +104,39 @@
 .toc-content ul {
   padding-left: 0;
 }
+
 .toc-content ul li {
   position: relative;
-  list-style: none;
   padding-left: 1.25em;
-  border-left: 1px solid var(--text-faint);
   margin-left: 0;
+  list-style: none;
+  border-left: 1px solid var(--text-faint);
 }
+
 .toc-content ul li::before {
-  content: "├── ";
   position: absolute;
   left: -0.5em;
-  color: var(--text-faint);
   font-family: monospace;
+  color: var(--text-faint);
+  content: "├── ";
 }
+
 .toc-content ul li:last-child::before {
   content: "└── ";
 }
+
 .toc-content ul li a {
   padding-left: 0.75em;
-  -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 
 .toc-content li ul li {
   opacity: 0.85;
+
   &:hover, :focus {
     opacity: 1;
   }
+
   a {
     color: var(--flexcyon-purple-lilac);
   }
@@ -139,9 +144,11 @@
 
 .toc-content li ul li ul li {
   opacity: 0.75;
+
   &:hover, :focus {
     opacity: 1;
   }
+
   a {
     color: var(--flexcyon-cyan);
   }
@@ -149,9 +156,11 @@
 
 .toc-content li ul li ul li ul li{
   opacity: 0.95;
+
   &:hover, :focus {
     opacity: 1;
   }
+
   a {
     color: var(--flexcyon-pink);
   }

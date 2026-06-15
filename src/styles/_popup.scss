@@ -15,20 +15,20 @@
 }
 
 .popup-header h2 {
+  padding: 0;
   margin: 0;
   font-size: 1.25rem;
-  padding: 0;
   color: var(--flexcyon-blue);
 }
 
 .popup-close {
+  padding: 0 4px;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-faint);
+  cursor: pointer;
   background: none;
   border: none;
-  color: var(--text-faint);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0 4px;
-  line-height: 1;
 }
 
 .popup-close:hover {
@@ -36,16 +36,16 @@
 }
 
 .popup-body {
+  flex: 1;
   padding: 0.75rem 1.25rem 1.25rem;
   overflow-y: auto;
-  flex: 1;
 }
 
 .popup-body h4 {
+  padding: 0;
   margin: 0.75rem 0 0.25rem;
   font-size: 0.9rem;
   color: var(--flexcyon-purple-lilac);
-  padding: 0;
 }
 
 .popup-body h4:first-child {
@@ -54,8 +54,8 @@
 
 .popup-body table {
   width: 100%;
-  font-size: 0.85rem;
   margin-bottom: 0.25rem;
+  font-size: 0.85rem;
 }
 
 .popup-body th,
@@ -65,17 +65,17 @@
 }
 
 .popup-body th {
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-faint);
-  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .popup-body td:first-child {
-  font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
-  color: var(--flexcyon-cyan);
   width: 30%;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
+  color: var(--flexcyon-cyan);
 }
 
 .popup-top-link {

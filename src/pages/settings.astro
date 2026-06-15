@@ -20,6 +20,10 @@ const colors = [
 <BaseLayout pageTitle={pageTitle}>
   <p>Customise how this site looks. All changes are saved locally and applied immediately.</p>
 
+  <div class="setting-group">
+    <button id="settings-reset" class="setting-btn">Reset defaults (keeps theme)</button>
+  </div>
+
   <div class="settings-layout">
     <div class="settings-column">
       <h3>Theme</h3>
@@ -51,10 +55,6 @@ const colors = [
             <option value="paragraphs">Paragraphs</option>
           </select>
         </label>
-      </div>
-
-      <div class="setting-group">
-        <button id="settings-reset" class="setting-btn">Reset defaults (keeps theme)</button>
       </div>
 
       <h3>Fonts</h3>
@@ -150,10 +150,14 @@ const colors = [
     <div class="preview-column">
       <h3>Preview</h3>
       <div class="preview-box" id="preview-box">
-        <h4 id="preview-h4">Sample Heading &mdash; &#x6807;&#x9898;</h4>
+        <h1 id="preview-h1">Heading 1 &mdash; Title</h1>
+        <h2 id="preview-h2">Heading 2 &mdash; Section</h2>
+        <h3 id="preview-h3">Heading 3 &mdash; Subsection</h3>
+        <h4 id="preview-h4">Heading 4 &mdash; Detail</h4>
         <p id="preview-p">
-          This paragraph shows how your selected <strong id="preview-strong">fonts</strong> and
-          <a href="#" id="preview-link">colours</a> will render.
+          This paragraph shows how your selected <strong id="preview-strong">bold text</strong>,
+          <em id="preview-em">italic text</em>, <a href="#" id="preview-link">colours</a>, and
+          <code id="preview-inline-code">inline code</code> will render.
           &#x8fd9;&#x662f;&#x4e00;&#x4e2a;&#x793a;&#x4f8b;&#x6bb5;&#x843d;&#xff0c;&#x5305;&#x542b;&#x4e2d;&#x6587;&#x6587;&#x672c;&#x3002;
         </p>
         <pre id="preview-code"><code><span class="kw">import</span> <span class="nx">fs</span> <span class="kw">from</span> <span class="s">"node:fs"</span>;
@@ -270,6 +274,27 @@ const colors = [
     margin-bottom: 1.25rem;
   }
 
+  .preview-box h1 {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    font-size: 1.6rem;
+    color: var(--flexcyon-blue);
+  }
+
+  .preview-box h2 {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    font-size: 1.35rem;
+    color: var(--flexcyon-cyan);
+  }
+
+  .preview-box h3 {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    font-size: 1.15rem;
+    color: var(--flexcyon-green);
+  }
+
   .preview-box h4 {
     margin: 0 0 0.5rem;
     padding: 0;
@@ -277,21 +302,32 @@ const colors = [
     font-size: 1rem;
   }
 
-  .preview-box p {
-    margin: 0 0 0.75rem;
-    font-size: inherit;
-  }
-
-  .preview-box pre {
-    margin: 0;
-    max-width: 100%;
-  }
-
   .preview-box h5 {
     margin: 0.75rem 0 0.25rem;
     font-size: 0.9rem;
     color: var(--flexcyon-purple-lilac);
     padding: 0;
+  }
+
+  .preview-box p {
+    margin: 0 0 0.75rem;
+    font-size: inherit;
+  }
+
+  .preview-box em {
+    color: var(--text-accent);
+  }
+
+  .preview-box code {
+    font-size: inherit;
+    background-color: var(--flexcyon-base-03);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .preview-box pre code {
+    padding: 6px 10px;
+    display: block;
   }
 
   .preview-box blockquote {
