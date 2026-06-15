@@ -21,4 +21,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# misc
 .headroom
+.stylelintcache

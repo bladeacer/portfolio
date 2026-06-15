@@ -1,0 +1,121 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  z-index: 9999;
+  display: none;
+  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
+}
+
+.popup-overlay.is-active {
+  display: block;
+}
+
+.popup-content {
+  background-color: var(--flexcyon-base-02);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-content div {
+  max-width: none;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem 0.5rem;
+  border-bottom: 1px solid var(--flexcyon-base-04);
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  padding: 0;
+  color: var(--flexcyon-blue);
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.popup-close:hover {
+  color: var(--flexcyon-red-salmon);
+}
+
+.popup-body {
+  padding: 0.75rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.popup-body h4 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 0.9rem;
+  color: var(--flexcyon-purple-lilac);
+  padding: 0;
+}
+
+.popup-body h4:first-child {
+  margin-top: 0;
+}
+
+.popup-body table {
+  width: 100%;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.popup-body th,
+.popup-body td {
+  padding: 3px 8px;
+  text-align: left;
+}
+
+.popup-body th {
+  font-weight: 600;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.popup-body td:first-child {
+  font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
+  color: var(--flexcyon-cyan);
+  width: 30%;
+}
+
+.popup-top-link {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+.popup-top-link a {
+  color: var(--flexcyon-blue);
+  text-decoration: none;
+}
+
+.popup-top-link a:hover {
+  text-decoration: underline;
+}

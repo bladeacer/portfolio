@@ -87,7 +87,7 @@
     } else if (e.key === "Enter") {
       e.preventDefault();
       execute(selectedIdx >= 0 ? selectedIdx : 0);
-    } else if (e.key === "ArrowDown" || (e.key === "n" && e.ctrlKey)) {
+    } else if (e.key === "ArrowDown" || (e.key === "n" && e.altKey)) {
       e.preventDefault();
       if (filtered.length === 0) return;
       var next = (selectedIdx + 1) % filtered.length;
@@ -95,7 +95,7 @@
       var items = list.querySelectorAll(".cm-item");
       if (items[next]) items[next].classList.add("cm-selected");
       selectedIdx = next;
-    } else if (e.key === "ArrowUp" || (e.key === "p" && e.ctrlKey)) {
+    } else if (e.key === "ArrowUp" || (e.key === "p" && e.altKey)) {
       e.preventDefault();
       if (filtered.length === 0) return;
       var prev = (selectedIdx - 1 + filtered.length) % filtered.length;

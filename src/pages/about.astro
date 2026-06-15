@@ -32,45 +32,37 @@ const pageTitle = "bladeacer's Portfolio";
   </p>
   
   <h3 id="shortcuts">Shortcuts</h3>
-  <p>This site has its own set of keyboard shortcuts you can use which are heavily inspired by Vim and Vimium.</p>
+  <p>This site has its own set of keyboard shortcuts you can use which are heavily inspired by Vim and Vimium. All scrolling and yanking motions support a numeric prefix (<code>5j</code>, <code>2yy</code>, etc.).</p>
   <h4>Scrolling</h4>
   <table>
       <thead>
-          <tr>
-              <th>Trigger</th>
-              <th>Action</th>
-          </tr>
+          <tr><th>Trigger</th><th>Action</th></tr>
       </thead>
       <tbody>
-          <tr>
-              <td>j</td>
-              <td>Scroll up*</td>
-          </tr>
-          <tr>
-              <td>k</td>
-              <td>Scroll down*</td>
-          </tr>
-          <tr>
-              <td>&#123;</td>
-              <td>Scroll up to previous section*</td>
-          </tr>
-          <tr>
-              <td>&#125;</td>
-              <td>Scroll down to next section*</td>
-          </tr>
-          <tr>
-              <td>gg</td>
-              <td>Scroll to the top</td>
-          </tr>
-          <tr>
-              <td>G</td>
-              <td>Scroll to the bottom</td>
-          </tr>
+          <tr><td><kbd>j</kbd></td><td>Scroll down</td></tr>
+          <tr><td><kbd>k</kbd></td><td>Scroll up</td></tr>
+          <tr><td><kbd>{</kbd></td><td>Scroll to previous heading</td></tr>
+          <tr><td><kbd>}</kbd></td><td>Scroll to next heading</td></tr>
+          <tr><td><kbd>gg</kbd></td><td>Scroll to top of page</td></tr>
+          <tr><td><kbd>G</kbd></td><td>Scroll to bottom of page</td></tr>
       </tbody>
   </table>
-  <p>Note: scrolling only works on selections which <strong>do not exceed</strong> the vertical centre of the top and bottom of this site.</p>
-  <p>For the motions with `*`, scrolling <em>x</em> numbers of times is supported.<br>E.g. 5j scrolls down 5 times. This only works within the range 1 to 9.</p>
-  
+  <p>Numeric prefix: <code>5j</code> scrolls down 5 elements, <code>10k</code> scrolls up 10 elements. Range 1-9 for single digit, or type multiple digits within 1 second.</p>
+
+  <h4>Yanking (Clipboard)</h4>
+  <table>
+      <thead>
+          <tr><th>Trigger</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+          <tr><td><kbd>yy</kbd></td><td>Yank (copy) current element</td></tr>
+          <tr><td><kbd>Y</kbd></td><td>Yank entire page</td></tr>
+          <tr><td><kbd>y}</kbd></td><td>Yank from current to next heading</td></tr>
+          <tr><td><kbd>y{</kbd></td><td>Yank from current to previous heading</td></tr>
+          <tr><td><kbd>Nyy</kbd></td><td>Yank N elements (<code>2yy</code> = current + next)</td></tr>
+      </tbody>
+  </table>
+
   <h4>Navigation</h4>
   <table>
       <thead>
@@ -80,79 +72,43 @@ const pageTitle = "bladeacer's Portfolio";
           </tr>
       </thead>
       <tbody>
-          <tr>
-              <td>Enter</td>
-              <td>Navigate to first link under active line. Lets you select blog items and images.</td>
-          </tr>
-          <tr>
-              <td>h</td>
-              <td>Navigate to home page</td>
-          </tr>
-          <tr>
-              <td>a</td>
-              <td>Navigate to about page</td>
-          </tr>
-          <tr>
-              <td>d</td>
-              <td>Navigate to digital garden</td>
-          </tr>
-          <tr>
-              <td>c</td>
-              <td>Navigate to credits page</td>
-          </tr>
-          <tr>
-              <td>t</td>
-              <td>Navigate to tags page</td>
-          </tr>
-          <tr>
-              <td></td>
-          </tr>
-          <tr>
-              <td>r</td>
-              <td>Navigate to my resume</td>
-          </tr>
-          <tr>
-              <td>f</td>
-              <td>Navigate to my RSS feed</td>
-          </tr>
-          <tr>
-              <td></td>
-          </tr>
-          <tr>
-              <td>em</td>
-              <td>Navigate to my Email</td>
-          </tr>
-          <tr>
-              <td>li</td>
-              <td>Navigate to my LinkedIn</td>
-          </tr>
-          <tr>
-              <td>gh</td>
-              <td>Navigate to my GitHub</td>
-          </tr>
-          <tr>
-              <td>gl</td>
-              <td>Navigate to my GitLab</td>
-          </tr>
-          <tr>
-              <td>b</td>
-              <td>Navigate to my Codeberg</td>
-          </tr>
-          <tr>
-              <td></td>
-          </tr>
-          <tr>
-              <td>?</td>
-              <td>Navigate to this shortcuts table</td>
-          </tr>
-          <tr>
-              <td>&lt;</td>
-              <td>Navigate backward one entry in the browser's history stack</td>
-          </tr>
-          <tr>
-              <td>&gt;</td>
-              <td>Navigate forward one entry in the browser's history stack</td>
-          </tr>
+          <tr><td><kbd>Enter</kbd></td><td>Open first link under highlighted element</td></tr>
+          <tr><td><kbd>h</kbd></td><td>Home page</td></tr>
+          <tr><td><kbd>a</kbd></td><td>About page</td></tr>
+          <tr><td><kbd>d</kbd></td><td>Digital garden</td></tr>
+          <tr><td><kbd>c</kbd></td><td>Credits page</td></tr>
+          <tr><td><kbd>#</kbd></td><td>Tags page</td></tr>
+          <tr><td><kbd>s</kbd></td><td>Settings page</td></tr>
+          <tr><td><kbd>ctrl+,</kbd></td><td>Settings page</td></tr>
+          <tr><td><kbd>r</kbd></td><td>Resume / CV</td></tr>
+          <tr><td><kbd>!</kbd></td><td>RSS feed</td></tr>
+          <tr><td><kbd>em</kbd></td><td>Email</td></tr>
+          <tr><td><kbd>li</kbd></td><td>LinkedIn</td></tr>
+          <tr><td><kbd>gh</kbd></td><td>GitHub</td></tr>
+          <tr><td><kbd>gl</kbd></td><td>GitLab</td></tr>
+          <tr><td><kbd>b</kbd></td><td>Codeberg</td></tr>
+          <tr><td><kbd>gr</kbd></td><td>Gravatar</td></tr>
+          <tr><td><kbd>&lt;</kbd></td><td>History back</td></tr>
+          <tr><td><kbd>&gt;</kbd></td><td>History forward</td></tr>
+      </tbody>
+  </table>
+
+  <h4>Toggles &amp; Modes</h4>
+  <table>
+      <thead>
+          <tr><th>Trigger</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+          <tr><td><kbd>l</kbd></td><td>Highlight active line</td></tr>
+          <tr><td><kbd>t</kbd></td><td>Toggle theme (light/dark)</td></tr>
+          <tr><td><kbd>o</kbd></td><td>Toggle table of contents</td></tr>
+          <tr><td><kbd>f</kbd></td><td>Open site search</td></tr>
+          <tr><td><kbd>:</kbd></td><td>Open command palette</td></tr>
+          <tr><td><kbd>ctrl+p</kbd></td><td>Open command palette</td></tr>
+          <tr><td><kbd>Alt+n</kbd></td><td>Next search/command result</td></tr>
+          <tr><td><kbd>Alt+p</kbd></td><td>Previous search/command result</td></tr>
+          <tr><td><kbd>?</kbd></td><td>Show this shortcuts reference</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Close overlay / Cancel</td></tr>
       </tbody>
   </table>
   <p>Note: For navigating to the first link under active line, you would need to use scroll motions or toggle active line first.</p>

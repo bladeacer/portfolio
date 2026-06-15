@@ -1,3 +1,6 @@
+---
+import "../styles/_popup.scss";
+---
 <div id="shortcuts-popup-overlay" class="popup-overlay">
   <div id="shortcuts-popup" class="popup-content" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts">
     <div class="popup-header">
@@ -14,12 +17,25 @@
           <tr><th>Trigger</th><th>Action</th></tr>
         </thead>
         <tbody>
-          <tr><td>j</td><td>Scroll up</td></tr>
-          <tr><td>k</td><td>Scroll down</td></tr>
-          <tr><td>&#123;</td><td>Scroll up to previous section</td></tr>
-          <tr><td>&#125;</td><td>Scroll down to next section</td></tr>
-          <tr><td>gg</td><td>Scroll to the top</td></tr>
-          <tr><td>G</td><td>Scroll to the bottom</td></tr>
+          <tr><td>j</td><td>Scroll down</td></tr>
+          <tr><td>k</td><td>Scroll up</td></tr>
+          <tr><td>&#123;</td><td>Previous heading</td></tr>
+          <tr><td>&#125;</td><td>Next heading</td></tr>
+          <tr><td>gg</td><td>Top of page</td></tr>
+          <tr><td>G</td><td>Bottom of page</td></tr>
+        </tbody>
+      </table>
+      <h4>Yanking</h4>
+      <table>
+        <thead>
+          <tr><th>Trigger</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>yy</td><td>Yank current element</td></tr>
+          <tr><td>Y</td><td>Yank entire page</td></tr>
+          <tr><td>y&#125;</td><td>Yank to next heading</td></tr>
+          <tr><td>y&#123;</td><td>Yank to previous heading</td></tr>
+          <tr><td>Nyy</td><td>Yank N elements (2yy = 2 lines)</td></tr>
         </tbody>
       </table>
       <h4>Navigation</h4>
@@ -28,6 +44,7 @@
           <tr><th>Trigger</th><th>Action</th></tr>
         </thead>
         <tbody>
+          <tr><td>Enter</td><td>Open link under active line</td></tr>
           <tr><td>h</td><td>Home page</td></tr>
           <tr><td>a</td><td>About page</td></tr>
           <tr><td>d</td><td>Digital garden</td></tr>
@@ -42,11 +59,12 @@
           <tr><td>gh</td><td>GitHub</td></tr>
           <tr><td>gl</td><td>GitLab</td></tr>
           <tr><td>b</td><td>Codeberg</td></tr>
+          <tr><td>gr</td><td>Gravatar</td></tr>
           <tr><td>&lt;</td><td>History back</td></tr>
           <tr><td>&gt;</td><td>History forward</td></tr>
         </tbody>
       </table>
-      <h4>Toggles</h4>
+      <h4>Toggles &amp; Modes</h4>
       <table>
         <thead>
           <tr><th>Trigger</th><th>Action</th></tr>
@@ -55,139 +73,18 @@
           <tr><td>l</td><td>Highlight active line</td></tr>
           <tr><td>t</td><td>Toggle theme</td></tr>
           <tr><td>o</td><td>Toggle table of contents</td></tr>
-          <tr><td>f</td><td>Search site</td></tr>
-          <tr><td>:</td><td>Command mode</td></tr>
-          <tr><td>ctrl+p</td><td>Command mode</td></tr>
-          <tr><td>?</td><td>Show shortcuts popup</td></tr>
-          <tr><td>Esc</td><td>Close popup / Cancel</td></tr>
+          <tr><td>f</td><td>Open search</td></tr>
+          <tr><td>:</td><td>Command palette</td></tr>
+          <tr><td>ctrl+p</td><td>Command palette</td></tr>
+          <tr><td>Alt+n</td><td>Next search result</td></tr>
+          <tr><td>Alt+p</td><td>Previous search result</td></tr>
+          <tr><td>?</td><td>Show shortcuts</td></tr>
+          <tr><td>Esc</td><td>Close / Cancel</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-  <style is:global>
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      z-index: 9999;
-      display: none;
-      background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
-    }
-    .popup-overlay.is-active {
-      display: block;
-    }
-
-    .popup-content {
-      background-color: var(--flexcyon-base-02);
-      border: 1px solid var(--flexcyon-base-04);
-      border-radius: 12px;
-      max-width: 800px;
-      width: 90vw;
-      max-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-  .popup-content div {
-    max-width: none;
-  }
-
-  .popup-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem 0.5rem;
-    border-bottom: 1px solid var(--flexcyon-base-04);
-  }
-
-  .popup-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    padding: 0;
-    color: var(--flexcyon-blue);
-  }
-
-  .popup-close {
-    background: none;
-    border: none;
-    color: var(--text-faint);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0 4px;
-    line-height: 1;
-  }
-
-  .popup-close:hover {
-    color: var(--flexcyon-red-salmon);
-  }
-
-  .popup-body {
-    padding: 0.75rem 1.25rem 1.25rem;
-    overflow-y: auto;
-    flex: 1;
-  }
-
-  .popup-body h4 {
-    margin: 0.75rem 0 0.25rem;
-    font-size: 0.9rem;
-    color: var(--flexcyon-purple-lilac);
-    padding: 0;
-  }
-
-  .popup-body h4:first-child {
-    margin-top: 0;
-  }
-
-  .popup-body table {
-    width: 100%;
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .popup-body th,
-  .popup-body td {
-    padding: 3px 8px;
-    text-align: left;
-  }
-
-  .popup-body th {
-    font-weight: 600;
-    color: var(--text-faint);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .popup-body td:first-child {
-    font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
-    color: var(--flexcyon-cyan);
-    width: 30%;
-  }
-
-  .popup-top-link {
-    margin: 0 0 0.75rem;
-    font-size: 0.85rem;
-  }
-
-  .popup-top-link a {
-    color: var(--flexcyon-blue);
-    text-decoration: none;
-  }
-
-  .popup-top-link a:hover {
-    text-decoration: underline;
-  }
-</style>
 
 <script is:inline>
   (function() {

@@ -20,4 +20,9 @@ export default defineConfig({
           },
         },
     },
+    vite: {
+        css: {
+            minify: true,
+        },
+    },
 });
