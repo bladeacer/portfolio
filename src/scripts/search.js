@@ -38,15 +38,13 @@ import FlexSearch from 'flexsearch';
               cache: true,
             }, {
               field: 'content',
-              tokenize: 'forward',
+              tokenize: 'full',
               resolution: 5,
               cache: true,
             }],
             store: ['title', 'url']
           },
-          tokenize: 'forward',
           cache: true,
-          context: { resolution: 3, depth: 2, bidirectional: true },
         });
         pages.forEach(function(p, i) {
           index.add({ id: i, title: p.title, content: p.content, url: p.url });
@@ -131,24 +129,26 @@ import FlexSearch from 'flexsearch';
     var results = [];
     var seenUrls = {};
     var lower = q.toLowerCase();
-    // FlexSearch index search
-    var raw = index.search(q, { limit: 20 });
-    if (raw && raw.length) {
-      raw.forEach(function(fieldRes) {
-        if (fieldRes.result) {
-          fieldRes.result.forEach(function(id) {
-            var p = pages[id];
-            if (p && !seenUrls[p.url]) {
-              seenUrls[p.url] = true;
-              var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
-              var rank = (p.title && p.title.toLowerCase().indexOf(lower) > -1) ? 0 : 1;
-              var preview = (p.content || '').substring(0, 120);
-              results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q), preview: preview, rank: rank });
-            }
-          });
-        }
-      });
-    }
+    // FlexSearch index search (with try/catch so fallback still runs)
+    try {
+      var raw = index.search(q, { limit: 20 });
+      if (raw && raw.length) {
+        raw.forEach(function(fieldRes) {
+          if (fieldRes.result) {
+            fieldRes.result.forEach(function(id) {
+              var p = pages[id];
+              if (p && !seenUrls[p.url]) {
+                seenUrls[p.url] = true;
+                var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
+                var rank = (p.title && p.title.toLowerCase().indexOf(lower) > -1) ? 0 : 1;
+                var preview = (p.content || '').substring(0, 120);
+                results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q), preview: preview, rank: rank });
+              }
+            });
+          }
+        });
+      }
+    } catch(e) {} // FlexSearch error non-fatal; fallback below still runs
     // Always run fallback for substring matching (catches partial-word matches)
     pages.forEach(function(p) {
       if (seenUrls[p.url]) return;

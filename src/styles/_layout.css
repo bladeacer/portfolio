@@ -1,0 +1,129 @@
+p.foot, footer {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  justify-content: left;
+  max-width: 60vw;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--text-faint);
+  padding-right: 16px;
+}
+
+footer svg {
+  transform: translateY(6px);
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (width < 900px) {
+  footer {
+    flex-direction: column;
+  }
+}
+
+p.foot {
+  margin-top: 0px;
+}
+
+p.foot a {
+  text-decoration: none;
+  color: var(--text-normal);
+}
+
+.posts-container {
+  width: 45vw;
+}
+
+@media (width < 1000px) {
+  .posts-container {
+    width: 80vw;
+  }
+  .post-item {
+    width: 70vw;
+  }
+}
+
+.skill-icons {
+  margin-inline-start: -6px;
+}
+
+.skill-icons a {
+  text-decoration: none;
+}
+
+.skill-icons img {
+  float: left;
+  scale: 0.8;
+}
+
+.skill-icons br {
+  margin-bottom: 6px;
+}
+
+.profile,
+.profile-2,
+.profile-3,
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  max-width: 100%;
+}
+
+.profile-2 {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.profile {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.profile-3 {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.card-item img {
+  max-inline-size: 300px;
+  max-block-size: 220px;
+  padding: 6px;
+  &:hover {
+    background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%);
+    cursor: pointer;
+  }
+}
+
+.card-item p {
+  margin-inline-start: 4px;
+  max-inline-size: 300px;
+  max-block-size: 220px;
+}
+
+.profile-2 img,
+.profile img {
+  border-radius: 50%;
+}
+
+.profile img {
+  margin-right: 2.5%;
+}
+
+@media (width < 900px) {
+  .profile-2,
+  .profile img {
+    margin-right: unset;
+  }
+  .profile div {
+    margin-top: unset;
+    padding-bottom: unset;
+  }
+  .profile .foot {
+    width: unset;
+  }
+}

@@ -1,6 +1,6 @@
 var Mousetrap = window.Mousetrap;
 // Scoped selectors: only direct-list-item children + specific class-based targets
-const CANDIDATE_SELECTOR = '.content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card, .content-wrapper .cards .card-item'; 
+const CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card'; 
 
 const HEADING_TYPE_SELECTOR = 'h1, h2, h3, h4'; 
 const HIGHLIGHT_DURATION = 2000;
@@ -334,6 +334,121 @@ function showStatus(chord, desc) {
 }
 
 // J/K Bindings
+// --- Yank Functionality ---
+var yPending = false;
+var yPendingTimer = null;
+
+function yankToClipboard(text, label) {
+  var len = text.length;
+  navigator.clipboard.writeText(text).then(function() {
+    showStatus(label || 'yank', 'Copied ' + len + ' chars');
+  }).catch(function() {
+    showStatus(label || 'yank', 'Clipboard write failed');
+  });
+}
+
+function yankCurrentElement() {
+  var el = document.querySelector('.' + HIGHLIGHT_CLASS) || lastHighlightedElement;
+  if (!el) return;
+  var count = numericPrefix > 1 ? numericPrefix : 1;
+  numericPrefix = 1;
+  if (count > 1) {
+    var cs = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR));
+    var idx = cs.indexOf(el);
+    if (idx !== -1) {
+      var endIdx = Math.min(idx + count, cs.length);
+      var texts = cs.slice(idx, endIdx).map(function(e) { return e.textContent.trim(); });
+      yankToClipboard(texts.join('\n'), count + 'yy');
+      return;
+    }
+  }
+  yankToClipboard(el.textContent.trim(), 'yy');
+}
+
+function yankWholePage() {
+  numericPrefix = 1;
+  var text = document.body.innerText || document.body.textContent || '';
+  yankToClipboard(text.trim(), 'Y');
+}
+
+function yankToHeading(direction) {
+  var el = document.querySelector('.' + HIGHLIGHT_CLASS) || lastHighlightedElement;
+  if (!el) return;
+  var cs = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR));
+  var idx = cs.indexOf(el);
+  if (idx === -1) return;
+  var headingIdx = findNextHeadingIndex(idx, direction, cs);
+  if (headingIdx === idx) {
+    // No heading found in that direction; yank to boundary
+    headingIdx = direction === 1 ? cs.length - 1 : 0;
+  }
+  var start = direction === 1 ? idx : headingIdx;
+  var end = direction === 1 ? headingIdx + 1 : idx + 1;
+  var texts = cs.slice(start, end).map(function(e) { return e.textContent.trim(); });
+  yankToClipboard(texts.join('\n'), 'y' + (direction === 1 ? '}' : '{'));
+}
+
+// Capture-phase keydown for yank state machine (intercepts before Mousetrap)
+document.addEventListener('keydown', function(e) {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  if (e.repeat) return;
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+  if (yPending) {
+    if (e.key === 'y') {
+      e.stopPropagation();
+      e.preventDefault();
+      yPending = false;
+      clearTimeout(yPendingTimer);
+      yankCurrentElement();
+      return;
+    }
+    if (e.key === '}') {
+      e.stopPropagation();
+      e.preventDefault();
+      yPending = false;
+      clearTimeout(yPendingTimer);
+      yankToHeading(1);
+      return;
+    }
+    if (e.key === '{') {
+      e.stopPropagation();
+      e.preventDefault();
+      yPending = false;
+      clearTimeout(yPendingTimer);
+      yankToHeading(-1);
+      return;
+    }
+    // Any other key cancels yank prompt
+    yPending = false;
+    clearTimeout(yPendingTimer);
+  }
+
+  if (e.key === 'y' && !e.shiftKey) {
+    yPending = true;
+    yPendingTimer = setTimeout(function() { yPending = false; }, 1000);
+    return;
+  }
+
+  if (e.key === 'Y') {
+    e.stopPropagation();
+    e.preventDefault();
+    yankWholePage();
+    return;
+  }
+}, true);
+
+// Update shortcuts registry for yank commands
+if (window.__shortcutsRegistry) {
+  window.__shortcutsRegistry.push(
+    { chord: 'yy', desc: 'Yank current element' },
+    { chord: 'Y', desc: 'Yank entire page' },
+    { chord: 'y}', desc: 'Yank from current to next heading' },
+    { chord: 'y{', desc: 'Yank from current to previous heading' }
+  );
+}
+
 Mousetrap.bind('j', () => {
   var c = handleKeydown(1);
   showStatus(c > 1 ? c + 'j' : 'j', 'Scrolled down');
