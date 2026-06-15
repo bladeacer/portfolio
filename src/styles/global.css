@@ -473,22 +473,30 @@ li {
   display: none;
 }
 
-.toc-content ul li {
-  border-left: var(--text-faint) 1px solid;
+.toc-content ul {
+  padding-left: 0;
 }
 .toc-content ul li {
-  list-style-type: "\2500";
-  list-style-position: inside;
-  margin-left: -1.25px;
-
-  &::marker {
-    color: var(--text-faint) !important;
-  }
-  a {
-    padding-left: 8px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
+  position: relative;
+  list-style: none;
+  padding-left: 1.25em;
+  border-left: 1px solid var(--text-faint);
+  margin-left: 0;
+}
+.toc-content ul li::before {
+  content: "├── ";
+  position: absolute;
+  left: -0.5em;
+  color: var(--text-faint);
+  font-family: monospace;
+}
+.toc-content ul li:last-child::before {
+  content: "└── ";
+}
+.toc-content ul li a {
+  padding-left: 0.75em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .toc-content li ul li {

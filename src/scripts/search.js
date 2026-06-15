@@ -31,9 +31,22 @@ import FlexSearch from 'flexsearch';
         index = new FlexSearch.Document({
           document: {
             id: 'id',
-            index: ['title', 'content'],
+            index: [{
+              field: 'title',
+              tokenize: 'forward',
+              resolution: 9,
+              cache: true,
+            }, {
+              field: 'content',
+              tokenize: 'forward',
+              resolution: 5,
+              cache: true,
+            }],
             store: ['title', 'url']
-          }
+          },
+          tokenize: 'forward',
+          cache: true,
+          context: { resolution: 3, depth: 2, bidirectional: true },
         });
         pages.forEach(function(p, i) {
           index.add({ id: i, title: p.title, content: p.content, url: p.url });

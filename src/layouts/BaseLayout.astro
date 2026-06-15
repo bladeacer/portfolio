@@ -113,7 +113,7 @@ const { pageTitle } = Astro.props;
         padding: 0;
         overflow-y: auto;
         flex: 1;
-        max-width: unset;
+        max-width: none;
       }
       .search-result-item {
         padding: 0.6rem 1.25rem;
@@ -145,10 +145,9 @@ const { pageTitle } = Astro.props;
         font-style: italic;
       }
       .search-highlight {
-        background-color: var(--flexcyon-yellow);
-        color: var(--flexcyon-base-01);
-        padding: 0 2px;
-        border-radius: 2px;
+        background-color: color-mix(in oklch, var(--flexcyon-yellow) 12.5%, transparent);
+        border-radius: 4px;
+        padding: 2px 4px;
       }
       .search-snippet {
         font-size: 0.78rem;
@@ -212,6 +211,7 @@ const { pageTitle } = Astro.props;
         padding: 0;
         overflow-y: auto;
         max-height: 35vh;
+        max-width: none;
       }
       .cm-item {
         padding: 0.5rem 1.25rem;
@@ -220,6 +220,7 @@ const { pageTitle } = Astro.props;
         color: var(--text-normal);
         display: flex;
         align-items: center;
+        gap: 0.5rem;
         border-bottom: 1px solid var(--flexcyon-base-03);
       }
       .cm-item:last-child {
