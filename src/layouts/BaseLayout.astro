@@ -65,7 +65,10 @@ const { pageTitle } = Astro.props;
       /* Search overlay - exact popup pattern */
       .search-overlay {
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: 99999;
         display: none;
         background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
@@ -92,7 +95,7 @@ const { pageTitle } = Astro.props;
         color: var(--text-normal);
         font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
         font-size: 1rem;
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.25rem;
         outline: none;
         border-bottom: 1px solid var(--flexcyon-base-04);
         box-sizing: border-box;
@@ -108,7 +111,7 @@ const { pageTitle } = Astro.props;
         flex: 1;
       }
       .search-result-item {
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.25rem;
         cursor: pointer;
         font-size: 0.9rem;
         color: var(--text-normal);
@@ -153,7 +156,10 @@ const { pageTitle } = Astro.props;
       /* Command mode overlay - exact popup pattern */
       .command-mode-overlay {
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: 99999;
         display: none;
         background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
@@ -184,7 +190,7 @@ const { pageTitle } = Astro.props;
         color: var(--text-normal);
         font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
         font-size: 0.95rem;
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.25rem;
         outline: none;
         border-bottom: 1px solid var(--flexcyon-base-04);
         box-sizing: border-box;
@@ -200,7 +206,7 @@ const { pageTitle } = Astro.props;
         max-height: 35vh;
       }
       .cm-item {
-        padding: 0.4rem 0.75rem;
+        padding: 0.5rem 1.25rem;
         cursor: pointer;
         font-size: 0.85rem;
         color: var(--text-normal);
@@ -220,12 +226,11 @@ const { pageTitle } = Astro.props;
       .cm-chord {
         font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
         color: var(--flexcyon-cyan);
-        min-width: 6em;
+        min-width: 4em;
         font-size: 0.85rem;
       }
       .cm-desc {
         color: var(--text-normal);
-        margin-left: 0.75rem;
         font-size: 0.85rem;
       }
       .cm-empty {

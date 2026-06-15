@@ -22,13 +22,13 @@ export async function GET() {
   // Get all markdown posts
   var postModules = import.meta.glob('./posts/**/*.md', { query: '?raw', import: 'default' });
   var staticPages = [
-    { title: 'Home', url: '/portfolio/', content: 'Home page - About Me' },
-    { title: 'About', url: '/portfolio/about/', content: 'About bladeacer' },
-    { title: 'Credits', url: '/portfolio/credits/', content: 'Credits and acknowledgements' },
-    { title: 'Settings', url: '/portfolio/settings/', content: 'Site settings and customisation' },
-    { title: 'Digital Garden', url: '/portfolio/digital-garden/', content: 'Digital garden index' },
-    { title: 'Resume', url: '/portfolio/resume/', content: 'Resume and CV' },
-    { title: 'Tags', url: '/portfolio/tags/', content: 'All tags index' },
+    { title: 'Home', url: '/portfolio/', content: 'Home page - About Me. Personal portfolio and blog. Tech stack, current projects, and contact information. CSS, Vim, Linux enthusiast. Software developer.' },
+    { title: 'About', url: '/portfolio/about/', content: 'About bladeacer. Keyboard shortcuts reference, site features, and usage guide. Scrolling, navigation, toggles, and other keyboard shortcuts.' },
+    { title: 'Credits', url: '/portfolio/credits/', content: 'Credits and acknowledgements for tools, fonts, icons, and libraries used to build this site. Open source licenses and attributions.' },
+    { title: 'Settings', url: '/portfolio/settings/', content: 'Site settings and customisation. Configure fonts, font sizes, heading sizes and colours, accent colours for dark and light mode. All changes are saved locally.' },
+    { title: 'Digital Garden', url: '/portfolio/digital-garden/', content: 'Digital garden index. A collection of notes and writings covering Linux, programming, tools, PDF processing, and other technical topics.' },
+    { title: 'Resume', url: '/portfolio/resume/', content: 'Resume and CV. Download or view the resume of bladeacer, detailing skills, experience, and projects as a software developer.' },
+    { title: 'Tags', url: '/portfolio/tags/', content: 'All tags index. Browse posts by topic tags including Linux, programming languages, PDF tools, Vim, themes, and more.' },
   ];
 
   var entries = [];

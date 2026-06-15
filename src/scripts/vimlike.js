@@ -110,25 +110,11 @@ function animateScroll(timestamp) {
     if (progress < 1) {
         animationFrame = requestAnimationFrame(animateScroll);
     } else {
-        // Animation finished, reset animation state for the next jump
+        // Animation finished, reset state
         scrollStartTimestamp = 0;
         lastScrollTime = timestamp;
-        
-        // If there's a numeric prefix remaining (2 or more), perform the next jump
-        if (numericPrefix > 1) {
-            numericPrefix--; // Decrement the count
-            // Recalculate and start the next jump immediately
-            const direction = distanceToScroll > 0 ? 1 : -1;
-            // Pass the 'command' argument to preserve heading logic during chained jumps
-            jumpToElement(direction, lastCommand); 
-        } else {
-            // If all jumps are done (numericPrefix is 1 or less):
-            // 1. Reset the numericPrefix state
-            numericPrefix = 1; 
-            
-            // 2. Reset the keyHoldStartTime
-            keyHoldStartTime = 0;
-        }
+        numericPrefix = 1;
+        keyHoldStartTime = 0;
     }
 }
 
@@ -251,51 +237,31 @@ function jumpToElement(direction, command = null) {
 function handleNumberKey(event) {
     const number = parseInt(event.key, 10);
     if (!isNaN(number)) {
-        // Clear the old timeout
         clearTimeout(numericPrefixTimeout);
-        // Build the prefix
         numericPrefix = (numericPrefix === 1 ? 0 : numericPrefix) * 10 + number;
-        
-        // Set a timeout to reset the prefix if no command follows
         numericPrefixTimeout = setTimeout(() => {
             numericPrefix = 1;
-        }, 800);
+        }, 1000);
     }
 }
-// Bind number keys for prefix capture (8 and 9 excluded - used for tags and TOC)
-for (let i = 0; i <= 7; i++) {
+// Bind number keys 0-9 for prefix capture
+for (let i = 0; i <= 9; i++) {
     Mousetrap.bind(String(i), handleNumberKey, 'keydown');
 }
 
 function handleKeydown(direction, command = null) {
-    clearTimeout(numericPrefixTimeout); // Stop number capture
+    clearTimeout(numericPrefixTimeout);
 
-    // Only initialize keyHoldStartTime if it hasn't been set (i.e., if it's the first keydown)
     if (keyHoldStartTime === 0) {
         keyHoldStartTime = performance.now();
     }
     
     const count = numericPrefix;
-    numericPrefix = 1; // Reset prefix immediately
+    numericPrefix = 1;
 
-    // For multi-jump: multiply distance instead of sequential animations
-    if (count > 1 && command !== 'heading') {
-        numericPrefix = 1;
-        jumpToElement(direction, command);
-        distanceToScroll *= count;
-        if (animationFrame) cancelAnimationFrame(animationFrame);
-        scrollStartTimestamp = 0;
-        animationFrame = requestAnimationFrame(animateScroll);
-        return;
-    }
-
-    // Perform the first jump
-    jumpToElement(direction, command);
-    
-    // Set the remaining count for the animation loop to handle
-    if (count > 1) {
-        numericPrefix = count;
-    }
+    // Use count as multiplier on direction (deterministic: advance N elements at once)
+    jumpToElement(direction * count, command);
+    return count;
 }
 
 function navigateToNearestLink() {
@@ -369,14 +335,12 @@ function showStatus(chord, desc) {
 
 // J/K Bindings
 Mousetrap.bind('j', () => {
-  handleKeydown(1);
-  var c = numericPrefix > 1 ? numericPrefix + 'j' : 'j';
-  showStatus(c, 'Scrolled down');
+  var c = handleKeydown(1);
+  showStatus(c > 1 ? c + 'j' : 'j', 'Scrolled down');
 }, 'keydown');
 Mousetrap.bind('k', () => {
-  handleKeydown(-1);
-  var c = numericPrefix > 1 ? numericPrefix + 'k' : 'k';
-  showStatus(c, 'Scrolled up');
+  var c = handleKeydown(-1);
+  showStatus(c > 1 ? c + 'k' : 'k', 'Scrolled up');
 }, 'keydown');
 
 // Heading Jumps

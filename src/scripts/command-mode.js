@@ -36,7 +36,7 @@
     filtered.forEach(function(s, i) {
       var li = document.createElement("li");
       li.className = "cm-item" + (i === 0 ? " cm-selected" : "");
-      var chordText = s.chord + ':';
+      var chordText = s.chord + ': ';
       var descText = s.desc;
       var q = input.value.toLowerCase().trim();
       if (q) {
@@ -118,6 +118,7 @@
     render();
     input.focus();
     if (window.setMode) window.setMode('CMD');
+    if (window.showStatus) window.showStatus(':', 'Opened command palette');
   };
 
   window.closeCommandMode = close;

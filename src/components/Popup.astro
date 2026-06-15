@@ -51,8 +51,7 @@
           <tr><td>l</td><td>Highlight active line</td></tr>
           <tr><td>t</td><td>Toggle theme</td></tr>
           <tr><td>9</td><td>Toggle table of contents</td></tr>
-          <tr><td>ctrl+/</td><td>Search site</td></tr>
-          <tr><td>ctrl+f</td><td>Search site</td></tr>
+          <tr><td>f</td><td>Search site</td></tr>
           <tr><td>:</td><td>Command mode</td></tr>
           <tr><td>ctrl+p</td><td>Command mode</td></tr>
           <tr><td>?</td><td>Show shortcuts popup</td></tr>
@@ -69,7 +68,10 @@
   <style is:global>
     .popup-overlay {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 9999;
       display: none;
       background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);

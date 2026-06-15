@@ -139,19 +139,21 @@ Mousetrap.bind('r', function(e) {
 
 Mousetrap.bind('<', () => {
     history.back();
-    showStatus('<', 'History back');
+    showStatus('<', 'History back', true);
     return false;
 });
 
 Mousetrap.bind('>', () => {
     history.forward();
-    showStatus('>', 'History forward');
+    showStatus('>', 'History forward', true);
     return false;
 });
 
-Mousetrap.bind('f', () => {
-    window.location.href = "/portfolio/rss.xml";
-    showStatus('f', 'Opened RSS feed');
+Mousetrap.bind('f', function() {
+    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    if (window.openSearch) window.openSearch();
+    showStatus('f', 'Opened search');
     return false; 
 });
 

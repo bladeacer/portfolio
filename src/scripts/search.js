@@ -74,6 +74,10 @@ import FlexSearch from 'flexsearch';
           snippetHtml = r.snippet.substring(0, sIdx) + '<mark class="search-highlight">' + r.snippet.substring(sIdx, sIdx + q.length) + '</mark>' + r.snippet.substring(sIdx + q.length);
         }
       }
+      // If title matched but no content snippet, show first chars as preview
+      if (!snippetHtml && r.title && r.title.toLowerCase().indexOf(q) > -1 && r.preview) {
+        snippetHtml = r.preview;
+      }
       li.innerHTML = '<a href="' + r.url + '">' + displayLabel + '</a>' + (snippetHtml ? '<div class="search-snippet">' + snippetHtml + '</div>' : '');
       li.dataset.url = r.url;
       li.addEventListener('click', function() { navigate(r.url); });
@@ -113,6 +117,7 @@ import FlexSearch from 'flexsearch';
     }
     var results = [];
     var seenUrls = {};
+    var lower = q.toLowerCase();
     // FlexSearch index search
     var raw = index.search(q, { limit: 20 });
     if (raw && raw.length) {
@@ -123,23 +128,28 @@ import FlexSearch from 'flexsearch';
             if (p && !seenUrls[p.url]) {
               seenUrls[p.url] = true;
               var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
-              results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q) });
+              var rank = (p.title && p.title.toLowerCase().indexOf(lower) > -1) ? 0 : 1;
+              var preview = (p.content || '').substring(0, 120);
+              results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q), preview: preview, rank: rank });
             }
           });
         }
       });
     }
     // Always run fallback for substring matching (catches partial-word matches)
-    var lower = q.toLowerCase();
     pages.forEach(function(p) {
       if (seenUrls[p.url]) return;
       if ((p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
           (p.content && p.content.toLowerCase().indexOf(lower) > -1)) {
         seenUrls[p.url] = true;
         var bc = p.url.indexOf('/posts/') > -1 ? 'Posts' : '';
-        results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q) });
+        var rank = (p.title && p.title.toLowerCase().indexOf(lower) > -1) ? 0 : 1;
+        var preview = (p.content || '').substring(0, 120);
+        results.push({ title: p.title, url: p.url, breadcrumb: bc, snippet: extractSnippet(p.content || '', q), preview: preview, rank: rank });
       }
     });
+    // Sort: title matches first, then content matches
+    results.sort(function(a, b) { return a.rank - b.rank; });
     render(results.slice(0, 10));
   }
 
@@ -191,27 +201,12 @@ import FlexSearch from 'flexsearch';
       if (noResults) noResults.style.display = 'none';
       selectedIdx = -1;
       if (window.setMode) window.setMode('CMD');
+      if (window.showStatus) window.showStatus('f', 'Opened search');
       setTimeout(function() { input.focus(); }, 50);
     });
   };
 
   window.closeSearch = close;
-
-  // Bind ctrl+/ to open search
-  Mousetrap.bind('ctrl+/', function() {
-    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-    window.openSearch();
-    return false;
-  });
-
-  // Bind ctrl+f to open search
-  Mousetrap.bind('ctrl+f', function() {
-    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-    window.openSearch();
-    return false;
-  });
 
   // Search icon button click handler
   document.getElementById('search-icon-btn')?.addEventListener('click', function(e) {
