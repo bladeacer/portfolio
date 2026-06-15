@@ -1,6 +1,6 @@
 (function() {
+  var KEY = "portfolio-settings";
   function apply() {
-    var KEY = "portfolio-settings";
     try {
       var raw = localStorage.getItem(KEY);
       if (!raw) return;
@@ -34,9 +34,13 @@
       if (s.accentDark) root.style.setProperty("--user-accent-dark", s.accentDark);
     } catch(e) {}
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', apply);
-  } else {
+  function init() {
+    if (window.location.pathname.indexOf('/settings') !== -1) return;
     apply();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();

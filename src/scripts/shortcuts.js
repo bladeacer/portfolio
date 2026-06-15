@@ -17,13 +17,11 @@ Mousetrap.bind('?', () => {
     return false;
 });
 
-Mousetrap.bind('9', function() {
+Mousetrap.bind('o', function() {
     var btn = document.getElementById("toc-mobile-toggle");
-    // On mobile (<1000px) the button is visible; click it to trigger the drawer
     if (btn && btn.offsetParent !== null) {
         btn.click();
     } else {
-        // On desktop, toggle display on the wrapper (avoids component CSS conflicts)
         var wrapper = document.getElementById("toc-wrapper");
         if (wrapper) {
             if (wrapper.style.display === 'none') {
@@ -33,13 +31,19 @@ Mousetrap.bind('9', function() {
             }
         }
     }
-    showStatus('9', 'Toggled table of contents');
+    showStatus('o', 'Toggled table of contents');
     return false;
 }, 'keydown');
 
 Mousetrap.bind('s', () => {
     window.location.href = "/portfolio/settings";
     showStatus('s', 'Opened settings', true);
+    return false;
+});
+
+Mousetrap.bind('ctrl+,', () => {
+    window.location.href = "/portfolio/settings";
+    showStatus('ctrl+,', 'Opened settings', true);
     return false;
 });
 
@@ -121,9 +125,9 @@ Mousetrap.bind('c', () => {
     return false; 
 });
 
-Mousetrap.bind('8', () => {
+Mousetrap.bind('#', () => {
     window.location.href = "/portfolio/tags";
-    showStatus('8', 'Navigated to tags', true);
+    showStatus('#', 'Navigated to tags', true);
     return false; 
 });
 

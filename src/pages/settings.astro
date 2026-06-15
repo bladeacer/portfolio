@@ -396,6 +396,10 @@ const colors = [
       setColor(root, "--h4-color", s.h4Color);
       setColor(root, "--user-accent-light", s.accentLight);
       setColor(root, "--user-accent-dark", s.accentDark);
+      document.documentElement.style.backgroundImage = "none";
+      requestAnimationFrame(function() {
+        document.documentElement.style.backgroundImage = "";
+      });
     }
 
     function setColor(root, prop, val) {
