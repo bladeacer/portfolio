@@ -390,13 +390,12 @@ li {
   top: 2rem;
   right: 2rem;
   z-index: 1001;
-  background: var(--flexcyon-cyan);
-  color: var(--flexcyon-base-01);
-  border: none;
+  background: none;
+  color: var(--flexcyon-orange);
+  border: 0;
   padding: 12px;
-  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  line-height: 0;
 }
 
 .toc-overlay {
@@ -439,7 +438,8 @@ li {
     position: relative;
     left: 0;
     top: 0;
-    width: 85vw;
+    width: 100%;
+    max-width: 100%;
     box-shadow: none;
   }
   
@@ -788,7 +788,6 @@ a:has([class*="cta"]) {
 }
 
 p[class*="cta"] {
-    background-color: color-mix(in oklch, var(--text-accent) 55%, transparent);
     padding: 6px 12px;
     margin-bottom: 4px;
     max-inline-size: 60%;
@@ -798,12 +797,16 @@ p[class*="cta"] {
     }
 }
 
+p.cta {
+    background-color: color-mix(in oklch, var(--text-accent) 55%, transparent);
+}
+
 p.cta2 {
-    background-color: color-mix(in oklch, var(--flexcyon-red-salmon) 55%, transparent);
+    background-color: color-mix(in oklch, var(--flexcyon-lime-green) 55%, transparent);
 }
 
 p.cta3 {
-    background-color: color-mix(in oklch, var(--flexcyon-orange) 55%, transparent);
+    background-color: color-mix(in oklch, var(--flexcyon-purple-lilac) 55%, transparent);
 }
 
 .active-line-highlight {

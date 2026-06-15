@@ -131,6 +131,12 @@ Mousetrap.bind('#', () => {
     return false; 
 });
 
+Mousetrap.bind('!', () => {
+    window.open("/portfolio/rss.xml", '_blank', 'noopener,noreferrer');
+    showStatus('!', 'Opened RSS feed');
+    return false;
+});
+
 Mousetrap.bind('r', function(e) {
     if (e.ctrlKey || e.metaKey) return;
     const url = "/portfolio/resume";
@@ -165,8 +171,8 @@ Mousetrap.bind('esc', function() {
     // Close popup if open (command mode and search handle their own Esc)
     if (window.toggleShortcutsPopup) {
         var popupOverlay = document.getElementById("shortcuts-popup-overlay");
-        if (popupOverlay && popupOverlay.style.display === "block") {
-            popupOverlay.style.display = "none";
+        if (popupOverlay && popupOverlay.classList.contains("is-active")) {
+            popupOverlay.classList.remove("is-active");
             showStatus('Esc', 'Closed popup');
             return false;
         }
@@ -181,7 +187,7 @@ Mousetrap.bind('esc', function() {
     }
     if (window.closeSearch) {
         var searchOverlay = document.getElementById("search-overlay");
-        if (searchOverlay && searchOverlay.style.display === "block") {
+        if (searchOverlay && searchOverlay.classList.contains("is-active")) {
             window.closeSearch();
             showStatus('Esc', 'Closed search');
             return false;

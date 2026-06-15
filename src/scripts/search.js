@@ -14,12 +14,12 @@ import FlexSearch from 'flexsearch';
   var loaded = false;
 
   function close() {
-    overlay.style.display = "";
+    overlay.classList.remove("is-active");
     input.value = "";
     list.innerHTML = "";
     if (noResults) noResults.style.display = "none";
     selectedIdx = -1;
-    if (window.setMode) window.setMode('NOR');
+    if (window.setMode) window.setMode('NORMAL');
   }
 
   function loadIndex(callback) {
@@ -170,7 +170,7 @@ import FlexSearch from 'flexsearch';
       } else if (items[0]) {
         navigate(items[0].dataset.url);
       }
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === 'ArrowDown' || (e.key === 'n' && e.altKey)) {
       e.preventDefault();
       var items = list.querySelectorAll('.search-result-item');
       if (items.length === 0) return;
@@ -178,7 +178,7 @@ import FlexSearch from 'flexsearch';
       document.querySelectorAll('.search-selected').forEach(function(el) { el.classList.remove('search-selected'); });
       if (items[next]) items[next].classList.add('search-selected');
       selectedIdx = next;
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === 'ArrowUp' || (e.key === 'p' && e.altKey)) {
       e.preventDefault();
       var items = list.querySelectorAll('.search-result-item');
       if (items.length === 0) return;
@@ -195,12 +195,12 @@ import FlexSearch from 'flexsearch';
 
   window.openSearch = function() {
     loadIndex(function() {
-      overlay.style.display = 'block';
+      overlay.classList.add("is-active");
       input.value = '';
       list.innerHTML = '';
       if (noResults) noResults.style.display = 'none';
       selectedIdx = -1;
-      if (window.setMode) window.setMode('CMD');
+      if (window.setMode) window.setMode('COMMAND');
       if (window.showStatus) window.showStatus('f', 'Opened search');
       setTimeout(function() { input.focus(); }, 50);
     });

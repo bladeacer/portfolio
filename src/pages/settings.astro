@@ -22,6 +22,29 @@ const colors = [
 
   <div class="settings-layout">
     <div class="settings-column">
+      <h3>Theme</h3>
+      <div class="setting-group">
+        <label class="setting-row">
+          <span class="setting-label">Active theme</span>
+          <select id="setting-theme" class="setting-select">
+            <option value="">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="setting-group">
+        <label class="setting-row">
+          <span class="setting-label">Grid background</span>
+          <input type="checkbox" id="setting-show-grid" checked />
+        </label>
+      </div>
+
+      <div class="setting-group">
+        <button id="settings-reset" class="setting-btn">Reset defaults (keeps theme)</button>
+      </div>
+
       <h3>Fonts</h3>
       <div class="setting-group">
         <label class="setting-row">
@@ -110,9 +133,6 @@ const colors = [
         </label>
       </div>
 
-      <div class="setting-actions">
-        <button id="settings-reset" class="setting-btn">Reset defaults</button>
-      </div>
     </div>
 
     <div class="preview-column">
@@ -348,6 +368,8 @@ const colors = [
       h2Color: "",
       h3Color: "",
       h4Color: "",
+      themePreference: "",
+      showGrid: true,
     };
 
     var SANS_CHAINS = {
@@ -377,36 +399,53 @@ const colors = [
     }
 
     function apply(s) {
-      var root = document.documentElement;
+      var sansChain = SANS_CHAINS[s.fontSans] || SANS_CHAINS[DEFAULTS.fontSans];
+      var fallbackChain = SANS_CHAINS[s.fontFallback] || SANS_CHAINS[DEFAULTS.fontFallback];
+      var monoChain = MONO_CHAINS[s.fontMono] || MONO_CHAINS[DEFAULTS.fontMono];
+      var sz = s.sizeSans + "px";
+      var szm = s.sizeMono + "px";
+      var szf = s.sizeFallback + "px";
 
-      root.style.setProperty("--font-sans", SANS_CHAINS[s.fontSans] || SANS_CHAINS[DEFAULTS.fontSans]);
-      root.style.setProperty("--font-fallback", SANS_CHAINS[s.fontFallback] || SANS_CHAINS[DEFAULTS.fontFallback]);
-      root.style.setProperty("--font-mono", MONO_CHAINS[s.fontMono] || MONO_CHAINS[DEFAULTS.fontMono]);
-      root.style.setProperty("--font-size-sans", s.sizeSans + "px");
-      root.style.setProperty("--font-size-fallback", s.sizeFallback + "px");
-      root.style.setProperty("--font-size-mono", s.sizeMono + "px");
+      var css = "";
+      css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
+      css += "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" + sz + " !important;}";
+      css += "code{font-size:" + szm + " !important;}";
+      css += "h1{font-size:" + s.h1Size + "em !important;";
+      if (s.h1Color && s.h1Color !== "custom") css += "color:" + s.h1Color + " !important;";
+      css += "}";
+      css += "h2{font-size:" + s.h2Size + "em !important;";
+      if (s.h2Color && s.h2Color !== "custom") css += "color:" + s.h2Color + " !important;";
+      css += "}";
+      css += "h3{font-size:" + s.h3Size + "em !important;";
+      if (s.h3Color && s.h3Color !== "custom") css += "color:" + s.h3Color + " !important;";
+      css += "}";
+      css += "h4{font-size:" + s.h4Size + "em !important;";
+      if (s.h4Color && s.h4Color !== "custom") css += "color:" + s.h4Color + " !important;";
+      css += "}";
+      if (s.accentLight && s.accentLight !== "custom") css += "body.theme-light{--user-accent-light:" + s.accentLight + " !important;}";
+      if (s.accentDark && s.accentDark !== "custom") css += "body.theme-dark{--user-accent-dark:" + s.accentDark + " !important;}";
+      if (s.showGrid === false) css += "body{background-image:none !important;}";
 
-      root.style.setProperty("--h1-size", s.h1Size + "em");
-      root.style.setProperty("--h2-size", s.h2Size + "em");
-      root.style.setProperty("--h3-size", s.h3Size + "em");
-      root.style.setProperty("--h4-size", s.h4Size + "em");
-      setColor(root, "--h1-color", s.h1Color);
-      setColor(root, "--h2-color", s.h2Color);
-      setColor(root, "--h3-color", s.h3Color);
-      setColor(root, "--h4-color", s.h4Color);
-      setColor(root, "--user-accent-light", s.accentLight);
-      setColor(root, "--user-accent-dark", s.accentDark);
-      document.documentElement.style.backgroundImage = "none";
-      requestAnimationFrame(function() {
-        document.documentElement.style.backgroundImage = "";
-      });
-    }
+      var old = document.getElementById("settings-style");
+      if (old) old.remove();
+      var style = document.createElement("style");
+      style.id = "settings-style";
+      style.textContent = css;
+      document.head.appendChild(style);
 
-    function setColor(root, prop, val) {
-      if (val && val !== "custom") {
-        root.style.setProperty(prop, val);
+      if (s.themePreference === "light") {
+        localStorage.setItem("theme", "light");
+        document.body.classList.remove("theme-dark");
+        document.body.classList.add("theme-light");
+      } else if (s.themePreference === "dark") {
+        localStorage.setItem("theme", "dark");
+        document.body.classList.remove("theme-light");
+        document.body.classList.add("theme-dark");
       } else {
-        root.style.removeProperty(prop);
+        localStorage.removeItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.body.classList.remove("theme-light", "theme-dark");
+        document.body.classList.add(prefersDark ? "theme-dark" : "theme-light");
       }
     }
 
@@ -421,6 +460,9 @@ const colors = [
       syncField("s-h2Size", s.h2Size);
       syncField("s-h3Size", s.h3Size);
       syncField("s-h4Size", s.h4Size);
+      syncField("setting-theme", s.themePreference || "");
+      var gridEl = document.getElementById("setting-show-grid");
+      if (gridEl) gridEl.checked = s.showGrid !== false;
       syncColorSelect("s-h1Color", "s-h1ColorPicker", s.h1Color);
       syncColorSelect("s-h2Color", "s-h2ColorPicker", s.h2Color);
       syncColorSelect("s-h3Color", "s-h3ColorPicker", s.h3Color);
@@ -465,6 +507,8 @@ const colors = [
         h4Color: readColor("s-h4Color"),
         accentLight: readColor("setting-color-light"),
         accentDark: readColor("setting-color-dark"),
+        themePreference: getVal("setting-theme"),
+        showGrid: document.getElementById("setting-show-grid")?.checked ?? true,
       };
     }
 
@@ -479,7 +523,10 @@ const colors = [
     }
 
     function doReset() {
+      var current = load();
+      var themePref = current.themePreference || "";
       var s = Object.assign({}, DEFAULTS);
+      s.themePreference = themePref;
       syncForm(s);
       apply(s);
       save(s);
@@ -519,7 +566,8 @@ const colors = [
 
       var autoSaveIds = ["setting-font-sans", "setting-font-fallback", "setting-font-mono",
                          "setting-size-sans", "setting-size-fallback", "setting-size-mono",
-                         "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size"];
+                         "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size",
+                         "setting-theme", "setting-show-grid"];
 
       autoSaveIds.forEach(function(id) {
         var el = $(id);

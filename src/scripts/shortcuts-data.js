@@ -16,7 +16,7 @@ window.__shortcutsRegistry = [
   { chord: 's', desc: 'Settings page', category: 'Navigation' },
   { chord: 'ctrl+,', desc: 'Settings page', category: 'Navigation' },
   { chord: 'r', desc: 'Resume', category: 'Navigation' },
-  { chord: 'f', desc: 'RSS feed', category: 'Navigation' },
+  { chord: '!', desc: 'RSS feed', category: 'Navigation' },
   { chord: 'em', desc: 'Email', category: 'Navigation' },
   { chord: 'li', desc: 'LinkedIn', category: 'Navigation' },
   { chord: 'gh', desc: 'GitHub', category: 'Navigation' },

@@ -11,11 +11,10 @@
 
   function close() {
     overlay.classList.remove("is-active");
-    overlay.style.display = "";
     input.value = "";
     list.innerHTML = "";
     selectedIdx = -1;
-    if (window.setMode) window.setMode('NOR');
+    if (window.setMode) window.setMode('NORMAL');
   }
 
   function render() {
@@ -113,11 +112,10 @@
 
   window.openCommandMode = function() {
     overlay.classList.add("is-active");
-    overlay.style.display = "";
     input.value = "";
     render();
     input.focus();
-    if (window.setMode) window.setMode('CMD');
+    if (window.setMode) window.setMode('COMMAND');
     if (window.showStatus) window.showStatus(':', 'Opened command palette');
   };
 

@@ -44,6 +44,5 @@
     modeEl.textContent = mode;
   };
 
-  // Ensure default is NOR
-  if (modeEl) modeEl.textContent = 'NOR';
+  if (modeEl) modeEl.textContent = 'NORMAL';
 })();
