@@ -108,14 +108,13 @@
 .toc-content ul li {
   position: relative;
   padding-left: 1.25em;
-  margin-left: 0;
   list-style: none;
   border-left: 1px solid var(--text-faint);
 }
 
 .toc-content ul li::before {
   position: absolute;
-  left: -0.5em;
+  left: -0.35em;
   font-family: monospace;
   color: var(--text-faint);
   content: "├── ";

@@ -1,5 +1,3 @@
-import { createElement } from "lucide";
-
 (function() {
   var el = document.getElementById("key-status");
   var chordEl = document.getElementById("key-status-chord");
@@ -13,21 +11,14 @@ import { createElement } from "lucide";
   // Detect platform from user agent
   if (platformEl) {
     var ua = navigator.userAgent;
-    var iconName = '';
     var name = '?';
-    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) { iconName = 'Monitor'; name = 'Linux'; }
-    else if (ua.indexOf('Android') > -1) { iconName = 'Smartphone'; name = 'Android'; }
-    else if (ua.indexOf('Windows') > -1) { iconName = 'Monitor'; name = 'Windows'; }
-    else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) { iconName = 'Monitor'; name = 'macOS'; }
-    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) { iconName = 'Smartphone'; name = 'iOS'; }
-    else if (ua.indexOf('FreeBSD') > -1) { iconName = 'Monitor'; name = 'FreeBSD'; }
-    if (iconName) {
-      platformEl.textContent = '';
-      platformEl.appendChild(createElement(iconName));
-      platformEl.appendChild(document.createTextNode(' ' + name));
-    } else {
-      platformEl.textContent = name;
-    }
+    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) name = 'Linux';
+    else if (ua.indexOf('Android') > -1) name = 'Android';
+    else if (ua.indexOf('Windows') > -1) name = 'Windows';
+    else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) name = 'macOS';
+    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) name = 'iOS';
+    else if (ua.indexOf('FreeBSD') > -1) name = 'FreeBSD';
+    platformEl.textContent = name;
   }
 
   // Set page path

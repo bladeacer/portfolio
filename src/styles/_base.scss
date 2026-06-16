@@ -237,12 +237,6 @@ img {
   opacity: 0.5;
 }
 
-.content-wrapper > ul > li::before,
-.content-wrapper > ol > li::before,
-.content-wrapper .markdown-content li::before {
-  left: -5rem;
-}
-
 strong {
   font-weight: 900;
   color: var(--flexcyon-red-salmon);
