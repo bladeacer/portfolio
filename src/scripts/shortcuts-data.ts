@@ -23,6 +23,7 @@ window.__shortcutsRegistry = [
   { chord: 'gl', desc: 'GitLab', category: 'Navigation' },
   { chord: 'b', desc: 'Codeberg', category: 'Navigation' },
   { chord: 'gr', desc: 'Gravatar', category: 'Navigation' },
+  { chord: 'm', desc: 'Matrix chat', category: 'Navigation' },
   { chord: '<', desc: 'History back', category: 'Navigation' },
   { chord: '>', desc: 'History forward', category: 'Navigation' },
   { chord: 't', desc: 'Toggle theme', category: 'Toggles' },

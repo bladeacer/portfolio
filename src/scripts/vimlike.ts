@@ -316,10 +316,10 @@ function getYankUnit() {
     var raw = localStorage.getItem('portfolio-settings');
     if (raw) {
       var s = JSON.parse(raw);
-      return s.yankUnit || 'characters';
+      return s.yankUnit || 'words';
     }
   } catch {}
-  return 'characters';
+  return 'words';
 }
 
 function formatYankCount(text) {

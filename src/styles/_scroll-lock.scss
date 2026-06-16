@@ -1,5 +1,4 @@
 .body-scroll-locked {
+  padding-right: var(--scrollbar-width, 0);
   overflow: hidden !important;
-  position: fixed;
-  width: 100%;
 }

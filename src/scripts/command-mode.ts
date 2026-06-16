@@ -8,12 +8,15 @@
 
   var filtered = [];
   var selectedIdx = -1;
+  var history = [];
+  var historyIdx = -1;
 
   function close() {
     overlay.classList.remove("is-active");
     input.value = "";
     list.innerHTML = "";
     selectedIdx = -1;
+    historyIdx = -1;
     if (window.setMode) window.setMode('NORMAL');
   }
 
@@ -35,7 +38,7 @@
     filtered.forEach(function(s, i) {
       var li = document.createElement("li");
       li.className = "cm-item" + (i === 0 ? " cm-selected" : "");
-      var chordText = s.chord + ': ';
+      var chordText = s.chord + ' ';
       var descText = s.desc;
       var q = input.value.toLowerCase().trim();
       if (q) {
@@ -63,22 +66,85 @@
     selectedIdx = 0;
   }
 
+  function processCommand(raw) {
+    var parts = raw.trim().split(/\s+/);
+    var cmd = parts[0];
+    var arg = parts.slice(1).join(' ');
+
+    // :q or :x to close modals/popups
+    if (cmd === ':q' || cmd === ':x' || cmd === 'q' || cmd === 'x') {
+      close();
+      // Close all overlays
+      ['shortcuts-popup-overlay', 'search-overlay', 'command-mode-overlay'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove('is-active');
+      });
+      document.body.classList.remove('body-scroll-locked');
+      if (window.setMode) window.setMode('NORMAL');
+      if (window.showStatus) window.showStatus(cmd, 'Closed all overlays');
+      return true;
+    }
+
+    // :theme light|dark
+    if (cmd === ':theme' || cmd === 'theme') {
+      if (arg === 'light' || arg === 'dark') {
+        localStorage.setItem('theme', arg);
+        document.body.className = 'theme-' + arg;
+        if (window.showStatus) window.showStatus(cmd, 'Theme set to ' + arg);
+      } else {
+        if (window.showStatus) window.showStatus(cmd, 'Usage: theme light|dark');
+      }
+      return true;
+    }
+
+    // :edit settings
+    if ((cmd === ':edit' || cmd === 'edit') && arg === 'settings') {
+      window.location.href = '/portfolio/settings';
+      return true;
+    }
+
+    // :N — navigate to Nth element (line number)
+    var num = parseInt(raw.replace(/^:/, ''), 10);
+    if (!isNaN(num) && num > 0) {
+      var candidates = Array.from(document.querySelectorAll(window.__CANDIDATE_SELECTOR || '.content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table'))
+        .filter(function(el) { return el.getBoundingClientRect().height > 0; });
+      if (num <= candidates.length) {
+        var target = candidates[num - 1];
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (window.showStatus) window.showStatus(':' + num, 'Jumped to element ' + num);
+      } else {
+        if (window.showStatus) window.showStatus(':' + num, 'Only ' + candidates.length + ' elements');
+      }
+      return true;
+    }
+
+    return false;
+  }
+
   function execute(idx) {
     if (idx < 0 || idx >= filtered.length) return;
     var s = filtered[idx];
-    close();
-    if (Mousetrap && s.chord !== ':') {
-      Mousetrap.trigger(s.chord);
-      if (window.showStatus) {
-        window.showStatus(s.chord, s.desc);
+    if (!processCommand(s.chord)) {
+      close();
+      if (Mousetrap && s.chord !== ':') {
+        Mousetrap.trigger(s.chord);
+        if (window.showStatus) {
+          window.showStatus(s.chord, s.desc);
+        }
       }
     }
+  }
+
+  function pushHistory(val) {
+    if (!val) return;
+    history.unshift(val);
+    if (history.length > 50) history.pop();
+    historyIdx = -1;
   }
 
   input.addEventListener("input", render);
 
   input.addEventListener("keydown", function(e) {
-    // Stop propagation so Mousetrap doesn't also fire
     e.stopPropagation();
     if (e.key === "Escape") {
       e.preventDefault();
@@ -86,7 +152,21 @@
       if (window.showStatus) window.showStatus('Esc', 'Closed command palette');
     } else if (e.key === "Enter") {
       e.preventDefault();
+      var raw = input.value;
+      if (processCommand(raw)) {
+        pushHistory(raw);
+        close();
+        return;
+      }
       execute(selectedIdx >= 0 ? selectedIdx : 0);
+      pushHistory(raw);
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      if (filtered.length > 0) {
+        var target = filtered[selectedIdx >= 0 ? selectedIdx : 0];
+        input.value = target.chord;
+        render();
+      }
     } else if (e.key === "ArrowDown" || (e.key === "n" && e.altKey)) {
       e.preventDefault();
       if (filtered.length === 0) return;
@@ -97,8 +177,14 @@
       selectedIdx = next;
     } else if (e.key === "ArrowUp" || (e.key === "p" && e.altKey)) {
       e.preventDefault();
-      if (filtered.length === 0) return;
-      var prev = (selectedIdx - 1 + filtered.length) % filtered.length;
+      // If at top of list, cycle through history
+      if (selectedIdx <= 0 && history.length > 0) {
+        historyIdx = (historyIdx + 1) % history.length;
+        input.value = history[historyIdx];
+        render();
+        return;
+      }
+      var prev = selectedIdx > 0 ? selectedIdx - 1 : filtered.length - 1;
       document.querySelectorAll(".cm-selected").forEach(function(el) { el.classList.remove("cm-selected"); });
       var items = list.querySelectorAll(".cm-item");
       if (items[prev]) items[prev].classList.add("cm-selected");
@@ -113,6 +199,7 @@
   window.openCommandMode = function() {
     overlay.classList.add("is-active");
     input.value = "";
+    historyIdx = -1;
     render();
     input.focus();
     if (window.setMode) window.setMode('COMMAND');

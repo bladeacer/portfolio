@@ -31,44 +31,89 @@
   transform: translate(-50%, -50%);
 }
 
-/* Status + Mode indicators side by side */
+/* Full-width Vim-style statusline (airline/lualine) */
 .status-bar {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 99999;
   display: flex;
-  gap: 0.5rem;
-  align-items: stretch;
+  gap: 0;
+  align-items: center;
+  max-width: unset;
+  min-height: 1.6rem;
+  padding: 0;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
+  font-size: 0.8rem;
+  line-height: 1;
+  background: var(--flexcyon-base-02);
+  border-top: 1px solid var(--flexcyon-base-04);
 }
 
-.key-status {
-  max-width: 300px;
-  padding: 0.5rem 0.75rem;
-  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: var(--text-normal);
-  background: var(--flexcyon-base-02);
-  border: 1px solid var(--flexcyon-base-04);
-  border-radius: 8px;
+.status-left {
+  display: flex;
+  gap: 0;
+  align-items: center;
 }
 
 .mode-indicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 3em;
-  padding: 0.5rem 0.75rem;
-  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
-  font-size: 0.85rem;
+  min-width: 4em;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
   font-weight: bold;
-  line-height: 1.4;
+  color: var(--flexcyon-base-02);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--flexcyon-cyan);
+}
+
+.status-scroll {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  border-right: 1px solid var(--flexcyon-base-04);
+}
+
+.key-status {
+  flex: 1;
+  padding: 0.3rem 0.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.78rem;
+  color: var(--text-normal);
+  white-space: nowrap;
+}
+
+#key-status-chord {
+  font-weight: bold;
   color: var(--flexcyon-cyan);
-  text-align: center;
-  background: var(--flexcyon-base-02);
-  border: 1px solid var(--flexcyon-base-04);
-  border-radius: 8px;
+}
+
+#key-status-desc {
+  color: var(--text-faint);
+}
+
+.status-right {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  margin-left: auto;
+}
+
+.status-path,
+.status-words {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.status-path {
+  border-left: 1px solid var(--flexcyon-base-04);
 }
 
 /* Search overlay */

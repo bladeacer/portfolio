@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint:css": "stylelint 'src/styles/**/*.{css,scss}'",
+    "lint:css": "stylelint 'src/styles/**/*.{scss}'",
     "lint:ts": "eslint 'src/scripts/**/*.ts'",
     "lint": "pnpm run lint:css && pnpm run lint:ts",
     "format:check": "prettier --check 'src/**/*.{astro,ts,css,scss}'",

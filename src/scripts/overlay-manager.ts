@@ -1,4 +1,8 @@
 (function() {
+  // Measure scrollbar width and set CSS var
+  var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
+
   var overlays = [
     "search-overlay",
     "command-mode-overlay",

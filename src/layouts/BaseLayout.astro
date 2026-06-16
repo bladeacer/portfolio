@@ -30,10 +30,18 @@ const { pageTitle } = Astro.props;
     <Popup />
 
     <div class="status-bar">
+      <div class="status-left">
+        <span id="mode-indicator" class="mode-indicator">NOR</span>
+      </div>
       <div id="key-status" class="key-status" style="display:none">
         <span id="key-status-chord"></span><span id="key-status-desc"></span>
       </div>
-      <div id="mode-indicator" class="mode-indicator">NOR</div>
+      <div class="status-right">
+        <span id="status-platform" class="status-platform"></span>
+        <span id="status-scroll" class="status-scroll"></span>
+        <span id="status-path" class="status-path"></span>
+        <span id="status-words" class="status-words"></span>
+      </div>
     </div>
 
     <!-- Search overlay -->

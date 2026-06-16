@@ -3,6 +3,56 @@
   var chordEl = document.getElementById("key-status-chord");
   var descEl = document.getElementById("key-status-desc");
   var modeEl = document.getElementById("mode-indicator");
+  var scrollEl = document.getElementById("status-scroll");
+  var pathEl = document.getElementById("status-path");
+  var wordsEl = document.getElementById("status-words");
+  var platformEl = document.getElementById("status-platform");
+
+  // Detect platform from user agent
+  if (platformEl) {
+    var ua = navigator.userAgent;
+    var plat = '?';
+    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) plat = 'LIN';
+    else if (ua.indexOf('Android') > -1) plat = 'ADR';
+    else if (ua.indexOf('Windows') > -1) plat = 'WIN';
+    else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) plat = 'MAC';
+    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) plat = 'IOS';
+    else if (ua.indexOf('FreeBSD') > -1) plat = 'BSD';
+    platformEl.textContent = plat;
+  }
+
+  // Set page path
+  if (pathEl) {
+    pathEl.textContent = window.location.pathname.replace(/\/portfolio/, '').replace(/\/$/, '') || '/';
+  }
+
+  // Set word count
+  if (wordsEl) {
+    var bodyText = document.body.innerText || document.body.textContent || '';
+    var wordCount = bodyText.trim().split(/\s+/).filter(Boolean).length;
+    wordsEl.textContent = wordCount + ' words';
+  }
+
+  // Update scroll percentage on scroll
+  function updateScroll() {
+    if (!scrollEl) return;
+    var scrollTop = window.scrollY;
+    var docHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
+    );
+    var winHeight = window.innerHeight;
+    var maxScroll = docHeight - winHeight;
+    var pct = maxScroll > 0 ? Math.round((scrollTop / maxScroll) * 100) : 0;
+    scrollEl.textContent = pct + '%';
+  }
+
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
 
   // Restore status from sessionStorage
   try {
@@ -12,7 +62,7 @@
       if (parsed.chord && el && chordEl && descEl) {
         chordEl.textContent = parsed.chord;
         descEl.textContent = parsed.desc ? " " + parsed.desc : "";
-        el.style.display = "block";
+        el.style.display = "";
         clearTimeout(el._hideTimeout);
         el._hideTimeout = setTimeout(function() {
           el.style.display = "none";
@@ -26,7 +76,7 @@
     if (!el || !chordEl || !descEl) return;
     chordEl.textContent = chord;
     descEl.textContent = desc ? " " + desc : "";
-    el.style.display = "block";
+    el.style.display = "";
     clearTimeout(el._hideTimeout);
     el._hideTimeout = setTimeout(function() {
       el.style.display = "none";
@@ -38,7 +88,6 @@
     }
   };
 
-  // Mode indicator
   window.setMode = function(mode) {
     if (!modeEl) return;
     modeEl.textContent = mode;

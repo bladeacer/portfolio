@@ -56,6 +56,12 @@ Mousetrap.bind('e m', () => {
     return false;
 });
 
+Mousetrap.bind('m', () => {
+    window.open("https://matrix.to/#/@bladeacer:matrix.org", '_blank', 'noopener,noreferrer');
+    showStatus('m', 'Opened Matrix chat');
+    return false;
+});
+
 Mousetrap.bind('g h', () => {
     const url = "https://github.com/bladeacer";
     const target = '_blank';

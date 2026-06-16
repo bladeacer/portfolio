@@ -1,6 +1,6 @@
 export default {
   cache: true,
-  ignoreFiles: ["src/styles/_fonts.css"],
+  ignoreFiles: ["src/styles/_fonts.scss"],
   extends: [
     "stylelint-config-standard-scss",
     "stylelint-config-recess-order",
