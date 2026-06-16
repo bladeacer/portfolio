@@ -1,3 +1,5 @@
+import { createElement } from "lucide";
+
 (function() {
   var el = document.getElementById("key-status");
   var chordEl = document.getElementById("key-status-chord");
@@ -11,14 +13,21 @@
   // Detect platform from user agent
   if (platformEl) {
     var ua = navigator.userAgent;
-    var plat = '?';
-    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) plat = 'LIN';
-    else if (ua.indexOf('Android') > -1) plat = 'ADR';
-    else if (ua.indexOf('Windows') > -1) plat = 'WIN';
-    else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) plat = 'MAC';
-    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) plat = 'IOS';
-    else if (ua.indexOf('FreeBSD') > -1) plat = 'BSD';
-    platformEl.textContent = plat;
+    var iconName = '';
+    var name = '?';
+    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) { iconName = 'Monitor'; name = 'Linux'; }
+    else if (ua.indexOf('Android') > -1) { iconName = 'Smartphone'; name = 'Android'; }
+    else if (ua.indexOf('Windows') > -1) { iconName = 'Monitor'; name = 'Windows'; }
+    else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) { iconName = 'Monitor'; name = 'macOS'; }
+    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) { iconName = 'Smartphone'; name = 'iOS'; }
+    else if (ua.indexOf('FreeBSD') > -1) { iconName = 'Monitor'; name = 'FreeBSD'; }
+    if (iconName) {
+      platformEl.textContent = '';
+      platformEl.appendChild(createElement(iconName));
+      platformEl.appendChild(document.createTextNode(' ' + name));
+    } else {
+      platformEl.textContent = name;
+    }
   }
 
   // Set page path

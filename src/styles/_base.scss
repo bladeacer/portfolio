@@ -170,6 +170,15 @@ img {
   counter-reset: line-num;
 }
 
+.content-wrapper ul,
+.content-wrapper ol {
+  padding-left: 0;
+}
+
+.content-wrapper li {
+  list-style-position: inside;
+}
+
 .content-wrapper > p:not(.foot, .cta, .cta2, .cta3),
 .content-wrapper > h1,
 .content-wrapper > h2,
@@ -226,6 +235,12 @@ img {
   user-select: none;
   content: counter(line-num);
   opacity: 0.5;
+}
+
+.content-wrapper > ul > li::before,
+.content-wrapper > ol > li::before,
+.content-wrapper .markdown-content li::before {
+  left: -5rem;
 }
 
 strong {

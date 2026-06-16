@@ -116,6 +116,22 @@
   border-left: 1px solid var(--flexcyon-base-04);
 }
 
+.status-platform {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-left: 1px solid var(--flexcyon-base-04);
+}
+
+.status-platform svg {
+  width: 0.9em;
+  height: 0.9em;
+}
+
 /* Search overlay */
 .search-overlay {
   z-index: 99999;

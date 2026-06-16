@@ -111,7 +111,7 @@
       if (num <= candidates.length) {
         var target = candidates[num - 1];
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        if (window.showStatus) window.showStatus(':' + num, 'Jumped to element ' + num);
+        if (window.showStatus) window.showStatus(':' + num, 'Go to line ' + num);
       } else {
         if (window.showStatus) window.showStatus(':' + num, 'Only ' + candidates.length + ' elements');
       }
