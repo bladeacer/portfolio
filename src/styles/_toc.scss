@@ -1,7 +1,7 @@
 .stron-toc.toc {
   position: fixed;
   top: 11.5vh;
-  left: 60vw;
+  left: 62vw;
   z-index: 100;
   max-width: min(35vw, 25rem);
   background-color: var(--flexcyon-base-01-02-mix);
@@ -61,7 +61,7 @@
     right: 0;
   }
 
-  stron-toc.toc {
+  .stron-toc.toc {
     position: relative;
     top: 0;
     left: 0;
@@ -88,6 +88,7 @@
   display: block;
   width: 100%;
   max-height: 70vh;
+  padding-left: 7.5%;
   overflow: auto;
 }
 
@@ -107,26 +108,26 @@
 
 .toc-content ul li {
   position: relative;
-  padding-left: 1.25em;
+  padding-left: 1em;
   list-style: none;
-  border-left: 1px solid var(--text-faint);
 }
 
 .toc-content ul li::before {
   position: absolute;
-  left: -0.35em;
-  font-family: monospace;
+  left: -0.1em;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
   color: var(--text-faint);
-  content: "├── ";
+  content: "♦";
 }
 
 .toc-content ul li:last-child::before {
-  content: "└── ";
+  content: "✦";
 }
 
 .toc-content ul li a {
   padding-left: 0.75em;
   box-decoration-break: clone;
+  text-decoration: none;
 }
 
 .toc-content li ul li {

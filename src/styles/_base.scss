@@ -95,7 +95,7 @@ p {
 }
 
 h1 {
-  padding: 1rem 0;
+  padding-top: calc(0.05 * var(--h1-size, 1.81803em)); 
   font-size: var(--h1-size, 1.81803em);
   font-weight: 700;
   line-height: 1.61;
@@ -103,7 +103,7 @@ h1 {
 }
 
 h2 {
-  padding-top: 1rem;
+  padding-top: calc(0.15 * var(--h2-size, 1.61803em)); 
   font-size: var(--h2-size, 1.61803em);
   font-weight: 675;
   line-height: 1.41;
@@ -111,7 +111,7 @@ h2 {
 }
 
 h3 {
-  padding-top: 1rem;
+  padding-top: calc(0.25 * var(--h3-size, 1.41803em));
   font-size: var(--h3-size, 1.41803em);
   font-weight: 650;
   line-height: 1.31;
@@ -119,7 +119,7 @@ h3 {
 }
 
 h4 {
-  padding-top: 1rem;
+  padding-top: calc(0.45 * var(--h4-size, 1.21803em));
   font-size: var(--h4-size, 1.21803em);
   font-weight: 625;
   line-height: 1.21;
@@ -176,7 +176,8 @@ img {
 }
 
 .content-wrapper li {
-  list-style-position: inside;
+  list-style-position: outside;
+  margin-left: 30px;
 }
 
 .content-wrapper > p:not(.foot, .cta, .cta2, .cta3),
@@ -201,6 +202,16 @@ img {
 .content-wrapper .blog-card {
   position: relative;
   counter-increment: line-num;
+}
+
+.content-wrapper > blockquote,
+.content-wrapper > pre,
+.content-wrapper > table,
+.content-wrapper > .blog-card,
+.content-wrapper .markdown-content pre,
+.content-wrapper .markdown-content table,
+.content-wrapper .markdown-content blockquote {
+  padding-top: 0.5em;
 }
 
 .content-wrapper > p:not(.foot, .cta, .cta2, .cta3)::before,
@@ -235,6 +246,42 @@ img {
   user-select: none;
   content: counter(line-num);
   opacity: 0.5;
+}
+
+.content-wrapper > h1::before,
+.content-wrapper > h2::before,
+.content-wrapper > h3::before,
+.content-wrapper > h4::before,
+.content-wrapper .markdown-content h1::before,
+.content-wrapper .markdown-content h2::before,
+.content-wrapper .markdown-content h3::before,
+.content-wrapper .markdown-content h4::before {
+  top: 1rem;
+}
+
+.content-wrapper > blockquote::before,
+.content-wrapper > pre::before,
+.content-wrapper > table::before,
+.content-wrapper > .blog-card::before,
+.content-wrapper .markdown-content pre::before,
+.content-wrapper .markdown-content table::before,
+.content-wrapper .markdown-content blockquote::before {
+  top: 0.5em;
+}
+
+.content-wrapper > ul > li::before,
+.content-wrapper > ol > li::before,
+.content-wrapper .markdown-content li::before {
+  left: -5.5rem;
+}
+
+/* Nested content inside blockquote/pre/li shouldn't get their own line number */
+.content-wrapper blockquote p::before,
+.content-wrapper blockquote li::before,
+.content-wrapper pre code::before,
+.content-wrapper li p::before {
+  display: none;
+  counter-increment: none;
 }
 
 strong {

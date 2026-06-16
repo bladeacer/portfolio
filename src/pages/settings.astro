@@ -510,7 +510,7 @@ const colors = [
       syncField("s-h3Size", s.h3Size);
       syncField("s-h4Size", s.h4Size);
       syncField("setting-theme", s.themePreference || "");
-      syncField("setting-yank-unit", s.yankUnit || "characters");
+      syncField("setting-yank-unit", s.yankUnit || "words");
       var gridEl = document.getElementById("setting-show-grid");
       if (gridEl) gridEl.checked = s.showGrid !== false;
       syncColorSelect("s-h1Color", "s-h1ColorPicker", s.h1Color);
@@ -643,6 +643,49 @@ const colors = [
       bindColor("setting-color-light", "setting-color-light-picker");
 
       $("settings-reset")?.addEventListener("click", doReset);
+
+      // Keyboard navigation for settings rows
+      var rows = Array.from(document.querySelectorAll(".setting-row"));
+      var currentRow = -1;
+
+      function focusRow(idx) {
+        if (idx < 0 || idx >= rows.length) return;
+        currentRow = idx;
+        var row = rows[idx];
+        row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        var inputs = row.querySelectorAll('input, select, button');
+        if (inputs.length > 0) inputs[0].focus();
+      }
+
+      document.addEventListener("keydown", function(e) {
+        var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+        if (tag !== 'input' && tag !== 'select' && tag !== 'button' && tag !== 'textarea') return;
+
+        if (e.key === 'j' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          var next = currentRow + 1;
+          if (next >= rows.length) next = rows.length - 1;
+          focusRow(next);
+        } else if (e.key === 'k' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          var prev = currentRow - 1;
+          if (prev < 0) prev = 0;
+          focusRow(prev);
+        } else if (e.key === 'Enter' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+          // Enter triggers the active element's default action (change event for select, click for button)
+          // Already does this natively; no override needed
+        } else if (e.key === 'n' && e.altKey) {
+          e.preventDefault();
+          var next = currentRow + 1;
+          if (next >= rows.length) next = rows.length - 1;
+          focusRow(next);
+        } else if (e.key === 'p' && e.altKey) {
+          e.preventDefault();
+          var prev = currentRow - 1;
+          if (prev < 0) prev = 0;
+          focusRow(prev);
+        }
+      });
     }
 
     if (document.readyState === "loading") {

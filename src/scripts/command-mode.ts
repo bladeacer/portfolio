@@ -24,6 +24,17 @@
     var q = input.value.toLowerCase().trim();
     if (!q) {
       filtered = registry.slice();
+    } else if (q.indexOf(':') === 0) {
+      // For colon-prefixed commands, check if it's a line number
+      var num = parseInt(q.replace(/^:/, ''), 10);
+      if (!isNaN(num) && num > 0) {
+        // Show a virtual entry for :N navigation
+        filtered = [{ chord: q, desc: 'Go to line ' + num }];
+      } else {
+        filtered = registry.filter(function(s) {
+          return s.chord.toLowerCase().indexOf(q) > -1 || s.desc.toLowerCase().indexOf(q) > -1;
+        });
+      }
     } else {
       filtered = registry.filter(function(s) {
         return s.chord.toLowerCase().indexOf(q) > -1 || s.desc.toLowerCase().indexOf(q) > -1;

@@ -7,6 +7,28 @@
   var pathEl = document.getElementById("status-path");
   var wordsEl = document.getElementById("status-words");
   var platformEl = document.getElementById("status-platform");
+  var timeEl = document.getElementById("status-time");
+
+  // Update time every minute
+  function updateTime() {
+    if (!timeEl) return;
+    var now = new Date();
+    var h = String(now.getHours()).padStart(2, '0');
+    var m = String(now.getMinutes()).padStart(2, '0');
+    var tz = -now.getTimezoneOffset();
+    var tzSign = tz >= 0 ? '+' : '-';
+    var tzHours = String(Math.floor(Math.abs(tz) / 60)).padStart(2, '0');
+    var tzMins = String(Math.abs(tz) % 60).padStart(2, '0');
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var dayName = days[now.getDay()];
+    var month = months[now.getMonth()];
+    var date = now.getDate();
+    var year = now.getFullYear();
+    timeEl.textContent = h + ':' + m + ' UTC' + tzSign + tzHours + ':' + tzMins + '  ' + dayName + ' ' + date + ' ' + month + ' ' + year;
+  }
+  updateTime();
+  setInterval(updateTime, 60000);
 
   // Detect platform from user agent
   if (platformEl) {

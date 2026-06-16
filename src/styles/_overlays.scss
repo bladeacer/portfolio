@@ -71,6 +71,15 @@
   background: var(--flexcyon-cyan);
 }
 
+.status-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
 .status-scroll {
   padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
@@ -117,14 +126,18 @@
 }
 
 .status-platform {
-  display: inline-flex;
+  display: flex;
   gap: 0.25rem;
   align-items: center;
+  justify-content: center;
+  min-width: 4em;
   padding: 0.3rem 0.6rem;
-  font-size: 0.75rem;
-  color: var(--text-faint);
-  white-space: nowrap;
-  border-left: 1px solid var(--flexcyon-base-04);
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: var(--flexcyon-base-02);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--flexcyon-orange);
 }
 
 .status-platform svg {
