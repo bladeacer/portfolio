@@ -1,0 +1,210 @@
+.settings-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (width < 900px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.setting-group {
+  margin-bottom: 1.25rem;
+}
+
+.setting-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.setting-label {
+  min-width: 130px;
+  font-size: 0.95rem;
+  color: var(--text-normal);
+}
+
+.heading-row .setting-label {
+  min-width: 30px;
+  font-weight: 600;
+}
+
+.setting-select {
+  min-width: 180px;
+  padding: 5px 8px;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--text-normal);
+  background-color: var(--flexcyon-base-01);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 4px;
+}
+
+.setting-size {
+  width: 70px;
+  padding: 8px 12px;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--text-normal);
+  background-color: var(--flexcyon-base-01);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 4px;
+}
+
+.setting-unit {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.heading-size {
+  width: 125px;
+  padding: 10px 14px;
+}
+
+.heading-color {
+  min-width: 130px;
+}
+
+.setting-color-picker {
+  width: 36px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 4px;
+}
+
+.preview-box {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background-color: var(--flexcyon-base-01-02-mix);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 12px;
+}
+
+.preview-box h1 {
+  padding: 0;
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  color: var(--flexcyon-blue);
+}
+
+.preview-box h2 {
+  padding: 0;
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  color: var(--flexcyon-cyan);
+}
+
+.preview-box h3 {
+  padding: 0;
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: var(--flexcyon-green);
+}
+
+.preview-box h4 {
+  padding: 0;
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--flexcyon-pink);
+}
+
+.preview-box h5 {
+  padding: 0;
+  margin: 0.75rem 0 0.25rem;
+  font-size: 0.9rem;
+  color: var(--flexcyon-purple-lilac);
+}
+
+.preview-box p {
+  padding: 0;
+  margin: 0 0 0.75rem;
+  font-size: inherit;
+}
+
+.preview-box em {
+  color: var(--text-accent);
+}
+
+.preview-box code {
+  padding: 2px 6px;
+  font-size: inherit;
+  background-color: var(--flexcyon-base-03);
+  border-radius: 4px;
+}
+
+.preview-box pre code {
+  display: block;
+  padding: 6px 10px;
+}
+
+.preview-box blockquote {
+  padding: 0.5rem 1rem;
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  background-color: var(--flexcyon-base-01);
+  border-left: 4px solid var(--flexcyon-blue);
+  border-radius: 4px;
+}
+
+.preview-box table {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  border-collapse: collapse;
+}
+
+.preview-box th,
+.preview-box td {
+  padding: 4px 10px;
+  text-align: left;
+  border: 1px solid var(--flexcyon-base-04);
+}
+
+.preview-box th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.preview-box code {
+  display: block;
+  padding: 6px 10px;
+  font-size: inherit;
+  background-color: var(--flexcyon-base-03);
+  border-radius: 4px;
+}
+
+.preview-box .kw { color: var(--flexcyon-purple-lilac); }
+.preview-box .nx { color: var(--flexcyon-cyan); }
+.preview-box .s { color: var(--flexcyon-green); }
+.preview-box .o { color: var(--flexcyon-orange); }
+.preview-box .p { color: var(--text-normal); }
+
+.setting-actions {
+  margin-top: 0.5rem;
+}
+
+.setting-btn {
+  padding: 8px 16px;
+  font-family: CascadiaCode, "Maple Mono Medium", ui-sans-serif, sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-normal);
+  cursor: pointer;
+  background-color: var(--flexcyon-base-03);
+  border: 1px solid var(--flexcyon-base-04);
+  border-radius: 6px;
+}
+
+.setting-btn:hover {
+  background-color: var(--flexcyon-base-04);
+}

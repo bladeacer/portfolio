@@ -9,6 +9,48 @@
   var platformEl = document.getElementById("status-platform");
   var timeEl = document.getElementById("status-time");
 
+  function getSetting(key, def) {
+    try {
+      var raw = localStorage.getItem('portfolio-settings');
+      if (raw) {
+        var s = JSON.parse(raw);
+        return s[key] !== undefined ? s[key] : def;
+      }
+    } catch {}
+    return def;
+  }
+
+  function countWords(text) { return text.split(/\s+/).filter(Boolean).length; }
+  function countChars(text) { return text.length; }
+  function countSentences(text) { return text.split(/[.!?]+/).filter(Boolean).length; }
+  function countParagraphs(text) { return text.split(/\n\s*\n/).filter(Boolean).length; }
+
+  function updateCount() {
+    if (!wordsEl) return;
+    var bodyText = document.body.innerText || document.body.textContent || '';
+    var wc = countWords(bodyText);
+    var cc = countChars(bodyText);
+    var sc = countSentences(bodyText);
+    var pc = countParagraphs(bodyText);
+    var mode = getSetting('statusCount', 'words');
+
+    var label;
+    if (mode === 'none') {
+      label = '';
+    } else {
+      var val;
+      switch (mode) {
+        case 'characters': val = cc; break;
+        case 'sentences': val = sc; break;
+        case 'paragraphs': val = pc; break;
+        default: val = wc; break;
+      }
+      label = val + ' ' + mode;
+    }
+    wordsEl.textContent = label;
+    wordsEl.title = wc + ' words, ' + cc + ' chars, ' + sc + ' sentences, ' + pc + ' paragraphs';
+  }
+
   // Update time every minute
   function updateTime() {
     if (!timeEl) return;
@@ -48,12 +90,18 @@
     pathEl.textContent = window.location.pathname.replace(/\/portfolio/, '').replace(/\/$/, '') || '/';
   }
 
-  // Set word count
-  if (wordsEl) {
-    var bodyText = document.body.innerText || document.body.textContent || '';
-    var wordCount = bodyText.trim().split(/\s+/).filter(Boolean).length;
-    wordsEl.textContent = wordCount + ' words';
-  }
+  // Set count
+  updateCount();
+
+  // Re-read count when settings change
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'portfolio-settings') updateCount();
+  });
+
+  // Also re-read every 2s on the settings page so live preview updates
+  setInterval(function() {
+    if (window.location.pathname.indexOf('/settings') > -1) updateCount();
+  }, 500);
 
   // Update scroll percentage on scroll
   function updateScroll() {

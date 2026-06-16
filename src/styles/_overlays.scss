@@ -121,6 +121,30 @@
   white-space: nowrap;
 }
 
+.status-words {
+  position: relative;
+  cursor: help;
+}
+
+.status-words:hover::after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  z-index: 10;
+  display: block;
+  padding: 4px 8px;
+  margin-bottom: 6px;
+  font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--text-normal);
+  white-space: nowrap;
+  pointer-events: none;
+  content: attr(title);
+  background: var(--flexcyon-base-02);
+  border-radius: 4px;
+  transform: translateX(-90%);
+}
+
 .status-path {
   border-left: 1px solid var(--flexcyon-base-04);
 }

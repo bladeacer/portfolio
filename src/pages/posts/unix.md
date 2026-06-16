@@ -89,7 +89,7 @@ developers to:
 - Finding and fixing software vulnerabilities
 
 It also does not help that plenty of well established FOSS software have codebases
-which are extremely difficult to decipher other to their core contributors.
+which are extremely difficult to decipher, other than to their core contributors.
 > E.g. the [Visual Studio Code codebase](https://github.com/microsoft/vscode)
 
 ## Credits

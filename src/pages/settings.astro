@@ -55,12 +55,23 @@ const colors = [
             <option value="paragraphs">Paragraphs</option>
           </select>
         </label>
+
+        <label class="setting-row">
+          <span class="setting-label">Status bar count</span>
+          <select id="setting-status-count" class="setting-select">
+            <option value="words">Words</option>
+            <option value="characters">Characters</option>
+            <option value="sentences">Sentences</option>
+            <option value="paragraphs">Paragraphs</option>
+            <option value="none">None</option>
+          </select>
+        </label>
       </div>
 
       <h3>Fonts</h3>
       <div class="setting-group">
         <label class="setting-row">
-          <span class="setting-label">Sans font</span>
+          <span class="setting-label">Body font</span>
           <select id="setting-font-sans" class="setting-select">
             {fonts.map(f => <option value={f}>{f}</option>)}
           </select>
@@ -84,6 +95,13 @@ const colors = [
           </select>
           <input type="number" id="setting-size-mono" class="setting-size" min="10" max="32" value="16" />
           <span class="setting-unit">px</span>
+        </label>
+
+        <label class="setting-row">
+          <span class="setting-label">CJK font</span>
+          <select id="setting-font-cjk" class="setting-select">
+            {fonts.map(f => <option value={f}>{f}</option>)}
+          </select>
         </label>
       </div>
 
@@ -184,227 +202,16 @@ const colors = [
   </div>
 </BaseLayout>
 
-<style is:global>
-  .settings-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-
-  @media (width < 900px) {
-    .settings-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .setting-group {
-    margin-bottom: 1.25rem;
-  }
-
-  .setting-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.6rem;
-    flex-wrap: wrap;
-  }
-
-  .setting-label {
-    min-width: 130px;
-    color: var(--text-normal);
-    font-size: 0.95rem;
-  }
-
-  .heading-row .setting-label {
-    min-width: 30px;
-    font-weight: 600;
-  }
-
-  .setting-select {
-    font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
-    font-size: 0.85rem;
-    padding: 5px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--flexcyon-base-04);
-    background-color: var(--flexcyon-base-01);
-    color: var(--text-normal);
-    min-width: 180px;
-  }
-
-  .setting-size {
-    font-family: "DepartureMono", "Maple Mono Medium", ui-monospace, monospace;
-    font-size: 0.85rem;
-    width: 70px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--flexcyon-base-04);
-    background-color: var(--flexcyon-base-01);
-    color: var(--text-normal);
-  }
-
-  .setting-unit {
-    font-size: 0.8rem;
-    color: var(--text-faint);
-  }
-
-  .heading-size {
-    width: 75px;
-  }
-
-  .heading-color {
-    min-width: 130px;
-  }
-
-  .setting-color-picker {
-    width: 36px;
-    height: 30px;
-    padding: 0;
-    border: 1px solid var(--flexcyon-base-04);
-    border-radius: 4px;
-    cursor: pointer;
-    background: none;
-  }
-
-  .preview-box {
-    background-color: var(--flexcyon-base-01-02-mix);
-    border: 1px solid var(--flexcyon-base-04);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .preview-box h1 {
-    margin: 0 0 0.5rem;
-    padding: 0;
-    font-size: 1.6rem;
-    color: var(--flexcyon-blue);
-  }
-
-  .preview-box h2 {
-    margin: 0 0 0.5rem;
-    padding: 0;
-    font-size: 1.35rem;
-    color: var(--flexcyon-cyan);
-  }
-
-  .preview-box h3 {
-    margin: 0 0 0.5rem;
-    padding: 0;
-    font-size: 1.15rem;
-    color: var(--flexcyon-green);
-  }
-
-  .preview-box h4 {
-    margin: 0 0 0.5rem;
-    padding: 0;
-    color: var(--flexcyon-pink);
-    font-size: 1rem;
-  }
-
-  .preview-box h5 {
-    margin: 0.75rem 0 0.25rem;
-    font-size: 0.9rem;
-    color: var(--flexcyon-purple-lilac);
-    padding: 0;
-  }
-
-  .preview-box p {
-    margin: 0 0 0.75rem;
-    font-size: inherit;
-  }
-
-  .preview-box em {
-    color: var(--text-accent);
-  }
-
-  .preview-box code {
-    font-size: inherit;
-    background-color: var(--flexcyon-base-03);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .preview-box pre code {
-    padding: 6px 10px;
-    display: block;
-  }
-
-  .preview-box blockquote {
-    margin: 0 0 0.75rem;
-    padding: 0.5rem 1rem;
-    border-left: 4px solid var(--flexcyon-blue);
-    background-color: var(--flexcyon-base-01);
-    border-radius: 4px;
-    font-style: italic;
-  }
-
-  .preview-box table {
-    width: 100%;
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-    border-collapse: collapse;
-  }
-
-  .preview-box th,
-  .preview-box td {
-    padding: 4px 10px;
-    text-align: left;
-    border: 1px solid var(--flexcyon-base-04);
-  }
-
-  .preview-box th {
-    font-weight: 600;
-    color: var(--text-faint);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .preview-box code {
-    font-size: inherit;
-    background-color: var(--flexcyon-base-03);
-    padding: 6px 10px;
-    border-radius: 4px;
-    display: block;
-  }
-
-  .preview-box .kw { color: var(--flexcyon-purple-lilac); }
-  .preview-box .nx { color: var(--flexcyon-cyan); }
-  .preview-box .s { color: var(--flexcyon-green); }
-  .preview-box .o { color: var(--flexcyon-orange); }
-  .preview-box .p { color: var(--text-normal); }
-
-  .setting-actions {
-    margin-top: 0.5rem;
-  }
-
-  .setting-btn {
-    font-family: "CascadiaCode", "Maple Mono Medium", ui-sans-serif, sans-serif;
-    font-size: 0.85rem;
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 1px solid var(--flexcyon-base-04);
-    background-color: var(--flexcyon-base-03);
-    color: var(--text-normal);
-    cursor: pointer;
-  }
-
-  .setting-btn:hover {
-    background-color: var(--flexcyon-base-04);
-  }
-</style>
-
 <script is:inline>
   (function() {
     var STORAGE_KEY = "portfolio-settings";
 
     var DEFAULTS = {
       fontSans: "CascadiaCode",
-      fontFallback: "Maple Mono Medium",
+      fontCJK: "Maple Mono Medium",
       fontMono: "DepartureMono",
+      fontHeading: "DepartureMono",
       sizeSans: 16,
-      sizeFallback: 16,
       sizeMono: 16,
       accentLight: "",
       accentDark: "",
@@ -419,26 +226,26 @@ const colors = [
       themePreference: "",
       showGrid: true,
       yankUnit: "words",
+      statusCount: "words",
     };
 
-    var SANS_CHAINS = {
-      CascadiaCode: '"CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-      "Maple Mono Medium": '"Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-      DepartureMono: '"DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-    };
-
-    var MONO_CHAINS = {
-      CascadiaCode: '"CascadiaCode", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-      "Maple Mono Medium": '"Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-      DepartureMono: '"DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-    };
+    function makeFontFamily(primary, cjk, generic) {
+      return '"' + primary + '", "' + cjk + '", ' + generic;
+    }
 
     function $(id) { return document.getElementById(id); }
 
     function load() {
       try {
         var raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) return Object.assign({}, DEFAULTS, JSON.parse(raw));
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          // Migrate old fontFallback key to fontCJK
+          if (parsed.fontFallback !== undefined && parsed.fontCJK === undefined) {
+            parsed.fontCJK = parsed.fontFallback;
+          }
+          return Object.assign({}, DEFAULTS, parsed);
+        }
       } catch(e) {}
       return Object.assign({}, DEFAULTS);
     }
@@ -448,17 +255,22 @@ const colors = [
     }
 
     function apply(s) {
-      var sansChain = SANS_CHAINS[s.fontSans] || SANS_CHAINS[DEFAULTS.fontSans];
-      var fallbackChain = SANS_CHAINS[s.fontFallback] || SANS_CHAINS[DEFAULTS.fontFallback];
-      var monoChain = MONO_CHAINS[s.fontMono] || MONO_CHAINS[DEFAULTS.fontMono];
+      var gen = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
+      var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+      var cjk = s.fontCJK || DEFAULTS.fontCJK;
+      var sansChain = makeFontFamily(s.fontSans, cjk, gen);
+      var monoChain = makeFontFamily(s.fontMono, cjk, monogen);
+      var headingChain = makeFontFamily(s.fontHeading || s.fontSans, cjk, gen);
       var sz = s.sizeSans + "px";
       var szm = s.sizeMono + "px";
-      var szf = s.sizeFallback + "px";
 
       var css = "";
       css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
       css += "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" + sz + " !important;}";
+      css += "code,pre,kbd,samp,.setting-select,.setting-size{font-family:" + monoChain + " !important;}";
       css += "code{font-size:" + szm + " !important;}";
+      css += "pre.astro-code,.setting-select,.setting-size{font-size:" + szm + " !important;}";
+      css += "h1,h2,h3,h4{font-family:" + headingChain + " !important;}";
       css += "h1{font-size:" + s.h1Size + "em !important;";
       if (s.h1Color && s.h1Color !== "custom") css += "color:" + s.h1Color + " !important;";
       css += "}";
@@ -500,10 +312,10 @@ const colors = [
 
     function syncForm(s) {
       syncField("setting-font-sans", s.fontSans);
-      syncField("setting-font-fallback", s.fontFallback);
+      syncField("setting-font-cjk", s.fontCJK);
       syncField("setting-font-mono", s.fontMono);
+      syncField("setting-font-heading", s.fontHeading || s.fontSans);
       syncField("setting-size-sans", s.sizeSans);
-      syncField("setting-size-fallback", s.sizeFallback);
       syncField("setting-size-mono", s.sizeMono);
       syncField("s-h1Size", s.h1Size);
       syncField("s-h2Size", s.h2Size);
@@ -511,6 +323,7 @@ const colors = [
       syncField("s-h4Size", s.h4Size);
       syncField("setting-theme", s.themePreference || "");
       syncField("setting-yank-unit", s.yankUnit || "words");
+      syncField("setting-status-count", s.statusCount || "words");
       var gridEl = document.getElementById("setting-show-grid");
       if (gridEl) gridEl.checked = s.showGrid !== false;
       syncColorSelect("s-h1Color", "s-h1ColorPicker", s.h1Color);
@@ -542,10 +355,10 @@ const colors = [
     function readForm() {
       return {
         fontSans: getVal("setting-font-sans"),
-        fontFallback: getVal("setting-font-fallback"),
+        fontCJK: getVal("setting-font-cjk"),
         fontMono: getVal("setting-font-mono"),
+        fontHeading: getVal("setting-font-heading"),
         sizeSans: parseFloat(getVal("setting-size-sans")) || 16,
-        sizeFallback: parseFloat(getVal("setting-size-fallback")) || 16,
         sizeMono: parseFloat(getVal("setting-size-mono")) || 16,
         h1Size: parseFloat(getVal("s-h1Size")) || 1.81803,
         h2Size: parseFloat(getVal("s-h2Size")) || 1.61803,
@@ -560,6 +373,7 @@ const colors = [
         themePreference: getVal("setting-theme"),
         showGrid: document.getElementById("setting-show-grid")?.checked ?? true,
         yankUnit: getVal("setting-yank-unit"),
+        statusCount: getVal("setting-status-count"),
       };
     }
 
@@ -615,10 +429,10 @@ const colors = [
       syncForm(s);
       apply(s);
 
-      var autoSaveIds = ["setting-font-sans", "setting-font-fallback", "setting-font-mono",
-                         "setting-size-sans", "setting-size-fallback", "setting-size-mono",
+      var autoSaveIds = ["setting-font-sans", "setting-font-cjk", "setting-font-mono", "setting-font-heading",
+                         "setting-size-sans", "setting-size-mono",
                          "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size",
-                         "setting-theme", "setting-show-grid", "setting-yank-unit"];
+                         "setting-theme", "setting-show-grid", "setting-yank-unit", "setting-status-count"];
 
       autoSaveIds.forEach(function(id) {
         var el = $(id);

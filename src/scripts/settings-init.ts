@@ -1,24 +1,41 @@
 (function() {
   var KEY = "portfolio-settings";
+  function makeFontFamily(primary, cjk, generic) {
+    return '"' + primary + '", "' + cjk + '", ' + generic;
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var s = JSON.parse(raw);
+        // Migrate old fontFallback key
+        if (s.fontFallback !== undefined && s.fontCJK === undefined) s.fontCJK = s.fontFallback;
+        return s;
+      }
+    } catch {}
+    return null;
+  }
   function apply() {
     if (window.location.pathname.indexOf('/settings') !== -1) return;
     try {
-      var raw = localStorage.getItem(KEY);
-      if (!raw) return;
-      var s = JSON.parse(raw);
-      var SANS = {
-        CascadiaCode: '"CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-        "Maple Mono Medium": '"Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-        DepartureMono: '"DepartureMono", "Maple Mono Medium", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-      };
-      var sansChain = SANS[s.fontSans] || SANS["CascadiaCode"];
+      var s = load();
+      if (!s) return;
+      var gen = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
+      var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+      var cjk = s.fontCJK || "Maple Mono Medium";
+      var sansChain = makeFontFamily(s.fontSans || "CascadiaCode", cjk, gen);
+      var monoChain = makeFontFamily(s.fontMono || "DepartureMono", cjk, monogen);
+      var headingChain = makeFontFamily(s.fontHeading || s.fontSans || "CascadiaCode", cjk, gen);
       var sz = (s.sizeSans || 16) + "px";
       var szm = (s.sizeMono || 16) + "px";
 
       var css = "";
       css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
       css += "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" + sz + " !important;}";
+      css += "code,pre,kbd,samp,.setting-select,.setting-size{font-family:" + monoChain + " !important;}";
       css += "code{font-size:" + szm + " !important;}";
+      css += "pre.astro-code,.setting-select,.setting-size{font-size:" + szm + " !important;}";
+      css += "h1,h2,h3,h4{font-family:" + headingChain + " !important;}";
       if (s.h1Size) css += "h1{font-size:" + s.h1Size + "em !important;}";
       if (s.h2Size) css += "h2{font-size:" + s.h2Size + "em !important;}";
       if (s.h3Size) css += "h3{font-size:" + s.h3Size + "em !important;}";

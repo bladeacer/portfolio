@@ -24,5 +24,9 @@ export default defineConfig({
         css: {
             minify: true,
         },
+        build: {
+            minify: true,
+            cssMinify: true,
+        },
     },
 });
