@@ -43,11 +43,16 @@ const pageTitle = "bladeacer's Portfolio";
           <tr><td><kbd>k</kbd></td><td>Scroll up</td></tr>
           <tr><td><kbd>{</kbd></td><td>Scroll to previous heading</td></tr>
           <tr><td><kbd>}</kbd></td><td>Scroll to next heading</td></tr>
-          <tr><td><kbd>gg</kbd></td><td>Scroll to top of page</td></tr>
-          <tr><td><kbd>G</kbd></td><td>Scroll to bottom of page</td></tr>
-      </tbody>
-  </table>
-  <p>Numeric prefix: <code>5j</code> scrolls down 5 elements, <code>10k</code> scrolls up 10 elements. Range 1-9 for single digit, or type multiple digits within 1 second.</p>
+            <tr><td><kbd>gg</kbd></td><td>Scroll to top of page</td></tr>
+            <tr><td><kbd>G</kbd></td><td>Scroll to bottom of page</td></tr>
+            <tr><td><kbd>zz</kbd></td><td>Center active line in viewport</td></tr>
+            <tr><td><kbd>zt</kbd></td><td>Scroll active line to top of viewport</td></tr>
+            <tr><td><kbd>zb</kbd></td><td>Scroll active line to bottom of viewport</td></tr>
+            <tr><td><kbd>N{</kbd></td><td>Jump backward N headings</td></tr>
+            <tr><td><kbd>N}</kbd></td><td>Jump forward N headings</td></tr>
+        </tbody>
+    </table>
+    <p>Numeric prefix: <code>5j</code> scrolls down 5 elements, <code>10k</code> scrolls up 10 elements, <code>3{</code> jumps back 3 headings. Range 1-9 for single digit, or type multiple digits within 1 second.</p>
 
   <h4>Yanking (Clipboard)</h4>
   <table>
@@ -114,6 +119,36 @@ const pageTitle = "bladeacer's Portfolio";
   </table>
   <p>Note: For navigating to the first link under active line, you would need to use scroll motions or toggle active line first.</p>
   <p>For navigating to other links under active line, you would need to use browser keybinds like Tab/Shift Tab to navigate between link items in the DOM.</p>
+
+  <h4>Command Palette</h4>
+  <table>
+      <thead>
+          <tr><th>Trigger</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+          <tr><td><kbd>:N</kbd></td><td>Go to line N</td></tr>
+          <tr><td><kbd>:theme &lt;light|dark&gt;</kbd></td><td>Switch theme</td></tr>
+          <tr><td><kbd>:edit settings</kbd></td><td>Open settings</td></tr>
+          <tr><td><kbd>:q / :x</kbd></td><td>Close all overlays</td></tr>
+          <tr><td><kbd>Tab</kbd></td><td>Complete from filtered list</td></tr>
+          <tr><td><kbd>Alt+n</kbd> / <kbd>&darr;</kbd></td><td>Next item in list</td></tr>
+          <tr><td><kbd>Alt+p</kbd> / <kbd>&uarr;</kbd></td><td>Previous item in list</td></tr>
+      </tbody>
+  </table>
+
+  <h4>Settings Keyboard Navigation</h4>
+  <table>
+      <thead>
+          <tr><th>Trigger</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+          <tr><td><kbd>j</kbd></td><td>Move to next setting</td></tr>
+          <tr><td><kbd>k</kbd></td><td>Move to previous setting</td></tr>
+          <tr><td><kbd>Alt+n</kbd></td><td>Move to next setting</td></tr>
+          <tr><td><kbd>Alt+p</kbd></td><td>Move to previous setting</td></tr>
+          <tr><td><kbd>Enter</kbd></td><td>Activate focused control</td></tr>
+      </tbody>
+  </table>
 
   <h3>Toggles</h3>
   <table>

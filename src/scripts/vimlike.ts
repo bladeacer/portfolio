@@ -447,43 +447,88 @@ if (window.__shortcutsRegistry) {
     { chord: 'yy', desc: 'Yank current element' },
     { chord: 'Y', desc: 'Yank entire page' },
     { chord: 'y}', desc: 'Yank from current to next heading' },
-    { chord: 'y{', desc: 'Yank from current to previous heading' }
+    { chord: 'y{', desc: 'Yank from current to previous heading' },
+    { chord: 'zz', desc: 'Center active line in viewport' },
+    { chord: 'zt', desc: 'Scroll active line to top' },
+    { chord: 'zb', desc: 'Scroll active line to bottom' }
   );
 }
 
 Mousetrap.bind('j', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(1);
   showStatus(c > 1 ? c + 'j' : 'j', 'Scrolled down');
 }, 'keydown');
 Mousetrap.bind('k', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(-1);
   showStatus(c > 1 ? c + 'k' : 'k', 'Scrolled up');
 }, 'keydown');
 
 // Heading Jumps
 Mousetrap.bind('{', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(-1, 'heading');
   showStatus(c > 1 ? c + '{' : '{', 'Previous heading');
 });
 Mousetrap.bind('}', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(1, 'heading');
   showStatus(c > 1 ? c + '}' : '}', 'Next heading');
 });
 
 // GG/G Bindings (Full top/bottom scroll)
 Mousetrap.bind('g g', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(0, 'top');
   showStatus(c > 1 ? c + 'gg' : 'gg', 'Top of page');
 });
 Mousetrap.bind('G', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(0, 'bottom');
   showStatus(c > 1 ? c + 'G' : 'G', 'Bottom of page');
 });
 
-Mousetrap.bind('l', () => { 
-    highlightActiveLine();
-    showStatus('l', 'Highlighted active line');
+Mousetrap.bind('l', () => {
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  highlightActiveLine();
+  showStatus('l', 'Highlighted active line');
 }, 'keydown');
+
+// zz / zt / zb: scroll active line to center / top / bottom
+function scrollActiveLine(block) {
+  var el = document.querySelector('.' + HIGHLIGHT_CLASS) || lastHighlightedElement;
+  if (!el) {
+    // Fall back to closest element to viewport center
+    highlightActiveLine();
+    el = lastHighlightedElement;
+  }
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: block });
+}
+
+Mousetrap.bind('z z', function() {
+  scrollActiveLine('center');
+  showStatus('zz', 'Centered active line');
+  return false;
+});
+Mousetrap.bind('z t', function() {
+  scrollActiveLine('start');
+  showStatus('zt', 'Scrolled active line to top');
+  return false;
+});
+Mousetrap.bind('z b', function() {
+  scrollActiveLine('end');
+  showStatus('zb', 'Scrolled active line to bottom');
+  return false;
+});
 
 Mousetrap.bind('enter', (e) => {
     // Don't intercept Enter when focused on form fields

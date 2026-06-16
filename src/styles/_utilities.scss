@@ -41,18 +41,6 @@ p.cta3 {
     opacity: 1 !important;
 }
 
-.active-line-highlight::after {
-    position: absolute;
-    top: 2px;
-    bottom: 2px;
-    left: -3px;
-    width: 3px;
-    content: '';
-    background: var(--text-accent);
-    border-radius: 1px;
-    opacity: 0.5;
-}
-
 .active-line-highlight img {
   padding-right: 16px;
 }

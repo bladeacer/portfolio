@@ -14,6 +14,7 @@
   function close() {
     overlay.classList.remove("is-active");
     input.value = "";
+    input.blur();
     list.innerHTML = "";
     selectedIdx = -1;
     historyIdx = -1;
@@ -24,21 +25,19 @@
     var q = input.value.toLowerCase().trim();
     if (!q) {
       filtered = registry.slice();
-    } else if (q.indexOf(':') === 0) {
-      // For colon-prefixed commands, check if it's a line number
-      var num = parseInt(q.replace(/^:/, ''), 10);
-      if (!isNaN(num) && num > 0) {
-        // Show a virtual entry for :N navigation
-        filtered = [{ chord: q, desc: 'Go to line ' + num }];
+    } else {
+      // Check if input is a literal number (bare or colon-prefixed) for line navigation
+      var bareNum = parseInt(q.replace(/^:/, ''), 10);
+      var isLineNav = !isNaN(bareNum) && bareNum > 0;
+      if (isLineNav) {
+        filtered = q.indexOf(':') === 0
+          ? [{ chord: q, desc: 'Go to line ' + bareNum }]
+          : [{ chord: ':' + bareNum, desc: 'Go to line ' + bareNum }];
       } else {
         filtered = registry.filter(function(s) {
           return s.chord.toLowerCase().indexOf(q) > -1 || s.desc.toLowerCase().indexOf(q) > -1;
         });
       }
-    } else {
-      filtered = registry.filter(function(s) {
-        return s.chord.toLowerCase().indexOf(q) > -1 || s.desc.toLowerCase().indexOf(q) > -1;
-      });
     }
     list.innerHTML = "";
     if (filtered.length === 0) {
