@@ -2,7 +2,9 @@
   position: fixed;
   top: 11.5vh;
   left: 62vw;
-  z-index: 100;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
   max-width: min(35vw, 25rem);
   background-color: var(--flexcyon-base-01-02-mix);
   border-radius: 8px;
@@ -16,7 +18,7 @@
   position: fixed;
   top: 2rem;
   right: 2rem;
-  z-index: 1001;
+  z-index: 60;
   display: none;
   padding: 12px;
   line-height: 0;
@@ -29,7 +31,7 @@
 .toc-overlay {
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 55;
   display: none;
   background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
 }
@@ -47,7 +49,8 @@
     position: fixed;
     top: 0;
     right: -100%;
-    z-index: 1000;
+    z-index: 55;
+    display: block !important;
     width: 90vw;
     max-width: 600px;
     height: 100vh;
@@ -59,6 +62,11 @@
 
   #toc-wrapper.is-active {
     right: 0;
+    visibility: visible;
+  }
+
+  #toc-wrapper:not(.is-active) {
+    visibility: hidden;
   }
 
   .stron-toc.toc {

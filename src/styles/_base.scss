@@ -236,8 +236,10 @@ img {
 .content-wrapper .blog-card::before {
   position: absolute;
   top: 0;
-  left: -3.5rem;
-  width: 2.5rem;
+  right: 100%;
+  width: 3rem;
+  padding: 0;
+  margin-right: 0.5rem;
   font-family: DepartureMono, "Maple Mono Medium", ui-monospace, monospace;
   font-size: 0.78rem;
   color: var(--text-faint);
@@ -272,16 +274,23 @@ img {
 .content-wrapper > ul > li::before,
 .content-wrapper > ol > li::before,
 .content-wrapper .markdown-content li::before {
-  left: -5.5rem;
+  width: 4.5rem;
+  right: calc(100% + 29px); 
 }
 
 /* Nested content inside blockquote/pre/li shouldn't get their own line number */
+.content-wrapper blockquote p,
+.content-wrapper blockquote li,
+.content-wrapper pre code,
+.content-wrapper li p {
+  counter-increment: none;
+}
+
 .content-wrapper blockquote p::before,
 .content-wrapper blockquote li::before,
 .content-wrapper pre code::before,
 .content-wrapper li p::before {
   display: none;
-  counter-increment: none;
 }
 
 strong {

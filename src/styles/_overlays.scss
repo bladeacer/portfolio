@@ -37,7 +37,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 99999;
+  z-index: 100;
   display: flex;
   gap: 0;
   align-items: center;
@@ -171,7 +171,7 @@
 
 /* Search overlay */
 .search-overlay {
-  z-index: 99999;
+  z-index: 200;
 }
 
 .search-box {
@@ -258,7 +258,7 @@
 
 /* Command mode overlay - exact popup pattern */
 .command-mode-overlay {
-  z-index: 99999;
+  z-index: 200;
 }
 
 .command-mode-box {

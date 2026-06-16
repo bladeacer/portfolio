@@ -66,7 +66,7 @@ other software integrating your own.
 > `ffmpeg`'s existence. FFmpeg helps you handle video and audio files formats.
 > You can find it used in media players like VLC or processing logic for YouTube.
 >
-> 'Another example would be the ubiquitous `curl`.
+> Another example would be the ubiquitous `curl`.
 
 ## On software bloat
 With how software development has evolved over time, the line between what

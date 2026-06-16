@@ -82,35 +82,6 @@ import X from '@lucide/astro/icons/x';
   </nav>
 </div>
 
-<style>
-  /* 1. Fix the "Beside" Title Issue */
-  .stron-toc.toc {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* 2. Fix the "Always Displayed" Mobile Issue */
-  @media (width < 1000px) {
-    /* We only want the TOC to be visible when the wrapper is active.
-       Your external CSS hides #toc-wrapper by moving it to right: -100%.
-    */
-    #toc-wrapper {
-      display: block !important; /* Ensure the container exists to animate */
-    }
-
-    /* If the wrapper IS NOT active, we ensure the inner TOC 
-       doesn't accidentally force its way into view.
-    */
-    #toc-wrapper:not(.is-active) {
-       visibility: hidden;
-    }
-    
-    #toc-wrapper.is-active {
-       visibility: visible;
-    }
-  }
-</style>
-
 <script>
   function setupTOC() {
     // Matches the IDs in the component HTML

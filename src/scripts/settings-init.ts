@@ -1,8 +1,5 @@
 (function() {
   var KEY = "portfolio-settings";
-  function makeFontFamily(primary, cjk, generic) {
-    return '"' + primary + '", "' + cjk + '", ' + generic;
-  }
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
@@ -22,10 +19,9 @@
       if (!s) return;
       var gen = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
       var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
-      var cjk = s.fontCJK || "Maple Mono Medium";
-      var sansChain = makeFontFamily(s.fontSans || "CascadiaCode", cjk, gen);
-      var monoChain = makeFontFamily(s.fontMono || "DepartureMono", cjk, monogen);
-      var headingChain = makeFontFamily(s.fontHeading || s.fontSans || "CascadiaCode", cjk, gen);
+      var sansChain = '"' + (s.fontSans || "CascadiaCode") + '", ' + gen;
+      var monoChain = '"' + (s.fontMono || "DepartureMono") + '", ' + monogen;
+      var headingChain = '"' + (s.fontHeading || s.fontSans || "CascadiaCode") + '", ' + gen;
       var sz = (s.sizeSans || 16) + "px";
       var szm = (s.sizeMono || 16) + "px";
 

@@ -80,15 +80,6 @@ const colors = [
         </label>
 
         <label class="setting-row">
-          <span class="setting-label">Fallback font</span>
-          <select id="setting-font-fallback" class="setting-select">
-            {fonts.map(f => <option value={f}>{f}</option>)}
-          </select>
-          <input type="number" id="setting-size-fallback" class="setting-size" min="10" max="32" value="16" />
-          <span class="setting-unit">px</span>
-        </label>
-
-        <label class="setting-row">
           <span class="setting-label">Monospace font</span>
           <select id="setting-font-mono" class="setting-select">
             {fonts.map(f => <option value={f}>{f}</option>)}
@@ -229,10 +220,6 @@ const colors = [
       statusCount: "words",
     };
 
-    function makeFontFamily(primary, cjk, generic) {
-      return '"' + primary + '", "' + cjk + '", ' + generic;
-    }
-
     function $(id) { return document.getElementById(id); }
 
     function load() {
@@ -257,10 +244,9 @@ const colors = [
     function apply(s) {
       var gen = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
       var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
-      var cjk = s.fontCJK || DEFAULTS.fontCJK;
-      var sansChain = makeFontFamily(s.fontSans, cjk, gen);
-      var monoChain = makeFontFamily(s.fontMono, cjk, monogen);
-      var headingChain = makeFontFamily(s.fontHeading || s.fontSans, cjk, gen);
+      var sansChain = '"' + s.fontSans + '", ' + gen;
+      var monoChain = '"' + s.fontMono + '", ' + monogen;
+      var headingChain = '"' + (s.fontHeading || s.fontSans) + '", ' + gen;
       var sz = s.sizeSans + "px";
       var szm = s.sizeMono + "px";
 
