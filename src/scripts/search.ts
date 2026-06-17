@@ -1,14 +1,17 @@
 import FlexSearch from "flexsearch";
 
 (function () {
-  var overlay = document.getElementById("search-overlay");
-  var input = document.getElementById("search-input");
-  var list = document.getElementById("search-results");
+  var _overlay = document.getElementById("search-overlay");
+  var _input = document.getElementById("search-input");
+  var _list = document.getElementById("search-results");
   var noResults = document.getElementById("search-no-results");
-  if (!overlay || !input || !list) return;
+  if (!_overlay || !_input || !_list) return;
+  var overlay: HTMLElement = _overlay;
+  var input: HTMLInputElement = _input as HTMLInputElement;
+  var list: HTMLElement = _list;
 
-  var index = null;
-  var pages = [];
+  var index: any = null;
+  var pages: any[] = [];
   var selectedIdx = -1;
   var loaded = false;
 
@@ -21,7 +24,7 @@ import FlexSearch from "flexsearch";
     if (window.setMode) window.setMode("NORMAL");
   }
 
-  function loadIndex(callback) {
+  function loadIndex(callback?: () => void) {
     if (loaded) {
       if (callback) callback();
       return;
@@ -53,7 +56,7 @@ import FlexSearch from "flexsearch";
           },
           cache: true,
         });
-        pages.forEach(function (p, i) {
+        pages.forEach(function (p: any, i: number) {
           index.add({ id: i, title: p.title, content: p.content, url: p.url });
         });
         loaded = true;
@@ -66,7 +69,7 @@ import FlexSearch from "flexsearch";
       });
   }
 
-  function render(results) {
+  function render(results: any[]) {
     list.innerHTML = "";
     if (noResults) noResults.style.display = "none";
     if (!results || results.length === 0) {
@@ -75,7 +78,7 @@ import FlexSearch from "flexsearch";
       return;
     }
     var q = input.value.trim().toLowerCase();
-    results.forEach(function (r, i) {
+    results.forEach(function (r: any, i: number) {
       var li = document.createElement("li");
       li.className = "search-result-item" + (i === 0 ? " search-selected" : "");
       var displayLabel = r.breadcrumb
@@ -138,12 +141,12 @@ import FlexSearch from "flexsearch";
     selectedIdx = 0;
   }
 
-  function navigate(url) {
+  function navigate(url: string) {
     close();
     window.location.href = url;
   }
 
-  function extractSnippet(content, query, maxLen) {
+  function extractSnippet(content: string, query: string, maxLen?: number) {
     maxLen = maxLen || 120;
     var lower = content.toLowerCase();
     var idx = lower.indexOf(query.toLowerCase());
@@ -162,16 +165,16 @@ import FlexSearch from "flexsearch";
       render([]);
       return;
     }
-    var results = [];
-    var seenUrls = {};
+    var results: any[] = [];
+    var seenUrls: Record<string, boolean> = {};
     var lower = q.toLowerCase();
     // FlexSearch index search (with try/catch so fallback still runs)
     try {
       var raw = index.search(q, { limit: 20 });
       if (raw && raw.length) {
-        raw.forEach(function (fieldRes) {
+        raw.forEach(function (fieldRes: any) {
           if (fieldRes.result) {
-            fieldRes.result.forEach(function (id) {
+            fieldRes.result.forEach(function (id: any) {
               var p = pages[id];
               if (p && !seenUrls[p.url]) {
                 seenUrls[p.url] = true;
@@ -194,7 +197,7 @@ import FlexSearch from "flexsearch";
       }
     } catch {} // FlexSearch error non-fatal; fallback below still runs
     // Always run fallback for substring matching (catches partial-word matches)
-    pages.forEach(function (p) {
+    pages.forEach(function (p: any) {
       if (seenUrls[p.url]) return;
       if (
         (p.title && p.title.toLowerCase().indexOf(lower) > -1) ||
@@ -215,7 +218,7 @@ import FlexSearch from "flexsearch";
       }
     });
     // Sort: title matches first, then content matches
-    results.sort(function (a, b) {
+    results.sort(function (a: any, b: any) {
       return a.rank - b.rank;
     });
     render(results.slice(0, 10));
@@ -232,15 +235,15 @@ import FlexSearch from "flexsearch";
       if (window.showStatus) window.showStatus("Esc", "Closed search");
     } else if (e.key === "Enter") {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      var items = list.querySelectorAll<HTMLElement>(".search-result-item");
       if (selectedIdx >= 0 && items[selectedIdx]) {
-        navigate(items[selectedIdx].dataset.url);
+        navigate(items[selectedIdx].dataset.url ?? "");
       } else if (items[0]) {
-        navigate(items[0].dataset.url);
+        navigate(items[0].dataset.url ?? "");
       }
     } else if (e.key === "ArrowDown" || (e.key === "n" && e.altKey)) {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      items = list.querySelectorAll<HTMLElement>(".search-result-item");
       if (items.length === 0) return;
       var next = (selectedIdx + 1) % items.length;
       document.querySelectorAll(".search-selected").forEach(function (el) {
@@ -250,7 +253,7 @@ import FlexSearch from "flexsearch";
       selectedIdx = next;
     } else if (e.key === "ArrowUp" || (e.key === "p" && e.altKey)) {
       e.preventDefault();
-      var items = list.querySelectorAll(".search-result-item");
+      items = list.querySelectorAll<HTMLElement>(".search-result-item");
       if (items.length === 0) return;
       var prev = (selectedIdx - 1 + items.length) % items.length;
       document.querySelectorAll(".search-selected").forEach(function (el) {

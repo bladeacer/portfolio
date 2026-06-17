@@ -9,7 +9,7 @@
   var platformEl = document.getElementById("status-platform");
   var timeEl = document.getElementById("status-time");
 
-  function getSetting(key, def) {
+  function getSetting(key: string, def: any) {
     try {
       var raw = localStorage.getItem("portfolio-settings");
       if (raw) {
@@ -20,16 +20,16 @@
     return def;
   }
 
-  function countWords(text) {
+  function countWords(text: string) {
     return text.split(/\s+/).filter(Boolean).length;
   }
-  function countChars(text) {
+  function countChars(text: string) {
     return text.length;
   }
-  function countSentences(text) {
+  function countSentences(text: string) {
     return text.split(/[.!?]+/).filter(Boolean).length;
   }
-  function countParagraphs(text) {
+  function countParagraphs(text: string) {
     return text.split(/\n\s*\n/).filter(Boolean).length;
   }
 
@@ -191,21 +191,25 @@
         el.style.display = "";
         clearTimeout(el._hideTimeout);
         el._hideTimeout = setTimeout(function () {
-          el.style.display = "none";
+          el!.style.display = "none";
         }, 4000);
       }
       sessionStorage.removeItem("portfolio-last-status");
     }
   } catch {}
 
-  window.showStatus = function (chord, desc, persistNav) {
+  window.showStatus = function (
+    chord: string,
+    desc: string,
+    persistNav?: boolean,
+  ) {
     if (!el || !chordEl || !descEl) return;
     chordEl.textContent = chord;
     descEl.textContent = desc ? " " + desc : "";
     el.style.display = "";
     clearTimeout(el._hideTimeout);
     el._hideTimeout = setTimeout(function () {
-      el.style.display = "none";
+      el!.style.display = "none";
     }, 5000);
     if (persistNav) {
       try {

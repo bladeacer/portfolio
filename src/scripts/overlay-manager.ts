@@ -39,10 +39,10 @@
   });
 
   // Focus trap helper: returns a focusable children of active overlay
-  function getFocusable(overlay) {
+  function getFocusable(overlay: HTMLElement | null) {
     if (!overlay) return [];
     return Array.from(
-      overlay.querySelectorAll(
+      overlay.querySelectorAll<HTMLElement>(
         'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])',
       ),
     );

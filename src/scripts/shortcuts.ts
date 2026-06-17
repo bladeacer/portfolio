@@ -1,6 +1,6 @@
 import { bindKey, bindKeyCombo } from "@rwh/keystrokes";
 
-function showStatus(chord, desc, persistNav) {
+function showStatus(chord: string, desc: string, persistNav?: boolean) {
   if (window.showStatus) window.showStatus(chord, desc, persistNav);
 }
 
@@ -8,11 +8,15 @@ var BLANK_FEATURES = "noopener,noreferrer";
 
 if (!window.__handlers) window.__handlers = {};
 
-function reg(chord, fn) {
+function reg(chord: string, fn: () => void) {
   window.__handlers[chord] = fn;
 }
 
-function captureKeyWithGuard(key, prefixKey, fn) {
+function captureKeyWithGuard(
+  key: string,
+  prefixKey: string | null,
+  fn: () => void,
+) {
   document.addEventListener(
     "keydown",
     function (e) {

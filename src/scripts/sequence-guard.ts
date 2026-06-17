@@ -6,20 +6,20 @@
 //
 // Prefix keys tracked: z, g, e
 
-var seqPrefixTimeout = null;
+var seqPrefixTimeout: ReturnType<typeof setTimeout> | null = null;
 
 function clearSeqPrefix() {
   window.__seqPrefixKey = null;
 }
 
-function setSeqPrefix(key) {
-  clearTimeout(seqPrefixTimeout);
+function setSeqPrefix(key: string) {
+  if (seqPrefixTimeout !== null) clearTimeout(seqPrefixTimeout);
   window.__seqPrefixKey = key;
   seqPrefixTimeout = setTimeout(clearSeqPrefix, 1000);
 }
 
 function clearSeqPrefixNow() {
-  clearTimeout(seqPrefixTimeout);
+  if (seqPrefixTimeout !== null) clearTimeout(seqPrefixTimeout);
   window.__seqPrefixKey = null;
 }
 

@@ -3,14 +3,17 @@ if (!window.__handlers) window.__handlers = {};
 
 (function () {
   var registry = window.__shortcutsRegistry || [];
-  var overlay = document.getElementById("command-mode-overlay");
-  var input = document.getElementById("command-mode-input");
-  var list = document.getElementById("command-mode-list");
-  if (!overlay || !input || !list) return;
+  var _overlay = document.getElementById("command-mode-overlay");
+  var _input = document.getElementById("command-mode-input");
+  var _list = document.getElementById("command-mode-list");
+  if (!_overlay || !_input || !_list) return;
+  var overlay: HTMLElement = _overlay;
+  var input: HTMLInputElement = _input as HTMLInputElement;
+  var list: HTMLElement = _list;
 
-  var filtered = [];
+  var filtered: ShortcutEntry[] = [];
   var selectedIdx = -1;
-  var history = [];
+  var history: string[] = [];
   var historyIdx = -1;
 
   function close() {
@@ -84,7 +87,7 @@ if (!window.__handlers) window.__handlers = {};
         '</span><span class="cm-desc">' +
         descText +
         "</span>";
-      li.dataset.index = i;
+      li.dataset.index = String(i);
       li.addEventListener("click", function () {
         execute(i);
       });
@@ -100,7 +103,7 @@ if (!window.__handlers) window.__handlers = {};
     selectedIdx = 0;
   }
 
-  function processCommand(raw) {
+  function processCommand(raw: string) {
     var parts = raw.trim().split(/\s+/);
     var cmd = parts[0];
     var arg = parts.slice(1).join(" ");
@@ -166,7 +169,7 @@ if (!window.__handlers) window.__handlers = {};
     return false;
   }
 
-  function execute(idx) {
+  function execute(idx: number) {
     if (idx < 0 || idx >= filtered.length) return;
     var s = filtered[idx];
     if (!processCommand(s.chord)) {
@@ -181,7 +184,7 @@ if (!window.__handlers) window.__handlers = {};
     }
   }
 
-  function pushHistory(val) {
+  function pushHistory(val: string) {
     if (!val) return;
     history.unshift(val);
     if (history.length > 50) history.pop();

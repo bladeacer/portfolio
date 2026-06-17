@@ -101,6 +101,10 @@ nav {
   padding-top: 12px;
   background: none;
   border: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #themeToggle p {

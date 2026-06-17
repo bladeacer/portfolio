@@ -8,17 +8,17 @@ const HIGHLIGHT_CLASS = "active-line-highlight";
 const ACCELERATION_MAX_FACTOR = 0.15;
 const BASE_SCROLL_DURATION = 350;
 
-let lastHighlightedElement = null;
-let highlightTimeout = null;
-let animationFrame = null;
+let lastHighlightedElement: HTMLElement | null = null;
+let highlightTimeout: ReturnType<typeof setTimeout> | null = null;
+let animationFrame: number | null = null;
 let keyHoldStartTime = 0;
 let scrollStartTimestamp = 0;
 let startPosition = 0;
 let distanceToScroll = 0;
 
 let numericPrefix = 1;
-let numericPrefixTimeout = null;
-let lastModifiedLink = null;
+let numericPrefixTimeout: ReturnType<typeof setTimeout> | null = null;
+let lastModifiedLink: HTMLElement | null = null;
 
 function removeHighlight() {
   if (lastHighlightedElement) {
@@ -28,30 +28,31 @@ function removeHighlight() {
 }
 
 function startHighlightTimer() {
-  clearTimeout(highlightTimeout);
+  if (highlightTimeout !== null) clearTimeout(highlightTimeout);
   highlightTimeout = setTimeout(removeHighlight, HIGHLIGHT_DURATION);
 }
 
-function easeOutCubic(t) {
+function easeOutCubic(t: number) {
   return --t * t * t + 1;
 }
 
 function highlightActiveLine() {
-  const candidates = document.querySelectorAll(CANDIDATE_SELECTOR);
+  const candidates = document.querySelectorAll<HTMLElement>(CANDIDATE_SELECTOR);
   const viewportCenterY = window.innerHeight / 2;
-  let closestElement = null;
+  let closestElement: HTMLElement | null = null;
   let closestDistance = Infinity;
 
-  candidates.forEach((el) => {
-    const rect = el.getBoundingClientRect();
+  for (var _i = 0; _i < candidates.length; _i++) {
+    var _el = candidates[_i];
+    const rect = _el.getBoundingClientRect();
     if (rect.height > 0) {
       const distance = Math.abs(rect.top + rect.height / 2 - viewportCenterY);
       if (distance < closestDistance) {
         closestDistance = distance;
-        closestElement = el;
+        closestElement = _el;
       }
     }
-  });
+  }
 
   if (closestElement && closestElement !== lastHighlightedElement) {
     if (lastHighlightedElement) {
@@ -63,7 +64,7 @@ function highlightActiveLine() {
   }
 }
 
-function animateScroll(timestamp) {
+function animateScroll(timestamp: number) {
   if (!scrollStartTimestamp) {
     scrollStartTimestamp = timestamp;
   }
@@ -97,7 +98,12 @@ function animateScroll(timestamp) {
   }
 }
 
-function findNextHeadingIndex(currentIndex, direction, candidates, count) {
+function findNextHeadingIndex(
+  currentIndex: number,
+  direction: number,
+  candidates: HTMLElement[],
+  count?: number,
+) {
   count = count || 1;
   var found = 0;
   var idx = currentIndex + direction;
@@ -113,14 +119,18 @@ function findNextHeadingIndex(currentIndex, direction, candidates, count) {
   return direction === 1 ? candidates.length - 1 : 0;
 }
 
-function jumpToElement(direction, command, count) {
+function jumpToElement(
+  direction: number,
+  command: string | null,
+  count?: number,
+) {
   count = count || 1;
-  var raw = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR)).filter(
-    function (el) {
-      return el.getBoundingClientRect().height > 0;
-    },
-  );
-  var candidates = [];
+  var raw = Array.from(
+    document.querySelectorAll<HTMLElement>(CANDIDATE_SELECTOR),
+  ).filter(function (el) {
+    return el.getBoundingClientRect().height > 0;
+  });
+  var candidates: HTMLElement[] = [];
   for (var i = 0; i < raw.length; i++) {
     var el = raw[i];
     if (el.parentElement && el.parentElement.tagName === "LI") continue;
@@ -197,7 +207,7 @@ function jumpToElement(direction, command, count) {
   if (!targetElement || (nextIndex === currentIndex && command === "heading"))
     return;
 
-  if (nextIndex === currentIndex) {
+  if (nextIndex === currentIndex && command !== "top" && command !== "bottom") {
     targetScrollTop = window.scrollY + direction * window.innerHeight;
     if (targetScrollTop < 0) targetScrollTop = 0;
     if (targetScrollTop > maxScrollY) targetScrollTop = maxScrollY;
@@ -207,7 +217,11 @@ function jumpToElement(direction, command, count) {
   distanceToScroll = targetScrollTop - startPosition;
 
   if (Math.abs(distanceToScroll) < 1) {
-    if (nextIndex === currentIndex) {
+    if (
+      nextIndex === currentIndex &&
+      command !== "top" &&
+      command !== "bottom"
+    ) {
       distanceToScroll = direction * window.innerHeight;
       targetScrollTop = startPosition + distanceToScroll;
     } else {
@@ -220,10 +234,10 @@ function jumpToElement(direction, command, count) {
   animationFrame = requestAnimationFrame(animateScroll);
 }
 
-function handleNumberKey(event) {
+function handleNumberKey(event: any) {
   const number = parseInt(event.key, 10);
   if (!isNaN(number)) {
-    clearTimeout(numericPrefixTimeout);
+    if (numericPrefixTimeout !== null) clearTimeout(numericPrefixTimeout);
     numericPrefix = (numericPrefix === 1 ? 0 : numericPrefix) * 10 + number;
     numericPrefixTimeout = setTimeout(() => {
       numericPrefix = 1;
@@ -235,8 +249,8 @@ for (let i = 0; i <= 9; i++) {
   bindKey(String(i), handleNumberKey);
 }
 
-function handleKeydown(direction, command = null) {
-  clearTimeout(numericPrefixTimeout);
+function handleKeydown(direction: number, command: string | null = null) {
+  if (numericPrefixTimeout !== null) clearTimeout(numericPrefixTimeout);
   if (keyHoldStartTime === 0) {
     keyHoldStartTime = performance.now();
   }
@@ -248,12 +262,14 @@ function handleKeydown(direction, command = null) {
 
 function navigateToNearestLink() {
   if (!lastHighlightedElement) {
-    lastHighlightedElement = document.querySelector("." + HIGHLIGHT_CLASS);
+    lastHighlightedElement = document.querySelector<HTMLElement>(
+      "." + HIGHLIGHT_CLASS,
+    );
     if (!lastHighlightedElement) return;
   }
 
-  let targetLink = null;
-  let navigationUrl = null;
+  let targetLink: HTMLElement | null = null;
+  let navigationUrl: string | null = null;
 
   targetLink =
     lastHighlightedElement.closest("a") ||
@@ -263,14 +279,14 @@ function navigateToNearestLink() {
     const isImg = lastHighlightedElement.tagName.toLowerCase() === "img";
     const imgInside = isImg
       ? lastHighlightedElement
-      : lastHighlightedElement.querySelector("img");
+      : lastHighlightedElement.querySelector<HTMLImageElement>("img");
 
     if (imgInside) {
       const imgParentAnchor = imgInside.closest("a");
       if (imgParentAnchor) {
         targetLink = imgParentAnchor;
-      } else if (imgInside.src) {
-        navigationUrl = imgInside.src;
+      } else if ((imgInside as HTMLImageElement).src) {
+        navigationUrl = (imgInside as HTMLImageElement).src;
       }
     }
   }
@@ -305,14 +321,14 @@ function navigateToNearestLink() {
   }
 }
 
-function showStatus(chord, desc) {
+function showStatus(chord: string, desc: string) {
   if (window.showStatus) window.showStatus(chord, desc);
 }
 
 var yPending = false;
-var yPendingTimer = null;
+var yPendingTimer: ReturnType<typeof setTimeout> | null = null;
 
-function getYankUnit() {
+function getYankUnit(): string {
   try {
     var raw = localStorage.getItem("portfolio-settings");
     if (raw) {
@@ -323,7 +339,7 @@ function getYankUnit() {
   return "words";
 }
 
-function formatYankCount(text) {
+function formatYankCount(text: string) {
   var unit = getYankUnit();
   var count;
   switch (unit) {
@@ -342,7 +358,7 @@ function formatYankCount(text) {
   return count + " " + unit;
 }
 
-function yankToClipboard(text, label) {
+function yankToClipboard(text: string, label?: string) {
   navigator.clipboard
     .writeText(text)
     .then(function () {
@@ -354,13 +370,16 @@ function yankToClipboard(text, label) {
 }
 
 function yankCurrentElement() {
-  var el =
-    document.querySelector("." + HIGHLIGHT_CLASS) || lastHighlightedElement;
+  var el: HTMLElement | null =
+    document.querySelector<HTMLElement>("." + HIGHLIGHT_CLASS) ||
+    lastHighlightedElement;
   if (!el) return;
   var count = numericPrefix > 1 ? numericPrefix : 1;
   numericPrefix = 1;
   if (count > 1) {
-    var cs = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR));
+    var cs = Array.from(
+      document.querySelectorAll<HTMLElement>(CANDIDATE_SELECTOR),
+    );
     var idx = cs.indexOf(el);
     if (idx !== -1) {
       var endIdx = Math.min(idx + count, cs.length);
@@ -380,11 +399,14 @@ function yankWholePage() {
   yankToClipboard(text.trim(), "Y");
 }
 
-function yankToHeading(direction) {
+function yankToHeading(direction: number) {
   var el =
-    document.querySelector("." + HIGHLIGHT_CLASS) || lastHighlightedElement;
+    document.querySelector<HTMLElement>("." + HIGHLIGHT_CLASS) ||
+    lastHighlightedElement;
   if (!el) return;
-  var cs = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR));
+  var cs = Array.from(
+    document.querySelectorAll<HTMLElement>(CANDIDATE_SELECTOR),
+  );
   var idx = cs.indexOf(el);
   if (idx === -1) return;
   var headingIdx = findNextHeadingIndex(idx, direction, cs);
@@ -401,7 +423,7 @@ function yankToHeading(direction) {
 
 document.addEventListener(
   "keydown",
-  function (e) {
+  function (e: KeyboardEvent) {
     var tag = document.activeElement
       ? document.activeElement.tagName.toLowerCase()
       : "";
@@ -414,7 +436,7 @@ document.addEventListener(
         e.stopPropagation();
         e.preventDefault();
         yPending = false;
-        clearTimeout(yPendingTimer);
+        if (yPendingTimer !== null) clearTimeout(yPendingTimer);
         yankCurrentElement();
         return;
       }
@@ -422,7 +444,7 @@ document.addEventListener(
         e.stopPropagation();
         e.preventDefault();
         yPending = false;
-        clearTimeout(yPendingTimer);
+        if (yPendingTimer !== null) clearTimeout(yPendingTimer);
         yankToHeading(1);
         return;
       }
@@ -430,12 +452,12 @@ document.addEventListener(
         e.stopPropagation();
         e.preventDefault();
         yPending = false;
-        clearTimeout(yPendingTimer);
+        if (yPendingTimer !== null) clearTimeout(yPendingTimer);
         yankToHeading(-1);
         return;
       }
       yPending = false;
-      clearTimeout(yPendingTimer);
+      if (yPendingTimer !== null) clearTimeout(yPendingTimer);
     }
 
     if (e.key === "y" && !e.shiftKey) {
@@ -560,16 +582,17 @@ document.addEventListener(
   true,
 );
 
-function scrollActiveLine(block) {
-  var el =
-    document.querySelector("." + HIGHLIGHT_CLASS) || lastHighlightedElement;
+function scrollActiveLine(block: ScrollLogicalPosition) {
+  var el: HTMLElement | null =
+    document.querySelector<HTMLElement>("." + HIGHLIGHT_CLASS) ||
+    lastHighlightedElement;
   if (!el) {
     highlightActiveLine();
     el = lastHighlightedElement;
   }
   if (!el) return;
   if (block === "end") {
-    var statusBar = document.querySelector(".status-bar");
+    var statusBar = document.querySelector<HTMLElement>(".status-bar");
     var offset = statusBar ? statusBar.offsetHeight : 0;
     var rect = el.getBoundingClientRect();
     var targetY = window.scrollY + rect.bottom - window.innerHeight + offset;
@@ -580,11 +603,11 @@ function scrollActiveLine(block) {
 }
 
 var zPending = false;
-var zTimer = null;
+var zTimer: ReturnType<typeof setTimeout> | null = null;
 
 document.addEventListener(
   "keydown",
-  function (e) {
+  function (e: KeyboardEvent) {
     if (e.repeat || e.ctrlKey || e.altKey || e.metaKey) return;
     var tag = document.activeElement
       ? document.activeElement.tagName.toLowerCase()
@@ -594,7 +617,7 @@ document.addEventListener(
     if (zPending) {
       if (e.key === "z") {
         zPending = false;
-        clearTimeout(zTimer);
+        if (zTimer !== null) clearTimeout(zTimer);
         scrollActiveLine("center");
         showStatus("zz", "Centered active line");
         e.stopPropagation();
@@ -603,7 +626,7 @@ document.addEventListener(
       }
       if (e.key === "b") {
         zPending = false;
-        clearTimeout(zTimer);
+        if (zTimer !== null) clearTimeout(zTimer);
         scrollActiveLine("end");
         showStatus("zb", "Scrolled active line to bottom");
         e.stopPropagation();
@@ -612,7 +635,7 @@ document.addEventListener(
       }
       if (e.key === "t") {
         zPending = false;
-        clearTimeout(zTimer);
+        if (zTimer !== null) clearTimeout(zTimer);
         scrollActiveLine("start");
         showStatus("zt", "Scrolled active line to top");
         e.stopPropagation();
@@ -620,7 +643,7 @@ document.addEventListener(
         return;
       }
       zPending = false;
-      clearTimeout(zTimer);
+      if (zTimer !== null) clearTimeout(zTimer);
     }
 
     if (e.key === "z") {
