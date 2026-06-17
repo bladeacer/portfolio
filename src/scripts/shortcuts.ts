@@ -12,6 +12,19 @@ function reg(chord, fn) {
   window.__handlers[chord] = fn;
 }
 
+function captureKeyWithGuard(key, prefixKey, fn) {
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== key || e.ctrlKey || e.metaKey) return;
+    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    if (window.__seqPrefixKey === prefixKey) {
+      window.__clearSeqPrefix();
+      return;
+    }
+    fn();
+  }, true);
+}
+
 reg('t', function() {
   window.toggleTheme();
   showStatus('t', 'Toggled theme');
@@ -73,7 +86,7 @@ reg('m', function() {
   showStatus('m', 'Opened Matrix chat');
 });
 
-bindKey('m', window.__handlers['m']);
+captureKeyWithGuard('m', 'e', window.__handlers['m']);
 
 reg('g h', function() {
   window.open("https://github.com/bladeacer", '_blank', BLANK_FEATURES);
@@ -115,7 +128,7 @@ reg('h', function() {
   showStatus('h', 'Navigated home', true);
 });
 
-bindKey('h', window.__handlers['h']);
+captureKeyWithGuard('h', 'g', window.__handlers['h']);
 
 reg('a', function() {
   window.location.href = "/portfolio/about";

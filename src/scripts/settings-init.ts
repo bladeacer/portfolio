@@ -21,7 +21,7 @@
       var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
       var sansChain = '"' + (s.fontSans || "CascadiaCode") + '", ' + gen;
       var monoChain = '"' + (s.fontMono || "DepartureMono") + '", ' + monogen;
-      var headingChain = '"' + (s.fontHeading || s.fontSans || "CascadiaCode") + '", ' + gen;
+      var headingChain = '"' + (s.fontHeading || "DepartureMono") + '", ' + gen;
       var sz = (s.sizeSans || 16) + "px";
       var szm = (s.sizeMono || 16) + "px";
 

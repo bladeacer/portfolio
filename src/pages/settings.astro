@@ -246,14 +246,13 @@ const colors = [
       var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
       var sansChain = '"' + s.fontSans + '", ' + gen;
       var monoChain = '"' + s.fontMono + '", ' + monogen;
-      var headingChain = '"' + (s.fontHeading || s.fontSans) + '", ' + gen;
+      var headingChain = '"' + (s.fontHeading || "DepartureMono") + '", ' + gen;
       var sz = s.sizeSans + "px";
       var szm = s.sizeMono + "px";
 
       if (s.fontCJK) {
         sansChain = "\"CJK\"," + sansChain;
         monoChain = "\"CJK\"," + monoChain;
-        headingChain = "\"CJK\"," + headingChain;
       }
 
       var css = "";
@@ -282,6 +281,17 @@ const colors = [
         css += "@font-face{font-family:\"CJK\";src:local(\"" + s.fontCJK + "\");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}";
       }
 
+      var fontFaceCss = s.fontCJK
+        ? "@font-face{font-family:\"CJK\";src:local(\"" + s.fontCJK + "\");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}"
+        : "";
+      var fontFaceEl = document.getElementById("settings-fontface");
+      if (!fontFaceEl) {
+        fontFaceEl = document.createElement("style");
+        fontFaceEl.id = "settings-fontface";
+        document.head.prepend(fontFaceEl);
+      }
+      fontFaceEl.textContent = fontFaceCss;
+
       var old = document.getElementById("settings-style");
       if (old) old.remove();
       var style = document.createElement("style");
@@ -309,7 +319,7 @@ const colors = [
       syncField("setting-font-sans", s.fontSans);
       syncField("setting-font-cjk", s.fontCJK);
       syncField("setting-font-mono", s.fontMono);
-      syncField("setting-font-heading", s.fontHeading || s.fontSans);
+      syncField("setting-font-heading", s.fontHeading);
       syncField("setting-size-sans", s.sizeSans);
       syncField("setting-size-mono", s.sizeMono);
       syncField("s-h1Size", s.h1Size);

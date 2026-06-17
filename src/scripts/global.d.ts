@@ -6,6 +6,9 @@ interface ShortcutEntry {
 interface Window {
   __handlers: Record<string, () => void>;
   __shortcutsRegistry: ShortcutEntry[];
+  __seqPrefixKey: string | null;
+  __clearSeqPrefix: () => void;
+  __setSeqPrefix: (key: string) => void;
   toggleTheme: () => void;
   toggleShortcutsPopup: () => void;
   openSearch: () => void;

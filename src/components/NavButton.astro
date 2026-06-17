@@ -1,0 +1,27 @@
+---
+export interface Props {
+  icon: any;
+  label: string;
+  shortcut: string;
+  href?: string;
+  id?: string;
+  ariaLabel?: string;
+  color?: string;
+}
+
+const { icon: Icon, label, shortcut, href, id, ariaLabel, color } = Astro.props;
+---
+
+{
+  href ? (
+    <a href={href} class="nav-icon-btn" id={id} aria-label={ariaLabel || `${label} (${shortcut})`} style={color ? `color:${color}` : ""}>
+      <Icon size="36" />
+      <p class="nav-icon-label">[{shortcut}]{label}</p>
+    </a>
+  ) : (
+    <button class="nav-icon-btn" id={id} aria-label={ariaLabel || `${label} (${shortcut})`} style={color ? `color:${color}` : ""}>
+      <Icon size="36" />
+      <p class="nav-icon-label">[{shortcut}]{label}</p>
+    </button>
+  )
+}

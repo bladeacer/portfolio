@@ -487,7 +487,16 @@ window.__handlers['l'] = function() {
   showStatus('l', 'Highlighted active line');
 };
 
-bindKey('l', window.__handlers['l']);
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'l' || e.ctrlKey || e.metaKey) return;
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  if (window.__seqPrefixKey === 'g') {
+    window.__clearSeqPrefix();
+    return;
+  }
+  window.__handlers['l']();
+}, true);
 
 function scrollActiveLine(block) {
   var el = document.querySelector('.' + HIGHLIGHT_CLASS) || lastHighlightedElement;
@@ -507,26 +516,66 @@ function scrollActiveLine(block) {
   }
 }
 
+var zPending = false;
+var zTimer = null;
+
+document.addEventListener('keydown', function(e) {
+  if (e.repeat || e.ctrlKey || e.altKey || e.metaKey) return;
+  var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+  if (zPending) {
+    if (e.key === 'z') {
+      zPending = false;
+      clearTimeout(zTimer);
+      scrollActiveLine('center');
+      showStatus('zz', 'Centered active line');
+      e.stopPropagation();
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 'b') {
+      zPending = false;
+      clearTimeout(zTimer);
+      scrollActiveLine('end');
+      showStatus('zb', 'Scrolled active line to bottom');
+      e.stopPropagation();
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 't') {
+      zPending = false;
+      clearTimeout(zTimer);
+      scrollActiveLine('start');
+      showStatus('zt', 'Scrolled active line to top');
+      e.stopPropagation();
+      e.preventDefault();
+      return;
+    }
+    zPending = false;
+    clearTimeout(zTimer);
+  }
+
+  if (e.key === 'z') {
+    zPending = true;
+    zTimer = setTimeout(function() { zPending = false; }, 1000);
+  }
+}, true);
+
 window.__handlers['z z'] = function() {
   scrollActiveLine('center');
   showStatus('zz', 'Centered active line');
 };
-
-bindKeyCombo('z, z', window.__handlers['z z']);
 
 window.__handlers['z t'] = function() {
   scrollActiveLine('start');
   showStatus('zt', 'Scrolled active line to top');
 };
 
-bindKeyCombo('z, t', window.__handlers['z t']);
-
 window.__handlers['z b'] = function() {
   scrollActiveLine('end');
   showStatus('zb', 'Scrolled active line to bottom');
 };
-
-bindKeyCombo('z, b', window.__handlers['z b']);
 
 window.__handlers['enter'] = function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
