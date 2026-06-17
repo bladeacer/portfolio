@@ -250,6 +250,12 @@ const colors = [
       var sz = s.sizeSans + "px";
       var szm = s.sizeMono + "px";
 
+      if (s.fontCJK) {
+        sansChain = "\"CJK\"," + sansChain;
+        monoChain = "\"CJK\"," + monoChain;
+        headingChain = "\"CJK\"," + headingChain;
+      }
+
       var css = "";
       css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
       css += "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" + sz + " !important;}";
@@ -272,6 +278,9 @@ const colors = [
       if (s.accentLight && s.accentLight !== "custom") css += "body.theme-light{--user-accent-light:" + s.accentLight + " !important;}";
       if (s.accentDark && s.accentDark !== "custom") css += "body.theme-dark{--user-accent-dark:" + s.accentDark + " !important;}";
       if (s.showGrid === false) css += "body{background-image:none !important;}";
+      if (s.fontCJK) {
+        css += "@font-face{font-family:\"CJK\";src:local(\"" + s.fontCJK + "\");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}";
+      }
 
       var old = document.getElementById("settings-style");
       if (old) old.remove();

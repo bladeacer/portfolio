@@ -274,21 +274,27 @@ img {
 .content-wrapper > ul > li::before,
 .content-wrapper > ol > li::before,
 .content-wrapper .markdown-content li::before {
+  right: calc(100% + 29px);
   width: 4.5rem;
-  right: calc(100% + 29px); 
 }
 
 /* Nested content inside blockquote/pre/li shouldn't get their own line number */
+.content-wrapper .markdown-content blockquote p,
+.content-wrapper .markdown-content blockquote li,
 .content-wrapper blockquote p,
 .content-wrapper blockquote li,
 .content-wrapper pre code,
+.content-wrapper .markdown-content li p,
 .content-wrapper li p {
   counter-increment: none;
 }
 
+.content-wrapper .markdown-content blockquote p::before,
+.content-wrapper .markdown-content blockquote li::before,
 .content-wrapper blockquote p::before,
 .content-wrapper blockquote li::before,
 .content-wrapper pre code::before,
+.content-wrapper .markdown-content li p::before,
 .content-wrapper li p::before {
   display: none;
 }

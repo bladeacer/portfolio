@@ -1,6 +1,6 @@
 var Mousetrap = window.Mousetrap;
 // Scoped selectors: only direct-list-item children + specific class-based targets
-const CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card'; 
+const CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card';
 
 const HIGHLIGHT_DURATION = 2000;
 const HIGHLIGHT_CLASS = 'active-line-highlight';
@@ -39,7 +39,7 @@ function easeOutCubic(t) {
 
 // --- Highlight Function ---
 function highlightActiveLine() {
-    const candidates = document.querySelectorAll(CANDIDATE_SELECTOR);
+    const candidates = document.querySelectorAll(CANDIDATE_SELECTOR);
     const viewportCenterY = window.innerHeight / 2;
     let closestElement = null;
     let closestDistance = Infinity;
@@ -136,8 +136,19 @@ function findNextHeadingIndex(currentIndex, direction, candidates, count) {
 // --- Main Jump Function (FIXED G/gg and J/K/{} scroll calculation) ---
 function jumpToElement(direction, command, count) {
   count = count || 1;
-  var candidates = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
+  var raw = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
     .filter(function(el) { return el.getBoundingClientRect().height > 0; });
+  // Collapse consecutive <li> items from the same parent into one entry
+  var candidates = [];
+  for (var i = 0; i < raw.length; i++) {
+    candidates.push(raw[i]);
+    if (raw[i].tagName === 'LI') {
+      var listParent = raw[i].parentNode;
+      while (i + 1 < raw.length && raw[i + 1].parentNode === listParent) {
+        i++;
+      }
+    }
+  }
 
   if (candidates.length === 0) return;
 
@@ -511,7 +522,16 @@ function scrollActiveLine(block) {
     el = lastHighlightedElement;
   }
   if (!el) return;
-  el.scrollIntoView({ behavior: 'smooth', block: block });
+  if (block === 'end') {
+    // Account for status bar height at the bottom of the viewport
+    var statusBar = document.querySelector('.status-bar');
+    var offset = statusBar ? statusBar.offsetHeight : 0;
+    var rect = el.getBoundingClientRect();
+    var targetY = window.scrollY + rect.bottom - window.innerHeight + offset;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  } else {
+    el.scrollIntoView({ behavior: 'smooth', block: block });
+  }
 }
 
 Mousetrap.bind('z z', function() {

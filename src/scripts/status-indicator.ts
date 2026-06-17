@@ -76,11 +76,11 @@
   if (platformEl) {
     var ua = navigator.userAgent;
     var name = '?';
-    if (ua.indexOf('Linux') > -1 && ua.indexOf('Android') === -1) name = 'Linux';
+    if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) name = 'iOS';
     else if (ua.indexOf('Android') > -1) name = 'Android';
+    else if (ua.indexOf('Linux') > -1) name = 'Linux';
     else if (ua.indexOf('Windows') > -1) name = 'Windows';
     else if (ua.indexOf('Mac OS X') > -1 || ua.indexOf('macOS') > -1) name = 'macOS';
-    else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) name = 'iOS';
     else if (ua.indexOf('FreeBSD') > -1) name = 'FreeBSD';
     platformEl.textContent = name;
   }
