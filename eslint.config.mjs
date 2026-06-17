@@ -19,6 +19,6 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["public/", ".astro/", "src/scripts/mousetrap.min.js"],
+    ignores: ["public/", ".astro/"],
   },
 );

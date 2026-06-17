@@ -1,6 +1,6 @@
-var Mousetrap = window.Mousetrap;
-// Scoped selectors: only direct-list-item children + specific class-based targets
-const CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card';
+import { bindKey, bindKeyCombo } from "@rwh/keystrokes";
+if (!window.__handlers) window.__handlers = {};
+var CANDIDATE_SELECTOR = '.content-wrapper > p:not(.foot):not(.cta):not(.cta2):not(.cta3), .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table, .content-wrapper .markdown-content p, .content-wrapper .markdown-content h1, .content-wrapper .markdown-content h2, .content-wrapper .markdown-content h3, .content-wrapper .markdown-content h4, .content-wrapper .markdown-content li, .content-wrapper .markdown-content pre, .content-wrapper .markdown-content table, .content-wrapper .markdown-content blockquote, .content-wrapper .blog-card';
 
 const HIGHLIGHT_DURATION = 2000;
 const HIGHLIGHT_CLASS = 'active-line-highlight';
@@ -16,106 +16,86 @@ let startPosition = 0;
 let distanceToScroll = 0;
 
 let numericPrefix = 1;
-let numericPrefixTimeout = null; 
+let numericPrefixTimeout = null;
 let lastModifiedLink = null;
 
 function removeHighlight() {
-    if (lastHighlightedElement) {
-        lastHighlightedElement.classList.remove(HIGHLIGHT_CLASS);
-        lastHighlightedElement = null;
-    }
+    if (lastHighlightedElement) {
+        lastHighlightedElement.classList.remove(HIGHLIGHT_CLASS);
+        lastHighlightedElement = null;
+    }
 }
 
 function startHighlightTimer() {
-    clearTimeout(highlightTimeout);
-    highlightTimeout = setTimeout(removeHighlight, HIGHLIGHT_DURATION);
+    clearTimeout(highlightTimeout);
+    highlightTimeout = setTimeout(removeHighlight, HIGHLIGHT_DURATION);
 }
 
-// --- Easing Function (Smoother scroll transition) ---
-// Cubic easing out function
 function easeOutCubic(t) {
-    return (--t) * t * t + 1;
+    return (--t) * t * t + 1;
 }
 
-// --- Highlight Function ---
 function highlightActiveLine() {
     const candidates = document.querySelectorAll(CANDIDATE_SELECTOR);
-    const viewportCenterY = window.innerHeight / 2;
-    let closestElement = null;
-    let closestDistance = Infinity;
+    const viewportCenterY = window.innerHeight / 2;
+    let closestElement = null;
+    let closestDistance = Infinity;
 
-    // Find new closest element
-    candidates.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.height > 0) {
-            const distance = Math.abs(rect.top + rect.height / 2 - viewportCenterY);
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestElement = el;
-            }
-        }
-    });
+    candidates.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.height > 0) {
+            const distance = Math.abs(rect.top + rect.height / 2 - viewportCenterY);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestElement = el;
+            }
+        }
+    });
 
-    // Apply highlight only if a new closest element is found AND it's different from the last one.
-    if (closestElement && closestElement !== lastHighlightedElement) {
-        // 1. Remove highlight from the old element
-        if (lastHighlightedElement) {
-            lastHighlightedElement.classList.remove(HIGHLIGHT_CLASS);
-        }
-        
-        // 2. Apply highlight to the new element
-        closestElement.classList.add(HIGHLIGHT_CLASS);
-        lastHighlightedElement = closestElement;
-        
-        // 3. Reset the timer
-        startHighlightTimer(); 
-    }
+    if (closestElement && closestElement !== lastHighlightedElement) {
+        if (lastHighlightedElement) {
+            lastHighlightedElement.classList.remove(HIGHLIGHT_CLASS);
+        }
+        closestElement.classList.add(HIGHLIGHT_CLASS);
+        lastHighlightedElement = closestElement;
+        startHighlightTimer();
+    }
 }
 
 function animateScroll(timestamp) {
     if (!scrollStartTimestamp) {
         scrollStartTimestamp = timestamp;
     }
-    
+
     const elapsedTime = timestamp - scrollStartTimestamp;
-    
     let accelerationFactor = 0;
-    
+
     if (numericPrefix > 1 || keyHoldStartTime > 0) {
-        const totalKeyHoldTime = timestamp - keyHoldStartTime; 
+        const totalKeyHoldTime = timestamp - keyHoldStartTime;
         const maxHoldTimeForAccel = 1500;
-        
+
         if (totalKeyHoldTime > 0) {
             const t = Math.min(1, totalKeyHoldTime / maxHoldTimeForAccel);
             accelerationFactor = ACCELERATION_MAX_FACTOR * t;
         }
     }
-    
-    // Adjust duration based on acceleration (Keep this block the same)
+
     const actualDuration = BASE_SCROLL_DURATION / (1 + accelerationFactor);
-    
     const progress = Math.min(1, elapsedTime / actualDuration);
     const easedProgress = easeOutCubic(progress);
-
-    // Calculate new scroll position (Keep this block the same)
     const newPosition = startPosition + distanceToScroll * easedProgress;
     window.scrollTo(0, newPosition);
-    
-    // Update highlight during the scroll (Keep this block the same)
-    highlightActiveLine(); 
+    highlightActiveLine();
 
     if (progress < 1) {
         animationFrame = requestAnimationFrame(animateScroll);
     } else {
-        // Animation finished, reset state
         scrollStartTimestamp = 0;
-        lastScrollTime = timestamp;
         numericPrefix = 1;
         keyHoldStartTime = 0;
     }
 }
 
-// --- Utility: Find Next/Previous Heading Index ---
 function findNextHeadingIndex(currentIndex, direction, candidates, count) {
   count = count || 1;
   var found = 0;
@@ -132,18 +112,13 @@ function findNextHeadingIndex(currentIndex, direction, candidates, count) {
   return (direction === 1) ? candidates.length - 1 : 0;
 }
 
- 
-// --- Main Jump Function (FIXED G/gg and J/K/{} scroll calculation) ---
 function jumpToElement(direction, command, count) {
   count = count || 1;
   var raw = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
     .filter(function(el) { return el.getBoundingClientRect().height > 0; });
-  // Collapse: skip children of <li> (e.g. <p> inside markdown <li>)
-  // and collapse consecutive <li> siblings into one entry
   var candidates = [];
   for (var i = 0; i < raw.length; i++) {
     var el = raw[i];
-    // Skip elements whose parent is an <li> (handles markdown <li><p> patterns)
     if (el.parentElement && el.parentElement.tagName === 'LI') continue;
     candidates.push(el);
     if (el.tagName === 'LI') {
@@ -207,22 +182,31 @@ function jumpToElement(direction, command, count) {
     targetElement = candidates[nextIndex];
   }
 
-  if (!targetElement || nextIndex === currentIndex) return;
+  if (!targetElement || (nextIndex === currentIndex && command === 'heading')) return;
+
+  if (nextIndex === currentIndex) {
+    targetScrollTop = window.scrollY + direction * window.innerHeight;
+    if (targetScrollTop < 0) targetScrollTop = 0;
+    if (targetScrollTop > maxScrollY) targetScrollTop = maxScrollY;
+  }
 
   startPosition = window.scrollY;
   distanceToScroll = targetScrollTop - startPosition;
 
-  if (Math.abs(distanceToScroll) < 1) return;
+  if (Math.abs(distanceToScroll) < 1) {
+    if (nextIndex === currentIndex) {
+      distanceToScroll = direction * window.innerHeight;
+      targetScrollTop = startPosition + distanceToScroll;
+    } else {
+      return;
+    }
+  }
 
   if (animationFrame) cancelAnimationFrame(animationFrame);
   scrollStartTimestamp = 0;
   animationFrame = requestAnimationFrame(animateScroll);
 }
 
-
-// --- Mousetrap Bindings ---
-
-// Utility to handle numeric prefixes before a command
 function handleNumberKey(event) {
     const number = parseInt(event.key, 10);
     if (!isNaN(number)) {
@@ -233,45 +217,36 @@ function handleNumberKey(event) {
         }, 1000);
     }
 }
-// Bind number keys 0-9 for prefix capture
+
 for (let i = 0; i <= 9; i++) {
-    Mousetrap.bind(String(i), handleNumberKey, 'keydown');
+    bindKey(String(i), handleNumberKey);
 }
 
 function handleKeydown(direction, command = null) {
     clearTimeout(numericPrefixTimeout);
-
-    if (keyHoldStartTime === 0) {
-        keyHoldStartTime = performance.now();
-    }
-    
+    if (keyHoldStartTime === 0) { keyHoldStartTime = performance.now(); }
     const count = numericPrefix;
     numericPrefix = 1;
-
     jumpToElement(direction, command, count);
     return count;
 }
 
 function navigateToNearestLink() {
     if (!lastHighlightedElement) {
-        lastHighlightedElement = document.querySelector(`.${HIGHLIGHT_CLASS}`);
+        lastHighlightedElement = document.querySelector('.' + HIGHLIGHT_CLASS);
         if (!lastHighlightedElement) return;
     }
 
     let targetLink = null;
     let navigationUrl = null;
 
-    // 1. GLOBAL ANCHOR CHECK
-    // First, check if the highlight itself is a link, OR is inside a link, OR contains a link
     targetLink = lastHighlightedElement.closest('a') || lastHighlightedElement.querySelector('a');
 
-    // 2. IMAGE FALLBACK (Only if no anchor was found above or inside)
     if (!targetLink) {
         const isImg = lastHighlightedElement.tagName.toLowerCase() === 'img';
         const imgInside = isImg ? lastHighlightedElement : lastHighlightedElement.querySelector('img');
 
         if (imgInside) {
-            // Check if the image found is wrapped in a link (redundancy check)
             const imgParentAnchor = imgInside.closest('a');
             if (imgParentAnchor) {
                 targetLink = imgParentAnchor;
@@ -281,9 +256,7 @@ function navigateToNearestLink() {
         }
     }
 
-    // 3. EXECUTION
     if (targetLink) {
-        // LRU Style Management
         if (lastModifiedLink && lastModifiedLink !== targetLink) {
             lastModifiedLink.style.outline = '';
             lastModifiedLink.style.boxShadow = '';
@@ -292,12 +265,10 @@ function navigateToNearestLink() {
         targetLink.style.outline = '2px solid var(--flexcyon-orange)';
         lastModifiedLink = targetLink;
 
-        // Force target="_blank"
         const originalTarget = targetLink.getAttribute('target');
         targetLink.setAttribute('target', '_blank');
         targetLink.click();
-        
-        // Restore target state
+
         setTimeout(() => {
             if (originalTarget) {
                 targetLink.setAttribute('target', originalTarget);
@@ -305,14 +276,13 @@ function navigateToNearestLink() {
                 targetLink.removeAttribute('target');
             }
         }, 0);
-        
+
         const href = targetLink.getAttribute('href');
         if (href && href.startsWith('#')) {
             setTimeout(highlightActiveLine, 100);
         }
 
     } else if (navigationUrl) {
-        // Direct image navigation if no anchor exists anywhere in the hierarchy
         window.open(navigationUrl, '_blank');
     }
 }
@@ -321,8 +291,6 @@ function showStatus(chord, desc) {
   if (window.showStatus) window.showStatus(chord, desc);
 }
 
-// J/K Bindings
-// --- Yank Functionality ---
 var yPending = false;
 var yPendingTimer = null;
 
@@ -341,17 +309,10 @@ function formatYankCount(text) {
   var unit = getYankUnit();
   var count;
   switch (unit) {
-    case 'words':
-      count = text.split(/\s+/).filter(Boolean).length;
-      break;
-    case 'sentences':
-      count = text.split(/[.!?]+/).filter(Boolean).length;
-      break;
-    case 'paragraphs':
-      count = text.split(/\n\s*\n/).filter(Boolean).length;
-      break;
-    default:
-      count = text.length;
+    case 'words': count = text.split(/\s+/).filter(Boolean).length; break;
+    case 'sentences': count = text.split(/[.!?]+/).filter(Boolean).length; break;
+    case 'paragraphs': count = text.split(/\n\s*\n/).filter(Boolean).length; break;
+    default: count = text.length;
   }
   return count + ' ' + unit;
 }
@@ -396,7 +357,6 @@ function yankToHeading(direction) {
   if (idx === -1) return;
   var headingIdx = findNextHeadingIndex(idx, direction, cs);
   if (headingIdx === idx) {
-    // No heading found in that direction; yank to boundary
     headingIdx = direction === 1 ? cs.length - 1 : 0;
   }
   var start = direction === 1 ? idx : headingIdx;
@@ -405,7 +365,6 @@ function yankToHeading(direction) {
   yankToClipboard(texts.join('\n'), 'y' + (direction === 1 ? '}' : '{'));
 }
 
-// Capture-phase keydown for yank state machine (intercepts before Mousetrap)
 document.addEventListener('keydown', function(e) {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
@@ -437,7 +396,6 @@ document.addEventListener('keydown', function(e) {
       yankToHeading(-1);
       return;
     }
-    // Any other key cancels yank prompt
     yPending = false;
     clearTimeout(yPendingTimer);
   }
@@ -456,7 +414,6 @@ document.addEventListener('keydown', function(e) {
   }
 }, true);
 
-// Update shortcuts registry for yank commands
 if (window.__shortcutsRegistry) {
   window.__shortcutsRegistry.push(
     { chord: 'yy', desc: 'Yank current element' },
@@ -469,65 +426,77 @@ if (window.__shortcutsRegistry) {
   );
 }
 
-Mousetrap.bind('j', () => {
+window.__handlers['j'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(1);
   showStatus(c > 1 ? c + 'j' : 'j', 'Scrolled down');
-}, 'keydown');
-Mousetrap.bind('k', () => {
+};
+
+bindKey('j', window.__handlers['j']);
+
+window.__handlers['k'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(-1);
   showStatus(c > 1 ? c + 'k' : 'k', 'Scrolled up');
-}, 'keydown');
+};
 
-// Heading Jumps
-Mousetrap.bind('{', () => {
+bindKey('k', window.__handlers['k']);
+
+window.__handlers['{'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(-1, 'heading');
   showStatus(c > 1 ? c + '{' : '{', 'Previous heading');
-});
-Mousetrap.bind('}', () => {
+};
+
+bindKey('{', window.__handlers['{']);
+
+window.__handlers['}'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(1, 'heading');
   showStatus(c > 1 ? c + '}' : '}', 'Next heading');
-});
+};
 
-// GG/G Bindings (Full top/bottom scroll)
-Mousetrap.bind('g g', () => {
+bindKey('}', window.__handlers['}']);
+
+window.__handlers['g g'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(0, 'top');
   showStatus(c > 1 ? c + 'gg' : 'gg', 'Top of page');
-});
-Mousetrap.bind('G', () => {
+};
+
+bindKeyCombo('g, g', window.__handlers['g g']);
+
+window.__handlers['G'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   var c = handleKeydown(0, 'bottom');
   showStatus(c > 1 ? c + 'G' : 'G', 'Bottom of page');
-});
+};
 
-Mousetrap.bind('l', () => {
+bindKey('G', window.__handlers['G']);
+
+window.__handlers['l'] = function() {
   var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
   highlightActiveLine();
   showStatus('l', 'Highlighted active line');
-}, 'keydown');
+};
 
-// zz / zt / zb: scroll active line to center / top / bottom
+bindKey('l', window.__handlers['l']);
+
 function scrollActiveLine(block) {
   var el = document.querySelector('.' + HIGHLIGHT_CLASS) || lastHighlightedElement;
   if (!el) {
-    // Fall back to closest element to viewport center
     highlightActiveLine();
     el = lastHighlightedElement;
   }
   if (!el) return;
   if (block === 'end') {
-    // Account for status bar height at the bottom of the viewport
     var statusBar = document.querySelector('.status-bar');
     var offset = statusBar ? statusBar.offsetHeight : 0;
     var rect = el.getBoundingClientRect();
@@ -538,30 +507,34 @@ function scrollActiveLine(block) {
   }
 }
 
-Mousetrap.bind('z z', function() {
+window.__handlers['z z'] = function() {
   scrollActiveLine('center');
   showStatus('zz', 'Centered active line');
-  return false;
-});
-Mousetrap.bind('z t', function() {
+};
+
+bindKeyCombo('z, z', window.__handlers['z z']);
+
+window.__handlers['z t'] = function() {
   scrollActiveLine('start');
   showStatus('zt', 'Scrolled active line to top');
-  return false;
-});
-Mousetrap.bind('z b', function() {
+};
+
+bindKeyCombo('z, t', window.__handlers['z t']);
+
+window.__handlers['z b'] = function() {
   scrollActiveLine('end');
   showStatus('zb', 'Scrolled active line to bottom');
-  return false;
-});
+};
 
-Mousetrap.bind('enter', (e) => {
-    // Don't intercept Enter when focused on form fields
+bindKeyCombo('z, b', window.__handlers['z b']);
+
+window.__handlers['enter'] = function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-    // Prevent default behavior (like form submission) if we're navigating
     if (lastHighlightedElement) {
-        e.preventDefault();
         navigateToNearestLink();
         showStatus('Enter', 'Opened link');
     }
-});
+};
+
+bindKey('enter', window.__handlers['enter']);

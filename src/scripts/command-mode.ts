@@ -1,5 +1,7 @@
+import { bindKey, bindKeyCombo } from "@rwh/keystrokes";
+if (!window.__handlers) window.__handlers = {};
+
 (function() {
-  var Mousetrap = window.Mousetrap;
   var registry = window.__shortcutsRegistry || [];
   var overlay = document.getElementById("command-mode-overlay");
   var input = document.getElementById("command-mode-input");
@@ -26,7 +28,6 @@
     if (!q) {
       filtered = registry.slice();
     } else {
-      // Check if input is a literal number (bare or colon-prefixed) for line navigation
       var bareNum = parseInt(q.replace(/^:/, ''), 10);
       var isLineNav = !isNaN(bareNum) && bareNum > 0;
       if (isLineNav) {
@@ -81,10 +82,8 @@
     var cmd = parts[0];
     var arg = parts.slice(1).join(' ');
 
-    // :q or :x to close modals/popups
     if (cmd === ':q' || cmd === ':x' || cmd === 'q' || cmd === 'x') {
       close();
-      // Close all overlays
       ['shortcuts-popup-overlay', 'search-overlay', 'command-mode-overlay'].forEach(function(id) {
         var el = document.getElementById(id);
         if (el) el.classList.remove('is-active');
@@ -95,7 +94,6 @@
       return true;
     }
 
-    // :theme light|dark
     if (cmd === ':theme' || cmd === 'theme') {
       if (arg === 'light' || arg === 'dark') {
         localStorage.setItem('theme', arg);
@@ -107,13 +105,11 @@
       return true;
     }
 
-    // :edit settings
     if ((cmd === ':edit' || cmd === 'edit') && arg === 'settings') {
       window.location.href = '/portfolio/settings';
       return true;
     }
 
-    // :N — navigate to Nth element (line number)
     var num = parseInt(raw.replace(/^:/, ''), 10);
     if (!isNaN(num) && num > 0) {
       var candidates = Array.from(document.querySelectorAll(window.__CANDIDATE_SELECTOR || '.content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table'))
@@ -136,8 +132,9 @@
     var s = filtered[idx];
     if (!processCommand(s.chord)) {
       close();
-      if (Mousetrap && s.chord !== ':') {
-        Mousetrap.trigger(s.chord);
+      var handlers = window.__handlers || {};
+      if (s.chord !== ':' && handlers[s.chord]) {
+        handlers[s.chord]();
         if (window.showStatus) {
           window.showStatus(s.chord, s.desc);
         }
@@ -187,7 +184,6 @@
       selectedIdx = next;
     } else if (e.key === "ArrowUp" || (e.key === "p" && e.altKey)) {
       e.preventDefault();
-      // If at top of list, cycle through history
       if (selectedIdx <= 0 && history.length > 0) {
         historyIdx = (historyIdx + 1) % history.length;
         input.value = history[historyIdx];
@@ -218,19 +214,15 @@
 
   window.closeCommandMode = close;
 
-  // Bind : to open command mode
-  Mousetrap.bind(':', function() {
+  var colonHandler = function() {
     var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     window.openCommandMode();
-    return false;
-  });
+  };
 
-  // Bind ctrl+p to open command mode
-  Mousetrap.bind('ctrl+p', function() {
-    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-    window.openCommandMode();
-    return false;
-  });
+  window.__handlers[':'] = colonHandler;
+  window.__handlers['ctrl+p'] = colonHandler;
+
+  bindKey(':', window.__handlers[':']);
+  bindKeyCombo('ctrl+p', window.__handlers['ctrl+p']);
 })();

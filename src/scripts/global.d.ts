@@ -4,7 +4,7 @@ interface ShortcutEntry {
 }
 
 interface Window {
-  Mousetrap: Mousetrap.MousetrapInstance;
+  __handlers: Record<string, () => void>;
   __shortcutsRegistry: ShortcutEntry[];
   toggleTheme: () => void;
   toggleShortcutsPopup: () => void;

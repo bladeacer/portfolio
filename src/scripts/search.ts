@@ -168,7 +168,7 @@ import FlexSearch from 'flexsearch';
   input.addEventListener('input', doSearch);
 
   input.addEventListener('keydown', function(e) {
-    // Stop propagation so Mousetrap doesn't also fire
+    // Stop propagation so Keystrokes doesn't also fire
     e.stopPropagation();
     if (e.key === 'Escape') {
       e.preventDefault();
