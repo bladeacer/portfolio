@@ -138,12 +138,16 @@ function jumpToElement(direction, command, count) {
   count = count || 1;
   var raw = Array.from(document.querySelectorAll(CANDIDATE_SELECTOR))
     .filter(function(el) { return el.getBoundingClientRect().height > 0; });
-  // Collapse consecutive <li> items from the same parent into one entry
+  // Collapse: skip children of <li> (e.g. <p> inside markdown <li>)
+  // and collapse consecutive <li> siblings into one entry
   var candidates = [];
   for (var i = 0; i < raw.length; i++) {
-    candidates.push(raw[i]);
-    if (raw[i].tagName === 'LI') {
-      var listParent = raw[i].parentNode;
+    var el = raw[i];
+    // Skip elements whose parent is an <li> (handles markdown <li><p> patterns)
+    if (el.parentElement && el.parentElement.tagName === 'LI') continue;
+    candidates.push(el);
+    if (el.tagName === 'LI') {
+      var listParent = el.parentNode;
       while (i + 1 < raw.length && raw[i + 1].parentNode === listParent) {
         i++;
       }
