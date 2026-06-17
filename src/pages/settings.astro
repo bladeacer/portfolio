@@ -18,10 +18,17 @@ const colors = [
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Customise how this site looks. All changes are saved locally and applied immediately. You can navigate settings with <kbd>j</kbd>/<kbd>k</kbd> or <kbd>Alt+n</kbd>/<kbd>Alt+p</kbd> and activate with <kbd>Enter</kbd>.</p>
+  <p>
+    Customise how this site looks. All changes are saved locally and applied
+    immediately. You can navigate settings with <kbd>j</kbd>/<kbd>k</kbd> or <kbd
+      >Alt+n</kbd
+    >/<kbd>Alt+p</kbd> and activate with <kbd>Enter</kbd>.
+  </p>
 
   <div class="setting-group">
-    <button id="settings-reset" class="setting-btn">Reset defaults (keeps theme)</button>
+    <button id="settings-reset" class="setting-btn"
+      >Reset defaults (keeps theme)</button
+    >
   </div>
 
   <div class="settings-layout">
@@ -73,25 +80,39 @@ const colors = [
         <label class="setting-row">
           <span class="setting-label">Body font</span>
           <select id="setting-font-sans" class="setting-select">
-            {fonts.map(f => <option value={f}>{f}</option>)}
+            {fonts.map((f) => <option value={f}>{f}</option>)}
           </select>
-          <input type="number" id="setting-size-sans" class="setting-size" min="10" max="32" value="16" />
+          <input
+            type="number"
+            id="setting-size-sans"
+            class="setting-size"
+            min="10"
+            max="32"
+            value="16"
+          />
           <span class="setting-unit">px</span>
         </label>
 
         <label class="setting-row">
           <span class="setting-label">Monospace font</span>
           <select id="setting-font-mono" class="setting-select">
-            {fonts.map(f => <option value={f}>{f}</option>)}
+            {fonts.map((f) => <option value={f}>{f}</option>)}
           </select>
-          <input type="number" id="setting-size-mono" class="setting-size" min="10" max="32" value="16" />
+          <input
+            type="number"
+            id="setting-size-mono"
+            class="setting-size"
+            min="10"
+            max="32"
+            value="16"
+          />
           <span class="setting-unit">px</span>
         </label>
 
         <label class="setting-row">
           <span class="setting-label">CJK font</span>
           <select id="setting-font-cjk" class="setting-select">
-            {fonts.map(f => <option value={f}>{f}</option>)}
+            {fonts.map((f) => <option value={f}>{f}</option>)}
           </select>
         </label>
       </div>
@@ -100,39 +121,95 @@ const colors = [
       <div class="setting-group">
         <div class="setting-row heading-row">
           <span class="setting-label">H1</span>
-          <input type="number" id="s-h1Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <input
+            type="number"
+            id="s-h1Size"
+            class="setting-size heading-size"
+            min="0.5"
+            max="4"
+            step="0.05"
+            value="1"
+          />
           <span class="setting-unit">em</span>
           <select id="s-h1Color" class="setting-select heading-color">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="s-h1ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+          <input
+            type="color"
+            id="s-h1ColorPicker"
+            class="setting-color-picker"
+            value="#3085dd"
+            style="display:none"
+          />
         </div>
         <div class="setting-row heading-row">
           <span class="setting-label">H2</span>
-          <input type="number" id="s-h2Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <input
+            type="number"
+            id="s-h2Size"
+            class="setting-size heading-size"
+            min="0.5"
+            max="4"
+            step="0.05"
+            value="1"
+          />
           <span class="setting-unit">em</span>
           <select id="s-h2Color" class="setting-select heading-color">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="s-h2ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+          <input
+            type="color"
+            id="s-h2ColorPicker"
+            class="setting-color-picker"
+            value="#3085dd"
+            style="display:none"
+          />
         </div>
         <div class="setting-row heading-row">
           <span class="setting-label">H3</span>
-          <input type="number" id="s-h3Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <input
+            type="number"
+            id="s-h3Size"
+            class="setting-size heading-size"
+            min="0.5"
+            max="4"
+            step="0.05"
+            value="1"
+          />
           <span class="setting-unit">em</span>
           <select id="s-h3Color" class="setting-select heading-color">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="s-h3ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+          <input
+            type="color"
+            id="s-h3ColorPicker"
+            class="setting-color-picker"
+            value="#3085dd"
+            style="display:none"
+          />
         </div>
         <div class="setting-row heading-row">
           <span class="setting-label">H4</span>
-          <input type="number" id="s-h4Size" class="setting-size heading-size" min="0.5" max="4" step="0.05" value="1" />
+          <input
+            type="number"
+            id="s-h4Size"
+            class="setting-size heading-size"
+            min="0.5"
+            max="4"
+            step="0.05"
+            value="1"
+          />
           <span class="setting-unit">em</span>
           <select id="s-h4Color" class="setting-select heading-color">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="s-h4ColorPicker" class="setting-color-picker" value="#3085dd" style="display:none" />
+          <input
+            type="color"
+            id="s-h4ColorPicker"
+            class="setting-color-picker"
+            value="#3085dd"
+            style="display:none"
+          />
         </div>
       </div>
 
@@ -141,19 +218,30 @@ const colors = [
         <label class="setting-row">
           <span class="setting-label">Dark mode</span>
           <select id="setting-color-dark" class="setting-select">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="setting-color-dark-picker" class="setting-color-picker" value="#a5bc84" style="display:none" />
+          <input
+            type="color"
+            id="setting-color-dark-picker"
+            class="setting-color-picker"
+            value="#a5bc84"
+            style="display:none"
+          />
         </label>
         <label class="setting-row">
           <span class="setting-label">Light mode</span>
           <select id="setting-color-light" class="setting-select">
-            {colors.map(c => <option value={c.value}>{c.label}</option>)}
+            {colors.map((c) => <option value={c.value}>{c.label}</option>)}
           </select>
-          <input type="color" id="setting-color-light-picker" class="setting-color-picker" value="#4b65b4" style="display:none" />
+          <input
+            type="color"
+            id="setting-color-light-picker"
+            class="setting-color-picker"
+            value="#4b65b4"
+            style="display:none"
+          />
         </label>
       </div>
-
     </div>
 
     <div class="preview-column">
@@ -164,18 +252,23 @@ const colors = [
         <h3 id="preview-h3">Heading 3 &mdash; Subsection</h3>
         <h4 id="preview-h4">Heading 4 &mdash; Detail</h4>
         <p id="preview-p">
-          This paragraph shows how your selected <strong id="preview-strong">bold text</strong>,
-          <em id="preview-em">italic text</em>, <a href="#" id="preview-link">colours</a>, and
-          <code id="preview-inline-code">inline code</code> will render.
-          &#x8fd9;&#x662f;&#x4e00;&#x4e2a;&#x793a;&#x4f8b;&#x6bb5;&#x843d;&#xff0c;&#x5305;&#x542b;&#x4e2d;&#x6587;&#x6587;&#x672c;&#x3002;
+          This paragraph shows how your selected <strong id="preview-strong"
+            >bold text</strong
+          >,
+          <em id="preview-em">italic text</em>, <a href="#" id="preview-link"
+            >colours</a
+          >, and
+          <code id="preview-inline-code">inline code</code> will render. &#x8fd9;&#x662f;&#x4e00;&#x4e2a;&#x793a;&#x4f8b;&#x6bb5;&#x843d;&#xff0c;&#x5305;&#x542b;&#x4e2d;&#x6587;&#x6587;&#x672c;&#x3002;
         </p>
-        <pre id="preview-code"><code><span class="kw">import</span> <span class="nx">fs</span> <span class="kw">from</span> <span class="s">"node:fs"</span>;
+        <pre
+          id="preview-code"><code><span class="kw">import</span> <span class="nx">fs</span> <span class="kw">from</span> <span class="s">"node:fs"</span>;
 <span class="kw">const</span> <span class="nx">greeting</span> <span class="o">=</span> <span class="s">"hello world"</span>;
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span></code></pre>
 
         <h5>Blockquote</h5>
         <blockquote id="preview-blockquote">
-          This is a blockquote. It should render with the correct fonts and colours based on your settings.
+          This is a blockquote. It should render with the correct fonts and
+          colours based on your settings.
         </blockquote>
 
         <h5>Table</h5>
@@ -194,7 +287,7 @@ const colors = [
 </BaseLayout>
 
 <script is:inline>
-  (function() {
+  (function () {
     var STORAGE_KEY = "portfolio-settings";
 
     var DEFAULTS = {
@@ -220,7 +313,9 @@ const colors = [
       statusCount: "words",
     };
 
-    function $(id) { return document.getElementById(id); }
+    function $(id) {
+      return document.getElementById(id);
+    }
 
     function load() {
       try {
@@ -228,12 +323,15 @@ const colors = [
         if (raw) {
           var parsed = JSON.parse(raw);
           // Migrate old fontFallback key to fontCJK
-          if (parsed.fontFallback !== undefined && parsed.fontCJK === undefined) {
+          if (
+            parsed.fontFallback !== undefined &&
+            parsed.fontCJK === undefined
+          ) {
             parsed.fontCJK = parsed.fontFallback;
           }
           return Object.assign({}, DEFAULTS, parsed);
         }
-      } catch(e) {}
+      } catch (e) {}
       return Object.assign({}, DEFAULTS);
     }
 
@@ -242,8 +340,10 @@ const colors = [
     }
 
     function apply(s) {
-      var gen = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
-      var monogen = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+      var gen =
+        'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"';
+      var monogen =
+        "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
       var sansChain = '"' + s.fontSans + '", ' + gen;
       var monoChain = '"' + s.fontMono + '", ' + monogen;
       var headingChain = '"' + (s.fontHeading || "DepartureMono") + '", ' + gen;
@@ -251,38 +351,65 @@ const colors = [
       var szm = s.sizeMono + "px";
 
       if (s.fontCJK) {
-        sansChain = "\"CJK\"," + sansChain;
-        monoChain = "\"CJK\"," + monoChain;
+        sansChain = '"CJK",' + sansChain;
+        monoChain = '"CJK",' + monoChain;
+        headingChain = '"CJK",' + headingChain;
       }
 
       var css = "";
-      css += "body{font-family:" + sansChain + " !important;font-size:" + sz + " !important;}";
-      css += "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" + sz + " !important;}";
-      css += "code,pre,kbd,samp,.setting-select,.setting-size{font-family:" + monoChain + " !important;}";
+      css +=
+        "body{font-family:" +
+        sansChain +
+        " !important;font-size:" +
+        sz +
+        " !important;}";
+      css +=
+        "p,div,em,ul,pre.astro-code,blockquote,hr,figcaption,li{font-size:" +
+        sz +
+        " !important;}";
+      css +=
+        "code,pre,kbd,samp,.setting-select,.setting-size{font-family:" +
+        monoChain +
+        " !important;}";
       css += "code{font-size:" + szm + " !important;}";
-      css += "pre.astro-code,.setting-select,.setting-size{font-size:" + szm + " !important;}";
+      css +=
+        "pre.astro-code,.setting-select,.setting-size{font-size:" +
+        szm +
+        " !important;}";
       css += "h1,h2,h3,h4{font-family:" + headingChain + " !important;}";
       css += "h1{font-size:" + s.h1Size + "em !important;";
-      if (s.h1Color && s.h1Color !== "custom") css += "color:" + s.h1Color + " !important;";
+      if (s.h1Color && s.h1Color !== "custom")
+        css += "color:" + s.h1Color + " !important;";
       css += "}";
       css += "h2{font-size:" + s.h2Size + "em !important;";
-      if (s.h2Color && s.h2Color !== "custom") css += "color:" + s.h2Color + " !important;";
+      if (s.h2Color && s.h2Color !== "custom")
+        css += "color:" + s.h2Color + " !important;";
       css += "}";
       css += "h3{font-size:" + s.h3Size + "em !important;";
-      if (s.h3Color && s.h3Color !== "custom") css += "color:" + s.h3Color + " !important;";
+      if (s.h3Color && s.h3Color !== "custom")
+        css += "color:" + s.h3Color + " !important;";
       css += "}";
       css += "h4{font-size:" + s.h4Size + "em !important;";
-      if (s.h4Color && s.h4Color !== "custom") css += "color:" + s.h4Color + " !important;";
+      if (s.h4Color && s.h4Color !== "custom")
+        css += "color:" + s.h4Color + " !important;";
       css += "}";
-      if (s.accentLight && s.accentLight !== "custom") css += "body.theme-light{--user-accent-light:" + s.accentLight + " !important;}";
-      if (s.accentDark && s.accentDark !== "custom") css += "body.theme-dark{--user-accent-dark:" + s.accentDark + " !important;}";
-      if (s.showGrid === false) css += "body{background-image:none !important;}";
-      if (s.fontCJK) {
-        css += "@font-face{font-family:\"CJK\";src:local(\"" + s.fontCJK + "\");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}";
-      }
+      if (s.accentLight && s.accentLight !== "custom")
+        css +=
+          "body.theme-light{--user-accent-light:" +
+          s.accentLight +
+          " !important;}";
+      if (s.accentDark && s.accentDark !== "custom")
+        css +=
+          "body.theme-dark{--user-accent-dark:" +
+          s.accentDark +
+          " !important;}";
+      if (s.showGrid === false)
+        css += "body{background-image:none !important;}";
 
       var fontFaceCss = s.fontCJK
-        ? "@font-face{font-family:\"CJK\";src:local(\"" + s.fontCJK + "\");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}"
+        ? '@font-face{font-family:"CJK";src:local("' +
+          s.fontCJK +
+          '");unicode-range:U+4E00-9FFF,U+3000-303F,U+FF00-FFEF,U+2E80-2EFF,U+3100-312F,U+3400-4DBF,U+F900-FAFF;}'
         : "";
       var fontFaceEl = document.getElementById("settings-fontface");
       if (!fontFaceEl) {
@@ -309,7 +436,9 @@ const colors = [
         document.body.classList.add("theme-dark");
       } else {
         localStorage.removeItem("theme");
-        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         document.body.classList.remove("theme-light", "theme-dark");
         document.body.classList.add(prefersDark ? "theme-dark" : "theme-light");
       }
@@ -335,11 +464,22 @@ const colors = [
       syncColorSelect("s-h2Color", "s-h2ColorPicker", s.h2Color);
       syncColorSelect("s-h3Color", "s-h3ColorPicker", s.h3Color);
       syncColorSelect("s-h4Color", "s-h4ColorPicker", s.h4Color);
-      syncColorSelect("setting-color-light", "setting-color-light-picker", s.accentLight);
-      syncColorSelect("setting-color-dark", "setting-color-dark-picker", s.accentDark);
+      syncColorSelect(
+        "setting-color-light",
+        "setting-color-light-picker",
+        s.accentLight,
+      );
+      syncColorSelect(
+        "setting-color-dark",
+        "setting-color-dark-picker",
+        s.accentDark,
+      );
     }
 
-    function syncField(id, val) { var el = $(id); if (el) el.value = val; }
+    function syncField(id, val) {
+      var el = $(id);
+      if (el) el.value = val;
+    }
 
     function syncColorSelect(selId, pickerId, val) {
       var sel = $(selId);
@@ -382,7 +522,10 @@ const colors = [
       };
     }
 
-    function getVal(id) { var el = $(id); return el ? el.value : ""; }
+    function getVal(id) {
+      var el = $(id);
+      return el ? el.value : "";
+    }
 
     function readColor(id) {
       var el = $(id);
@@ -406,7 +549,7 @@ const colors = [
       var sel = $(selId);
       var picker = $(pickerId);
       if (!sel || !picker) return;
-      sel.addEventListener("change", function() {
+      sel.addEventListener("change", function () {
         if (sel.value === "custom") {
           picker.style.display = "inline-block";
         } else {
@@ -416,7 +559,7 @@ const colors = [
           save(s);
         }
       });
-      picker.addEventListener("input", function() {
+      picker.addEventListener("input", function () {
         sel.value = "custom";
         var s = readForm();
         if (selId.indexOf("h1") > -1) s.h1Color = this.value;
@@ -434,20 +577,32 @@ const colors = [
       syncForm(s);
       apply(s);
 
-      var autoSaveIds = ["setting-font-sans", "setting-font-cjk", "setting-font-mono", "setting-font-heading",
-                         "setting-size-sans", "setting-size-mono",
-                         "s-h1Size", "s-h2Size", "s-h3Size", "s-h4Size",
-                         "setting-theme", "setting-show-grid", "setting-yank-unit", "setting-status-count"];
+      var autoSaveIds = [
+        "setting-font-sans",
+        "setting-font-cjk",
+        "setting-font-mono",
+        "setting-font-heading",
+        "setting-size-sans",
+        "setting-size-mono",
+        "s-h1Size",
+        "s-h2Size",
+        "s-h3Size",
+        "s-h4Size",
+        "setting-theme",
+        "setting-show-grid",
+        "setting-yank-unit",
+        "setting-status-count",
+      ];
 
-      autoSaveIds.forEach(function(id) {
+      autoSaveIds.forEach(function (id) {
         var el = $(id);
         if (!el) return;
-        el.addEventListener("change", function() {
+        el.addEventListener("change", function () {
           var s = readForm();
           apply(s);
           save(s);
         });
-        el.addEventListener("input", function() {
+        el.addEventListener("input", function () {
           var s = readForm();
           apply(s);
           save(s);
@@ -471,34 +626,42 @@ const colors = [
         if (idx < 0 || idx >= rows.length) return;
         currentRow = idx;
         var row = rows[idx];
-        row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        var inputs = row.querySelectorAll('input, select, button');
+        row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        var inputs = row.querySelectorAll("input, select, button");
         if (inputs.length > 0) inputs[0].focus();
       }
 
-      document.addEventListener("keydown", function(e) {
-        var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-        if (tag !== 'input' && tag !== 'select' && tag !== 'button' && tag !== 'textarea') return;
+      document.addEventListener("keydown", function (e) {
+        var tag = document.activeElement
+          ? document.activeElement.tagName.toLowerCase()
+          : "";
+        if (
+          tag !== "input" &&
+          tag !== "select" &&
+          tag !== "button" &&
+          tag !== "textarea"
+        )
+          return;
 
-        if (e.key === 'j' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        if (e.key === "j" && !e.altKey && !e.ctrlKey && !e.metaKey) {
           e.preventDefault();
           var next = currentRow + 1;
           if (next >= rows.length) next = rows.length - 1;
           focusRow(next);
-        } else if (e.key === 'k' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        } else if (e.key === "k" && !e.altKey && !e.ctrlKey && !e.metaKey) {
           e.preventDefault();
           var prev = currentRow - 1;
           if (prev < 0) prev = 0;
           focusRow(prev);
-        } else if (e.key === 'Enter' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        } else if (e.key === "Enter" && !e.altKey && !e.ctrlKey && !e.metaKey) {
           // Enter triggers the active element's default action (change event for select, click for button)
           // Already does this natively; no override needed
-        } else if (e.key === 'n' && e.altKey) {
+        } else if (e.key === "n" && e.altKey) {
           e.preventDefault();
           var next = currentRow + 1;
           if (next >= rows.length) next = rows.length - 1;
           focusRow(next);
-        } else if (e.key === 'p' && e.altKey) {
+        } else if (e.key === "p" && e.altKey) {
           e.preventDefault();
           var prev = currentRow - 1;
           if (prev < 0) prev = 0;

@@ -13,7 +13,9 @@ interface Props {
 const { headings = [], levels = 4 } = Astro.props;
 
 // Filter headings
-const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth <= levels);
+const filteredHeadings = headings.filter(
+  (h) => h.depth > 1 && h.depth <= levels,
+);
 
 // 1. IMPORTANT: If no headings, return nothing (prevents empty TOC box/button)
 if (filteredHeadings.length === 0) return null;
@@ -38,13 +40,17 @@ function buildTree(list: Heading[]) {
 
 const nestedHeadings = buildTree(filteredHeadings);
 
-import Menu from '@lucide/astro/icons/menu';
-import X from '@lucide/astro/icons/x'; 
+import Menu from "@lucide/astro/icons/menu";
+import X from "@lucide/astro/icons/x";
 ---
 
-<button id="toc-mobile-toggle" class="toc-mobile-button" aria-label="Toggle Table of Contents">
+<button
+  id="toc-mobile-toggle"
+  class="toc-mobile-button"
+  aria-label="Toggle Table of Contents"
+>
   <Menu class="menu-icon" />
-  <X class="close-icon" /> 
+  <X class="close-icon" />
 </button>
 
 <div id="toc-overlay" class="toc-overlay"></div>
@@ -54,29 +60,37 @@ import X from '@lucide/astro/icons/x';
     <h4 id="toc-title">Table [o]f Contents</h4>
     <div class="toc-content">
       <ul>
-        {nestedHeadings.map((h2) => (
-          <li>
-            <a href={`#${h2.slug}`} class="toc-link">{h2.text}</a>
-            {h2.children.length > 0 && (
-              <ul>
-                {h2.children.map((h3) => (
-                  <li>
-                    <a href={`#${h3.slug}`} class="toc-link">{h3.text}</a>
-                    {h3.children.length > 0 && (
-                      <ul>
-                        {h3.children.map((h4) => (
-                          <li>
-                            <a href={`#${h4.slug}`} class="toc-link">{h4.text}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
+        {
+          nestedHeadings.map((h2) => (
+            <li>
+              <a href={`#${h2.slug}`} class="toc-link">
+                {h2.text}
+              </a>
+              {h2.children.length > 0 && (
+                <ul>
+                  {h2.children.map((h3) => (
+                    <li>
+                      <a href={`#${h3.slug}`} class="toc-link">
+                        {h3.text}
+                      </a>
+                      {h3.children.length > 0 && (
+                        <ul>
+                          {h3.children.map((h4) => (
+                            <li>
+                              <a href={`#${h4.slug}`} class="toc-link">
+                                {h4.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
       </ul>
     </div>
   </nav>
@@ -85,53 +99,60 @@ import X from '@lucide/astro/icons/x';
 <script>
   function setupTOC() {
     // Matches the IDs in the component HTML
-    const btn = document.getElementById('toc-mobile-toggle');
-    const wrapper = document.getElementById('toc-wrapper');
-    const overlay = document.getElementById('toc-overlay');
-    const links = document.querySelectorAll('.toc-link');
-    const content = document.querySelector('.markdown-content');
+    const btn = document.getElementById("toc-mobile-toggle");
+    const wrapper = document.getElementById("toc-wrapper");
+    const overlay = document.getElementById("toc-overlay");
+    const links = document.querySelectorAll(".toc-link");
+    const content = document.querySelector(".markdown-content");
 
     const toggle = () => {
       // Toggle 'is-active' on all three elements to trigger the CSS rules
-      wrapper?.classList.toggle('is-active');
-      overlay?.classList.toggle('is-active');
-      btn?.classList.toggle('is-active');
-      
+      wrapper?.classList.toggle("is-active");
+      overlay?.classList.toggle("is-active");
+      btn?.classList.toggle("is-active");
+
       // Prevent background scrolling when menu is open
-      document.body.classList.toggle('no-scroll');
+      document.body.classList.toggle("no-scroll");
     };
 
     // Open/Close listeners
-    btn?.addEventListener('click', toggle);
-    overlay?.addEventListener('click', toggle);
-    
+    btn?.addEventListener("click", toggle);
+    overlay?.addEventListener("click", toggle);
+
     // Close mobile menu when a heading link is clicked
-    links.forEach(l => l.addEventListener('click', () => {
-      if (wrapper?.classList.contains('is-active')) {
-        toggle();
-      }
-    }));
+    links.forEach((l) =>
+      l.addEventListener("click", () => {
+        if (wrapper?.classList.contains("is-active")) {
+          toggle();
+        }
+      }),
+    );
 
     // Intersection Observer for highlighting current section
     if (content) {
-      const headers = content.querySelectorAll('h2, h3, h4');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            links.forEach(l => l.classList.remove('toc-current'));
-            const target = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
-            target?.classList.add('toc-current');
-          }
-        });
-      }, { rootMargin: '0px 0px -70% 0px' });
-      
-      headers.forEach(h => observer.observe(h));
+      const headers = content.querySelectorAll("h2, h3, h4");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              links.forEach((l) => l.classList.remove("toc-current"));
+              const target = document.querySelector(
+                `.toc-link[href="#${entry.target.id}"]`,
+              );
+              target?.classList.add("toc-current");
+            }
+          });
+        },
+        { rootMargin: "0px 0px -70% 0px" },
+      );
+
+      headers.forEach((h) => observer.observe(h));
     }
   }
 
   // Initialize on load
   setupTOC();
-  
+
   // Re-initialize if you are using Astro View Transitions
-  document.addEventListener('astro:after-swap', setupTOC);
+  document.addEventListener("astro:after-swap", setupTOC);
 </script>

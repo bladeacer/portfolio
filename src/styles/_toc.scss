@@ -33,17 +33,31 @@
   inset: 0;
   z-index: 55;
   display: none;
-  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-bg-col) 60%,
+    transparent 40%
+  );
 }
 
 @media (width < 1000px) {
-  .toc-mobile-button { display: block; }
-  
-  .toc-mobile-button .close-icon { display: none; }
-  .toc-mobile-button.is-active .close-icon { display: block; }
-  .toc-mobile-button.is-active .menu-icon { display: none; }
+  .toc-mobile-button {
+    display: block;
+  }
 
-  .toc-overlay.is-active { display: block; }
+  .toc-mobile-button .close-icon {
+    display: none;
+  }
+  .toc-mobile-button.is-active .close-icon {
+    display: block;
+  }
+  .toc-mobile-button.is-active .menu-icon {
+    display: none;
+  }
+
+  .toc-overlay.is-active {
+    display: block;
+  }
 
   #toc-wrapper {
     position: fixed;
@@ -57,7 +71,9 @@
     padding: 2rem;
     overflow-y: auto;
     background: var(--flexcyon-base-01-02-mix);
-    transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
+    transition:
+      box-shadow 0.35s ease-in-out,
+      transform 0.35s ease-in-out;
   }
 
   #toc-wrapper.is-active {
@@ -78,7 +94,7 @@
     max-width: 100%;
     box-shadow: none;
   }
-  
+
   .no-scroll {
     overflow: hidden;
   }
@@ -141,7 +157,8 @@
 .toc-content li ul li {
   opacity: 0.85;
 
-  &:hover, :focus {
+  &:hover,
+  :focus {
     opacity: 1;
   }
 
@@ -153,7 +170,8 @@
 .toc-content li ul li ul li {
   opacity: 0.75;
 
-  &:hover, :focus {
+  &:hover,
+  :focus {
     opacity: 1;
   }
 
@@ -162,10 +180,11 @@
   }
 }
 
-.toc-content li ul li ul li ul li{
+.toc-content li ul li ul li ul li {
   opacity: 0.95;
 
-  &:hover, :focus {
+  &:hover,
+  :focus {
     opacity: 1;
   }
 

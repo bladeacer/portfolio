@@ -38,7 +38,11 @@ nav {
 
 .nav-links a:hover,
 .nav-links a:focus {
-  background-color: color-mix(in oklch, var(--flexcyon-cyan) 20%, transparent 80%);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-cyan) 20%,
+    transparent 80%
+  );
 }
 
 .nav-links:not(.expanded) {
@@ -70,15 +74,15 @@ nav {
 }
 
 .nav-icon-btn {
-  padding-top: 14px;
+  display: inline-block;
   padding-inline: 1px;
+  padding-top: 14px;
   color: var(--flexcyon-cyan);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
   background: none;
   border: 0;
-  display: inline-block;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
 }
 
 .nav-icon-btn svg {
@@ -94,9 +98,9 @@ nav {
 }
 
 #themeToggle {
+  padding-top: 12px;
   background: none;
   border: 0;
-  padding-top: 12px;
 }
 
 #themeToggle p {
@@ -106,7 +110,8 @@ nav {
   color: var(--text-faint);
 }
 
-.sun, .moon {
+.sun,
+.moon {
   stroke-width: 0;
 }
 

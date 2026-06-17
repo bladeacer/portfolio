@@ -9,11 +9,20 @@ body {
   color: var(--text-normal);
   background-color: var(--bg-color);
   background-image:
-    repeating-linear-gradient(0deg, var(--flexcyon-bg-col),
-    var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px),
-    repeating-linear-gradient(90deg, var(--flexcyon-bg-col),
-    var(--flexcyon-bg-col) 1px, transparent 1px, transparent 15px)
-  ;
+    repeating-linear-gradient(
+      0deg,
+      var(--flexcyon-bg-col),
+      var(--flexcyon-bg-col) 1px,
+      transparent 1px,
+      transparent 15px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--flexcyon-bg-col),
+      var(--flexcyon-bg-col) 1px,
+      transparent 1px,
+      transparent 15px
+    );
   will-change: scroll-position;
   --text-normal: var(--flexcyon-base-grey-light);
   --text-faint: color-mix(in oklch, var(--flexcyon-base-grey-light), #6f768599);
@@ -37,8 +46,20 @@ a {
   color: var(--flexcyon-blue);
 }
 
-.sort-dropdown, .astro-code span, blockquote,
-em, strong, div span, a, h1, h2, h3, h4, h5, h6, code {
+.sort-dropdown,
+.astro-code span,
+blockquote,
+em,
+strong,
+div span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+code {
   font-family: var(--font-mono);
 }
 
@@ -73,9 +94,17 @@ blockquote {
   border-radius: 16px;
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 pre.astro-code,
-div, p, em, ul {
+div,
+p,
+em,
+ul {
   max-width: 45vw;
   overflow: visible;
   text-overflow: clip;
@@ -85,7 +114,12 @@ div, p, em, ul {
 }
 
 @media (width < 1000px) {
-  blockquote, pre.astro-code, div, p, em, ul {
+  blockquote,
+  pre.astro-code,
+  div,
+  p,
+  em,
+  ul {
     max-width: 85vw;
   }
 }
@@ -95,7 +129,7 @@ p {
 }
 
 h1 {
-  padding-top: calc(0.05 * var(--h1-size, 1.81803em)); 
+  padding-top: calc(0.05 * var(--h1-size, 1.81803em));
   font-size: var(--h1-size, 1.81803em);
   font-weight: 700;
   line-height: 1.61;
@@ -103,7 +137,7 @@ h1 {
 }
 
 h2 {
-  padding-top: calc(0.15 * var(--h2-size, 1.61803em)); 
+  padding-top: calc(0.15 * var(--h2-size, 1.61803em));
   font-size: var(--h2-size, 1.61803em);
   font-weight: 675;
   line-height: 1.41;
@@ -150,7 +184,9 @@ hr {
 }
 
 @media (width < 1000px) {
-  hr, p.foot, footer {
+  hr,
+  p.foot,
+  footer {
     max-width: 85vw;
   }
 }

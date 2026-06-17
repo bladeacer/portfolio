@@ -9,16 +9,24 @@ const { pageTitle } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/portfolio/favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/portfolio/favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <link rel="shortcut icon" href="/portfolio/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/portfolio/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/portfolio/apple-touch-icon.png"
+    />
     <meta name="apple-mobile-web-app-title" content="bladeacer's Portfolio" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-
   </head>
   <body>
     <div class="content-wrapper">
@@ -48,23 +56,43 @@ const { pageTitle } = Astro.props;
     <!-- Search overlay -->
     <div id="search-overlay" class="search-overlay overlay-backdrop">
       <div class="search-box overlay-box">
-        <input id="search-input" class="search-input" type="text" placeholder="Search pages..." autocomplete="off" spellcheck="false" />
-        <div id="search-no-results" class="search-no-results">No results found.</div>
+        <input
+          id="search-input"
+          class="search-input"
+          type="text"
+          placeholder="Search pages..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div id="search-no-results" class="search-no-results">
+          No results found.
+        </div>
         <ul id="search-results" class="search-results"></ul>
       </div>
     </div>
 
     <!-- Command mode overlay (centered) -->
-    <div id="command-mode-overlay" class="command-mode-overlay overlay-backdrop">
+    <div
+      id="command-mode-overlay"
+      class="command-mode-overlay overlay-backdrop"
+    >
       <div class="command-mode-box overlay-box">
-        <input id="command-mode-input" class="command-mode-input" type="text" placeholder=":" autocomplete="off" spellcheck="false" />
+        <input
+          id="command-mode-input"
+          class="command-mode-input"
+          type="text"
+          placeholder=":"
+          autocomplete="off"
+          spellcheck="false"
+        />
         <ul id="command-mode-list" class="command-mode-list"></ul>
       </div>
     </div>
 
     <noscript>
-      This site uses JavaScript functionality. Please ensure that JavaScript is enabled to continue.
-      <br>
+      This site uses JavaScript functionality. Please ensure that JavaScript is
+      enabled to continue.
+      <br />
       Try reloading the page.
     </noscript>
     <script>

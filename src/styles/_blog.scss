@@ -43,9 +43,12 @@
 }
 
 .blog-card:hover {
-  box-shadow: 0 1px 2px color-mix(in oklch, var(--text-faint) 15%, transparent 85%);
+  box-shadow: 0 1px 2px
+    color-mix(in oklch, var(--text-faint) 15%, transparent 85%);
   transform: scale(1.01);
-  transition: box-shadow 0.35s ease-in-out, transform 0.35s ease-in-out;
+  transition:
+    box-shadow 0.35s ease-in-out,
+    transform 0.35s ease-in-out;
 }
 
 .blog-card__tags,
@@ -86,7 +89,11 @@ select::-ms-expand {
 .blog-card__tag {
   margin-bottom: 12px;
   margin-left: 0;
-  background-color: color-mix(in oklch, var(--flexcyon-base-03) 35%, transparent 80%);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-base-03) 35%,
+    transparent 80%
+  );
 }
 
 .blog-card__tags {

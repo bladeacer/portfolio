@@ -1,7 +1,7 @@
-var hamburger = document.querySelector('.hamburger');
-var navLinks = document.querySelector('.nav-links');
+var hamburger = document.querySelector(".hamburger");
+var navLinks = document.querySelector(".nav-links");
 if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    navLinks.classList.toggle('expanded');
+  hamburger.addEventListener("click", function () {
+    navLinks.classList.toggle("expanded");
   });
 }

@@ -7,7 +7,11 @@
   width: 100%;
   max-width: none;
   height: 100%;
-  background-color: color-mix(in oklch, var(--flexcyon-bg-col) 60%, transparent 40%);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-bg-col) 60%,
+    transparent 40%
+  );
 }
 
 .overlay-backdrop.is-active {
@@ -27,7 +31,7 @@
   background: var(--flexcyon-base-02);
   border: 1px solid var(--flexcyon-base-04);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgb(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgb(0, 0, 0, 0.3);
   transform: translate(-50%, -50%);
 }
 
@@ -215,7 +219,11 @@
 .search-selected {
   outline: 1px solid var(--flexcyon-cyan);
   outline-offset: -1px;
-  background-color: color-mix(in oklch, var(--flexcyon-cyan) 55%, var(--flexcyon-base-02)) !important;
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-cyan) 55%,
+    var(--flexcyon-base-02)
+  ) !important;
   border-radius: 4px;
 }
 
@@ -241,7 +249,11 @@
 
 .search-highlight {
   padding: 2px 4px;
-  background-color: color-mix(in oklch, var(--flexcyon-yellow) 55%, transparent);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-yellow) 55%,
+    transparent
+  );
   border-radius: 4px;
 }
 
@@ -310,7 +322,11 @@
 .cm-selected {
   outline: 1px solid var(--flexcyon-cyan);
   outline-offset: -1px;
-  background-color: color-mix(in oklch, var(--flexcyon-cyan) 55%, var(--flexcyon-base-02)) !important;
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-cyan) 55%,
+    var(--flexcyon-base-02)
+  ) !important;
   border-radius: 4px;
 }
 

@@ -1,17 +1,20 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import Menu from '@lucide/astro/icons/menu';
-import X from '@lucide/astro/icons/x';
-import TableOfContents from '../components/TableOfContents.astro';
+import Menu from "@lucide/astro/icons/menu";
+import X from "@lucide/astro/icons/x";
+import TableOfContents from "../components/TableOfContents.astro";
 
 const { frontmatter, headings } = Astro.props;
 
 const dateOptions: object = {
   year: "numeric",
   month: "long",
-  day: "numeric"
+  day: "numeric",
 };
-const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString("en-GB", dateOptions);
+const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString(
+  "en-GB",
+  dateOptions,
+);
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
@@ -19,20 +22,25 @@ const formattedPubDate = new Date(frontmatter.pubDate).toLocaleDateString("en-GB
 
   <div>
     <em>{frontmatter.description}</em>
-    <br><br>
-    <span>Written by:</span> {frontmatter.author}
-    <br>
-    <span>Created on:</span> {formattedPubDate}
-    <br>
-    <span>Status:</span> {frontmatter.status}
+    <br /><br />
+    <span>Written by:</span>
+    {frontmatter.author}
+    <br />
+    <span>Created on:</span>
+    {formattedPubDate}
+    <br />
+    <span>Status:</span>
+    {frontmatter.status}
   </div>
 
   <div class="tags">
-    {frontmatter.tags.map((tag: string) => (
-      <div class="tag">
-        <a href={`/portfolio/tags/${tag}`}>{tag}</a>
-      </div>
-    ))}
+    {
+      frontmatter.tags.map((tag: string) => (
+        <div class="tag">
+          <a href={`/portfolio/tags/${tag}`}>{tag}</a>
+        </div>
+      ))
+    }
   </div>
 
   <div class="markdown-content">

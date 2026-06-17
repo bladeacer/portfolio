@@ -1,7 +1,7 @@
 import { bindKey, bindKeyCombo } from "@rwh/keystrokes";
 if (!window.__handlers) window.__handlers = {};
 
-(function() {
+(function () {
   var registry = window.__shortcutsRegistry || [];
   var overlay = document.getElementById("command-mode-overlay");
   var input = document.getElementById("command-mode-input");
@@ -20,7 +20,7 @@ if (!window.__handlers) window.__handlers = {};
     list.innerHTML = "";
     selectedIdx = -1;
     historyIdx = -1;
-    if (window.setMode) window.setMode('NORMAL');
+    if (window.setMode) window.setMode("NORMAL");
   }
 
   function render() {
@@ -28,15 +28,19 @@ if (!window.__handlers) window.__handlers = {};
     if (!q) {
       filtered = registry.slice();
     } else {
-      var bareNum = parseInt(q.replace(/^:/, ''), 10);
+      var bareNum = parseInt(q.replace(/^:/, ""), 10);
       var isLineNav = !isNaN(bareNum) && bareNum > 0;
       if (isLineNav) {
-        filtered = q.indexOf(':') === 0
-          ? [{ chord: q, desc: 'Go to line ' + bareNum }]
-          : [{ chord: ':' + bareNum, desc: 'Go to line ' + bareNum }];
+        filtered =
+          q.indexOf(":") === 0
+            ? [{ chord: q, desc: "Go to line " + bareNum }]
+            : [{ chord: ":" + bareNum, desc: "Go to line " + bareNum }];
       } else {
-        filtered = registry.filter(function(s) {
-          return s.chord.toLowerCase().indexOf(q) > -1 || s.desc.toLowerCase().indexOf(q) > -1;
+        filtered = registry.filter(function (s) {
+          return (
+            s.chord.toLowerCase().indexOf(q) > -1 ||
+            s.desc.toLowerCase().indexOf(q) > -1
+          );
         });
       }
     }
@@ -46,29 +50,48 @@ if (!window.__handlers) window.__handlers = {};
       selectedIdx = -1;
       return;
     }
-    filtered.forEach(function(s, i) {
+    filtered.forEach(function (s, i) {
       var li = document.createElement("li");
       li.className = "cm-item" + (i === 0 ? " cm-selected" : "");
-      var chordText = s.chord + ' ';
+      var chordText = s.chord + " ";
       var descText = s.desc;
       var q = input.value.toLowerCase().trim();
       if (q) {
         var cl = chordText.toLowerCase();
         var ci = cl.indexOf(q);
         if (ci > -1) {
-          chordText = chordText.substring(0, ci) + '<mark class="search-highlight">' + chordText.substring(ci, ci + q.length) + '</mark>' + chordText.substring(ci + q.length);
+          chordText =
+            chordText.substring(0, ci) +
+            '<mark class="search-highlight">' +
+            chordText.substring(ci, ci + q.length) +
+            "</mark>" +
+            chordText.substring(ci + q.length);
         }
         var dl = descText.toLowerCase();
         var di = dl.indexOf(q);
         if (di > -1) {
-          descText = descText.substring(0, di) + '<mark class="search-highlight">' + descText.substring(di, di + q.length) + '</mark>' + descText.substring(di + q.length);
+          descText =
+            descText.substring(0, di) +
+            '<mark class="search-highlight">' +
+            descText.substring(di, di + q.length) +
+            "</mark>" +
+            descText.substring(di + q.length);
         }
       }
-      li.innerHTML = '<span class="cm-chord">' + chordText + '</span><span class="cm-desc">' + descText + '</span>';
+      li.innerHTML =
+        '<span class="cm-chord">' +
+        chordText +
+        '</span><span class="cm-desc">' +
+        descText +
+        "</span>";
       li.dataset.index = i;
-      li.addEventListener("click", function() { execute(i); });
-      li.addEventListener("mouseenter", function() {
-        document.querySelectorAll(".cm-selected").forEach(function(el) { el.classList.remove("cm-selected"); });
+      li.addEventListener("click", function () {
+        execute(i);
+      });
+      li.addEventListener("mouseenter", function () {
+        document.querySelectorAll(".cm-selected").forEach(function (el) {
+          el.classList.remove("cm-selected");
+        });
         li.classList.add("cm-selected");
         selectedIdx = i;
       });
@@ -80,46 +103,62 @@ if (!window.__handlers) window.__handlers = {};
   function processCommand(raw) {
     var parts = raw.trim().split(/\s+/);
     var cmd = parts[0];
-    var arg = parts.slice(1).join(' ');
+    var arg = parts.slice(1).join(" ");
 
-    if (cmd === ':q' || cmd === ':x' || cmd === 'q' || cmd === 'x') {
+    if (cmd === ":q" || cmd === ":x" || cmd === "q" || cmd === "x") {
       close();
-      ['shortcuts-popup-overlay', 'search-overlay', 'command-mode-overlay'].forEach(function(id) {
+      [
+        "shortcuts-popup-overlay",
+        "search-overlay",
+        "command-mode-overlay",
+      ].forEach(function (id) {
         var el = document.getElementById(id);
-        if (el) el.classList.remove('is-active');
+        if (el) el.classList.remove("is-active");
       });
-      document.body.classList.remove('body-scroll-locked');
-      if (window.setMode) window.setMode('NORMAL');
-      if (window.showStatus) window.showStatus(cmd, 'Closed all overlays');
+      document.body.classList.remove("body-scroll-locked");
+      if (window.setMode) window.setMode("NORMAL");
+      if (window.showStatus) window.showStatus(cmd, "Closed all overlays");
       return true;
     }
 
-    if (cmd === ':theme' || cmd === 'theme') {
-      if (arg === 'light' || arg === 'dark') {
-        localStorage.setItem('theme', arg);
-        document.body.className = 'theme-' + arg;
-        if (window.showStatus) window.showStatus(cmd, 'Theme set to ' + arg);
+    if (cmd === ":theme" || cmd === "theme") {
+      if (arg === "light" || arg === "dark") {
+        localStorage.setItem("theme", arg);
+        document.body.className = "theme-" + arg;
+        if (window.showStatus) window.showStatus(cmd, "Theme set to " + arg);
       } else {
-        if (window.showStatus) window.showStatus(cmd, 'Usage: theme light|dark');
+        if (window.showStatus)
+          window.showStatus(cmd, "Usage: theme light|dark");
       }
       return true;
     }
 
-    if ((cmd === ':edit' || cmd === 'edit') && arg === 'settings') {
-      window.location.href = '/portfolio/settings';
+    if ((cmd === ":edit" || cmd === "edit") && arg === "settings") {
+      window.location.href = "/portfolio/settings";
       return true;
     }
 
-    var num = parseInt(raw.replace(/^:/, ''), 10);
+    var num = parseInt(raw.replace(/^:/, ""), 10);
     if (!isNaN(num) && num > 0) {
-      var candidates = Array.from(document.querySelectorAll(window.__CANDIDATE_SELECTOR || '.content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table'))
-        .filter(function(el) { return el.getBoundingClientRect().height > 0; });
+      var candidates = Array.from(
+        document.querySelectorAll(
+          window.__CANDIDATE_SELECTOR ||
+            ".content-wrapper > p, .content-wrapper > h1, .content-wrapper > h2, .content-wrapper > h3, .content-wrapper > h4, .content-wrapper > ul > li, .content-wrapper > ol > li, .content-wrapper > blockquote, .content-wrapper > pre, .content-wrapper > table",
+        ),
+      ).filter(function (el) {
+        return el.getBoundingClientRect().height > 0;
+      });
       if (num <= candidates.length) {
         var target = candidates[num - 1];
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        if (window.showStatus) window.showStatus(':' + num, 'Go to line ' + num);
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (window.showStatus)
+          window.showStatus(":" + num, "Go to line " + num);
       } else {
-        if (window.showStatus) window.showStatus(':' + num, 'Only ' + candidates.length + ' elements');
+        if (window.showStatus)
+          window.showStatus(
+            ":" + num,
+            "Only " + candidates.length + " elements",
+          );
       }
       return true;
     }
@@ -133,7 +172,7 @@ if (!window.__handlers) window.__handlers = {};
     if (!processCommand(s.chord)) {
       close();
       var handlers = window.__handlers || {};
-      if (s.chord !== ':' && handlers[s.chord]) {
+      if (s.chord !== ":" && handlers[s.chord]) {
         handlers[s.chord]();
         if (window.showStatus) {
           window.showStatus(s.chord, s.desc);
@@ -151,12 +190,12 @@ if (!window.__handlers) window.__handlers = {};
 
   input.addEventListener("input", render);
 
-  input.addEventListener("keydown", function(e) {
+  input.addEventListener("keydown", function (e) {
     e.stopPropagation();
     if (e.key === "Escape") {
       e.preventDefault();
       close();
-      if (window.showStatus) window.showStatus('Esc', 'Closed command palette');
+      if (window.showStatus) window.showStatus("Esc", "Closed command palette");
     } else if (e.key === "Enter") {
       e.preventDefault();
       var raw = input.value;
@@ -178,7 +217,9 @@ if (!window.__handlers) window.__handlers = {};
       e.preventDefault();
       if (filtered.length === 0) return;
       var next = (selectedIdx + 1) % filtered.length;
-      document.querySelectorAll(".cm-selected").forEach(function(el) { el.classList.remove("cm-selected"); });
+      document.querySelectorAll(".cm-selected").forEach(function (el) {
+        el.classList.remove("cm-selected");
+      });
       var items = list.querySelectorAll(".cm-item");
       if (items[next]) items[next].classList.add("cm-selected");
       selectedIdx = next;
@@ -191,38 +232,42 @@ if (!window.__handlers) window.__handlers = {};
         return;
       }
       var prev = selectedIdx > 0 ? selectedIdx - 1 : filtered.length - 1;
-      document.querySelectorAll(".cm-selected").forEach(function(el) { el.classList.remove("cm-selected"); });
+      document.querySelectorAll(".cm-selected").forEach(function (el) {
+        el.classList.remove("cm-selected");
+      });
       var items = list.querySelectorAll(".cm-item");
       if (items[prev]) items[prev].classList.add("cm-selected");
       selectedIdx = prev;
     }
   });
 
-  overlay.addEventListener("click", function(e) {
+  overlay.addEventListener("click", function (e) {
     if (e.target === overlay) close();
   });
 
-  window.openCommandMode = function() {
+  window.openCommandMode = function () {
     overlay.classList.add("is-active");
     input.value = "";
     historyIdx = -1;
     render();
     input.focus();
-    if (window.setMode) window.setMode('COMMAND');
-    if (window.showStatus) window.showStatus(':', 'Opened command palette');
+    if (window.setMode) window.setMode("COMMAND");
+    if (window.showStatus) window.showStatus(":", "Opened command palette");
   };
 
   window.closeCommandMode = close;
 
-  var colonHandler = function() {
-    var tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  var colonHandler = function () {
+    var tag = document.activeElement
+      ? document.activeElement.tagName.toLowerCase()
+      : "";
+    if (tag === "input" || tag === "textarea" || tag === "select") return;
     window.openCommandMode();
   };
 
-  window.__handlers[':'] = colonHandler;
-  window.__handlers['ctrl+p'] = colonHandler;
+  window.__handlers[":"] = colonHandler;
+  window.__handlers["ctrl+p"] = colonHandler;
 
-  bindKey(':', window.__handlers[':']);
-  bindKeyCombo('ctrl+p', window.__handlers['ctrl+p']);
+  bindKey(":", window.__handlers[":"]);
+  bindKeyCombo("ctrl+p", window.__handlers["ctrl+p"]);
 })();

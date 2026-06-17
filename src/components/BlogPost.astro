@@ -3,30 +3,43 @@ const { title, url, author, pubDate, description, tags } = Astro.props;
 const dateOptions: object = {
   year: "numeric",
   month: "long",
-  day: "numeric"
+  day: "numeric",
 };
-const formattedPubDate = new Date(pubDate).toLocaleDateString("en-GB", dateOptions);
+const formattedPubDate = new Date(pubDate).toLocaleDateString(
+  "en-GB",
+  dateOptions,
+);
 ---
+
 <div class="blog-card">
   <a href={url}>
     <div class="blog-card__content">
       <h3 class="blog-card__title">{title}</h3>
-      {author && formattedPubDate && (
-        <div class="blog-card__author">
-          <span>By {author}<br>Created on {formattedPubDate}<br> </span>
-        </div>
-      )}
-      {tags && tags.length > 0 && (
-        <div class="blog-card__tags">
-          {tags.map(tag => (
-          <a href={`/portfolio/tags/${tag}`}>
-            <span class="blog-card__tag">{tag}</span>
-          </a>
-          ))}
-        </div>
-      )}
+      {
+        author && formattedPubDate && (
+          <div class="blog-card__author">
+            <span>
+              By {author}
+              <br />
+              Created on {formattedPubDate}
+              <br />{" "}
+            </span>
+          </div>
+        )
+      }
+      {
+        tags && tags.length > 0 && (
+          <div class="blog-card__tags">
+            {tags.map((tag) => (
+              <a href={`/portfolio/tags/${tag}`}>
+                <span class="blog-card__tag">{tag}</span>
+              </a>
+            ))}
+          </div>
+        )
+      }
       <a href={url}>
-      {description && <p class="blog-card__excerpt">{description}</p>}
+        {description && <p class="blog-card__excerpt">{description}</p>}
       </a>
     </div>
   </a>

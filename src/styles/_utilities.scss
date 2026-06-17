@@ -1,44 +1,52 @@
 a:has([class*="cta"]) {
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: var(--text-normal);
-    text-decoration: none;
-    text-shadow: 2px 4px 2px 4px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--text-normal);
+  text-decoration: none;
+  text-shadow: 2px 4px 2px 4px;
 }
 
 p[class*="cta"] {
-    max-inline-size: 60%;
-    padding: 6px 12px;
-    margin-bottom: 4px;
-    border-radius: 12px;
+  max-inline-size: 60%;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  border-radius: 12px;
 
-    svg {
-      color: var(--text-normal);
-    }
+  svg {
+    color: var(--text-normal);
+  }
 }
 
 p.cta {
-    background-color: color-mix(in oklch, var(--text-accent) 55%, transparent);
+  background-color: color-mix(in oklch, var(--text-accent) 55%, transparent);
 }
 
 p.cta2 {
-    background-color: color-mix(in oklch, var(--flexcyon-lime-green) 55%, transparent);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-lime-green) 55%,
+    transparent
+  );
 }
 
 p.cta3 {
-    background-color: color-mix(in oklch, var(--flexcyon-purple-lilac) 55%, transparent);
+  background-color: color-mix(
+    in oklch,
+    var(--flexcyon-purple-lilac) 55%,
+    transparent
+  );
 }
 
 .active-line-highlight {
-    position: relative;
-    background: color-mix(in oklch, var(--text-accent) 8%, transparent);
-    border-radius: 2px;
+  position: relative;
+  background: color-mix(in oklch, var(--text-accent) 8%, transparent);
+  border-radius: 2px;
 }
 
 .active-line-highlight::before {
-    color: var(--text-accent) !important;
-    content: "\25BA  " counter(line-num) !important;
-    opacity: 1 !important;
+  color: var(--text-accent) !important;
+  content: "\25BA  " counter(line-num) !important;
+  opacity: 1 !important;
 }
 
 .active-line-highlight img {
@@ -58,7 +66,7 @@ body {
   }
 
   100% {
-    opacity: 1; 
+    opacity: 1;
     transform: translateX(0);
   }
 }

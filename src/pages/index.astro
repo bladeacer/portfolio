@@ -1,53 +1,51 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Icon } from 'astro-icon/components'
-import User from '@lucide/astro/icons/user';
-import Network from '@lucide/astro/icons/network';
-import CodeXML from '@lucide/astro/icons/code-xml';
-import Download from '@lucide/astro/icons/download';
-import Keyboard from '@lucide/astro/icons/keyboard';
-import { Image } from 'astro:assets';
+import { Icon } from "astro-icon/components";
+import User from "@lucide/astro/icons/user";
+import Network from "@lucide/astro/icons/network";
+import CodeXML from "@lucide/astro/icons/code-xml";
+import Download from "@lucide/astro/icons/download";
+import Keyboard from "@lucide/astro/icons/keyboard";
+import { Image } from "astro:assets";
 const pageTitle = "About Me";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="profile">
-    <Image alt="Profile Picture" src="/portfolio/profile.png" width="128" height="128"/>
+    <Image
+      alt="Profile Picture"
+      src="/portfolio/profile.png"
+      width="128"
+      height="128"
+    />
     <div class="profile-desc">
-      <p>
-        Hi there, I write software I use.
-      </p>
+      <p>Hi there, I write software I use.</p>
       <ul>
         <li>
-          css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux enjoyer
+          css, <a target="_blank" href="/portfolio/posts/vim">vim</a>, linux
+          enjoyer
         </li>
-        <li>
-          currently a student
-        </li>
-        <li>
-          software developer in the making
-        </li>
+        <li>currently a student</li>
+        <li>software developer in the making</li>
       </ul>
-      <p>
-        UTC+8 / EN / zh-CN
-      </p>
-      <br>
+      <p>UTC+8 / EN / zh-CN</p>
+      <br />
       <a href="/portfolio/resume" target="_blank">
         <p class="foot cta">
-          <Download/>
-            [r]esume/CV
+          <Download />
+          [r]esume/CV
         </p>
       </a>
       <a href="/portfolio/about#shortcuts" target="_blank">
         <p class="foot cta2">
-          <Keyboard/>
-            [?]Shortcuts
+          <Keyboard />
+          [?]Shortcuts
         </p>
       </a>
       <a href="/portfolio/rss.xml" target="_blank">
         <p class="foot cta3">
-          <Icon name="simple-icons:rss"/>
-            [!]RSS feed
+          <Icon name="simple-icons:rss" />
+          [!]RSS feed
         </p>
       </a>
     </div>
@@ -58,36 +56,49 @@ const pageTitle = "About Me";
   <div class="cards">
     <div class="card-item">
       <a target="_blank" href="https://github.com/bladeacer/flexcyon">
-        <img src="/portfolio/flexcyon-512-x-288-logo.webp"/>
+        <img src="/portfolio/flexcyon-512-x-288-logo.webp" />
       </a>
       <p>
-        flexcyon is a reasonably opinionated Obsidian.md theme. More about flexcyon <a target="_blank" href="/portfolio/posts/flexcyon">can be found here</a>.
+        flexcyon is a reasonably opinionated Obsidian.md theme. More about
+        flexcyon <a target="_blank" href="/portfolio/posts/flexcyon"
+          >can be found here</a
+        >.
       </p>
     </div>
 
     <div class="card-item">
       <a target="_blank" href="https://github.com/bladeacer/pdf-fmt">
-        <img src="/portfolio/pdf-fmt-preview.png"/>
+        <img src="/portfolio/pdf-fmt-preview.png" />
       </a>
       <p>
-        <a target="_blank" href="https://github.com/bladeacer/pdf-fmt">pdf-fmt</a> is a PDF text extractor, processor and formatter.
-        More about pdf-fmt <a target="_blank" href="/portfolio/posts/pdf-fmt">can be found here</a>.
+        <a target="_blank" href="https://github.com/bladeacer/pdf-fmt"
+          >pdf-fmt</a
+        > is a PDF text extractor, processor and formatter. More about pdf-fmt <a
+          target="_blank"
+          href="/portfolio/posts/pdf-fmt">can be found here</a
+        >.
       </p>
     </div>
     <div class="card-item">
       <a target="_blank" href="https://codeberg.org/bladeacer/yams">
-        <img src="/portfolio/yams-preview.webp"/>
+        <img src="/portfolio/yams-preview.webp" />
       </a>
       <p>
-        <a target="_blank" href="https://codeberg.org/bladeacer/yams">yams</a>, short for Yet Another Media Screensaver, is a CLI tool written with ncurses and C.  It lets you view media status and perform basic controls via <kbd>playerctl</kbd>.
+        <a target="_blank" href="https://codeberg.org/bladeacer/yams">yams</a>,
+        short for Yet Another Media Screensaver, is a CLI tool written with
+        ncurses and C. It lets you view media status and perform basic controls
+        via <kbd>playerctl</kbd>.
       </p>
     </div>
     <div class="card-item">
       <a target="_blank" href="https://github.com/bladeacer/mns">
-        <img src="/portfolio/mmsync-preview.png"/>
+        <img src="/portfolio/mmsync-preview.png" />
       </a>
       <p>
-        <a target="_blank" href="https://github.com/bladeacer/mns">mns - short for mnemosync</a> is a Golang CLI tool that lets you add folders to backup manually to a target Git repository. 
+        <a target="_blank" href="https://github.com/bladeacer/mns"
+          >mns - short for mnemosync</a
+        > is a Golang CLI tool that lets you add folders to backup manually to a target
+        Git repository.
       </p>
     </div>
     <!-- <div class="card-item"> -->
@@ -107,32 +118,41 @@ const pageTitle = "About Me";
     <div>
       <h3>Frontend</h3>
       <p class="skill-icons">
-        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-          <Icon name="simple-icons:html5"/>
+        <a
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+        >
+          <Icon name="simple-icons:html5" />
         </a>
-        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-          <Icon name="simple-icons:css"/>
+        <a
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+        >
+          <Icon name="simple-icons:css" />
         </a>
         <a target="_blank" href="https://sass-lang.com">
-          <Icon name="simple-icons:sass"/>
+          <Icon name="simple-icons:sass" />
         </a>
         <a target="_blank" href="https://getbootstrap.com">
-          <Icon name="simple-icons:bootstrap"/>
+          <Icon name="simple-icons:bootstrap" />
         </a>
         <a target="_blank" href="https://www.figma.com">
-          <Icon name="simple-icons:figma"/>
+          <Icon name="simple-icons:figma" />
         </a>
-        <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-          <Icon name="simple-icons:javascript"/>
+        <a
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        >
+          <Icon name="simple-icons:javascript" />
         </a>
         <a target="_blank" href="https://react.dev">
-          <Icon name="simple-icons:react"/>
+          <Icon name="simple-icons:react" />
         </a>
         <a target="_blank" href="https://nodejs.org/en">
-          <Icon name="simple-icons:nodedotjs"/>
+          <Icon name="simple-icons:nodedotjs" />
         </a>
         <a target="_blank" href="https://www.postman.com/">
-          <Icon name="simple-icons:postman"/>
+          <Icon name="simple-icons:postman" />
         </a>
       </p>
     </div>
@@ -141,16 +161,19 @@ const pageTitle = "About Me";
       <h3>Languages</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://www.python.org/">
-          <Icon name="simple-icons:python"/>
+          <Icon name="simple-icons:python" />
         </a>
         <a target="_blank" href="https://kotlinlang.org/">
-          <Icon name="simple-icons:kotlin"/>
+          <Icon name="simple-icons:kotlin" />
         </a>
-        <a target="_blank" href="https://dotnet.microsoft.com/en-us/languages/csharp">
-          <Icon name="simple-icons:dotnet"/>
+        <a
+          target="_blank"
+          href="https://dotnet.microsoft.com/en-us/languages/csharp"
+        >
+          <Icon name="simple-icons:dotnet" />
         </a>
         <a target="_blank" href="https://www.gnu.org/software/bash/">
-          <Icon name="simple-icons:gnubash"/>
+          <Icon name="simple-icons:gnubash" />
         </a>
       </p>
     </div>
@@ -159,13 +182,13 @@ const pageTitle = "About Me";
       <h3>Databases</h3>
       <p class="skill-icons">
         <a target="_blank" href="https://www.mysql.com/">
-          <Icon name="simple-icons:mysql"/>
+          <Icon name="simple-icons:mysql" />
         </a>
         <a target="_blank" href="https://sqlite.org/">
-          <Icon name="simple-icons:sqlite"/>
+          <Icon name="simple-icons:sqlite" />
         </a>
         <a target="_blank" href="https://sequelize.org/">
-          <Icon name="simple-icons:sequelize"/>
+          <Icon name="simple-icons:sequelize" />
         </a>
       </p>
     </div>
@@ -175,40 +198,64 @@ const pageTitle = "About Me";
   <p>Feel free to connect or reach out to me via these channels.</p>
   <div class="profile-3">
     <p class="foot">
-      <Icon name="simple-icons:gmail"/>
-      <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank">[em]ail</a>
+      <Icon name="simple-icons:gmail" />
+      <a target="_blank" href="mailto:wg.nick.exe@gmail.com" target="_blank"
+        >[em]ail</a
+      >
     </p>
     <p class="foot">
-      <User/>
-      <a target="_blank" href="https://gravatar.com/objectoriginal8f1e7ecf6f" target="_blank">[gr]avatar</a>
+      <User />
+      <a
+        target="_blank"
+        href="https://gravatar.com/objectoriginal8f1e7ecf6f"
+        target="_blank">[gr]avatar</a
+      >
     </p>
     <p class="foot">
-      <Network/>
-      <a target="_blank" href="https://www.linkedin.com/in/nicholas-wen-a525832b2/" target="_blank">[li]nkedIn</a>
+      <Network />
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/in/nicholas-wen-a525832b2/"
+        target="_blank">[li]nkedIn</a
+      >
     </p>
   </div>
   <div class="profile-3">
     <p class="foot">
-      <Icon name="simple-icons:matrix"/>
-      <a target="_blank" href="https://matrix.to/#/@bladeacer:matrix.org" target="_blank"><span class="bracket-prefix">[m]</span>atrix</a>
+      <Icon name="simple-icons:matrix" />
+      <a
+        target="_blank"
+        href="https://matrix.to/#/@bladeacer:matrix.org"
+        target="_blank"><span class="bracket-prefix">[m]</span>atrix</a
+      >
     </p>
     <p class="foot">
-      <Icon name="simple-icons:discord"/>
-      <a target="_blank" href="https://discord.com/users/695109107861946409" target="_blank">Discord</a>
+      <Icon name="simple-icons:discord" />
+      <a
+        target="_blank"
+        href="https://discord.com/users/695109107861946409"
+        target="_blank">Discord</a
+      >
     </p>
   </div>
   <div class="profile-3">
     <p class="foot">
-      <Icon name="simple-icons:github"/>
-      <a target="_blank" href="https://github.com/bladeacer" target="_blank">[gh]github</a>
+      <Icon name="simple-icons:github" />
+      <a target="_blank" href="https://github.com/bladeacer" target="_blank"
+        >[gh]github</a
+      >
     </p>
     <p class="foot">
-      <Icon name="simple-icons:gitlab"/>
-      <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank">[gl]gitlab</a>
+      <Icon name="simple-icons:gitlab" />
+      <a target="_blank" href="https://gitlab.com/bladeacer" target="_blank"
+        >[gl]gitlab</a
+      >
     </p>
     <p class="foot">
-      <Icon name="simple-icons:codeberg"/>
-      <a target="_blank" href="https://codeberg.org/bladeacer" target="_blank">Code[b]erg</a>
+      <Icon name="simple-icons:codeberg" />
+      <a target="_blank" href="https://codeberg.org/bladeacer" target="_blank"
+        >Code[b]erg</a
+      >
     </p>
   </div>
 </BaseLayout>

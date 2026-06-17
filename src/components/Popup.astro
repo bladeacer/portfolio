@@ -1,14 +1,26 @@
 ---
+
 ---
+
 <div id="shortcuts-popup-overlay" class="popup-overlay overlay-backdrop">
-  <div id="shortcuts-popup" class="popup-content overlay-box" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts">
+  <div
+    id="shortcuts-popup"
+    class="popup-content overlay-box"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Keyboard Shortcuts"
+  >
     <div class="popup-header">
       <h2 id="popup-title">Keyboard Shortcuts</h2>
-      <button id="popup-close" class="popup-close" aria-label="Close">&times;</button>
+      <button id="popup-close" class="popup-close" aria-label="Close"
+        >&times;</button
+      >
     </div>
     <div class="popup-body">
       <p class="popup-top-link">
-        <a href="/portfolio/about#shortcuts">View full shortcuts reference &rarr;</a>
+        <a href="/portfolio/about#shortcuts"
+          >View full shortcuts reference &rarr;</a
+        >
       </p>
       <h4>Scrolling</h4>
       <table>
@@ -120,14 +132,18 @@
 </div>
 
 <script is:inline>
-  (function() {
+  (function () {
     var overlay = document.getElementById("shortcuts-popup-overlay");
     if (!overlay) return;
 
-    function close() { overlay.classList.remove("is-active"); }
-    function open() { overlay.classList.add("is-active"); }
+    function close() {
+      overlay.classList.remove("is-active");
+    }
+    function open() {
+      overlay.classList.add("is-active");
+    }
 
-    window.toggleShortcutsPopup = function() {
+    window.toggleShortcutsPopup = function () {
       if (!overlay.classList.contains("is-active")) {
         open();
       } else {
@@ -135,15 +151,16 @@
       }
     };
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("popup-close")?.addEventListener("click", close);
 
-      overlay.addEventListener("click", function(e) {
+      overlay.addEventListener("click", function (e) {
         if (e.target === overlay) close();
       });
 
-      document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape" && overlay.classList.contains("is-active")) close();
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && overlay.classList.contains("is-active"))
+          close();
       });
     });
   })();

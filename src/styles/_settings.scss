@@ -184,11 +184,21 @@
   border-radius: 4px;
 }
 
-.preview-box .kw { color: var(--flexcyon-purple-lilac); }
-.preview-box .nx { color: var(--flexcyon-cyan); }
-.preview-box .s { color: var(--flexcyon-green); }
-.preview-box .o { color: var(--flexcyon-orange); }
-.preview-box .p { color: var(--text-normal); }
+.preview-box .kw {
+  color: var(--flexcyon-purple-lilac);
+}
+.preview-box .nx {
+  color: var(--flexcyon-cyan);
+}
+.preview-box .s {
+  color: var(--flexcyon-green);
+}
+.preview-box .o {
+  color: var(--flexcyon-orange);
+}
+.preview-box .p {
+  color: var(--text-normal);
+}
 
 .setting-actions {
   margin-top: 0.5rem;

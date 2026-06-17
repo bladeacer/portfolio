@@ -1,7 +1,13 @@
 html {
-  --font-sans: "CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-fallback: "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: "DepartureMono", "Maple Mono Medium", ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace;
+  --font-sans:
+    "CascadiaCode", "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-fallback:
+    "Maple Mono Medium", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono:
+    "DepartureMono", "Maple Mono Medium", ui-monospace, sfmono-regular, menlo,
+    monaco, consolas, monospace;
   --font-size-sans: 16px;
   --font-size-mono: 16px;
   --font-size-fallback: 16px;
@@ -16,8 +22,16 @@ body.theme-light {
   --flexcyon-base-grey-dark: #929190;
   --flexcyon-base-grey-light: #080808;
 
-  --flexcyon-base-01-02-mix: color-mix(in oklch, var(--flexcyon-base-01) 40%, var(--flexcyon-base-02) 60%);
-  --flexcyon-bg-col: color-mix(in oklch, var(--flexcyon-base-01), var(--flexcyon-base-02));
+  --flexcyon-base-01-02-mix: color-mix(
+    in oklch,
+    var(--flexcyon-base-01) 40%,
+    var(--flexcyon-base-02) 60%
+  );
+  --flexcyon-bg-col: color-mix(
+    in oklch,
+    var(--flexcyon-base-01),
+    var(--flexcyon-base-02)
+  );
 
   --flexcyon-cyan: #3b9ba1;
   --flexcyon-lime-green: #599100;
@@ -42,8 +56,16 @@ body.theme-dark {
   --flexcyon-base-grey-dark: #898c93;
   --flexcyon-base-grey-light: #d3d5d3;
 
-  --flexcyon-base-01-02-mix: color-mix(in oklch, var(--flexcyon-base-01) 40%, var(--flexcyon-base-02) 60%);
-  --flexcyon-bg-col: color-mix(in oklch, var(--flexcyon-base-01), var(--flexcyon-base-02));
+  --flexcyon-base-01-02-mix: color-mix(
+    in oklch,
+    var(--flexcyon-base-01) 40%,
+    var(--flexcyon-base-02) 60%
+  );
+  --flexcyon-bg-col: color-mix(
+    in oklch,
+    var(--flexcyon-base-01),
+    var(--flexcyon-base-02)
+  );
 
   --flexcyon-cyan: #3cb9c2;
   --flexcyon-lime-green: #a1c05c;

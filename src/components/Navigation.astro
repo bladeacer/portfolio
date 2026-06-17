@@ -1,22 +1,64 @@
 ---
-import ThemeIcon from "./ThemeIcon.astro"
-import NavButton from "./NavButton.astro"
-import Search from '@lucide/astro/icons/search';
-import House from '@lucide/astro/icons/house';
-import Cog from '@lucide/astro/icons/cog';
-import Info from '@lucide/astro/icons/info';
-import Leaf from '@lucide/astro/icons/leaf';
-import Tag from '@lucide/astro/icons/tag';
-import Heart from '@lucide/astro/icons/heart';
+import ThemeIcon from "./ThemeIcon.astro";
+import NavButton from "./NavButton.astro";
+import Search from "@lucide/astro/icons/search";
+import House from "@lucide/astro/icons/house";
+import Cog from "@lucide/astro/icons/cog";
+import Info from "@lucide/astro/icons/info";
+import Leaf from "@lucide/astro/icons/leaf";
+import Tag from "@lucide/astro/icons/tag";
+import Heart from "@lucide/astro/icons/heart";
 ---
 
 <ThemeIcon />
-<NavButton icon={Search} label="ind" shortcut="f" id="search-icon-btn" color="var(--flexcyon-cyan)" />
+<NavButton
+  icon={Search}
+  label="ind"
+  shortcut="f"
+  id="search-icon-btn"
+  color="var(--flexcyon-cyan)"
+/>
 <div class="nav-links">
-  <NavButton icon={House} label="ome" shortcut="h" href="/portfolio" color="var(--flexcyon-lime-green)" />
-  <NavButton icon={Info} label="bout" shortcut="a" href="/portfolio/about/" color="var(--flexcyon-blue)" />
-  <NavButton icon={Leaf} label="igital garden" shortcut="d" href="/portfolio/digital-garden/" color="var(--flexcyon-lime-green)" />
-  <NavButton icon={Heart} label="redits" shortcut="c" href="/portfolio/credits/" color="var(--flexcyon-pink)" />
-  <NavButton icon={Tag} label="ags" shortcut="#" href="/portfolio/tags/" color="var(--flexcyon-purple-lilac)" />
-  <NavButton icon={Cog} label="ettings" shortcut="s" href="/portfolio/settings/" color="var(--flexcyon-purple-lilac)" />
+  <NavButton
+    icon={House}
+    label="ome"
+    shortcut="h"
+    href="/portfolio"
+    color="var(--flexcyon-lime-green)"
+  />
+  <NavButton
+    icon={Info}
+    label="bout"
+    shortcut="a"
+    href="/portfolio/about/"
+    color="var(--flexcyon-blue)"
+  />
+  <NavButton
+    icon={Leaf}
+    label="igital garden"
+    shortcut="d"
+    href="/portfolio/digital-garden/"
+    color="var(--flexcyon-lime-green)"
+  />
+  <NavButton
+    icon={Heart}
+    label="redits"
+    shortcut="c"
+    href="/portfolio/credits/"
+    color="var(--flexcyon-pink)"
+  />
+  <NavButton
+    icon={Tag}
+    label="ags"
+    shortcut="#"
+    href="/portfolio/tags/"
+    color="var(--flexcyon-purple-lilac)"
+  />
+  <NavButton
+    icon={Cog}
+    label="ettings"
+    shortcut="s"
+    href="/portfolio/settings/"
+    color="var(--flexcyon-purple-lilac)"
+  />
 </div>

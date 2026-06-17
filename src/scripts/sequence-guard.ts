@@ -24,12 +24,16 @@ function clearSeqPrefixNow() {
 }
 
 // Capture-phase listeners for prefix keys (z, g, e)
-document.addEventListener('keydown', function(e) {
-  if (e.repeat) return;
-  if (e.key === 'z' || e.key === 'g' || e.key === 'e') {
-    setSeqPrefix(e.key);
-  }
-}, true);
+document.addEventListener(
+  "keydown",
+  function (e) {
+    if (e.repeat) return;
+    if (e.key === "z" || e.key === "g" || e.key === "e") {
+      setSeqPrefix(e.key);
+    }
+  },
+  true,
+);
 
 // Expose for use by sequence handlers (z b / z t / z z / g l / g h / e m)
 window.__clearSeqPrefix = clearSeqPrefixNow;

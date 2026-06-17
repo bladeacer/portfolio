@@ -1,7 +1,10 @@
-(function() {
+(function () {
   // Measure scrollbar width and set CSS var
   var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
+  document.documentElement.style.setProperty(
+    "--scrollbar-width",
+    scrollbarWidth + "px",
+  );
 
   var overlays = [
     "search-overlay",
@@ -12,7 +15,7 @@
   var bodyScrollLocked = false;
 
   function checkLock() {
-    var anyActive = overlays.some(function(id) {
+    var anyActive = overlays.some(function (id) {
       var el = document.getElementById(id);
       return el && el.classList.contains("is-active");
     });
@@ -26,21 +29,26 @@
   }
 
   // Watch class changes on overlay elements
-  var observer = new MutationObserver(function() { checkLock(); });
-  overlays.forEach(function(id) {
+  var observer = new MutationObserver(function () {
+    checkLock();
+  });
+  overlays.forEach(function (id) {
     var el = document.getElementById(id);
-    if (el) observer.observe(el, { attributes: true, attributeFilter: ["class"] });
+    if (el)
+      observer.observe(el, { attributes: true, attributeFilter: ["class"] });
   });
 
   // Focus trap helper: returns a focusable children of active overlay
   function getFocusable(overlay) {
     if (!overlay) return [];
-    return Array.from(overlay.querySelectorAll(
-      'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
-    ));
+    return Array.from(
+      overlay.querySelectorAll(
+        'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])',
+      ),
+    );
   }
 
-  document.addEventListener("keydown", function(e) {
+  document.addEventListener("keydown", function (e) {
     if (e.key !== "Tab") return;
     var activeOverlay = null;
     for (var i = 0; i < overlays.length; i++) {

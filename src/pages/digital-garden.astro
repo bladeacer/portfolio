@@ -3,17 +3,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 
 const pageTitle = "Digital Garden";
-const allPosts = Object.values(await import.meta.glob('./posts/*.md', { eager: true }));
+const allPosts = Object.values(
+  await import.meta.glob("./posts/*.md", { eager: true }),
+);
 
 // Default sort is by date, descending
 const sortedPosts = allPosts.sort((a, b) => {
-    return new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf();
+  return (
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+  );
 });
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div>
-    <p>Here is my digital garden. I post about my projects and works from time to time.</p>
+    <p>
+      Here is my digital garden. I post about my projects and works from time to
+      time.
+    </p>
     <p>This is also a space for me to share my thoughts and experiences.</p>
 
     <div class="sort-buttons">
@@ -27,58 +35,73 @@ const sortedPosts = allPosts.sort((a, b) => {
     </div>
 
     <div id="posts-container" class="posts-container">
-      {sortedPosts.length === 0 ? (
-        <p>No posts available yet.</p>
-      ) : (
-        sortedPosts.map((post) => (
-          <div
-            class="post-item"
-            data-date={new Date(post.frontmatter.pubDate).valueOf()}
-            data-title={post.frontmatter.title && post.frontmatter.title.length != 0 ? post.frontmatter.title : "No title"}
-          >
-            <BlogPost
-              url={post.url}
-              title={post.frontmatter.title && post.frontmatter.title.length != 0 ? post.frontmatter.title : "No title"}
-              author={post.frontmatter.author}
-              pubDate={post.frontmatter.pubDate}
-              description={post.frontmatter.description}
-              tags={post.frontmatter.tags}
-            />
-          </div>
-        ))
-      )}
+      {
+        sortedPosts.length === 0 ? (
+          <p>No posts available yet.</p>
+        ) : (
+          sortedPosts.map((post) => (
+            <div
+              class="post-item"
+              data-date={new Date(post.frontmatter.pubDate).valueOf()}
+              data-title={
+                post.frontmatter.title && post.frontmatter.title.length != 0
+                  ? post.frontmatter.title
+                  : "No title"
+              }
+            >
+              <BlogPost
+                url={post.url}
+                title={
+                  post.frontmatter.title && post.frontmatter.title.length != 0
+                    ? post.frontmatter.title
+                    : "No title"
+                }
+                author={post.frontmatter.author}
+                pubDate={post.frontmatter.pubDate}
+                description={post.frontmatter.description}
+                tags={post.frontmatter.tags}
+              />
+            </div>
+          ))
+        )
+      }
     </div>
 
     <script is:inline>
-      const postsContainer = document.getElementById('posts-container');
-      const sortSelect = document.getElementById('sort-select');
-      const postItems = Array.from(document.querySelectorAll('.post-item'));
+      const postsContainer = document.getElementById("posts-container");
+      const sortSelect = document.getElementById("sort-select");
+      const postItems = Array.from(document.querySelectorAll(".post-item"));
 
       function sortAndRender(sortBy) {
         let sortedItems = [];
-        if (sortBy === 'title-asc') {
+        if (sortBy === "title-asc") {
           sortedItems = postItems.sort((a, b) => {
-            const titleA = a.getAttribute('data-title').toLowerCase();
-            const titleB = b.getAttribute('data-title').toLowerCase();
+            const titleA = a.getAttribute("data-title").toLowerCase();
+            const titleB = b.getAttribute("data-title").toLowerCase();
             return titleA.localeCompare(titleB);
           });
-        } else if (sortBy === 'title-desc') {
-            sortedItems = postItems.sort((a, b) => {
-            const titleA = a.getAttribute('data-title').toLowerCase();
-            const titleB = b.getAttribute('data-title').toLowerCase();
+        } else if (sortBy === "title-desc") {
+          sortedItems = postItems.sort((a, b) => {
+            const titleA = a.getAttribute("data-title").toLowerCase();
+            const titleB = b.getAttribute("data-title").toLowerCase();
             return titleB.localeCompare(titleA);
           });
-        } else if (sortBy === 'date-asc') {
-          sortedItems = postItems.sort((a, b) => a.getAttribute('data-date') - b.getAttribute('data-date'));
-        } else { // default 'date-desc'
-          sortedItems = postItems.sort((a, b) => b.getAttribute('data-date') - a.getAttribute('data-date'));
+        } else if (sortBy === "date-asc") {
+          sortedItems = postItems.sort(
+            (a, b) => a.getAttribute("data-date") - b.getAttribute("data-date"),
+          );
+        } else {
+          // default 'date-desc'
+          sortedItems = postItems.sort(
+            (a, b) => b.getAttribute("data-date") - a.getAttribute("data-date"),
+          );
         }
 
-        postsContainer.innerHTML = '';
-        sortedItems.forEach(item => postsContainer.appendChild(item));
+        postsContainer.innerHTML = "";
+        sortedItems.forEach((item) => postsContainer.appendChild(item));
       }
 
-      sortSelect.addEventListener('change', (event) => {
+      sortSelect.addEventListener("change", (event) => {
         sortAndRender(event.target.value);
       });
 
@@ -87,4 +110,3 @@ const sortedPosts = allPosts.sort((a, b) => {
     </script>
   </div>
 </BaseLayout>
-
