@@ -1,11 +1,9 @@
 // Keystrokes shortcut bindings — tested with createTestKeystrokes
-import { createTestKeystrokes, setGlobalKeystrokes } from "@rwh/keystrokes";
+import { describe, it, expect } from "vitest";
+import { createTestKeystrokes, setGlobalKeystrokes, type TestKeystrokes } from "@rwh/keystrokes";
 
 // Helper: simulate a series of key presses/releases
-function pressKeys(
-  ks: ReturnType<typeof createTestKeystrokes>,
-  keys: string[],
-) {
+function pressKeys(ks: TestKeystrokes<any, any, any>, keys: string[]) {
   for (const key of keys) {
     ks.press({ key });
     ks.release({ key });
@@ -63,8 +61,8 @@ describe("navigation shortcuts", () => {
     expect(fired).toBe(true);
   });
 
-  it("sequence ctrl+p fires", () => {
-    const ks = createTestKeystrokes();
+  it("combo ctrl+p fires", () => {
+    const ks = createTestKeystrokes({ keyRemap: { control: "ctrl" } });
     let fired = false;
     ks.bindKeyCombo("ctrl+p", () => {
       fired = true;

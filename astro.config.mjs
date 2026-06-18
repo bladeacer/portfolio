@@ -15,15 +15,14 @@ export default defineConfig({
     markdown: {
         shikiConfig: {
           themes: {
+            /** @type {any} */
             dark: flexcyonDark,
+            /** @type {any} */
             light: flexcyonLight,
           },
         },
     },
     vite: {
-        css: {
-            minify: true,
-        },
         build: {
             minify: true,
             cssMinify: true,

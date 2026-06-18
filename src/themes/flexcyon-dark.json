@@ -12,6 +12,7 @@
     "sideBar.background": "#14161c",
     "sideBar.foreground": "#d3d5d3"
   },
+  "settings": [],
   "tokenColors": [
     {
       "scope": ["comment", "punctuation.definition.comment"],
